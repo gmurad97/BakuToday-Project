@@ -1,0 +1,1 @@
+(function(){new Choices("#language",{allowHTML:!0,removeItemButton:!0}),new Choices("#skills",{allowHTML:!0,removeItemButton:!0}),new Choices("#qualification",{allowHTML:!0,removeItemButton:!0}),flatpickr("#job-deadline",{mode:"range",dateFormat:"Y-m-d"})})();

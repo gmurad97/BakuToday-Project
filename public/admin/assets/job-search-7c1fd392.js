@@ -1,0 +1,1 @@
+(function(){"use strcit";var e=document.getElementById("nonlinear");noUiSlider.create(e,{connect:!0,behaviour:"tap",start:[8e3,4e4],range:{min:[0],max:[5e4]}});var t=[document.getElementById("lower-value"),document.getElementById("upper-value")];e.noUiSlider.on("update",function(o,n,i,r,a){t[n].innerHTML=o[n]})})();
