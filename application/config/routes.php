@@ -1,5 +1,53 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
+
+
+/*========== User Route ==========*/
+/*========== Sys Route ==========*/
+
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+
+/*========== Admins Route ==========*/
+
+$route["admin/dashboard"] = "admin/DashboardController/index";
+
+$route["admin/news"]["GET"] = "admin/NewsController/index";
+$route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
+$route["admin/news/create"]["GET"] = "admin/NewsController/create";
+$route["admin/news/store"]["POST"] = "admin/NewsController/store";
+$route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
+$route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
+$route["admin/news/(:any)/delete"]["POST"] = "admin/NewsController/delete/$1";
+
+$route["admin/advertising"]["GET"] = "admin/AdvertisingController/index";
+$route["admin/advertising/(:any)"]["GET"] = "admin/AdvertisingController/show/$1";
+$route["admin/advertising/create"]["GET"] = "admin/AdvertisingController/create";
+$route["admin/advertising/store"]["POST"] = "admin/AdvertisingController/store";
+$route["admin/advertising/(:any)/edit"]["GET"] = "admin/AdvertisingController/edit/$1";
+$route["admin/advertising/(:any)/update"]["POST"] = "admin/AdvertisingController/update/$1";
+$route["admin/advertising/(:any)/delete"]["POST"] = "admin/AdvertisingController/delete/$1";
+
+
+
+
+// /* /*EXAMPLE REST API ROUTING PLEASE USE THIS IT!!! */
+
+// $route["category"]["POST"] = "Controller/store"; // Action: Создание новой категории
+// $route["category/(:num)/update"]["POST"] = "Controller/update/$1"; // Action: Обновление категории через POST
+// $route["category/(:num)/edit"]["GET"] = "Controller/edit/$1"; // Форма отображения: Форма редактирования категории
+// $route["category/(:num)/delete"]["POST"] = "Controller/destroy/$1"; // Action: Удаление категории через POST
+
+
+
+$route["admin/advertising"] = "";
+
+
+
+
 
 /*
 | -------------------------------------------------------------------------
@@ -49,8 +97,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
 
-$route["home"] = "TestCoreController/index";
+
+
+
+
+
+
+
+
