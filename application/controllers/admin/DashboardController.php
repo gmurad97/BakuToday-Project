@@ -9,6 +9,7 @@ class DashboardController extends BASE_Controller
 
     public function index()
     {
-        $this->load->view("admin/dashboard");
+        $context["page_title"] = "Dashboard";
+        $this->load->view("admin/dashboard", $context);
     }
 }

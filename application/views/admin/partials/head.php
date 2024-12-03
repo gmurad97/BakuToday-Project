@@ -1,32 +1,13 @@
-<!doctype html>
-<html lang="en">
-
 <head>
-    <!-- Title Meta -->
-    <meta charset="utf-8" />
-    <title>Welcome | Reback - Responsive Admin Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A fully responsive premium admin dashboard template" />
-    <meta name="author" content="Techzaa" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= base_url('public/admin/assets/images/favicon.ico'); ?>" />
-
-    <!-- Vendor css (Require in all Page) -->
-    <link href="<?= base_url('public/admin/assets/css/vendor.min.css'); ?>" rel="stylesheet" type="text/css" />
-
-    <!-- Icons css (Require in all Page) -->
-    <link href="<?= base_url('public/admin/assets/css/icons.min.css'); ?>" rel="stylesheet" type="text/css" />
-
-    <!-- App css (Require in all Page) -->
-    <link href="<?= base_url('public/admin/assets/css/app.min.css'); ?>" rel="stylesheet" type="text/css" />
-
-    <!-- Theme Config js (Require in all Page) -->
-    <script src="<?= base_url('public/admin/assets/js/config.js'); ?>"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NobleUI - <?= empty($page_title) ? "Admin Panel" : ""; ?></title>
+    <link rel="shortcut icon" href="<?= base_url('public/admin/assets/images/favicon.png'); ?>" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/core/core.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/fonts/feather-font/css/iconfont.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/style.css'); ?>">
 </head>
-
-<body>
-    <!-- START Wrapper -->
-    <div class="wrapper">

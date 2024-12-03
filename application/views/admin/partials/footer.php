@@ -1,30 +1,12 @@
-            
-                        </div>
-                        <!-- End Container -->
-
-
-            <!-- ========== Footer Start ========== -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            &copy; Reback. Crafted by
-                            <iconify-icon icon="iconamoon:heart-duotone"
-                                class="fs-18 align-middle text-danger"></iconify-icon>
-                            <a href="https://1.envato.market/techzaa" class="fw-bold footer-text"
-                                target="_blank">Techzaa</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- ========== Footer End ========== -->
-
-            </div>
-        <!-- ==================================================== -->
-        <!-- End Page Content -->
-        <!-- ==================================================== -->
-    </div>
-    <!-- END Wrapper -->
+<footer class="footer d-flex flex-row align-items-center justify-content-between px-4 py-3 border-top small">
+    <p class="text-secondary mb-1 mb-md-0">
+        Copyright &copy;
+        <script>document.write(new Date().getFullYear())</script>
+        <a href="<?= base_url('admin/dashboard'); ?>">NobleUI</a>
+    </p>
+    <p class="text-secondary">
+        Developed with
+        <i class="mb-1 text-primary mx-1 icon-sm" data-feather="heart"></i>
+        by <a href="https://github.com/gmurad97" target="_blank">gmurad97</a>
+    </p>
+</footer>

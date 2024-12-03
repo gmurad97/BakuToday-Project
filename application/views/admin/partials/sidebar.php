@@ -1,646 +1,336 @@
-        <!-- ========== App Menu Start ========== -->
-        <div class="main-nav">
-            <!-- Sidebar Logo -->
-            <div class="logo-box">
-                <a href="index.html" class="logo-dark">
-                    <img src="<?= base_url('public/admin/assets/images/logo-sm.png'); ?>" class="logo-sm"
-                        alt="logo sm" />
-                    <img src="<?= base_url('public/admin/assets/images/logo-dark.png'); ?>" class="logo-lg"
-                        alt="logo dark" />
-                </a>
-
-                <a href="index.html" class="logo-light">
-                    <img src="<?= base_url('public/admin/assets/images/logo-sm.png'); ?>" class="logo-sm"
-                        alt="logo sm" />
-                    <img src="<?= base_url('public/admin/assets/images/logo-light.png'); ?>" class="logo-lg"
-                        alt="logo light" />
-                </a>
-            </div>
-
-            <!-- Menu Toggle Button (sm-hover) -->
-            <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
-                <iconify-icon icon="iconamoon:arrow-left-4-square-duotone" class="button-sm-hover-icon"></iconify-icon>
-            </button>
-
-            <div class="scrollbar" data-simplebar>
-                <ul class="navbar-nav" id="navbar-nav">
-                    <li class="menu-title">General</li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarDashboards"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarDashboards">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:home-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Dashboards </span>
-                        </a>
-                        <div class="collapse" id="sidebarDashboards">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="index.html">Analytics</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="dashboard-finance.html">Finance</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="dashboard-sales.html">Sales</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-title">Apps</li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarEcommerce"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarEcommerce">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:shopping-bag-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Ecommerce </span>
-                        </a>
-                        <div class="collapse" id="sidebarEcommerce">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-product-list.html">Products</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-product-detail.html">Product
-                                        Details</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-product-add.html">Create Product</a>
-                                </li>
-
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-customer-list.html">Customers</a>
-                                </li>
-
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-seller-list.html">Sellers</a>
-                                </li>
-
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-order-list.html">Orders</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-order-detail.html">Order Details</a>
-                                </li>
-
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-ecommerce-inventory.html">Inventory</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="apps-chat.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:comment-dots-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Chat </span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="apps-email.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:email-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Email </span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarCalendar"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarCalendar">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:calendar-1-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Calendar </span>
-                        </a>
-                        <div class="collapse" id="sidebarCalendar">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-calendar-schedule.html">Schedule</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-calendar-integration.html">Integration</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-calendar-help.html">Help</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="apps-todo.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:ticket-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Todo </span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="apps-social.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:squinting-face-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Social </span>
-                            <span class="badge badge-pill text-end bg-danger">Hot</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="apps-contacts.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:profile-circle-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Contacts </span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarInvoice"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarInvoice">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:invoice-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Invoices </span>
-                        </a>
-                        <div class="collapse" id="sidebarInvoice">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-invoices.html">Invoices</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="apps-invoice-details.html">Invoice Details</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-title">Custom</li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarPages" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarPages">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:copy-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Pages </span>
-                        </a>
-                        <div class="collapse" id="sidebarPages">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-starter.html">Welcome</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-faqs.html">FAQs</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-profile.html">Profile</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-comingsoon.html">Coming Soon</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-contact-us.html">Contact Us</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-about-us.html">About Us</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-team.html">Our Team</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-timeline.html">Timeline</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-404.html">404 Error</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-404-2.html">404 Error 2</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="pages-404-alt.html">404 Error (alt)</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Pages Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarAuthentication"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarAuthentication">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:lock-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Authentication </span>
-                        </a>
-                        <div class="collapse" id="sidebarAuthentication">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-signin.html">Sign In</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-signin2.html">Sign In 2</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-signup.html">Sign Up</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-signup2.html">Sign Up 2</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-password.html">Reset Password</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-password2.html">Reset Password 2</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-lock-screen.html">Lock Screen</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="auth-lock-screen2.html">Lock Screen 2</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="widgets.html">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:gift-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text">Widgets</span>
-                            <span class="badge bg-info badge-pill text-end">9+</span>
-                        </a>
-                    </li>
-                    <!-- end Demo Menu Item -->
-
-                    <li class="menu-title">Components</li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarBaseUI" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarBaseUI">
-                            <span class="nav-icon"><iconify-icon
-                                    icon="iconamoon:briefcase-duotone"></iconify-icon></span>
-                            <span class="nav-text"> Base UI </span>
-                        </a>
-                        <div class="collapse" id="sidebarBaseUI">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-accordion.html">Accordion</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-alerts.html">Alerts</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-avatar.html">Avatar</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-badge.html">Badge</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-breadcrumb.html">Breadcrumb</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-buttons.html">Buttons</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-card.html">Card</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-carousel.html">Carousel</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-collapse.html">Collapse</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-dropdown.html">Dropdown</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-list-group.html">List Group</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-modal.html">Modal</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-tabs.html">Tabs</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-offcanvas.html">Offcanvas</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-pagination.html">Pagination</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-placeholders.html">Placeholders</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-popovers.html">Popovers</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-progress.html">Progress</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-scrollspy.html">Scrollspy</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-spinners.html">Spinners</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-toasts.html">Toasts</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="ui-tooltips.html">Tooltips</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Base UI Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarExtendedUI"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarExtendedUI">
-                            <span class="nav-icon"><iconify-icon
-                                    icon="iconamoon:component-duotone"></iconify-icon></span>
-                            <span class="nav-text"> Advanced UI </span>
-                        </a>
-                        <div class="collapse" id="sidebarExtendedUI">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="extended-ratings.html">Ratings</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="extended-sweetalert.html">Sweet Alert</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="extended-swiper-silder.html">Swiper Slider</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="extended-scrollbar.html">Scrollbar</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="extended-toastify.html">Toastify</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Extended UI Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarCharts" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarCharts">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:3d-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Charts </span>
-                        </a>
-                        <div class="collapse" id="sidebarCharts">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-area.html">Area</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-bar.html">Bar</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-bubble.html">Bubble</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-candlestick.html">Candlestick</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-column.html">Column</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-heatmap.html">Heatmap</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-line.html">Line</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-mixed.html">Mixed</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-timeline.html">Timeline</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-boxplot.html">Boxplot</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-treemap.html">Treemap</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-pie.html">Pie</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-radar.html">Radar</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-radialbar.html">RadialBar</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-scatter.html">Scatter</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="charts-apex-polar-area.html">Polar Area</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Chart library Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarForms" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarForms">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:cheque-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Forms </span>
-                        </a>
-                        <div class="collapse" id="sidebarForms">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-basic.html">Basic Elements</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-checkbox-radio.html">Checkbox &amp; Radio</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-choices.html">Choice Select</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-clipboard.html">Clipboard</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-flatepicker.html">Flatepicker</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-validation.html">Validation</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-wizard.html">Wizard</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-fileuploads.html">File Upload</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-editors.html">Editors</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-input-mask.html">Input Mask</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="forms-range-slider.html">Slider</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Form Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarTables" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarTables">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:box-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Tables </span>
-                        </a>
-                        <div class="collapse" id="sidebarTables">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="tables-basic.html">Basic Tables</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="tables-gridjs.html">Grid Js</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Table Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarIcons" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarIcons">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:lightning-1-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Icons </span>
-                        </a>
-                        <div class="collapse" id="sidebarIcons">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="icons-boxicons.html">Boxicons</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="icons-iconamoon.html">IconaMoon Icons</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Icons library Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarMaps" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarMaps">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:location-pin-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Maps </span>
-                        </a>
-                        <div class="collapse" id="sidebarMaps">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="maps-google.html">Google Maps</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="maps-vector.html">Vector Maps</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Map Menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0);">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:badge-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text">Badge Menu</span>
-                            <span class="badge bg-danger badge-pill text-end">1</span>
-                        </a>
-                    </li>
-                    <!-- end Demo Menu Item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="pages-starter.html#sidebarMultiLevelDemo"
-                            data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="sidebarMultiLevelDemo">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:folder-add-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Menu Item </span>
-                        </a>
-                        <div class="collapse" id="sidebarMultiLevelDemo">
-                            <ul class="nav sub-navbar-nav">
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="javascript:void(0);">Menu Item 1</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link menu-arrow" href="pages-starter.html#sidebarItemDemoSubItem"
-                                        data-bs-toggle="collapse" role="button" aria-expanded="false"
-                                        aria-controls="sidebarItemDemoSubItem">
-                                        <span> Menu Item 2 </span>
-                                    </a>
-                                    <div class="collapse" id="sidebarItemDemoSubItem">
-                                        <ul class="nav sub-navbar-nav">
-                                            <li class="sub-nav-item">
-                                                <a class="sub-nav-link" href="javascript:void(0);">Menu Sub item</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <!-- end Demo Menu Item -->
-
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="javascript:void(0);">
-                            <span class="nav-icon">
-                                <iconify-icon icon="iconamoon:unavailable-duotone"></iconify-icon>
-                            </span>
-                            <span class="nav-text"> Disabled Item </span>
-                        </a>
-                    </li>
-                    <!-- end Demo Menu Item -->
-                </ul>
-            </div>
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <a href="<?= base_url('admin/dashboard'); ?>" class="sidebar-brand">
+            Noble<span>UI</span>
+        </a>
+        <div class="sidebar-toggler">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+    </div>
+    <div class="sidebar-body">
+        <ul class="nav" id="sidebarNav">
+            <li class="nav-item nav-category">Main</li>
+            <li class="nav-item">
+                <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item nav-category">Content Manager</li>
 
-        <!-- ========== App Menu End ========== -->
+            
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#emails" role="button"
+                    aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Email</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="emails">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../email/inbox.html" class="nav-link">Inbox</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../email/read.html" class="nav-link">Read</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../email/compose.html" class="nav-link">Compose</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
-                <!-- ==================================================== -->
-        <!-- Start right Content here -->
-        <!-- ==================================================== -->
-        <div class="page-content">
-            <!-- Start Container -->
-            <div class="container-xxl"></div>
+
+
+
+
+
+
+            <li class="nav-item">
+                <a href="../apps/chat.html" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">Chat</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../apps/calendar.html" class="nav-link">
+                    <i class="link-icon" data-feather="calendar"></i>
+                    <span class="link-title">Calendar</span>
+                </a>
+            </li>
+            <li class="nav-item nav-category">Components</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#uiComponents" role="button"
+                    aria-expanded="false" aria-controls="uiComponents">
+                    <i class="link-icon" data-feather="feather"></i>
+                    <span class="link-title">UI Kit</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="uiComponents">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../ui-components/accordion.html" class="nav-link">Accordion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/alerts.html" class="nav-link">Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/badges.html" class="nav-link">Badges</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/breadcrumbs.html" class="nav-link">Breadcrumbs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/buttons.html" class="nav-link">Buttons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/button-group.html" class="nav-link">Button group</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/cards.html" class="nav-link">Cards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/carousel.html" class="nav-link">Carousel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/collapse.html" class="nav-link">Collapse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/dropdowns.html" class="nav-link">Dropdowns</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/list-group.html" class="nav-link">List group</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/media-object.html" class="nav-link">Media object</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/modal.html" class="nav-link">Modal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/navs.html" class="nav-link">Navs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/navbar.html" class="nav-link">Navbar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/pagination.html" class="nav-link">Pagination</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/popover.html" class="nav-link">Popovers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/progress.html" class="nav-link">Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/scrollbar.html" class="nav-link">Scrollbar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/scrollspy.html" class="nav-link">Scrollspy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/spinners.html" class="nav-link">Spinners</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/tabs.html" class="nav-link">Tabs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../ui-components/tooltips.html" class="nav-link">Tooltips</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#advancedUI" role="button"
+                    aria-expanded="false" aria-controls="advancedUI">
+                    <i class="link-icon" data-feather="anchor"></i>
+                    <span class="link-title">Advanced UI</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="advancedUI">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../advanced-ui/cropper.html" class="nav-link">Cropper</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../advanced-ui/owl-carousel.html" class="nav-link">Owl carousel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../advanced-ui/sortablejs.html" class="nav-link">SortableJs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../advanced-ui/sweet-alert.html" class="nav-link">Sweet Alert</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#forms" role="button"
+                    aria-expanded="false" aria-controls="forms">
+                    <i class="link-icon" data-feather="inbox"></i>
+                    <span class="link-title">Forms</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="forms">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../forms/basic-elements.html" class="nav-link">Basic Elements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/advanced-elements.html" class="nav-link">Advanced Elements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/editors.html" class="nav-link">Editors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../forms/wizard.html" class="nav-link">Wizard</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#charts" role="button"
+                    aria-expanded="false" aria-controls="charts">
+                    <i class="link-icon" data-feather="pie-chart"></i>
+                    <span class="link-title">Charts</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="charts">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../charts/apex.html" class="nav-link">Apex</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/chartjs.html" class="nav-link">ChartJs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/flot.html" class="nav-link">Flot</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/peity.html" class="nav-link">Peity</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/sparkline.html" class="nav-link">Sparkline</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#tables" role="button"
+                    aria-expanded="false" aria-controls="tables">
+                    <i class="link-icon" data-feather="layout"></i>
+                    <span class="link-title">Table</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="tables">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../tables/basic-table.html" class="nav-link">Basic Tables</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../tables/data-table.html" class="nav-link">Data Table</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#icons" role="button"
+                    aria-expanded="false" aria-controls="icons">
+                    <i class="link-icon" data-feather="smile"></i>
+                    <span class="link-title">Icons</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="icons">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../icons/feather-icons.html" class="nav-link">Feather Icons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../icons/flag-icons.html" class="nav-link">Flag Icons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../icons/mdi-icons.html" class="nav-link">Mdi Icons</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item nav-category">Pages</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#general-pages" role="button"
+                    aria-expanded="false" aria-controls="general-pages">
+                    <i class="link-icon" data-feather="book"></i>
+                    <span class="link-title">Special pages</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="general-pages">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="blank-page.html" class="nav-link">Blank page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="faq.html" class="nav-link">Faq</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="invoice.html" class="nav-link">Invoice</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="profile.html" class="nav-link">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pricing.html" class="nav-link">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="timeline.html" class="nav-link">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#authPages" role="button"
+                    aria-expanded="false" aria-controls="authPages">
+                    <i class="link-icon" data-feather="unlock"></i>
+                    <span class="link-title">Authentication</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="authPages">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../auth/login.html" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../auth/register.html" class="nav-link">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="blank-page.html#errorPages" role="button"
+                    aria-expanded="false" aria-controls="errorPages">
+                    <i class="link-icon" data-feather="cloud-off"></i>
+                    <span class="link-title">Error</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" data-bs-parent="#sidebarNav" id="errorPages">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="../error/404.html" class="nav-link">404</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../error/500.html" class="nav-link">500</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item nav-category">Docs</li>
+            <li class="nav-item">
+                <a href="../../../../documentation/docs.html" target="_blank" class="nav-link">
+                    <i class="link-icon" data-feather="hash"></i>
+                    <span class="link-title">Documentation</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,4 @@
+- extending core version: 0.1
+- new template (integrated)
+- bug fix ...
+- build ver: 6
