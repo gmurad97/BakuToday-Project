@@ -6,7 +6,7 @@
     </p>
     <p class="text-secondary">
         Developed with
-        <i class="mb-1 text-primary mx-1 icon-sm" data-feather="heart"></i>
+        <i class="mb-1 text-danger mx-1 icon-sm" data-feather="heart"></i>
         by <a href="https://github.com/gmurad97" target="_blank">gmurad97</a>
     </p>
 </footer>
