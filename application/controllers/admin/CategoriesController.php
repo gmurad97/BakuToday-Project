@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class AdvertisingController extends CRUD_Controller
+class CategoriesController extends CRUD_Controller
 {
     public function __construct()
     {

@@ -11,22 +11,33 @@
     </div>
     <div class="sidebar-body">
         <ul class="nav" id="sidebarNav">
+            <?php
+            $currentUriString = $this->uri->uri_string();
+            function menuActiveState($currentUriString, $pageName)
+            {
+                return str_contains($currentUriString, $pageName) ? "active" : "";
+            }
+            ?>
+
+
+
             <li class="nav-item nav-category">Main</li>
-            <li class="nav-item">
+            <li class="nav-item <?= activeState($currentSegmentName, 'dashboard') ?>">
                 <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
             <li class="nav-item nav-category">Content Manager</li>
-            <li class="nav-item">
+            <li class="nav-item <?= activeState($currentSegmentName, 'news'); ?>">
                 <a class="nav-link" data-bs-toggle="collapse" href="#menuNews" role="button" aria-expanded="false"
                     aria-controls="menuNews">
                     <i class="link-icon" data-feather="file-text"></i>
                     <span class="link-title">News</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
-                <div class="collapse" data-bs-parent="#sidebarNav" id="menuNews">
+                <div class="collapse <?= $this->uri->segment(2) == 'news' ? 'show' : ''; ?>"
+                    data-bs-parent="#sidebarNav" id="menuNews">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="<?= base_url('admin/news'); ?>" class="nav-link">All News</a>
