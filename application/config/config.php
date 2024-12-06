@@ -77,8 +77,11 @@ $config['url_suffix'] = '';
 | there is an available translation if you intend to use something other
 | than english.
 |
+
 */
-$config['language']	= 'english';
+$config['language'] = 'user/en'; //потому что дефолт
+
+$config['admin_language'] = 'admin/en'; // для админки резерв (в стоке нет такой функциональности временная заглушка)
 
 /*
 |--------------------------------------------------------------------------
@@ -102,7 +105,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
