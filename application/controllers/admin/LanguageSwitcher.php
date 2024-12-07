@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class LanguageSwitcher extends CI_Controller
+class LanguageSwitcher extends BASE_Controller
 {
     public function __construct() {
         parent::__construct();
@@ -21,5 +21,8 @@ class LanguageSwitcher extends CI_Controller
         // Перенаправляем на предыдущую страницу или на главную, если HTTP_REFERER пуст
         $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
         redirect($referer);
+    }
+    function index(){
+        //заглушка
     }
 }

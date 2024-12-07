@@ -79,7 +79,7 @@ $config['url_suffix'] = '';
 |
 
 */
-$config['language'] = 'user/en'; //потому что дефолт
+$config['language'] = 'english'; //потому что дефолт
 
 $config['admin_language'] = 'admin/en'; // для админки резерв (в стоке нет такой функциональности временная заглушка)
 
