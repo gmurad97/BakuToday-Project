@@ -2,8 +2,8 @@
 // github link: https://github.com/dropzone/dropzone
 
 'use strict';
-
-(function () {
+if (document.getElementById('#exampleDropzone')) {
+	(function () {
 
   // const myDropzone = new Dropzone("#exampleDropzone", { url: "/file/post"});
 
@@ -92,3 +92,4 @@
   }
 
 })();
+}

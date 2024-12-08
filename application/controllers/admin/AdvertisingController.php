@@ -20,7 +20,8 @@ class AdvertisingController extends CRUD_Controller
 
     public function create()
     {
-
+        $context["page_title"] = "Add Ads";
+        $this->load->view("admin/advertising/create", $context);
     }
 
     public function store()

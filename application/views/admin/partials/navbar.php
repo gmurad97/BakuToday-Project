@@ -10,7 +10,7 @@
             <li class="theme-switcher-wrapper nav-item">
                 <input type="checkbox" id="theme-switcher">
                 <label for="theme-switcher">
-                    <div class="box">
+                    <div class="box dark">
                         <div class="ball"></div>
                         <div class="icons">
                             <i class="feather icon-sun"></i>

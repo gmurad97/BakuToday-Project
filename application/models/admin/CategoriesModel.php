@@ -2,6 +2,6 @@
 
 class CategoriesModel extends ELOQUENT_Model
 {
-    protected $table = "categories";
+    protected $tableName = "categories";
     protected $primaryKey = "id";
 }
