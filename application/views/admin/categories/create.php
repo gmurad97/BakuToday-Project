@@ -29,191 +29,61 @@
                                 </a>
                             </li>
                         </ul>
-
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-content mt-3" id="lineTabContent">
                             <div class="tab-pane fade show active" id="az" role="tabpanel"
                                 aria-labelledby="az-line-tab">
-
-
-
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Category Name</label>
-                                            <input type="text" class="form-control" placeholder="Economics">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <?php
-                                            function renderCategories($categories, $parentId = 0, $level = 0)
-                                            {
-                                                foreach ($categories as $category) {
-                                                    if ($category['parent_id'] == $parentId) {
-                                                        // Отступ для вложенности
-                                                        $indent = str_repeat('-- ', $level);
-                                                        echo '<option value="' . $category['id'] . '">' . $indent . $category['name_en'] . '</option>';
-                                                        // Рекурсивный вызов для вложенных категорий
-                                                        renderCategories($categories, $category['id'], $level + 1);
-                                                    }
-                                                }
-                                            }
-                                            ?>
-                                            <label class="form-label">Sub category</label>
-                                            <select class="form-select mb-3">
-                                                <option selected>Open this select menu</option>
-                                                <?php renderCategories($categories_collection); ?>
-                                            </select>
+                                            <label class="form-label">Category name</label>
+                                            <input maxlength="255" type="text" class="form-control"
+                                                placeholder="Economics" id="defaultconfig">
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <div class="form-check form-switch mb-2">
-                                            <input type="checkbox" class="form-check-input" id="formSwitch1" checked>
-                                            <label class="form-check-label" for="formSwitch1">Status</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
-
-                                    <div class="col-sm-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
+                                            <label class="form-label">Category name</label>
+                                            <input maxlength="255" type="text" class="form-control"
+                                                placeholder="Economics">
                                         </div>
-                                    </div><!-- Col -->
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
-                                        </div>
-                                    </div><!-- Col -->
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Default</label>
-                                            <select class="form-select mb-3">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div><!-- Col -->
-
-
-
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
+                                            <label class="form-label">Category name</label>
+                                            <input type="text" class="form-control" placeholder="Economics">
                                         </div>
-                                    </div><!-- Col -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
 
 
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sub category</label>
+                                <select class="form-select mb-3">
+                                    <option selected>None</option>
+                                    <?php
+                                    renderCategories(
+                                        $categories_collection, // Массив категорий
+                                        'id',                   // Поле ID
+                                        'parent_id',            // Поле родительского ID
+                                        'name_en'               // Поле для имени (например, на английском)
+                                    );
+                                    ?>
+                                </select>
                             </div>
                         </div>
 
@@ -223,19 +93,19 @@
 
 
 
+                        <div class="row">
+                            <div class="mb-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input type="checkbox" class="form-check-input" id="categoryStatus" checked>
+                                    <label class="form-check-label" for="categoryStatus">Status</label>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
-
-
-
-
-
-
-
-
-                        <button type="submit" class="btn btn-primary submit">Submit form</button>
+                        <button type="submit" class="btn btn-success">Create</button>
                     </form>
                 </div>
             </div>

@@ -1,12 +1,15 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 class LanguageSwitcher extends BASE_Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    function switchLang($language = "") {
+    function switchLang($language = "")
+    {
         // Список доступных языков, добавьте в этот список нужные языки
         $available_languages = ['en', 'fr', 'de', 'es'];
 
@@ -22,7 +25,8 @@ class LanguageSwitcher extends BASE_Controller
         $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
         redirect($referer);
     }
-    function index(){
+    function index()
+    {
         //заглушка
     }
 }

@@ -14,7 +14,12 @@ class CategoriesController extends CRUD_Controller
 
     public function index()
     {
-
+        $context["page_title"] = "All News";
+        $context["news_array"] = $this->CategoriesModel->all();
+/*         print_r("<pre>");
+        print_r($context);
+        die(); */
+        $this->load->view("admin/categories/list", $context);
     }
 
     public function show($id)
