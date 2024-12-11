@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class ContactController extends BASE_Controller
 {
@@ -9,6 +10,7 @@ class ContactController extends BASE_Controller
 
     public function index()
     {
-        $this->load->view("user/contact");
+        $context["page_title"] = $this->lang->line("contact_navbar_menu");
+        $this->load->view("user/contact", $context);
     }
 }

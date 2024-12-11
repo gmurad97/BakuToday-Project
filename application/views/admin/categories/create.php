@@ -75,14 +75,14 @@
                                 <label class="form-label">Sub category</label>
                                 <select class="form-select mb-3">
                                     <option selected>None</option>
-                                    <?php
-                                    renderCategories(
+                                    <!-- <?php
+                                    /* renderCategories(
                                         $categories_collection, // Массив категорий
                                         'id',                   // Поле ID
                                         'parent_id',            // Поле родительского ID
                                         'name_en'               // Поле для имени (например, на английском)
-                                    );
-                                    ?>
+                                    ); */
+                                    ?> -->
                                 </select>
                             </div>
                         </div>

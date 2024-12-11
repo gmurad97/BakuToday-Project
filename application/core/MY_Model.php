@@ -8,6 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Calendar $calendar
  * @property CI_Config $config
  * @property CI_Controller $controller
+ * @property CI_Lang $lang
  * @property CI_DB $db
  * @property CI_Email $email
  * @property CI_Encrypt $encrypt

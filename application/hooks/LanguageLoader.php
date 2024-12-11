@@ -56,4 +56,5 @@ function toggleDebugPanel() {
         toggleText.textContent = "Show";
     }
 }
-</script>'; */
+</script>';
+ */

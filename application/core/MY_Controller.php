@@ -8,6 +8,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Calendar $calendar
  * @property CI_Config $config
  * @property CI_Controller $controller
+ * @property CI_Lang $lang
+ * @property CI_Session $session
  * @property CI_DB $db
  * @property CI_Email $email
  * @property CI_Encrypt $encrypt
@@ -42,13 +44,13 @@ class MY_Controller extends CI_Controller
     }
 }
 
-/*========== BASE_CONTROLLER - Abstract template for creating controllers based on CI_Controller ==========*/
+/*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
 abstract class BASE_Controller extends MY_Controller
 {
     abstract public function index();
 }
 
-/*========== CRUD_CONTROLLER - Abstract controller for implementing CRUD operations ==========*/
+/*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
 abstract class CRUD_Controller extends MY_Controller
 {
     abstract public function index();

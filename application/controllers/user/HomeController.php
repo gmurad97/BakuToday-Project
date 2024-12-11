@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class HomeController extends BASE_Controller
 {
@@ -9,7 +10,7 @@ class HomeController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = "Home";
-        $this->load->view("user/home",$context);
+        $context["page_title"] = $this->lang->line("home_navbar_menu");
+        $this->load->view("user/home", $context);
     }
 }
