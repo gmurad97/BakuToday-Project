@@ -1,3 +1,7 @@
+<?php
+redirect(base_url("admin/dashboard"));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

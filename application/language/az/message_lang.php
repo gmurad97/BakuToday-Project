@@ -13,3 +13,5 @@ $lang["about_page_heading"] = "Haqqında səhifə";
 $lang["about_page_description"] = "Haqqımızda. Biz [sizin sahə] sahəsində uzun illər təcrübəsi olan peşəkar komandayıq. Məqsədimiz sizə uğur qazanmağınızda kömək etməkdir, keyfiyyətli və səmərəli həllər təqdim edirik. Müştərilərimizlə uzunmüddətli əlaqələrə inanır və həmişə onların maraqlarını ön planda tuturuq.";
 
 /*========== Admin Translate ==========*/
+
+$lang["admin_test"] = "Test acari";

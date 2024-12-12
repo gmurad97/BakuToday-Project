@@ -17,7 +17,7 @@ class LanguageController extends MY_Controller
             ? strtolower($language)
             : $default_language;
 
-        $this->session->set_userdata("user_lang", $selected_language);
+        $this->session->set_userdata("admin_lang", $selected_language);
 
         redirect($_SERVER["HTTP_REFERER"] ?? base_url());
     }

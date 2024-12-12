@@ -82,6 +82,17 @@ $route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfileController/edit/$1";
 $route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfileController/update/$1";
 $route["admin/profiles/(:any)/delete"]["POST"] = "admin/ProfileController/delete/$1";
 
+
+
+
+
+
+
+
+
+
+
+
 /*===== Dashboard Routes ===== */
 $route["admin/dashboard"]["GET"] = "admin/DashboardController/index";
 
@@ -115,3 +126,21 @@ $route["admin/advertising/(:any)/delete"]["POST"] = "admin/AdvertisingController
 /*===== Settings Routes ===== */
 $route["admin/settings"]["GET"] = "admin/SettingsController/index";
 $route["admin/settings/update"]["POST"] = "admin/SettingsController/update";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$route["admin(.*)"] = "admin/AdminController/index";

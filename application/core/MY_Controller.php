@@ -50,6 +50,28 @@ abstract class BASE_Controller extends MY_Controller
     abstract public function index();
 }
 
+
+
+
+abstract class ERROR_Controller extends MY_Controller{
+
+
+    public function index(){
+
+    }
+
+    public function error_404(){
+
+    }
+
+    public function error_500(){
+        
+    }
+}
+
+
+
+
 /*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
 abstract class CRUD_Controller extends MY_Controller
 {

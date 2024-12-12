@@ -13,3 +13,10 @@ $lang["about_page_heading"] = "About page";
 $lang["about_page_description"] = "About Us. We are a team of professionals with years of experience in the field of [your field]. Our goal is to help you succeed by providing quality and effective solutions. We believe in long-term relationships with our clients and always put their interests first.";
 
 /*========== Admin Translate ==========*/
+
+$lang["sidebar_menu_main"] = "Main";
+$lang["sidebar_menu_dashboard"] = "Dashboard";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
