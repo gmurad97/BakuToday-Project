@@ -10,6 +10,15 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">All News</h6>
+                    <?php $alert = $this->session->flashdata("category_delete_alert"); ?>
+                    <?php if ($alert): ?>
+                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
+                            <strong><?= $alert['alert_message']['title'] ?></strong>
+                            <?= $alert['alert_message']['description'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                        </div>
+                    <?php endif; ?>
 
 
 

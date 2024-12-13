@@ -5,31 +5,15 @@
 
 (function () {
 
-  $('#defaultconfig').maxlength({
+  $("#category_name_az").maxlength({
     warningClass: "badge mt-1 bg-success",
     limitReachedClass: "badge mt-1 bg-danger"
   });
-
-  $('#defaultconfig-2').maxlength({
-    alwaysShow: true,
-    threshold: 20,
+  $('#category_name_en').maxlength({
     warningClass: "badge mt-1 bg-success",
     limitReachedClass: "badge mt-1 bg-danger"
   });
-
-  $('#defaultconfig-3').maxlength({
-    alwaysShow: true,
-    threshold: 10,
-    warningClass: "badge mt-1 bg-success",
-    limitReachedClass: "badge mt-1 bg-danger",
-    separator: ' of ',
-    preText: 'You have ',
-    postText: ' chars remaining.',
-    validate: true
-  });
-
-  $('#maxlength-textarea').maxlength({
-    alwaysShow: true,
+  $('#category_name_ru').maxlength({
     warningClass: "badge mt-1 bg-success",
     limitReachedClass: "badge mt-1 bg-danger"
   });

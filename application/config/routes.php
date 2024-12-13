@@ -52,7 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /*========== System Routes ==========*/
 $route["default_controller"] = "DefaultController";
-$route["404_override"] = "";
+$route["404_override"] = "ErrorController";
 $route["translate_uri_dashes"] = FALSE;
 
 
@@ -80,7 +80,7 @@ $route["admin/profiles"]["GET"] = "admin/ProfileController/index";
 $route["admin/profiles/(:any)"]["GET"] = "admin/ProfileController/show/$1";
 $route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfileController/edit/$1";
 $route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfileController/update/$1";
-$route["admin/profiles/(:any)/delete"]["POST"] = "admin/ProfileController/delete/$1";
+$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfileController/delete/$1";
 
 
 
@@ -103,16 +103,33 @@ $route["admin/news/store"]["POST"] = "admin/NewsController/store";
 $route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
 $route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
 $route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
-$route["admin/news/(:any)/delete"]["POST"] = "admin/NewsController/delete/$1";
+$route["admin/news/(:any)/delete"]["GET"] = "admin/NewsController/destroy/$1";
 
 /*===== Categories Routes ===== */
+
+
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";
 $route["admin/categories/create"]["GET"] = "admin/CategoriesController/create";
 $route["admin/categories/store"]["POST"] = "admin/CategoriesController/store";
 $route["admin/categories/(:any)"]["GET"] = "admin/CategoriesController/show/$1";
 $route["admin/categories/(:any)/edit"]["GET"] = "admin/CategoriesController/edit/$1";
 $route["admin/categories/(:any)/update"]["POST"] = "admin/CategoriesController/update/$1";
-$route["admin/categories/(:any)/delete"]["POST"] = "admin/CategoriesController/delete/$1";
+$route["admin/categories/(:any)/delete"]["GET"] = "admin/CategoriesController/destroy/$1";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*===== Advertising Routes ===== */
 $route["admin/advertising"]["GET"] = "admin/AdvertisingController/index";
@@ -121,7 +138,7 @@ $route["admin/advertising/store"]["POST"] = "admin/AdvertisingController/store";
 $route["admin/advertising/(:any)"]["GET"] = "admin/AdvertisingController/show/$1";
 $route["admin/advertising/(:any)/edit"]["GET"] = "admin/AdvertisingController/edit/$1";
 $route["admin/advertising/(:any)/update"]["POST"] = "admin/AdvertisingController/update/$1";
-$route["admin/advertising/(:any)/delete"]["POST"] = "admin/AdvertisingController/delete/$1";
+$route["admin/advertising/(:any)/delete"]["GET"] = "admin/AdvertisingController/destroy/$1";
 
 /*===== Settings Routes ===== */
 $route["admin/settings"]["GET"] = "admin/SettingsController/index";
@@ -143,4 +160,4 @@ $route["admin/settings/update"]["POST"] = "admin/SettingsController/update";
 
 
 
-$route["admin(.*)"] = "admin/AdminController/index";
+/* $route["admin(.*)"] = "admin/AdminController/index"; */
