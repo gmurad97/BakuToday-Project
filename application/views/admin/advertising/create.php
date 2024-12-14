@@ -1,6 +1,7 @@
 <?php $this->load->view("admin/partials/head"); ?>
 <?php $this->load->view("admin/partials/sidebar"); ?>
 <?php $this->load->view("admin/partials/navbar"); ?>
+
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -29,130 +30,83 @@
                             </li>
                         </ul>
 
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-content mt-3" id="lineTabContent">
-                            <div class="tab-pane fade show active" id="az" role="tabpanel"
-                                aria-labelledby="az-line-tab">
-
-
-
+                            <!-- AZ Tab -->
+                            <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="category_name_az" class="form-label">
+                                            <label for="title_az" class="form-label">
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
-                                            <input name="category_name_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Siyasət" id="category_name_az">
+                                            <input name="title_az" maxlength="255" type="text" class="form-control" placeholder="Siyasət" id="title_az" required>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <!-- EN Tab -->
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="category_name_az" class="form-label">
+                                            <label for="title_en" class="form-label">
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
-                                            <input name="category_name_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Siyasət" id="category_name_az">
+                                            <input name="title_en" maxlength="255" type="text" class="form-control" placeholder="Politics" id="title_en" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- RU Tab -->
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="category_name_az" class="form-label">
+                                            <label for="title_ru" class="form-label">
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
-                                            <input name="category_name_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Siyasət" id="category_name_az">
+                                            <input name="title_ru" maxlength="255" type="text" class="form-control" placeholder="Политика" id="title_ru" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-
-
+                        <!-- Image Upload -->
                         <div class="row">
-
                             <div class="mb-3">
-                                <label class="form-label">Location</label>
-                                <input type="text" class="form-control" placeholder="Enter first name">
+                                <label for="img" class="form-label">Main Image</label>
+                                <input type="file" class="form-control" name="img" id="img" required>
                             </div>
+                        </div>
 
-                        </div><!-- Row -->
+                        <!-- Location Selection -->
                         <div class="row">
-
                             <div class="mb-3">
-                                <label class="form-label">Location</label>
-                                <input type="file" class="form-control" placeholder="Enter first name" multiple>
+                                <label for="location" class="form-label">Location</label>
+                                <select class="form-select" name="location" id="location" required>
+                                    <option value="1">Location 1</option>
+                                    <option value="2">Location 2</option>
+                                    <option value="3">Location 3</option>
+                                    <option value="">None</option>
+                                </select>
                             </div>
+                        </div>
 
-                        </div><!-- Row -->
+                        <!-- Status Selection -->
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" name="status" id="status" required>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        <!-- Submit Button -->
                         <button type="submit" class="btn btn-primary submit">Submit form</button>
                     </form>
                 </div>
@@ -160,8 +114,10 @@
         </div>
     </div>
 </div>
+
 <?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>
+
 <script>
     CKEDITOR.replace("tinymceExample", {
         on: {

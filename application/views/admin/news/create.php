@@ -1,6 +1,7 @@
 <?php $this->load->view("admin/partials/head"); ?>
 <?php $this->load->view("admin/partials/sidebar"); ?>
 <?php $this->load->view("admin/partials/navbar"); ?>
+
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -29,212 +30,128 @@
                             </li>
                         </ul>
 
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-content mt-3" id="lineTabContent">
-                            <div class="tab-pane fade show active" id="az" role="tabpanel"
-                                aria-labelledby="az-line-tab">
-
-
-
+                            <!-- AZ Tab -->
+                            <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-line-tab">
                                 <div class="row">
-                                    <div class="mb-3">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name">
+                                    <div class="mb-3 col-12">
+                                        <label class="form-label">Title (AZ)</label>
+                                        <input type="text" class="form-control" name="title_az" placeholder="Enter title in Azerbaijani" required>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="short-description-az" class="form-label">Short Description (AZ)</label>
+                                        <textarea class="form-control" id="short-description-az" name="short_description_az" rows="3" placeholder="Enter short description" required></textarea>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="long-description-az" class="form-label">Long Description (AZ)</label>
+                                        <textarea class="form-control" id="long-description-az" name="long_description_az" rows="5" placeholder="Enter detailed description" required></textarea>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <h4 class="card-title">TinyMCE</h4>
-                                        <p class="text-secondary mb-3">Read the <a href="https://www.tiny.cloud/docs/"
-                                                target="_blank"> Official TinyMCE Documentation </a>for a full list of
-                                            instructions and other options.</p>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample"
-                                            rows="10"></textarea>
-                                    </div>
-                                </div>
-
-                                <link rel="stylesheet"
-                                    href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
-
-
-
-
-
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <h6 class="card-title">Dropzone</h6>
-                                        <p class="text-secondary mb-3">Read the <a href="https://www.dropzonejs.com/"
-                                                target="_blank"> Official Dropzone.js Documentation </a>for a full list
-                                            of instructions and other options.</p>
-
-                                        <form action="/file-upload" class="dropzone" id="exampleDropzone">
-                                            <div class="dz-message ">
-                                                Drop files here or click to upload.<BR>
-                                                <SPAN class="note needsclick">(This is just a demo dropzone. Selected
-                                                    files are <STRONG>not</STRONG> actually uploaded.)</SPAN>
-                                            </div>
-                                        </form>
-
-
-                                    </div>
-                                </div>
-
-
                             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <!-- EN Tab -->
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
-                                        </div>
-                                    </div><!-- Col -->
-
-
-
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
+                                    <div class="mb-3 col-12">
+                                        <label class="form-label">Title (EN)</label>
+                                        <input type="text" class="form-control" name="title_en" placeholder="Enter title in English" required>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="short-description-en" class="form-label">Short Description (EN)</label>
+                                        <textarea class="form-control" id="short-description-en" name="short_description_en" rows="3" placeholder="Enter short description" required></textarea>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="long-description-en" class="form-label">Long Description (EN)</label>
+                                        <textarea class="form-control" id="long-description-en" name="long_description_en" rows="5" placeholder="Enter detailed description" required></textarea>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- RU Tab -->
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
-                                        </div>
-                                    </div><!-- Col -->
-
-
-
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    <div class="mb-3 col-12">
+                                        <label class="form-label">Title (RU)</label>
+                                        <input type="text" class="form-control" name="title_ru" placeholder="Enter title in Russian" required>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="short-description-ru" class="form-label">Short Description (RU)</label>
+                                        <textarea class="form-control" id="short-description-ru" name="short_description_ru" rows="3" placeholder="Enter short description" required></textarea>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="long-description-ru" class="form-label">Long Description (RU)</label>
+                                        <textarea class="form-control" id="long-description-ru" name="long_description_ru" rows="5" placeholder="Enter detailed description" required></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- Image Upload Section -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="img" class="form-label">Main Image</label>
+                                <input type="file" class="form-control" id="img" name="img" required>
+                            </div>
+                        </div>
 
+                        <!-- Multiple Image Upload Section -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="multi_img" class="form-label">Multiple Images</label>
+                                <input type="file" class="form-control" id="multi_img" name="multi_img[]" multiple>
+                                <small class="form-text text-muted">Hold down the 'Ctrl' or 'Cmd' key to select multiple files.</small>
+                            </div>
+                        </div>
 
+                        <!-- Category and Author Selection -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="category_id" class="form-label">Category</label>
+                                <select class="form-select" name="category_id" id="category_id" required>
+                                    <!-- Add categories dynamically -->
+                                    <option value="">Select Category</option>
+                                    <option value="1">Technology</option>
+                                    <option value="2">Business</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="author_id" class="form-label">Author</label>
+                                <select class="form-select" name="author_id" id="author_id" required>
+                                    <!-- Add authors dynamically -->
+                                    <option value="">Select Author</option>
+                                    <option value="1">John Doe</option>
+                                    <option value="2">Jane Smith</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <!-- Type of News -->
+                        <div class="mb-3">
+                            <label for="type" class="form-label">News Type</label>
+                            <select class="form-select" name="type" id="type" required>
+                                <option value="daily_news">Daily News</option>
+                                <option value="important_news">Important News</option>
+                                <option value="general_news">General News</option>
+                            </select>
+                        </div>
 
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" name="status" id="status" required>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <button type="submit" class="btn btn-primary submit">Submit form</button>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Submit Form</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>
-<script>
-    CKEDITOR.replace("tinymceExample", {
-        on: {
-            instanceReady: function (e) {
-                let editorElement = e.editor.container.$;
-                editorElement.style.marginTop = "0.5rem";
-                editorElement.style.marginBottom = "0.5rem";
-                editorElement.style.boxShadow = "none";
-            }
-        }
-    });
-</script>
