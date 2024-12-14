@@ -29,6 +29,7 @@ $lang[""] = "";
 /*========== Admin Translate ==========*/
 $lang["admin_all_categories_page_title"] = "All Categories";
 $lang["admin_create_category_page_title"] = "Create Category";
+$lang["admin_system_settings_page_title"] = "Settings";
 
 
 
@@ -82,6 +83,8 @@ $lang["admin_categories_view_page_status_disabled"] = "Disabled";
 $lang["admin_categories_view_page_table_created_at"] = "Created At";
 $lang["admin_categories_view_page_table_updated_at"] = "Updated At";
 $lang["admin_categories_view_page_back_btn"] = "Back";
+$lang["admin_categories_view_page_delete_btn"] = "Delete";
+$lang["admin_categories_view_page_edit_btn"] = "Edit";
 
 
 
@@ -95,6 +98,16 @@ $lang["admin_categories_list_page_create_btn"] = "Update";
 
 
 
+
+
+
+
+
+$lang["admin_settings_edit_page_setting_thead"] = "Setting";
+$lang["admin_settings_edit_page_status_thead"] = "Status";
+$lang["admin_settings_edit_page_maintenance_mode_label"] = "Maintenance mode";
+$lang["admin_settings_edit_page_snow_mode_label"] = "Snow mode";
+$lang["admin_settings_edit_page_update_btn"] = "Update";
 
 
 
@@ -146,6 +159,9 @@ $lang["admin_category_detail_invalid_id_alert_description"] = "The provided ID i
 
 
 
+
+$lang["admin_settings_edit_success_alert_title"] = "Success!";
+$lang["admin_settings_edit_success_alert_description"] = "The settings has been successfully updated.";
 
 
 

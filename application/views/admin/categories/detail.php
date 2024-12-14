@@ -11,7 +11,7 @@
                         <?= $this->lang->line("admin_categories_view_page_card_title"); ?> •
                         <?= $category["name_$current_language"]; ?>
                     </h6>
-                    <div class="table-responsive pt-3">
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
                                 <td>
@@ -19,7 +19,11 @@
                                         <?= $this->lang->line("admin_categories_view_page_table_name"); ?>
                                     </span>
                                 </td>
-                                <td><?= $category["name_$current_language"]; ?></td>
+                                <td>
+                                    <span class="text-secondary">
+                                        <?= $category["name_$current_language"]; ?>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -46,7 +50,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span>
+                                    <span class="text-secondary">
                                         <?= $category["created_at"]; ?>
                                     </span>
                                 </td>
@@ -58,17 +62,52 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span>
+                                    <span class="text-secondary">
                                         <?= $category["updated_at"]; ?>
                                     </span>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary mt-3">
+                </div>
+                <div class="card-footer">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal"
+                        class="btn btn-outline-danger">
+                        <?= $this->lang->line("admin_categories_view_page_delete_btn"); ?>
+                    </a>
+                    <a href="<?= base_url('admin/categories/' . $category['id'] . '/edit'); ?>"
+                        class="btn btn-outline-warning">
+                        <?= $this->lang->line("admin_categories_view_page_edit_btn"); ?>
+                    </a>
+                    <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
                         <?= $this->lang->line("admin_categories_view_page_back_btn"); ?>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCategoryModalTitle">
+                    <?= $this->lang->line("admin_categories_list_page_delete_modal_title"); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <?= $this->lang->line("admin_categories_list_page_delete_modal_description"); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <?= $this->lang->line("admin_categories_list_page_delete_modal_close_btn"); ?>
+                </button>
+                <a href="<?= base_url('admin/categories/' . $category['id'] . '/delete'); ?>" id="deleteCategoryButton"
+                    class="btn btn-outline-danger">
+                    <?= $this->lang->line("admin_categories_list_page_delete_modal_delete_btn"); ?>
+                </a>
             </div>
         </div>
     </div>

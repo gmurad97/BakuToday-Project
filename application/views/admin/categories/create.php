@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?= $this->lang->line("admin_categories_create_page_card_title"); ?></h6>
-                    <?php $alert = $this->session->flashdata("category_alert"); ?>
+                    <?php $alert = $this->session->flashdata("categories_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -18,6 +18,8 @@
                     <?php endif; ?>
                     <form action="<?= base_url('admin/categories/store'); ?>" method="POST"
                         enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                            value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"

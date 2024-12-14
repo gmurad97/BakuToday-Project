@@ -72,6 +72,14 @@
                                     </div>
                                 </div>
 
+                                <link rel="stylesheet"
+                                    href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+
+
+
+
+
+
                                 <div class="row">
                                     <div class="mb-3">
                                         <h6 class="card-title">Dropzone</h6>
@@ -87,14 +95,6 @@
                                             </div>
                                         </form>
 
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                    <h6 class="card-title">Dropify</h6>
-								<p class="text-secondary mb-3">Read the <a href="https://github.com/JeremyFagis/dropify" target="_blank"> Official Dropify Documentation </a>for a full list of instructions and other options.</p>
-								<input type="file" id="myDropify"/>
 
                                     </div>
                                 </div>

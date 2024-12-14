@@ -11,7 +11,7 @@
                         <?= $this->lang->line("admin_categories_edit_page_card_title"); ?> •
                         <?= $category["name_$current_language"]; ?>
                     </h6>
-                    <?php $alert = $this->session->flashdata("category_alert"); ?>
+                    <?php $alert = $this->session->flashdata("categories_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -22,6 +22,8 @@
                     <?php endif; ?>
                     <form action="<?= base_url('admin/categories/' . $category['id'] . '/update'); ?>" method="POST"
                         enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                            value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
@@ -98,9 +100,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-warning">
+                        <button type="submit" class="btn btn-outline-warning">
                             <?= $this->lang->line("admin_categories_edit_page_create_btn"); ?>
                         </button>
+                        <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
+                            <?= $this->lang->line("admin_categories_view_page_back_btn"); ?>
+                        </a>
                     </form>
                 </div>
             </div>

@@ -6,7 +6,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Create News</h6>
+                    <h6 class="card-title">Create Advertising</h6>
                     <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
@@ -46,56 +46,14 @@
 
 
                                 <div class="row">
-                                    <div class="mb-3">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <h4 class="card-title">TinyMCE</h4>
-                                        <p class="text-secondary mb-3">Read the <a href="https://www.tiny.cloud/docs/"
-                                                target="_blank"> Official TinyMCE Documentation </a>for a full list of
-                                            instructions and other options.</p>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample"
-                                            rows="10"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <h6 class="card-title">Dropzone</h6>
-                                        <p class="text-secondary mb-3">Read the <a href="https://www.dropzonejs.com/"
-                                                target="_blank"> Official Dropzone.js Documentation </a>for a full list
-                                            of instructions and other options.</p>
-
-                                        <form action="/file-upload" class="dropzone" id="exampleDropzone">
-                                            <div class="dz-message ">
-                                                Drop files here or click to upload.<BR>
-                                                <SPAN class="note needsclick">(This is just a demo dropzone. Selected
-                                                    files are <STRONG>not</STRONG> actually uploaded.)</SPAN>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="mb-3">
-                                    <h6 class="card-title">Dropify</h6>
-								<p class="text-secondary mb-3">Read the <a href="https://github.com/JeremyFagis/dropify" target="_blank"> Official Dropify Documentation </a>for a full list of instructions and other options.</p>
-								<input type="file" id="myDropify"/>
-
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="category_name_az" class="form-label">
+                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            </label>
+                                            <input name="category_name_az" maxlength="255" type="text"
+                                                class="form-control" placeholder="Siyasət" id="category_name_az">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -134,73 +92,51 @@
 
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
+                                            <label for="category_name_az" class="form-label">
+                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            </label>
+                                            <input name="category_name_az" maxlength="255" type="text"
+                                                class="form-control" placeholder="Siyasət" id="category_name_az">
                                         </div>
-                                    </div><!-- Col -->
-
-
-
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input type="text" class="form-control" placeholder="Enter first name">
+                                            <label for="category_name_az" class="form-label">
+                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            </label>
+                                            <input name="category_name_az" maxlength="255" type="text"
+                                                class="form-control" placeholder="Siyasət" id="category_name_az">
                                         </div>
-                                    </div><!-- Col -->
-
-
-
-
-
-
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter last name">
-                                        </div>
-                                    </div><!-- Col -->
-                                </div><!-- Row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
 
 
+
+                        <div class="row">
+
+                            <div class="mb-3">
+                                <label class="form-label">Location</label>
+                                <input type="text" class="form-control" placeholder="Enter first name">
+                            </div>
+
+                        </div><!-- Row -->
+                        <div class="row">
+
+                            <div class="mb-3">
+                                <label class="form-label">Location</label>
+                                <input type="file" class="form-control" placeholder="Enter first name" multiple>
+                            </div>
+
+                        </div><!-- Row -->
 
 
 

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?= $this->lang->line("admin_categories_list_page_card_title"); ?></h6>
-                    <?php $alert = $this->session->flashdata("category_alert"); ?>
+                    <?php $alert = $this->session->flashdata("categories_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>

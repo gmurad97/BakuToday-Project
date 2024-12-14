@@ -2,11 +2,12 @@
 // github link: https://github.com/dropzone/dropzone
 
 'use strict';
-if (document.getElementById('#exampleDropzone')) {
+
 	(function () {
 
   // const myDropzone = new Dropzone("#exampleDropzone", { url: "/file/post"});
 
+  console.log("выавыавы");
   const dropzone = new Dropzone('#exampleDropzone', {
     parallelUploads: 2,
     thumbnailHeight: 120,
@@ -92,4 +93,4 @@ if (document.getElementById('#exampleDropzone')) {
   }
 
 })();
-}
+

@@ -11,5 +11,7 @@ class ProfilesController extends BASE_Controller
     {
      /*    $context["page_title"] = "Login";
         $this->load->view("admin/auth/login", $context); */
+
+        $this->load->view("admin/auth/profiles");
     }
 }

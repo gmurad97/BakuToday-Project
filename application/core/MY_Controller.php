@@ -54,6 +54,29 @@ class MY_Controller extends CI_Controller
         $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
         $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
     }
+
+    public function alert_flashdata($alert_name, $alert_type, $alert_message)
+    {
+        $alert_types = [
+            "info" => ["class" => "alert-info", "icon" => "alert-circle"],
+            "success" => ["class" => "alert-success", "icon" => "check-circle"],
+            "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
+            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"],
+        ];
+
+        $alert_type = strtolower($alert_type) ?? "info";
+        $alert_class = $alert_types[$alert_type]["class"];
+        $alert_icon = $alert_types[$alert_type]["icon"];
+
+        $this->session->set_flashdata($alert_name, [
+            'alert_class' => $alert_class,
+            'alert_icon' => $alert_icon,
+            'alert_message' => [
+                "title" => $alert_message["title"],
+                "description" => $alert_message["description"]
+            ]
+        ]);
+    }
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
@@ -91,27 +114,4 @@ abstract class CRUD_Controller extends MY_Controller
     abstract public function edit($id);
     abstract public function update($id);
     abstract public function destroy($id);
-
-    public function alert_flashdata($alert_name, $alert_type, $alert_message)
-    {
-        $alert_types = [
-            "info" => ["class" => "alert-info", "icon" => "alert-circle"],
-            "success" => ["class" => "alert-success", "icon" => "check-circle"],
-            "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
-            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"],
-        ];
-
-        $alert_type = strtolower($alert_type) ?? "info";
-        $alert_class = $alert_types[$alert_type]["class"];
-        $alert_icon = $alert_types[$alert_type]["icon"];
-
-        $this->session->set_flashdata($alert_name, [
-            'alert_class' => $alert_class,
-            'alert_icon' => $alert_icon,
-            'alert_message' => [
-                "title" => $alert_message["title"],
-                "description" => $alert_message["description"]
-            ]
-        ]);
-    }
 }

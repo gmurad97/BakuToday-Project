@@ -96,6 +96,14 @@ class ELOQUENT_Model extends MY_Model
             ->row_array();
     }
 
+    public function first()
+    {
+        return $this->db
+            ->limit(1)
+            ->get($this->tableName)
+            ->row_array();
+    }
+
     public function create($data)
     {
         return $this->db

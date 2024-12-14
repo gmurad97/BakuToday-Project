@@ -27,7 +27,7 @@ class CategoriesController extends CRUD_Controller
             $context["page_title"] = "View category • $category_name";
             $this->load->view("admin/categories/detail", $context);
         } else {
-            $this->alert_flashdata("category_alert", "info", [
+            $this->alert_flashdata("categories_alert", "info", [
                 "title" => $this->lang->line("admin_category_detail_invalid_id_alert_title"),
                 "description" => $this->lang->line("admin_category_detail_invalid_id_alert_description")
             ]);
@@ -59,14 +59,14 @@ class CategoriesController extends CRUD_Controller
 
             $this->CategoriesModel->create($data);
 
-            $this->alert_flashdata("category_alert", "success", [
+            $this->alert_flashdata("categories_alert", "success", [
                 "title" => $this->lang->line("admin_category_create_success_alert_title"),
                 "description" => $this->lang->line("admin_category_create_success_alert_description")
             ]);
 
             redirect(base_url("admin/categories/create"));
         } else {
-            $this->alert_flashdata("category_alert", "warning", [
+            $this->alert_flashdata("categories_alert", "warning", [
                 "title" => $this->lang->line("admin_category_create_empty_fields_alert_title"),
                 "description" => $this->lang->line("admin_category_create_empty_fields_alert_description")
             ]);
@@ -84,7 +84,7 @@ class CategoriesController extends CRUD_Controller
             $context["page_title"] = "Edit category • $category_name";
             $this->load->view("admin/categories/edit", $context);
         } else {
-            $this->alert_flashdata("category_alert", "info", [
+            $this->alert_flashdata("categories_alert", "info", [
                 "title" => $this->lang->line("admin_category_edit_invalid_id_alert_title"),
                 "description" => $this->lang->line("admin_category_edit_invalid_id_alert_description")
             ]);
@@ -113,14 +113,14 @@ class CategoriesController extends CRUD_Controller
 
                 $this->CategoriesModel->update($id, $data);
 
-                $this->alert_flashdata("category_alert", "success", [
+                $this->alert_flashdata("categories_alert", "success", [
                     "title" => $this->lang->line("admin_category_edit_success_alert_title"),
                     "description" => $this->lang->line("admin_category_edit_success_alert_description")
                 ]);
 
                 redirect(base_url("admin/categories/$id/edit"));
             } else {
-                $this->alert_flashdata("category_alert", "warning", [
+                $this->alert_flashdata("categories_alert", "warning", [
                     "title" => $this->lang->line("admin_category_edit_empty_fields_alert_title"),
                     "description" => $this->lang->line("admin_category_edit_empty_fields_alert_description")
                 ]);
@@ -128,7 +128,7 @@ class CategoriesController extends CRUD_Controller
                 redirect(base_url("admin/categories/$id/edit"));
             }
         } else {
-            $this->alert_flashdata("category_alert", "info", [
+            $this->alert_flashdata("categories_alert", "info", [
                 "title" => $this->lang->line("admin_category_edit_invalid_id_alert_title"),
                 "description" => $this->lang->line("admin_category_edit_invalid_id_alert_description")
             ]);
@@ -143,14 +143,14 @@ class CategoriesController extends CRUD_Controller
         if (!empty($category)) {
             $this->CategoriesModel->delete($id);
 
-            $this->alert_flashdata("category_alert", "success", [
+            $this->alert_flashdata("categories_alert", "success", [
                 "title" => $this->lang->line("admin_category_delete_success_alert_title"),
                 "description" => $this->lang->line("admin_category_delete_success_alert_description")
             ]);
 
             redirect(base_url("admin/categories"));
         } else {
-            $this->alert_flashdata("category_alert", "info", [
+            $this->alert_flashdata("categories_alert", "info", [
                 "title" => $this->lang->line("admin_category_delete_invalid_id_alert_title"),
                 "description" => $this->lang->line("admin_category_delete_invalid_id_alert_description")
             ]);
