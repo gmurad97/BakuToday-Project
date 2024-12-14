@@ -10,7 +10,7 @@ class AboutController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("about_navbar_menu");
+        $context["page_title"] = $this->lang->line("user_about_page_title");
         $this->load->view("user/about", $context);
     }
 }

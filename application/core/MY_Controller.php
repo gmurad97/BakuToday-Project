@@ -8,62 +8,82 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Calendar $calendar
  * @property CI_Config $config
  * @property CI_Controller $controller
- * @property CI_Lang $lang
- * @property CI_Session $session
  * @property CI_DB $db
+ * @property CI_Driver $driver
  * @property CI_Email $email
  * @property CI_Encrypt $encrypt
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Output $output
- * @property CI_Session $session
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
+ * @property CI_Encryption $encryption
+ * @property CI_Exceptions $exceptions
  * @property CI_Form_validation $form_validation
  * @property CI_FTP $ftp
  * @property CI_Hooks $hooks
  * @property CI_Image_lib $image_lib
- * @property CI_Encryption $encryption
+ * @property CI_Input $input
+ * @property CI_Jquery $jquery
+ * @property CI_Lang $lang
+ * @property CI_Loader $loader
+ * @property CI_Log $log
+ * @property CI_Migration $migration
+ * @property CI_Model $model
+ * @property CI_Output $output
  * @property CI_Pagination $pagination
  * @property CI_Parser $parser
  * @property CI_Unit_test $unit_test
- * @property CI_Zip $zip
+ * @property CI_Profiler $profiler
+ * @property CI_Router $router
  * @property CI_Security $security
- * @property CI_Cart $cart
- * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Session $session
+ * @property CI_Table $table
+ * @property CI_Trackback $trackback
+ * @property CI_Typography $typography
  * @property CI_Upload $upload
+ * @property CI_URI $uri
+ * @property CI_User_agent $user_agent
+ * @property CI_Utf8 $utf8
+ * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Xmlrpcs $xmlrpcs
+ * @property CI_Zip $zip
  */
 class MY_Controller extends CI_Controller
 {
+    public $current_admin_language;
+    public $current_user_language;
     public function __construct()
     {
         parent::__construct();
+        $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
+        $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
     }
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
 abstract class BASE_Controller extends MY_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     abstract public function index();
 }
 
-
-
-
 abstract class ERROR_Controller extends MY_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
     abstract function index();
 }
-
-
-
 
 /*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
 abstract class CRUD_Controller extends MY_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     abstract public function index();
     abstract public function show($id);
     abstract public function create();

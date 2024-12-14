@@ -9,19 +9,19 @@
                 <li class="nav-item">
                     <a class="nav-link <?= set_active_class(['', 'home'], false, 'active'); ?>"
                         href="<?= base_url('home'); ?>">
-                        <?= $this->lang->line("home_navbar_menu"); ?>
+                        <?= $this->lang->line("user_navbar_home_menu"); ?>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= set_active_class(['contact'], false, 'active'); ?>"
                         href="<?= base_url('contact'); ?>">
-                        <?= $this->lang->line("contact_navbar_menu"); ?>
+                        <?= $this->lang->line("user_navbar_contact_menu"); ?>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= set_active_class(['about'], false, 'active'); ?>"
                         href="<?= base_url('about'); ?>">
-                        <?= $this->lang->line("about_navbar_menu"); ?>
+                        <?= $this->lang->line("user_navbar_about_menu"); ?>
                     </a>
                 </li>
             </ul>

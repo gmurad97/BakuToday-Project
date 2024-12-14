@@ -10,6 +10,11 @@ class RegisterController extends BASE_Controller
 
     public function index()
     {
-        //REGISTER
+        $this->load->view("admin/auth/register");
+    }
+
+    public function store()
+    {
+
     }
 }

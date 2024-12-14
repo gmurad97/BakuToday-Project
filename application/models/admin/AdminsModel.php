@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class NewsModel extends ELOQUENT_Model
+class AdminsModel extends ELOQUENT_Model
 {
-    protected $tableName = "news";
+    protected $table = "admins";
     protected $primaryKey = "id";
-
 }

@@ -26,9 +26,9 @@
                         <h1 class="fw-bolder mb-22 mt-2 fs-80px text-secondary">
                             <?= $this->lang->line("admin_404_error_title") ?>
                         </h1>
-                        <h4 class="mb-2"><?= $this->lang->line("admin_404_error_description_first") ?></h4>
+                        <h4 class="mb-2"><?= $this->lang->line("admin_404_error_description_1") ?></h4>
                         <h6 class="text-secondary mb-3 text-center">
-                            <?= $this->lang->line("admin_404_error_description_second") ?>
+                            <?= $this->lang->line("admin_404_error_description_2") ?>
                         </h6>
                         <a href="<?= base_url('admin/dashboard'); ?>">
                             <?= $this->lang->line("admin_404_error_back_to_home") ?>

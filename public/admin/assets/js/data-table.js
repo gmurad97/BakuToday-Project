@@ -5,6 +5,35 @@
 
 (function () {
 
+  $('#categoriesDataTable').DataTable({
+
+    layout: {
+      topEnd: {
+        search: {
+          placeholder: 'Search here'
+        }
+      }
+    },
+    "aLengthMenu": [
+      [5, 10, 30, 50, -1],
+      [5, 10, 30, 50, "All"]
+    ],
+    "iDisplayLength": 10,
+    "language": {
+      search: ""
+    },
+    paginationType: 'simple_numbers',
+    "bAutoWidth": false,
+    // Настроить выравнивание для числовых и дата-колонок
+    columnDefs: [
+      {
+        targets: ['_all'],  // Применить к нужным колонкам
+        className: 'text-start' // Устанавливаем выравнивание по левому краю
+      }
+    ]
+  });
+
+
   $('#dataTableExample').DataTable({
     layout: {
       topEnd: {
@@ -21,7 +50,8 @@
     "language": {
       search: ""
     },
-    paginationType: 'simple_numbers'
+    paginationType: 'simple_numbers',
+    "bAutoWidth": false
   });
 
 })();

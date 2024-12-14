@@ -99,7 +99,7 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#menuAdministrators" role="button"
                     aria-expanded="false" aria-controls="menuAdministrators">
                     <i class="link-icon" data-feather="users"></i>
-                    <span class="link-title fw-bold">Administrators</span>
+                    <span class="link-title">Administrators</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse <?= set_active_class(['admin/profiles'], true, 'show'); ?>"

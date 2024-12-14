@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -12,9 +12,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$hook['post_controller_constructor'] = array(
-    'class'    => 'LanguageLoader',
-    'function' => 'initialize',
-    'filename' => 'LanguageLoader.php',
-    'filepath' => 'hooks'
-);
+$hook["post_controller_constructor"] = [
+    "class" => "LanguageLoader",
+    "function" => "initialize",
+    "filename" => "LanguageLoader.php",
+    "filepath" => "hooks"
+];
+
+/* $hook["post_controller"] = [
+    "class" => "DebugPanel",
+    "function" => "renderDebugPanel",
+    "filename" => "DebugPanel.php",
+    "filepath" => "hooks"
+]; */

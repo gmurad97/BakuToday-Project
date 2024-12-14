@@ -10,7 +10,7 @@ class ContactController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("contact_navbar_menu");
+        $context["page_title"] = $this->lang->line("user_contact_page_title");
         $this->load->view("user/contact", $context);
     }
 }

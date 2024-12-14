@@ -10,7 +10,7 @@ class HomeController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("home_navbar_menu");
+        $context["page_title"] = $this->lang->line("user_home_page_title");
         $this->load->view("user/home", $context);
     }
 }

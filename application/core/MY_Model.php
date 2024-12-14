@@ -1,39 +1,48 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== MY_MODEL - Controller extending CI_Model for common purposes ==========*/
+/*========== MY_Model - Controller extending CI_Model for common purposes ==========*/
 /**
  * @property CI_Benchmark $benchmark
  * @property CI_Cache $cache
  * @property CI_Calendar $calendar
  * @property CI_Config $config
  * @property CI_Controller $controller
- * @property CI_Lang $lang
  * @property CI_DB $db
+ * @property CI_Driver $driver
  * @property CI_Email $email
  * @property CI_Encrypt $encrypt
- * @property CI_Input $input
- * @property CI_Loader $load
- * @property CI_Log $log
- * @property CI_Profiler $profiler
- * @property CI_Router $router
- * @property CI_Output $output
- * @property CI_Session $session
- * @property CI_URI $uri
- * @property CI_User_agent $user_agent
+ * @property CI_Encryption $encryption
+ * @property CI_Exceptions $exceptions
  * @property CI_Form_validation $form_validation
  * @property CI_FTP $ftp
  * @property CI_Hooks $hooks
  * @property CI_Image_lib $image_lib
- * @property CI_Encryption $encryption
+ * @property CI_Input $input
+ * @property CI_Jquery $jquery
+ * @property CI_Lang $lang
+ * @property CI_Loader $loader
+ * @property CI_Log $log
+ * @property CI_Migration $migration
+ * @property CI_Model $model
+ * @property CI_Output $output
  * @property CI_Pagination $pagination
  * @property CI_Parser $parser
  * @property CI_Unit_test $unit_test
- * @property CI_Zip $zip
+ * @property CI_Profiler $profiler
+ * @property CI_Router $router
  * @property CI_Security $security
- * @property CI_Cart $cart
- * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Session $session
+ * @property CI_Table $table
+ * @property CI_Trackback $trackback
+ * @property CI_Typography $typography
  * @property CI_Upload $upload
+ * @property CI_URI $uri
+ * @property CI_User_agent $user_agent
+ * @property CI_Utf8 $utf8
+ * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Xmlrpcs $xmlrpcs
+ * @property CI_Zip $zip
  */
 class MY_Model extends CI_Model
 {
@@ -43,7 +52,7 @@ class MY_Model extends CI_Model
     }
 }
 
-/*========== ELOQUENT_MODEL - Abstract model implementing core database operations in ORM style ==========*/
+/*========== ELOQUENT_Model - Abstract model implementing core database operations in ORM style ==========*/
 /**
  * @property string $tableName
  * @property string $primaryKey
@@ -61,17 +70,15 @@ class ELOQUENT_Model extends MY_Model
             fn($property) => empty ($this->{$property})
         );
 
-        if ($missingProperties)
+        if ($missingProperties) {
             throw new LogicException(
                 "Configuration error in "
                 . get_class($this)
                 . ": Missing required properties: "
-                . implode(
-                    ", ",
-                    array_map(fn($property) => "\"$property\"", $missingProperties)
-                )
+                . implode(", ", array_map(fn($property) => "\"$property\"", $missingProperties))
                 . "."
             );
+        }
     }
 
     public function all()
@@ -84,7 +91,8 @@ class ELOQUENT_Model extends MY_Model
     public function find($id)
     {
         return $this->db
-            ->get_where($this->tableName, [$this->primaryKey => $id])
+            ->where($this->primaryKey, $id)
+            ->get($this->tableName)
             ->row_array();
     }
 

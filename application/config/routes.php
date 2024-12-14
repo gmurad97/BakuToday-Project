@@ -76,11 +76,11 @@ $route["admin/register"]["GET"] = "admin/RegisterController/index";
 $route["admin/register/store"]["POST"] = "admin/RegisterController/store";
 
 /*===== Profiles Routes ===== */
-$route["admin/profiles"]["GET"] = "admin/ProfileController/index";
-$route["admin/profiles/(:any)"]["GET"] = "admin/ProfileController/show/$1";
-$route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfileController/edit/$1";
-$route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfileController/update/$1";
-$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfileController/delete/$1";
+$route["admin/profiles"]["GET"] = "admin/ProfilesController/index";
+$route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
+$route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
+$route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
+$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfilesController/delete/$1";
 
 
 
