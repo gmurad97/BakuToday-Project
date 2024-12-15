@@ -13,7 +13,7 @@ class SettingsController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("admin_system_settings_page_title");
+        $context["page_title"] = $this->lang->line("admin_settings_edit_page_title");
         $context["settings"] = json_decode($this->SettingsModel->first()["collection"]);
 
         if ($context["settings"]) {
@@ -25,13 +25,13 @@ class SettingsController extends BASE_Controller
 
     public function update()
     {
-        $maintenance_mode = $this->input->post("maintenance_mode", true) === "on" ? true : false;
-        $snow_mode = $this->input->post("snow_mode", true) === "on" ? true : false;
+        $maintenance_mode = $this->input->post("maintenance_mode", true);
+        $snow_mode = $this->input->post("snow_mode", true);
 
         $data = [
             "collection" => json_encode([
-                "maintenance_mode" => $maintenance_mode,
-                "snow_mode" => $snow_mode
+                "maintenance_mode" => $maintenance_mode === "on",
+                "snow_mode" => $snow_mode === "on"
             ])
         ];
 

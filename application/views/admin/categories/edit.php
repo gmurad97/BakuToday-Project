@@ -55,7 +55,7 @@
                                             </label>
                                             <input name="category_name_az" maxlength="255" type="text"
                                                 class="form-control" placeholder="Siyasət" id="category_name_az"
-                                                value="<?= $category['name_az']; ?>">
+                                                value="<?= $category['name_az']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                             </label>
                                             <input name="category_name_en" maxlength="255" type="text"
                                                 class="form-control" placeholder="Politics" id="category_name_en"
-                                                value="<?= $category['name_en']; ?>">
+                                                value="<?= $category['name_en']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                             </label>
                                             <input name="category_name_ru" maxlength="255" type="text"
                                                 class="form-control" placeholder="Политика" id="category_name_ru"
-                                                value="<?= $category['name_ru']; ?>">
+                                                value="<?= $category['name_ru']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                             <?= $this->lang->line("admin_categories_edit_page_create_btn"); ?>
                         </button>
                         <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
-                            <?= $this->lang->line("admin_categories_view_page_back_btn"); ?>
+                            <?= $this->lang->line("admin_categories_detail_page_back_btn"); ?>
                         </a>
                     </form>
                 </div>

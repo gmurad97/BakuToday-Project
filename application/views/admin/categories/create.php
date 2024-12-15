@@ -50,7 +50,8 @@
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
                                             <input name="category_name_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Siyasət" id="category_name_az">
+                                                class="form-control" placeholder="Siyasət" id="category_name_az"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +64,8 @@
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
                                             <input name="category_name_en" maxlength="255" type="text"
-                                                class="form-control" placeholder="Politics" id="category_name_en">
+                                                class="form-control" placeholder="Politics" id="category_name_en"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +78,8 @@
                                                 <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
                                             </label>
                                             <input name="category_name_ru" maxlength="255" type="text"
-                                                class="form-control" placeholder="Политика" id="category_name_ru">
+                                                class="form-control" placeholder="Политика" id="category_name_ru"
+                                                required>
                                         </div>
                                     </div>
                                 </div>

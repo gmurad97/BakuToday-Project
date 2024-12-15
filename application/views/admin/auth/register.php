@@ -1,27 +1,39 @@
 <?php $this->load->view("admin/partials/head"); ?>
 <?php $this->load->view("admin/partials/sidebar"); ?>
 <?php $this->load->view("admin/partials/navbar"); ?>
-
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Add Administrator</h6>
-
-                    <form action="<?= base_url('admin/register'); ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                    <form action="<?= base_url('admin/register/store'); ?>" method="POST"
+                        enctype="application/x-www-form-urlencoded">
                         <div class="row mb-3">
+
                             <div class="col-md-6">
                                 <label for="admin_first_name" class="form-label">First Name</label>
                                 <input type="text" name="admin_first_name" id="admin_first_name" class="form-control"
                                     placeholder="Murad" required>
                             </div>
+
+
+                            
                             <div class="col-md-6">
                                 <label for="admin_last_name" class="form-label">Last Name</label>
                                 <input type="text" name="admin_last_name" id="admin_last_name" class="form-control"
                                     placeholder="Gazymagomedov" required>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="admin_email" class="form-label">Email</label>
@@ -34,6 +46,11 @@
                                     placeholder="gmurad97" required>
                             </div>
                         </div>
+
+
+
+
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="admin_password" class="form-label">Password</label>
@@ -47,7 +64,9 @@
                             </div>
                         </div>
 
-                        <!-- Role Selection -->
+
+
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="role" class="form-label">Role</label>
@@ -70,7 +89,7 @@
                             </div>
                         </div>
 
-                        <!-- Submit Button -->
+
                         <button type="submit" class="btn btn-primary submit">Submit</button>
                     </form>
                 </div>

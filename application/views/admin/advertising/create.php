@@ -1,14 +1,17 @@
 <?php $this->load->view("admin/partials/head"); ?>
 <?php $this->load->view("admin/partials/sidebar"); ?>
 <?php $this->load->view("admin/partials/navbar"); ?>
-
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Create Advertising</h6>
+                    <h6 class="card-title">
+                        <?= $this->lang->line("admin_advertising_create_page_card_title"); ?>
+                    </h6>
                     <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                            value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
@@ -29,104 +32,90 @@
                                 </a>
                             </li>
                         </ul>
-
                         <div class="tab-content mt-3" id="lineTabContent">
-                            <!-- AZ Tab -->
-                            <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-line-tab">
+                            <div class="tab-pane fade show active" id="az" role="tabpanel"
+                                aria-labelledby="az-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="title_az" class="form-label">
-                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            <label for="advertising_title_az" class="form-label">
+                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
                                             </label>
-                                            <input name="title_az" maxlength="255" type="text" class="form-control" placeholder="Siyasət" id="title_az" required>
+                                            <input name="advertising_title_az" maxlength="255" type="text"
+                                                class="form-control" placeholder="Ən yaxşı seçiminiz üçün reklam edin!"
+                                                id="advertising_title_az" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- EN Tab -->
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="title_en" class="form-label">
-                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            <label for="advertising_title_en" class="form-label">
+                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
                                             </label>
-                                            <input name="title_en" maxlength="255" type="text" class="form-control" placeholder="Politics" id="title_en" required>
+                                            <input name="advertising_title_en" maxlength="255" type="text"
+                                                class="form-control" placeholder="Advertise for the best results!"
+                                                id="advertising_title_en" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- RU Tab -->
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="title_ru" class="form-label">
-                                                <?= $this->lang->line("admin_categories_create_page_category_name_label"); ?>
+                                            <label for="advertising_title_ru" class="form-label">
+                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
                                             </label>
-                                            <input name="title_ru" maxlength="255" type="text" class="form-control" placeholder="Политика" id="title_ru" required>
+                                            <input name="advertising_title_ru" maxlength="255" type="text"
+                                                class="form-control"
+                                                placeholder="Рекламируйтесь для лучших результатов!"
+                                                id="advertising_title_ru" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Image Upload -->
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="img" class="form-label">Main Image</label>
-                                <input type="file" class="form-control" name="img" id="img" required>
-                            </div>
-                        </div>
-
-                        <!-- Location Selection -->
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="location" class="form-label">Location</label>
-                                <select class="form-select" name="location" id="location" required>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
-                                    <option value="">None</option>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="advertising_location" class="form-label">
+                                    <?= $this->lang->line("admin_advertising_create_page_location_label"); ?>
+                                </label>
+                                <select name="advertising_location" id="advertising_location" class="form-select">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <!-- Status Selection -->
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Status</label>
-                                <select class="form-select" name="status" id="status" required>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select>
+                            <div class="col-md-6">
+                                <label for="advertising_img" class="form-label">
+                                    <?= $this->lang->line("admin_advertising_create_page_image_label"); ?>
+                                </label>
+                                <input name="advertising_img" type="file" class="form-control" id="advertising_img"
+                                    required>
                             </div>
                         </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary submit">Submit form</button>
+                        <div class="row">
+                            <div class="mb-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input name="advertising_status" type="checkbox" class="form-check-input"
+                                        id="advertising_status" checked>
+                                    <label class="form-check-label" for="advertising_status">
+                                        <?= $this->lang->line("admin_advertising_create_page_status_label"); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit">
+                            <?= $this->lang->line("admin_advertising_create_page_create_btn"); ?>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>
-
-<script>
-    CKEDITOR.replace("tinymceExample", {
-        on: {
-            instanceReady: function (e) {
-                let editorElement = e.editor.container.$;
-                editorElement.style.marginTop = "0.5rem";
-                editorElement.style.marginBottom = "0.5rem";
-                editorElement.style.boxShadow = "none";
-            }
-        }
-    });
-</script>

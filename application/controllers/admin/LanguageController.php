@@ -19,6 +19,6 @@ class LanguageController extends MY_Controller
 
         $this->session->set_userdata("admin_lang", $selected_language);
 
-        redirect($_SERVER["HTTP_REFERER"] ?? base_url());
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/dashboard"));
     }
 }

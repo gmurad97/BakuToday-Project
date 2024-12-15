@@ -11,7 +11,8 @@ $vendor_scripts = [
     "ckeditor/ckeditor.js",
     "dropify/dist/dropify.min.js",
     "dropzone/dropzone-min.js",
-    "core/core.js"
+    "core/core.js",
+    "lity/lity.min.js"
 ];
 
 $custom_scripts = [
@@ -20,7 +21,8 @@ $custom_scripts = [
     "dropify.js",
     "data-table.js",
     "color-modes.js",
-    "app.js"
+    "app.js",
+
 ];
 ?>
 

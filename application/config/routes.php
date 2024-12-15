@@ -106,8 +106,6 @@ $route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
 $route["admin/news/(:any)/delete"]["GET"] = "admin/NewsController/destroy/$1";
 
 /*===== Categories Routes ===== */
-
-
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";
 $route["admin/categories/create"]["GET"] = "admin/CategoriesController/create";
 $route["admin/categories/store"]["POST"] = "admin/CategoriesController/store";

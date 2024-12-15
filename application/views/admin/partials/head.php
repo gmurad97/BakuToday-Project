@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/fonts/feather-font/css/iconfont.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/dropzone/dropzone.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/dropify/dist/dropify.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/lity/lity.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/style.css'); ?>">
 </head>
 
