@@ -96,37 +96,6 @@ $lang["admin_settings_edit_success_alert_description"] = "The settings has been 
 
 
 
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -140,6 +109,85 @@ $lang["admin_advertising_create_page_location_label"] = "Location";
 $lang["admin_advertising_create_page_image_label"] = "Image";
 $lang["admin_advertising_create_page_status_label"] = "Status";
 $lang["admin_advertising_create_page_create_btn"] = "Create";
+
+
+$lang["admin_advertising_detail_page_card_title"] = "View";
+
+
+
+$lang["admin_advertising_detail_page_title_thead"] = "Title";
+$lang["admin_advertising_detail_page_location_thead"] = "Location";
+$lang["admin_advertising_detail_page_image_thead"] = "Image";
+$lang["admin_advertising_detail_page_status_thead"] = "Status";
+$lang["admin_advertising_detail_page_status_enabled"] = "Enabled";
+$lang["admin_advertising_detail_page_status_disabled"] = "Disabled";
+
+
+$lang["admin_advertising_detail_page_created_at_thead"] = "Created At";
+$lang["admin_advertising_detail_page_updated_at_thead"] = "Updated At";
+$lang["admin_advertising_detail_page_delete_btn"] = "Delete";
+$lang["admin_advertising_detail_page_edit_btn"] = "Edit";
+$lang["admin_advertising_detail_page_back_btn"] = "Back";
+
+$lang["admin_advertising_list_page_delete_modal_title"] = " Confirm Advertising Deletion";
+$lang["admin_advertising_list_page_delete_modal_description"] = "Are you sure you want to permanently delete this advertising?";
+$lang["admin_advertising_list_page_delete_modal_close_btn"] = "Close";
+$lang["admin_advertising_list_page_delete_modal_delete_btn"] = "Delete";
+
+
+
+$lang["admin_advertising_list_page_card_title"] = "All Advertising";
+
+
+$lang["admin_advertising_list_page_table_id"] = "Id";
+$lang["admin_advertising_list_page_table_image"] = "Image";
+$lang["admin_advertising_list_page_table_title"] = "Title";
+$lang["admin_advertising_list_page_table_location"] = "Location";
+$lang["admin_advertising_list_page_table_status"] = "Status";
+$lang["admin_advertising_list_page_table_created_at"] = "Created At";
+$lang["admin_advertising_list_page_table_updated_at"] = "Updated At";
+
+$lang["admin_advertising_list_page_status_enabled"] = "Enabled";
+$lang["admin_advertising_list_page_status_disabled"] = "Disabled";
+
+$lang["admin_advertising_list_page_control_view"] = "View";
+$lang["admin_advertising_list_page_control_edit"] = "Edit";
+$lang["admin_advertising_list_page_control_delete"] = "Delete";
+
+
+
+
+
+
+
+
+
+
+
+
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

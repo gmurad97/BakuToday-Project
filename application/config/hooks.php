@@ -19,9 +19,9 @@ $hook["post_controller_constructor"] = [
     "filepath" => "hooks"
 ];
 
-/* $hook["post_controller"] = [
+$hook["post_controller"] = [
     "class" => "DebugPanel",
     "function" => "renderDebugPanel",
     "filename" => "DebugPanel.php",
     "filepath" => "hooks"
-]; */
+];

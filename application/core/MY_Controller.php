@@ -77,6 +77,43 @@ class MY_Controller extends CI_Controller
             ]
         ]);
     }
+
+    public function upload_and_resize_image($field_name, $upload_path, $resize_options = [])
+    {
+        // Default upload configuration
+        $upload_config = [
+            "upload_path"      => $upload_path,
+            "allowed_types"    => "ico|jpeg|jpg|png|svg|ICO|JPEG|JPG|PNG|SVG",
+            "file_ext_tolower" => TRUE,
+            "remove_spaces"    => TRUE,
+            "encrypt_name"     => TRUE
+        ];
+
+        $this->load->library("upload", $upload_config);
+
+        if (!$this->upload->do_upload($field_name)) {
+            return ["success" => false, "error" => $this->upload->display_errors()];
+        }
+
+        $uploaded_data = $this->upload->data();
+
+        // Check if resizing is required
+        if (!empty($resize_options)) {
+            $resize_config = array_merge([
+                "image_library"  => "gd2",
+                "source_image"   => $uploaded_data["full_path"],
+                "maintain_ratio" => FALSE
+            ], $resize_options);
+
+            $this->load->library("image_lib", $resize_config);
+
+            if (!$this->image_lib->resize()) {
+                return ["success" => false, "error" => $this->image_lib->display_errors()];
+            }
+        }
+
+        return ["success" => true, "data" => $uploaded_data];
+    }
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/

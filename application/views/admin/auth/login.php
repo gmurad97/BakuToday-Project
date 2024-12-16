@@ -1,5 +1,7 @@
 <?php
-redirect(base_url("admin/dashboard"));
+if($this->session->userdata("logged_in")){
+    redirect(base_url("admin/dashboard"));
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,19 +40,28 @@ redirect(base_url("admin/dashboard"));
                                         <h5 class="text-secondary fw-normal mb-4">
                                             Welcome back! Log in to your account.
                                         </h5>
+
+                                        <!-- Выводим ошибку, если она есть -->
+                                        <?php if ($this->session->flashdata('error')): ?>
+                                            <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
+                                        <?php endif; ?>
+
                                         <form action="<?= base_url('admin/login/verify'); ?>" method="POST"
-                                            enctype="application/x-www-form-urlencoded" class="forms-sample">
+                                            class="forms-sample">
+                                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+value="<?= $this->security->get_csrf_hash(); ?>">
+
                                             <div class="mb-3">
                                                 <label for="admin_username" class="form-label">
                                                     Email or Username
                                                 </label>
-                                                <input name="admin_username" type="email" class="form-control"
-                                                    id="admin_username" placeholder="example@domain.com">
+                                                <input name="admin_username" type="text" class="form-control"
+                                                    id="admin_username" placeholder="example@domain.com" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="admin_password" class="form-label">Password</label>
                                                 <input name="admin_password" type="password" class="form-control"
-                                                    id="admin_password" placeholder="Enter your password">
+                                                    id="admin_password" placeholder="Enter your password" required>
                                             </div>
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-primary text-white" type="submit">Login</button>
@@ -65,6 +76,7 @@ redirect(base_url("admin/dashboard"));
             </div>
         </div>
     </div>
+
     <script src="<?= base_url('public/admin/assets/js/color-modes.js'); ?>"></script>
     <script src="<?= base_url('public/admin/assets/vendors/core/core.js'); ?>"></script>
     <script src="<?= base_url('public/admin/assets/vendors/feather-icons/feather.min.js'); ?>"></script>

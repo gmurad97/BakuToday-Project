@@ -6,10 +6,22 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
-                        <?= $this->lang->line("admin_advertising_create_page_card_title"); ?>
+                        <?= $this->lang->line("admin_categories_edit_page_card_title"); ?> •
+                        <?= $advertising["title_$current_language"]; ?>
                     </h6>
-                    <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
+                    <?php $alert = $this->session->flashdata("advertising_alert"); ?>
+                    <?php if ($alert): ?>
+                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
+                            <strong><?= $alert['alert_message']['title'] ?></strong>
+                            <?= $alert['alert_message']['description'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <form action="<?= base_url('admin/advertising/' . $advertising['id'] . '/update'); ?>" method="POST"
+                        enctype="multipart/form-data">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
                             value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
@@ -102,8 +114,7 @@
                                 <label for="advertising_img" class="form-label">
                                     <?= $this->lang->line("admin_advertising_create_page_image_label"); ?>
                                 </label>
-                                <input name="advertising_img" type="file" class="form-control" id="advertising_img"
-                                    required>
+                                <input name="advertising_img" type="file" class="form-control" id="advertising_img">
                             </div>
                         </div>
                         <div class="row">
@@ -117,9 +128,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary submit">
-                            <?= $this->lang->line("admin_advertising_create_page_create_btn"); ?>
+                        <button type="submit" class="btn btn-outline-warning">
+                            <?= $this->lang->line("admin_categories_edit_page_create_btn"); ?>
                         </button>
+                        <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
+                            <?= $this->lang->line("admin_categories_detail_page_back_btn"); ?>
+                        </a>
                     </form>
                 </div>
             </div>

@@ -81,6 +81,17 @@ class ELOQUENT_Model extends MY_Model
         }
     }
 
+    public function findByUsernameOrEmail($username)
+    {
+        return $this->db
+            ->group_start()  // Начало группы условий
+            ->where('username', $username)
+            ->or_where('email', $username)  // Для проверки по email
+            ->group_end()  // Конец группы условий
+            ->get($this->tableName)  // Запрос к таблице
+            ->row_array();  // Возвращаем данные первого пользователя
+    }
+
     public function all()
     {
         return $this->db

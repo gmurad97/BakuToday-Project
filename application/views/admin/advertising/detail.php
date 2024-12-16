@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
-                        <?= $this->lang->line("admin_categories_view_page_card_title"); ?> •
+                        <?= $this->lang->line("admin_advertising_detail_page_card_title"); ?> •
                         <?= $advertising["title_$current_language"]; ?>
                     </h6>
                     <div class="table-responsive">
@@ -16,7 +16,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        Title
+                                        <?= $this->lang->line("admin_advertising_detail_page_title_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -28,7 +28,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        SUKA 2
+                                        <?= $this->lang->line("admin_advertising_detail_page_location_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -40,75 +40,34 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        KOROLEVA suka suka suka 3
+                                        <?= $this->lang->line("admin_advertising_detail_page_image_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
-
-                                    <span class="text-secondary">
-                                        <style>
-                                            /* Превью изображения */
-                                            a[data-lity] img {
-                                                width: 48px;
-                                                /* Размер превью изображения */
-                                                height: 48px;
-                                                object-fit: cover;
-                                                border: 2px ridge #6571FF;
-                                                border-radius: 50%;
-                                                box-shadow: outset 0px 0px 3px 1px #6571FF;
-                                                animation: pulse 2048ms infinite linear alternate;
-                                                filter: grayscale(0);
-                                                transition: filter 256ms linear;
-                                            }
-
-                                            a[data-lity] img:hover {
-                                                filter: grayscale(1);
-                                            }
-
-                                            @keyframes pulse {
-                                                from {
-                                                    box-shadow: 0px 0px 0px #6571FF;
-                                                }
-
-                                                to {
-                                                    box-shadow: 0px 0px 12px #6571FF;
-                                                }
-                                            }
-
-                                            /* Изменяем размер изображения в модальном окне */
-                                            .lity-content img {
-                                                max-width: 80vw;
-                                                /* Ограничиваем максимальную ширину изображения */
-                                                max-height: 80vh;
-                                                /* Ограничиваем максимальную высоту изображения */
-                                                object-fit: contain;
-                                                /* Сохраняем пропорции изображения */
-                                            }
-                                        </style>
-                                        <a href="<?= base_url("public/uploads/advertising/") . $advertising["img"]; ?>"
+                                    <span>
+                                        <a href="<?= base_url('public/uploads/advertising/') . $advertising["img"]; ?>"
                                             data-lity>
-                                            <img width="150" height="150"
-                                                src="<?= base_url("public/uploads/advertising/") . $advertising["img"]; ?>"
-                                                alt="Нажми для увеличения">
+                                            <img style="object-fit:cover;"
+                                                src="<?= base_url('public/uploads/advertising/') . $advertising["img"]; ?>"
+                                                alt="Advertising Image">
                                         </a>
-
                                     </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        SUKA
+                                        <?= $this->lang->line("admin_advertising_detail_page_status_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
                                     <?php if ($advertising["status"]): ?>
                                         <span class="badge border border-success text-success">
-                                            ENABLED
+                                            <?= $this->lang->line("admin_advertising_detail_page_status_enabled"); ?>
                                         </span>
                                     <?php else: ?>
                                         <span class="badge border border-secondary text-secondary">
-                                            DISABLED
+                                            <?= $this->lang->line("admin_advertising_detail_page_status_disabled"); ?>
                                         </span>
                                     <?php endif; ?>
                                 </td>
@@ -116,7 +75,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        SUKA CREATED
+                                        <?= $this->lang->line("admin_advertising_detail_page_created_at_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -128,7 +87,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        SUKA EDITED
+                                        <?= $this->lang->line("admin_advertising_detail_page_updated_at_thead"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -141,42 +100,42 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal"
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteAdvertisingModal"
                         class="btn btn-outline-danger">
-                        delete
+                        <?= $this->lang->line("admin_advertising_detail_page_delete_btn"); ?>
                     </a>
-                    <a href="<?= base_url('admin/categories/' . $advertising['id'] . '/edit'); ?>"
+                    <a href="<?= base_url('admin/advertising/' . $advertising['id'] . '/edit'); ?>"
                         class="btn btn-outline-warning">
-                        edited
+                        <?= $this->lang->line("admin_advertising_detail_page_edit_btn"); ?>
                     </a>
-                    <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
-                        back btn
+                    <a href="<?= base_url('admin/advertising'); ?>" class="btn btn-primary">
+                        <?= $this->lang->line("admin_advertising_detail_page_back_btn"); ?>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalTitle"
+<div class="modal fade" id="deleteAdvertisingModal" tabindex="-1" aria-labelledby="deleteAdvertisingModalTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteCategoryModalTitle">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_title"); ?>
+                <h5 class="modal-title" id="deleteAdvertisingModalTitle">
+                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_title"); ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->lang->line("admin_categories_list_page_delete_modal_description"); ?>
+                <?= $this->lang->line("admin_advertising_list_page_delete_modal_description"); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_close_btn"); ?>
+                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_close_btn"); ?>
                 </button>
-                <a href="<?= base_url('admin/categories/' . $advertising['id'] . '/delete'); ?>"
+                <a href="<?= base_url('admin/avdertising/' . $advertising['id'] . '/delete'); ?>"
                     id="deleteCategoryButton" class="btn btn-outline-danger">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_delete_btn"); ?>
+                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_delete_btn"); ?>
                 </a>
             </div>
         </div>

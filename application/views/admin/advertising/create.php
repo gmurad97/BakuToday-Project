@@ -9,7 +9,16 @@
                     <h6 class="card-title">
                         <?= $this->lang->line("admin_advertising_create_page_card_title"); ?>
                     </h6>
-                    <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
+                    <?php $alert = $this->session->flashdata("advertising_alert"); ?>
+                    <?php if ($alert): ?>
+                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
+                            <strong><?= $alert['alert_message']['title'] ?></strong>
+                            <?= $alert['alert_message']['description'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <form action="<?= base_url('admin/advertising/store'); ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
                             value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">

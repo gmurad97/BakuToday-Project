@@ -7,6 +7,17 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Add Administrator</h6>
+                    <?php if ($this->session->flashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= $this->session->flashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= $this->session->flashdata('success'); ?>
+    </div>
+<?php endif; ?>
                     <form action="<?= base_url('admin/register/store'); ?>" method="POST"
                         enctype="application/x-www-form-urlencoded">
                         <div class="row mb-3">
