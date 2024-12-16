@@ -42,11 +42,31 @@ class CategoriesController extends CRUD_Controller
                 // Загружаем библиотеку стандартным способом
 
 
-                $this->load->library("admin_roles");
-                $name = $this->admin_roles->has_access('admin')? "TRUEK":"FALSIK";
+                /* $this->load->library("admin_roles");
+                $name = $this->admin_roles->has_access('admin')? "TRUEK":"FALSIK"; */
         
+                $name = $this->CategoriesModel->find(["name_en"=> "Technology"]);
+
+                print_r("<pre>");
                 print_r($name);
                 die();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

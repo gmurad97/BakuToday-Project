@@ -57,64 +57,57 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
             <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
-        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="w-30px h-30px ms-1 rounded-circle"
-            src="<?= base_url('public/admin/assets/images/faces/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>" alt="Profile">
-    </a>
-    <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
-        <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
-            <div class="mb-3">
-                <img class="w-80px h-80px rounded-circle"
-                    src="<?= base_url('public/admin/assets/images/faces/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>" alt="Profile">
-            </div>
-            <div class="text-center">
-                <p class="fs-16px fw-bolder"><?= $this->session->userdata('username'); ?></p>
-                <p class="fs-12px text-secondary"><?= $this->session->userdata('email'); ?></p>
-                <p class="fs-12px text-warning"><?= ucfirst($this->session->userdata('role')); ?></p>
-            </div>
-        </div>
-        <ul class="list-unstyled p-1">
-            <li class="dropdown-item py-2">
-                <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id')); ?>" class="text-body ms-0">
-                    <i class="me-2 icon-md" data-feather="user"></i>
-                    <span>Profile</span>
+
+
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="w-30px h-30px ms-1 rounded-circle"
+                        src="<?= base_url('public/uploads/profiles/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>"
+                        alt="Profile">
                 </a>
+
+
+
+
+
+                <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
+                    <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
+                        <div class="mb-3">
+                            <img class="w-80px h-80px rounded-circle"
+                                src="<?= base_url('public/admin/assets/images/faces/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>"
+                                alt="Profile">
+                        </div>
+                        <div class="text-center">
+                            <p class="fs-16px fw-bolder"><?= $this->session->userdata('username'); ?></p>
+                            <p class="fs-12px text-secondary"><?= $this->session->userdata('email'); ?></p>
+                            <p class="fs-12px text-warning"><?= ucfirst($this->session->userdata('role')); ?></p>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled p-1">
+                        <li class="dropdown-item py-2">
+                            <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id')); ?>"
+                                class="text-body ms-0">
+                                <i class="me-2 icon-md" data-feather="user"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item py-2">
+                            <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id') . '/edit'); ?>"
+                                class="text-body ms-0">
+                                <i class="me-2 icon-md" data-feather="edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item py-2">
+                            <a href="<?= base_url('admin/profiles/logout'); ?>" class="text-body ms-0">
+                                <i class="me-2 icon-md text-danger" data-feather="log-out"></i>
+                                <span class="fw-bold text-danger">Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
-            <li class="dropdown-item py-2">
-                <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id') . '/edit'); ?>" class="text-body ms-0">
-                    <i class="me-2 icon-md" data-feather="edit"></i>
-                    <span>Edit Profile</span>
-                </a>
-            </li>
-            <li class="dropdown-item py-2">
-                <a href="<?= base_url('admin/profiles/logout'); ?>" class="text-body ms-0">
-                    <i class="me-2 icon-md text-danger" data-feather="log-out"></i>
-                    <span class="fw-bold text-danger">Log Out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</li>
 
         </ul>
         <a href="javascript:void(0);" class="sidebar-toggler">

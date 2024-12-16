@@ -81,17 +81,6 @@ class ELOQUENT_Model extends MY_Model
         }
     }
 
-    public function findByUsernameOrEmail($username)
-    {
-        return $this->db
-            ->group_start()  // Начало группы условий
-            ->where('username', $username)
-            ->or_where('email', $username)  // Для проверки по email
-            ->group_end()  // Конец группы условий
-            ->get($this->tableName)  // Запрос к таблице
-            ->row_array();  // Возвращаем данные первого пользователя
-    }
-
     public function all()
     {
         return $this->db
@@ -99,18 +88,33 @@ class ELOQUENT_Model extends MY_Model
             ->result_array();
     }
 
-    public function find($id)
+    public function find($query)
+    {
+        $query = is_array($query) ? $query : [$this->primaryKey => $query];
+
+        foreach ($query as $field => $value) {
+            if (is_array($value))
+                $this->db->where_in($field, $value);
+            else
+                $this->db->where($field, $value);
+        }
+
+        return $this->db->get($this->tableName)->row_array();
+    }
+
+    public function first($limit = 1)
     {
         return $this->db
-            ->where($this->primaryKey, $id)
+            ->limit($limit)
             ->get($this->tableName)
             ->row_array();
     }
 
-    public function first()
+    public function last($limit = 1)
     {
         return $this->db
-            ->limit(1)
+            ->order_by($this->primaryKey, "DESC")
+            ->limit($limit)
             ->get($this->tableName)
             ->row_array();
     }

@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="row">
             <h3><?= $this->lang->line("user_404_error_title"); ?></h3>
-            <p><?= $this->lang->line("user_404_error_description"); ?></p>
+            <p><?= $this->lang->line("page_not_found"); ?></p>
         </div>
     </div>
 </div>

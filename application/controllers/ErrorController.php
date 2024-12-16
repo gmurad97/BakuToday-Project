@@ -10,7 +10,7 @@ class ErrorController extends ERROR_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("user_admin_error_404_page_title");
+        $context["page_title"] = $this->lang->line("page_not_found");
         $current_route = $this->uri->uri_string();
         $this->output->set_status_header(404);
         $view_path = str_starts_with($current_route, "admin")

@@ -66,43 +66,22 @@ $route["about"]["GET"] = "user/AboutController/index";
 
 /*========== Admin Routes ==========*/
 
-/*===== Login Routes ===== */
-$route["admin/login"]["GET"] = "admin/LoginController/index";
-$route["admin/login/verify"]["POST"] = "admin/LoginController/verify";
-
-/*===== Register Routes ===== */
-$route["admin/register"]["GET"] = "admin/RegisterController/index";
-$route["admin/register/store"]["POST"] = "admin/RegisterController/store";
-
-/*===== Profiles Routes ===== */
-$route["admin/profiles"]["GET"] = "admin/ProfilesController/index";
-$route["admin/profiles/logout"]["GET"] = "admin/ProfilesController/logout";
-$route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
-$route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
-$route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
-$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfilesController/delete/$1";
-
-
-
-
-
-
-
-
-
-
+/*===== Auth Routes ===== */
+$route["admin/login"]["GET"] = "admin/AuthController/index";
+$route["admin/login/verify"]["POST"] = "admin/AuthController/verify";
+$route["admin/logout"]["GET"] = "admin/AuthController/logout";
 
 /*===== Dashboard Routes ===== */
 $route["admin/dashboard"]["GET"] = "admin/DashboardController/index";
 
-/*===== News Routes ===== */
-$route["admin/news"]["GET"] = "admin/NewsController/index";
-$route["admin/news/create"]["GET"] = "admin/NewsController/create";
-$route["admin/news/store"]["POST"] = "admin/NewsController/store";
-$route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
-$route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
-$route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
-$route["admin/news/(:any)/delete"]["GET"] = "admin/NewsController/destroy/$1";
+/*===== Profiles Routes ===== */
+$route["admin/profiles"]["GET"] = "admin/ProfilesController/index";
+$route["admin/profiles/create"]["GET"] = "admin/ProfilesController/create";
+$route["admin/profiles/store"]["POST"] = "admin/ProfilesController/store";
+$route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
+$route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
+$route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
+$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfilesController/destroy/$1";
 
 /*===== Categories Routes ===== */
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";
@@ -113,20 +92,14 @@ $route["admin/categories/(:any)/edit"]["GET"] = "admin/CategoriesController/edit
 $route["admin/categories/(:any)/update"]["POST"] = "admin/CategoriesController/update/$1";
 $route["admin/categories/(:any)/delete"]["GET"] = "admin/CategoriesController/destroy/$1";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*===== News Routes ===== */
+$route["admin/news"]["GET"] = "admin/NewsController/index";
+$route["admin/news/create"]["GET"] = "admin/NewsController/create";
+$route["admin/news/store"]["POST"] = "admin/NewsController/store";
+$route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
+$route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
+$route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
+$route["admin/news/(:any)/delete"]["GET"] = "admin/NewsController/destroy/$1";
 
 /*===== Advertising Routes ===== */
 $route["admin/advertising"]["GET"] = "admin/AdvertisingController/index";
@@ -141,25 +114,10 @@ $route["admin/advertising/(:any)/delete"]["GET"] = "admin/AdvertisingController/
 $route["admin/settings"]["GET"] = "admin/SettingsController/index";
 $route["admin/settings/update"]["POST"] = "admin/SettingsController/update";
 
-
-
-
-
-
-/* $route["admin(.*)"] = "admin/AdminController/index"; */
-
-
-
-
-
-
-
-/*========== API Routes ==========*/
-
-$route["api/items"]["GET"] = "api/ItemController/index";
-$route["api/items/(:num)"]["GET"] = "api/ItemController/show/$1";
-$route["api/items"]["POST"] = "api/ItemController/store";
-$route["api/items/(:num)"]["PUT"] = "api/ItemController/update/$1";
-$route["api/items/(:num)"]["PATCH"] = "api/ItemController/update/$1";
-$route["api/items/(:num)"]["DELETE"] = "api/ItemController/destroy/$1";
-
+/*========== API Routes - Example ==========*/
+// $route["api/items"]["GET"] = "api/ItemController/index";
+// $route["api/items/(:num)"]["GET"] = "api/ItemController/show/$1";
+// $route["api/items"]["POST"] = "api/ItemController/store";
+// $route["api/items/(:num)"]["PUT"] = "api/ItemController/update/$1";
+// $route["api/items/(:num)"]["PATCH"] = "api/ItemController/update/$1";
+// $route["api/items/(:num)"]["DELETE"] = "api/ItemController/destroy/$1";

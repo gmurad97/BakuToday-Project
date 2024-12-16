@@ -3,8 +3,8 @@
 <div class="page-content">
     <div class="container mt-5">
         <div class="row">
-            <h3><?= $this->lang->line("user_about_page_heading"); ?></h3>
-            <p><?= $this->lang->line("user_about_page_description"); ?></p>
+            <h3><?= $this->lang->line("about_title"); ?></h3>
+            <p><?= $this->lang->line("about_description"); ?></p>
         </div>
     </div>
 </div>

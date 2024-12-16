@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== MY_CONTROLLER - Controller extending CI_Controller for common purposes ==========*/
+/*========== MY_Controller - Controller extending CI_Controller for common purposes ==========*/
 /**
  * @property CI_Benchmark $benchmark
  * @property CI_Cache $cache
@@ -48,6 +48,7 @@ class MY_Controller extends CI_Controller
 {
     public $current_admin_language;
     public $current_user_language;
+
     public function __construct()
     {
         parent::__construct();
@@ -78,9 +79,8 @@ class MY_Controller extends CI_Controller
         ]);
     }
 
-    public function upload_and_resize_image($field_name, $upload_path, $resize_options = [])
+    public function upload_image($field_name, $upload_path, $resize_options = [])
     {
-        // Default upload configuration
         $upload_config = [
             "upload_path" => $upload_path,
             "allowed_types" => "ico|jpeg|jpg|png|svg|ICO|JPEG|JPG|PNG|SVG",
@@ -97,7 +97,6 @@ class MY_Controller extends CI_Controller
 
         $uploaded_data = $this->upload->data();
 
-        // Check if resizing is required
         if (!empty($resize_options)) {
             $resize_config = array_merge([
                 "image_library" => "gd2",
@@ -133,6 +132,7 @@ abstract class ERROR_Controller extends MY_Controller
     {
         parent::__construct();
     }
+
     abstract function index();
 }
 
@@ -153,8 +153,7 @@ abstract class CRUD_Controller extends MY_Controller
     abstract public function destroy($id);
 }
 
-
-/*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
+/*========== API_Controller - Abstract controller for implementing CRUD operations ==========*/
 abstract class API_Controller extends MY_Controller
 {
     public function __construct()

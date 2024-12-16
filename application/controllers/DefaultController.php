@@ -10,7 +10,7 @@ class DefaultController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("user_home_page_title");
+        $context["page_title"] = $this->lang->line("home");
         $this->load->view("user/home", $context);
     }
 }

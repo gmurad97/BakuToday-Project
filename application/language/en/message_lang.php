@@ -1,19 +1,61 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== Global Translate ==========*/
-$lang["user_admin_error_404_page_title"] = "Page Not Found";
+$lang["home"] = "Home";
+$lang["contact"] = "Contact";
+$lang["about"] = "About";
+$lang["page_not_found"] = "Page Not Found";
+$lang["about_title"] = "About page";
+$lang["about_description"] = "About Us. We are a team of professionals with years of experience in the field of [your field]. Our goal is to help you succeed by providing quality and effective solutions. We believe in long-term relationships with our clients and always put their interests first.";
+$lang["contact_title"] = "Contact page";
+$lang["contact_description"] = "Contact us! We are always ready to answer your questions and provide the necessary information. Use the form below or our contact details to send an inquiry. We value your time and aim for fast and convenient service.";
+$lang["home_title"] = "Home page";
+$lang["home_description"] = "Welcome to our website! We offer innovative solutions for your business and provide high-quality service at every stage. Our team of professionals is always ready to offer effective and reliable methods to help you achieve your goals. Discover new opportunities with us!";
+
+
+$lang["undefined"] = "Undefined";
 $lang["user_404_error_title"] = "Error 404!";
-$lang["user_404_error_description"] = "Page Not Found";
+
+
+$lang["copyright"] = "Copyright";
+$lang["developed_with"] = "Developed with";
+$lang["by"] = "by";
+
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*========== Global Translate ==========*/
+
+$lang["user_404_error_title"] = "Error 404!";
 $lang["admin_404_error_title"] = "404";
 $lang["admin_404_error_description_1"] = "Page Not Found";
 $lang["admin_404_error_description_2"] = "Oopps!! The page you were looking for doesn't exist.";
 $lang["admin_404_error_back_to_home"] = "Back to home";
 
 /*========== User Translate ==========*/
-$lang["user_home_page_title"] = "Home";
-$lang["user_contact_page_title"] = "Contact";
-$lang["user_about_page_title"] = "About";
+
 $lang["user_navbar_home_menu"] = "Home";
 $lang["user_navbar_contact_menu"] = "Contact";
 $lang["user_navbar_about_menu"] = "About";
