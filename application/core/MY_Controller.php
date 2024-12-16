@@ -82,11 +82,11 @@ class MY_Controller extends CI_Controller
     {
         // Default upload configuration
         $upload_config = [
-            "upload_path"      => $upload_path,
-            "allowed_types"    => "ico|jpeg|jpg|png|svg|ICO|JPEG|JPG|PNG|SVG",
+            "upload_path" => $upload_path,
+            "allowed_types" => "ico|jpeg|jpg|png|svg|ICO|JPEG|JPG|PNG|SVG",
             "file_ext_tolower" => TRUE,
-            "remove_spaces"    => TRUE,
-            "encrypt_name"     => TRUE
+            "remove_spaces" => TRUE,
+            "encrypt_name" => TRUE
         ];
 
         $this->load->library("upload", $upload_config);
@@ -100,8 +100,8 @@ class MY_Controller extends CI_Controller
         // Check if resizing is required
         if (!empty($resize_options)) {
             $resize_config = array_merge([
-                "image_library"  => "gd2",
-                "source_image"   => $uploaded_data["full_path"],
+                "image_library" => "gd2",
+                "source_image" => $uploaded_data["full_path"],
                 "maintain_ratio" => FALSE
             ], $resize_options);
 
@@ -149,6 +149,22 @@ abstract class CRUD_Controller extends MY_Controller
     abstract public function create();
     abstract public function store();
     abstract public function edit($id);
+    abstract public function update($id);
+    abstract public function destroy($id);
+}
+
+
+/*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
+abstract class API_Controller extends MY_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    abstract public function index();
+    abstract public function show($id);
+    abstract public function store();
     abstract public function update($id);
     abstract public function destroy($id);
 }

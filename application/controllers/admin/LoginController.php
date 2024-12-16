@@ -37,7 +37,7 @@ class LoginController extends BASE_Controller
         // Если пользователь найден и хеш пароля совпадает
         if ($user && hash('sha256', $password) === $user['password'] && $user['status'] == 1) {
             // Создаём сессию для пользователя
-            $this->session->set_userdata([
+            $this->session->set_userdata("admin_credentials",[
                 'user_id' => $user['id'],
                 'role' => $user['role'],
                 'username' => $user['username'],

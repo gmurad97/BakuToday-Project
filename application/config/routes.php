@@ -55,15 +55,14 @@ $route["default_controller"] = "DefaultController";
 $route["404_override"] = "ErrorController";
 $route["translate_uri_dashes"] = FALSE;
 
-
 /*========== Language Routes ==========*/
 $route["lang/switch/(:any)"]["GET"] = "user/LanguageController/index/$1";
 $route["admin/lang/switch/(:any)"]["GET"] = "admin/LanguageController/index/$1";
 
 /*========== User Routes ==========*/
-$route["home"] = "user/HomeController/index";
-$route["contact"] = "user/ContactController/index";
-$route["about"] = "user/AboutController/index";
+$route["home"]["GET"] = "user/HomeController/index";
+$route["contact"]["GET"] = "user/ContactController/index";
+$route["about"]["GET"] = "user/AboutController/index";
 
 /*========== Admin Routes ==========*/
 
@@ -147,15 +146,20 @@ $route["admin/settings/update"]["POST"] = "admin/SettingsController/update";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* $route["admin(.*)"] = "admin/AdminController/index"; */
+
+
+
+
+
+
+
+/*========== API Routes ==========*/
+
+$route["api/items"]["GET"] = "api/ItemController/index";
+$route["api/items/(:num)"]["GET"] = "api/ItemController/show/$1";
+$route["api/items"]["POST"] = "api/ItemController/store";
+$route["api/items/(:num)"]["PUT"] = "api/ItemController/update/$1";
+$route["api/items/(:num)"]["PATCH"] = "api/ItemController/update/$1";
+$route["api/items/(:num)"]["DELETE"] = "api/ItemController/destroy/$1";
+

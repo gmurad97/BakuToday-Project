@@ -10,6 +10,7 @@ class CategoriesController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/CategoriesModel");
+        $this->load->library("admin_roles");
     }
 
     public function index()
@@ -38,6 +39,17 @@ class CategoriesController extends CRUD_Controller
 
     public function create()
     {
+                // Загружаем библиотеку стандартным способом
+
+
+                $this->load->library("admin_roles");
+                $name = $this->admin_roles->has_access('admin')? "TRUEK":"FALSIK";
+        
+                print_r($name);
+                die();
+
+
+
         $context["page_title"] = $this->lang->line("admin_categories_create_page_title");
         $this->load->view("admin/categories/create", $context);
     }

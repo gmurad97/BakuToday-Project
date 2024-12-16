@@ -50,7 +50,7 @@ class ProfilesController extends BASE_Controller
     public function logout()
     {
         // Удаляем только данные о пользователе из сессии
-        $this->session->unset_userdata('user'); // Замените 'user' на имя вашей переменной с данными пользователя
+        $this->session->unset_userdata('admin_credentials'); // Замените 'user' на имя вашей переменной с данными пользователя
 
         // Устанавливаем флеш-сообщение
         $this->session->set_flashdata('success', 'You have logged out successfully.');

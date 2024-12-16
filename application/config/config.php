@@ -77,12 +77,9 @@ $config['url_suffix'] = '';
 | there is an available translation if you intend to use something other
 | than english.
 |
-
 */
 $config['language'] = 'english'; //dont change this [this for system language db_lang and other]
 
-/* $config['admin_language'] = 'admin/en'; // для админки резерв (в стоке нет такой функциональности временная заглушка)
- */
 /*
 |--------------------------------------------------------------------------
 | Default Character Set
@@ -387,7 +384,7 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_cookie_name'] = 'news_session';
 $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
@@ -465,7 +462,7 @@ $config['csrf_token_name'] = 'csrf_news_token';
 $config['csrf_cookie_name'] = 'csrf_news_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array('api/items');
 
 /*
 |--------------------------------------------------------------------------
