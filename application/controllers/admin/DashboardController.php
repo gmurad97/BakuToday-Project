@@ -22,15 +22,15 @@ class DashboardController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = "Dashboard";
+        $context["page_title"] = $this->lang->line("dashboard");
         $context["statistics"] = [
             "admins_count" => $this->AdminsModel->count(),
             "advertising_count" => $this->AdvertisingModel->count(),
             "categories_count" => $this->CategoriesModel->count(),
             "news_count" => $this->NewsModel->count(),
-            "news_last_collection" => $this->NewsModel->last(3),
             "settings" => $this->SettingsModel->first(),
         ];
+        $context["news_last_collection"] = $this->NewsModel->last(4);
         $this->load->view("admin/dashboard", $context);
     }
 }

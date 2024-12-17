@@ -16,9 +16,6 @@ class NewsController extends CRUD_Controller
     {
         $context["page_title"] = "All News";
         $context["news_array"] = $this->NewsModel->all();
-/*         print_r("<pre>");
-        print_r($context);
-        die(); */
         $this->load->view("admin/news/list", $context);
     }
 
@@ -37,11 +34,26 @@ class NewsController extends CRUD_Controller
 
     public function store()
     {
-        $this->input->post();
         $data = [
-            "ucfirst" => "ml"
+            "title_az" => $this->input->post('title_az'),
+            "title_en" => $this->input->post('title_en'),
+            "title_ru" => $this->input->post('title_ru'),
+            "short_description_az" => $this->input->post('short_description_az'),
+            "short_description_en" => $this->input->post('short_description_en'),
+            "short_description_ru" => $this->input->post('short_description_ru'),
+            "long_description_az" => $this->input->post('long_description_az'),
+            "long_description_en" => $this->input->post('long_description_en'),
+            "long_description_ru" => $this->input->post('long_description_ru'),
+            "img" => $this->input->post('img'), // path to the image
+            "multi_img" => json_encode($this->input->post('multi_img')), // assuming it's an array
+            "category_id" => $this->input->post('category_id'),
+            "author_id" => $this->input->post('author_id'),
+            "type" => $this->input->post('type'),
+            "status" => $this->input->post('status') ?: 1, // default to 1 if not set
         ];
+
         $this->NewsModel->create($data);
+        redirect('admin/news'); // Redirect to list after save
     }
 
     public function edit($id)
@@ -53,15 +65,31 @@ class NewsController extends CRUD_Controller
 
     public function update($id)
     {
-        $this->input->post();
         $data = [
-            "ucfirst" => "ml"
+            "title_az" => $this->input->post('title_az'),
+            "title_en" => $this->input->post('title_en'),
+            "title_ru" => $this->input->post('title_ru'),
+            "short_description_az" => $this->input->post('short_description_az'),
+            "short_description_en" => $this->input->post('short_description_en'),
+            "short_description_ru" => $this->input->post('short_description_ru'),
+            "long_description_az" => $this->input->post('long_description_az'),
+            "long_description_en" => $this->input->post('long_description_en'),
+            "long_description_ru" => $this->input->post('long_description_ru'),
+            "img" => $this->input->post('img'),
+            "multi_img" => json_encode($this->input->post('multi_img')),
+            "category_id" => $this->input->post('category_id'),
+            "author_id" => $this->input->post('author_id'),
+            "type" => $this->input->post('type'),
+            "status" => $this->input->post('status') ?: 1, // default to 1 if not set
         ];
-        $this->NewsModel->create($data);
+
+        $this->NewsModel->update($id, $data);
+        redirect('admin/news'); // Redirect to list after update
     }
 
     public function destroy($id)
     {
         $this->NewsModel->delete($id);
+        redirect('admin/news'); // Redirect to list after delete
     }
 }

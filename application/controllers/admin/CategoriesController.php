@@ -22,8 +22,8 @@ class CategoriesController extends CRUD_Controller
     public function show($id)
     {
         $context["category"] = $this->CategoriesModel->find($id);
-        $category_name = $context["category"]["name_{$this->current_admin_language}"];
         if (!empty($context["category"])) {
+            $category_name = $context["category"]["name_{$this->current_admin_language}"];
             $context["page_title"] = $this->lang->line("view_category") . " • $category_name";
             $this->load->view("admin/categories/detail", $context);
         } else {
@@ -64,7 +64,7 @@ class CategoriesController extends CRUD_Controller
                 "description" => $this->lang->line("success_added_alert_description")
             ]);
 
-            redirect(base_url("admin/categories/create"));
+            redirect(base_url("admin/categories"));
         } else {
             $this->alert_flashdata("crud_alert", "warning", [
                 "title" => $this->lang->line("empty_fields_alert_title"),
@@ -78,9 +78,9 @@ class CategoriesController extends CRUD_Controller
     public function edit($id)
     {
         $context["category"] = $this->CategoriesModel->find($id);
-        $category_name = $context["category"]["name_{$this->current_admin_language}"];
 
         if (!empty($context["category"])) {
+            $category_name = $context["category"]["name_{$this->current_admin_language}"];
             $context["page_title"] = $this->lang->line("edit_category") . " • $category_name";
             $this->load->view("admin/categories/edit", $context);
         } else {

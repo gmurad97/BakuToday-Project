@@ -17,9 +17,8 @@ class SettingsController extends BASE_Controller
             $this->alert_flashdata("crud_alert", "danger", [
                 "title" => $this->lang->line("access_denied_alert_title"),
                 "description" => $this->lang->line("access_denied_alert_description")
-
             ]);
-            redirect(base_url('admin/dashboard'));
+            redirect(base_url("admin/dashboard"));
         }
     }
 

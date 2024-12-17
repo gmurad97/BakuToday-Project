@@ -129,8 +129,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('admin/register'); ?>"
-                                    class="nav-link <?= set_active_class(['admin/register'], true, 'active'); ?>">
+                                <a href="<?= base_url('admin/profiles/create'); ?>"
+                                    class="nav-link <?= set_active_class(['admin/profiles/create'], true, 'active'); ?>">
                                     <?= $this->lang->line("add_administrator"); ?>
                                 </a>
                             </li>

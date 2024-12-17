@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
 /**
  * @property AdvertisingModel $AdvertisingModel
  */
@@ -15,7 +14,7 @@ class AdvertisingController extends CRUD_Controller
 
     public function index()
     {
-        $context["page_title"] = "All Advertising";
+        $context["page_title"] = $this->lang->line("all_advertising");
         $context["advertising_collection"] = $this->AdvertisingModel->all();
         $this->load->view("admin/advertising/list", $context);
     }
@@ -23,14 +22,15 @@ class AdvertisingController extends CRUD_Controller
     public function show($id)
     {
         $context["advertising"] = $this->AdvertisingModel->find($id);
+
         if (!empty($context["advertising"])) {
-            $ads_name = $context["advertising"]["name_{$this->current_admin_language}"];
-            $context["page_title"] = "View • $ads_name";
+            $advertising_name = $context["advertising"]["title_{$this->current_admin_language}"];
+            $context["page_title"] = $this->lang->line("view") . " • $advertising_name";
             $this->load->view("admin/advertising/detail", $context);
         } else {
-            $this->alert_flashdata("advertising_alert", "info", [
-                "title" => "Info!",
-                "description" => "The provided ID is invalid or does not exist."
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
             ]);
 
             redirect(base_url("admin/advertising"));
@@ -39,80 +39,85 @@ class AdvertisingController extends CRUD_Controller
 
     public function create()
     {
-        $context["page_title"] = "Create Advertising";
+        $context["page_title"] = $this->lang->load("create_advertising");
         $this->load->view("admin/advertising/create", $context);
     }
 
     public function store()
     {
-        $advertising_title_az = substr($this->input->post("advertising_title_az", true), 0, 255);
-        $advertising_title_en = substr($this->input->post("advertising_title_en", true), 0, 255);
-        $advertising_title_ru = substr($this->input->post("advertising_title_ru", true), 0, 255);
+        $title_az = substr($this->input->post("title_az", true), 0, 255);
+        $title_en = substr($this->input->post("title_en", true), 0, 255);
+        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
+        $location = substr($this->input->post("location", true), 0, 255);
+        $status = $this->input->post("status", true);
 
-        $advertising_status = $this->input->post("advertising_status", true);
-
-        // Проверяем заполненность всех полей
-        if (!empty($advertising_title_az) && !empty($advertising_title_en) && !empty($advertising_title_ru)) {
-
+        if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/advertising/";
+            $upload_result = $this->upload_image("img", $upload_path);
 
-            // Загружаем и обрабатываем изображение
-            $result = $this->upload_and_resize_image("advertising_img", $upload_path);
+            if ($upload_result["success"]) {
+                $uploaded_img_data = $upload_result["data"];
+                $image_name = $uploaded_img_data["file_name"];
 
-            if ($result["success"]) {
-                $uploaded_img_data = $result["data"];
-                $image_name = $uploaded_img_data["file_name"]; // Имя загруженного файла
-
-                // Подготавливаем данные для записи
                 $data = [
-                    "title_az" => $advertising_title_az,
-                    "title_en" => $advertising_title_en,
-                    "title_ru" => $advertising_title_ru,
+                    "title_az" => $title_az,
+                    "title_en" => $title_en,
+                    "title_ru" => $title_ru,
                     "img" => $image_name,
-                    "location" => $advertising_title_ru, // Возможно, это ошибка? Проверьте значение
-                    "status" => $advertising_status === "on" // Преобразуем статус в boolean
+                    "location" => $location,
+                    "status" => $status === "on"
                 ];
 
-                // Сохраняем данные в базу
                 $this->AdvertisingModel->create($data);
 
-                // Успешное уведомление
                 $this->alert_flashdata("advertising_alert", "success", [
-                    "title" => "Success",
-                    "description" => "Success upgraded"
+                    "title" => $this->lang->line("success_added_alert_title"),
+                    "description" => $this->lang->line("success_added_alert_description")
                 ]);
 
-                redirect(base_url("admin/advertising/create"));
+                redirect(base_url("admin/advertising"));
+
             } else {
-                // Уведомление об ошибке загрузки изображения
-                $this->alert_flashdata("advertising_alert", "success", [
-                    "title" => "Success",
-                    "description" => $result["error"]
+                $this->alert_flashdata("crud_alert", "warning", [
+                    "title" => $this->lang->line("invalid_img_format_alert_title"),
+                    "description" => $this->lang->line("invalid_img_format_alert_description")
                 ]);
 
                 redirect(base_url("admin/advertising/create"));
             }
         } else {
-            // Уведомление о незаполненных полях
-            $this->alert_flashdata("advertising_alert", "warning", [
-                "title" => "empty filled error",
-                "description" => "empty filled input"
+            $this->alert_flashdata("crud_alert", "warning", [
+                "title" => $this->lang->line("empty_fields_alert_title"),
+                "description" => $this->lang->line("empty_fields_alert_description")
             ]);
 
             redirect(base_url("admin/advertising/create"));
         }
-
     }
 
     public function edit($id)
     {
         $context["advertising"] = $this->AdvertisingModel->find($id);
-        $this->load->view("admin/advertising/edit", $context);
+        if (!empty($context["advertising"])) {
+            $advertising_title = $context["advertising"]["title_{$this->current_admin_language}"];
+            $context["page_title"] = $this->lang->line("edit_advertising") . " • $advertising_title";
+            $this->load->view("admin/advertising/edit", $context);
+        } else {
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
+            ]);
+            redirect(base_url("admin/advertising"));
+        }
     }
 
     public function update($id)
     {
+        
         $advertising = $this->AdvertisingModel->find($id);
+
+
+
 
         if (!$advertising) {
             // Если запись не найдена, перенаправляем с сообщением об ошибке

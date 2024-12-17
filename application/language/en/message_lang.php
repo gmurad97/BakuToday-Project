@@ -63,6 +63,10 @@ $lang["logout_alert_title"] = "Goodbye!";
 $lang["logout_alert_description"] = "You have been successfully logged out.";
 $lang["invalid_id_alert_title"] = "Info!";
 $lang["invalid_id_alert_description"] = "The provided ID is invalid or does not exist.";
+
+$lang["invalid_img_format_alert_title"] = "Image Upload Error!";
+$lang["invalid_img_format_alert_description"] = "The image format is not supported. Allowed formats: JPEG, JPG, PNG, GIF";
+
 $lang["all_categories"] = "All Categories";
 $lang["view_category"] = "View category";
 $lang["create_category"] = "Create Category";
@@ -82,19 +86,95 @@ $lang["delete"] = "Delete";
 $lang["edit"] = "Edit";
 $lang["back"] = "Back";
 
+
+
+
+
+
 $lang["modal_confirm_delete_title"] = "Confirm Deletion";
-$lang["modal_confirm_delete_description"] = "Are you sure you want to permanently delete this category?";
+$lang["modal_confirm_delete_description"] = "Are you sure you want to permanently delete this item?";
+
+
+
+
+
+
 $lang["close"] = "Close";
-
-
-
 $lang["id"] = "Id";
 $lang["name"] = "Name";
 $lang["status"] = "Status";
 $lang["created_at"] = "Created At";
 $lang["updated_at"] = "Updated At";
+$lang["view"] = "View";
+$lang["edit"] = "Edit";
+$lang["delete"] = "Delete";
+$lang["statistics"] = "Statistics";
+$lang["latest_created_news"] = "Latest Created News";
+$lang["read_more"] = "Read more...";
+$lang["dashboard"] = "Dashboard";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$lang["create_advertising"] = "Create Advertising";
+$lang["edit_advertising"] = "Edit Advertising";
+$lang["title"] = "Title";
+$lang["location"] = "Location";
+$lang["image"] = "Image";
+$lang["status"] = "Status";
+$lang["create"] = "Create";
+$lang["back"] = "Back";
+$lang["update"] = "Update";
+$lang["view"] = "View";
+$lang["title"] = "Title";
+$lang["location"] = "Location";
+$lang["image"] = "Image";
+$lang["status"] = "Status";
+$lang["enabled"] = "Enabled";
+$lang["disabled"] = "Disabled";
+$lang["created_at"] = "Created At";
+$lang["updated_at"] = "Updated At";
+$lang["delete"] = "Delete";
+$lang["edit"] = "Edit";
+$lang["back"] = "Back";
+$lang["modal_confirm_delete_title"] = "Confirm Deletion";
+$lang["modal_confirm_delete_description"] = "Are you sure you want to permanently delete this item?";
+$lang["close"] = "Close";
+$lang["delete"] = "Delete";
+$lang["all_advertising"] = "All Advertising";
+
+
+
+
+$lang["id"] = "Id";
+$lang["image"] = "Image";
+$lang["title"] = "Title";
+$lang["location"] = "Location";
+$lang["status"] = "Status";
+
+$lang["created_at"] = "Created At";
+$lang["updated_at"] = "Updated At";
+$lang["enabled"] = "Enabled";
+$lang["disabled"] = "Disabled";
 $lang["view"] = "View";
 $lang["edit"] = "Edit";
 $lang["delete"] = "Delete";
@@ -142,6 +222,9 @@ $lang["delete"] = "Delete";
 
 
 
+
+
+/*konec normalize */
 
 
 $lang[""] = "";
@@ -293,13 +376,17 @@ $lang["admin_categories_detail_page_status_enabled"] = "Enabled";
 $lang["admin_categories_detail_page_status_disabled"] = "Disabled";
 $lang["admin_categories_detail_page_table_created_at"] = "Created At";
 $lang["admin_categories_detail_page_table_updated_at"] = "Updated At";
-$lang["admin_categories_detail_page_back_btn"] = "Back";
 $lang["admin_categories_detail_page_delete_btn"] = "Delete";
 $lang["admin_categories_detail_page_edit_btn"] = "Edit";
+
+
+
 $lang["admin_categories_edit_page_card_title"] = "Edit Category";
 $lang["admin_categories_edit_page_category_name_label"] = "Category name";
 $lang["admin_categories_edit_page_category_status_label"] = "Status";
-$lang["admin_categories_edit_page_create_btn"] = "Update";
+
+
+
 
 $lang["admin_categories_list_page_category_name_label"] = "Category name";
 $lang["admin_categories_list_page_category_status_label"] = "Status";
@@ -317,56 +404,6 @@ $lang["admin_categories_list_page_create_btn"] = "Update";
 
 
 
-$lang["admin_advertising_create_page_card_title"] = "Create Advertising";
-$lang["admin_advertising_create_page_title_label"] = "Title";
-$lang["admin_advertising_create_page_location_label"] = "Location";
-$lang["admin_advertising_create_page_image_label"] = "Image";
-$lang["admin_advertising_create_page_status_label"] = "Status";
-$lang["admin_advertising_create_page_create_btn"] = "Create";
-
-
-$lang["admin_advertising_detail_page_card_title"] = "View";
-
-
-
-$lang["admin_advertising_detail_page_title_thead"] = "Title";
-$lang["admin_advertising_detail_page_location_thead"] = "Location";
-$lang["admin_advertising_detail_page_image_thead"] = "Image";
-$lang["admin_advertising_detail_page_status_thead"] = "Status";
-$lang["admin_advertising_detail_page_status_enabled"] = "Enabled";
-$lang["admin_advertising_detail_page_status_disabled"] = "Disabled";
-
-
-$lang["admin_advertising_detail_page_created_at_thead"] = "Created At";
-$lang["admin_advertising_detail_page_updated_at_thead"] = "Updated At";
-$lang["admin_advertising_detail_page_delete_btn"] = "Delete";
-$lang["admin_advertising_detail_page_edit_btn"] = "Edit";
-$lang["admin_advertising_detail_page_back_btn"] = "Back";
-
-$lang["admin_advertising_list_page_delete_modal_title"] = " Confirm Advertising Deletion";
-$lang["admin_advertising_list_page_delete_modal_description"] = "Are you sure you want to permanently delete this advertising?";
-$lang["admin_advertising_list_page_delete_modal_close_btn"] = "Close";
-$lang["admin_advertising_list_page_delete_modal_delete_btn"] = "Delete";
-
-
-
-$lang["admin_advertising_list_page_card_title"] = "All Advertising";
-
-
-$lang["admin_advertising_list_page_table_id"] = "Id";
-$lang["admin_advertising_list_page_table_image"] = "Image";
-$lang["admin_advertising_list_page_table_title"] = "Title";
-$lang["admin_advertising_list_page_table_location"] = "Location";
-$lang["admin_advertising_list_page_table_status"] = "Status";
-$lang["admin_advertising_list_page_table_created_at"] = "Created At";
-$lang["admin_advertising_list_page_table_updated_at"] = "Updated At";
-
-$lang["admin_advertising_list_page_status_enabled"] = "Enabled";
-$lang["admin_advertising_list_page_status_disabled"] = "Disabled";
-
-$lang["admin_advertising_list_page_control_view"] = "View";
-$lang["admin_advertising_list_page_control_edit"] = "Edit";
-$lang["admin_advertising_list_page_control_delete"] = "Delete";
 
 
 

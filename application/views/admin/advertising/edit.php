@@ -8,10 +8,10 @@
                 <div class="card-body">
                     <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
-                        <?= $this->lang->line("admin_categories_edit_page_card_title"); ?> •
+                        <?= $this->lang->line("edit_advertising"); ?> •
                         <?= $advertising["title_$current_language"]; ?>
                     </h6>
-                    <?php $alert = $this->session->flashdata("advertising_alert"); ?>
+                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -50,13 +50,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="advertising_title_az" class="form-label">
-                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
+                                            <label for="title_az" class="form-label">
+                                                <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="advertising_title_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Ən yaxşı seçiminiz üçün reklam edin!"
-                                                id="advertising_title_az" value="<?= $advertising['title_az']; ?>"
-                                                required>
+                                            <input name="title_az" maxlength="255" type="text" class="form-control"
+                                                placeholder="Ən yaxşı seçiminiz üçün reklam edin!" id="title_az"
+                                                value="<?= $advertising['title_az']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -65,13 +64,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="advertising_title_en" class="form-label">
-                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
+                                            <label for="title_en" class="form-label">
+                                                <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="advertising_title_en" maxlength="255" type="text"
-                                                class="form-control" placeholder="Advertise for the best results!"
-                                                id="advertising_title_en" value="<?= $advertising['title_en']; ?>"
-                                                required>
+                                            <input name="title_en" maxlength="255" type="text" class="form-control"
+                                                placeholder="Advertise for the best results!" id="title_en"
+                                                value="<?= $advertising['title_en']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -80,14 +78,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="advertising_title_ru" class="form-label">
-                                                <?= $this->lang->line("admin_advertising_create_page_title_label"); ?>
+                                            <label for="title_ru" class="form-label">
+                                                <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="advertising_title_ru" maxlength="255" type="text"
-                                                class="form-control"
-                                                placeholder="Рекламируйтесь для лучших результатов!"
-                                                id="advertising_title_ru" value="<?= $advertising['title_ru']; ?>"
-                                                required>
+                                            <input name="title_ru" maxlength="255" type="text" class="form-control"
+                                                placeholder="Рекламируйтесь для лучших результатов!" id="title_ru"
+                                                value="<?= $advertising['title_ru']; ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -95,10 +91,10 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="advertising_location" class="form-label">
-                                    <?= $this->lang->line("admin_advertising_create_page_location_label"); ?>
+                                <label for="location" class="form-label">
+                                    <?= $this->lang->line("location"); ?>
                                 </label>
-                                <select name="advertising_location" id="advertising_location" class="form-select">
+                                <select name="location" id="location" class="form-select">
                                     <option value="1" <?= $advertising['location'] === "1" ? "selected" : ""; ?>>
                                         1
                                     </option>
@@ -111,28 +107,28 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="advertising_img" class="form-label">
-                                    <?= $this->lang->line("admin_advertising_create_page_image_label"); ?>
+                                <label for="img" class="form-label">
+                                    <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="advertising_img" type="file" class="form-control" id="advertising_img">
+                                <input name="img" type="file" class="form-control" id="img">
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3">
                                 <div class="form-check form-switch mb-2">
-                                    <input name="advertising_status" type="checkbox" class="form-check-input"
-                                        id="advertising_status" <?= $advertising['status'] ? "checked" : ""; ?>>
-                                    <label class="form-check-label" for="advertising_status">
-                                        <?= $this->lang->line("admin_advertising_create_page_status_label"); ?>
+                                    <input name="status" type="checkbox" class="form-check-input" id="status"
+                                        <?= $advertising['status'] ? "checked" : ""; ?>>
+                                    <label class="form-check-label" for="status">
+                                        <?= $this->lang->line("status"); ?>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-outline-warning">
-                            <?= $this->lang->line("admin_categories_edit_page_create_btn"); ?>
+                            <?= $this->lang->line("update"); ?>
                         </button>
                         <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
-                            <?= $this->lang->line("admin_categories_detail_page_back_btn"); ?>
+                            <?= $this->lang->line("back"); ?>
                         </a>
                     </form>
                 </div>

@@ -87,7 +87,7 @@ class MY_Controller extends CI_Controller
     {
         $upload_config = [
             "upload_path" => $upload_path,
-            "allowed_types" => "ico|jpeg|jpg|png|svg|ICO|JPEG|JPG|PNG|SVG",
+            "allowed_types" => "jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF",
             "file_ext_tolower" => TRUE,
             "remove_spaces" => TRUE,
             "encrypt_name" => TRUE
@@ -116,6 +116,13 @@ class MY_Controller extends CI_Controller
         }
 
         return ["success" => true, "data" => $uploaded_data];
+    }
+
+    public function delete_file($file_path)
+    {
+        if (file_exists($file_path))
+            return unlink($file_path);
+        return false;
     }
 }
 

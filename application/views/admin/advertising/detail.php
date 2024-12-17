@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
-                        <?= $this->lang->line("admin_advertising_detail_page_card_title"); ?> •
+                        <?= $this->lang->line("view"); ?> •
                         <?= $advertising["title_$current_language"]; ?>
                     </h6>
                     <div class="table-responsive">
@@ -16,7 +16,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_title_thead"); ?>
+                                        <?= $this->lang->line("title"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -28,7 +28,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_location_thead"); ?>
+                                        <?= $this->lang->line("location"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -40,7 +40,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_image_thead"); ?>
+                                        <?= $this->lang->line("image"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -57,17 +57,17 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_status_thead"); ?>
+                                        <?= $this->lang->line("status"); ?>
                                     </span>
                                 </td>
                                 <td>
                                     <?php if ($advertising["status"]): ?>
                                         <span class="badge border border-success text-success">
-                                            <?= $this->lang->line("admin_advertising_detail_page_status_enabled"); ?>
+                                            <?= $this->lang->line("enabled"); ?>
                                         </span>
                                     <?php else: ?>
                                         <span class="badge border border-secondary text-secondary">
-                                            <?= $this->lang->line("admin_advertising_detail_page_status_disabled"); ?>
+                                            <?= $this->lang->line("disabled"); ?>
                                         </span>
                                     <?php endif; ?>
                                 </td>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_created_at_thead"); ?>
+                                        <?= $this->lang->line("created_at"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -87,7 +87,7 @@
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("admin_advertising_detail_page_updated_at_thead"); ?>
+                                        <?= $this->lang->line("updated_at"); ?>
                                     </span>
                                 </td>
                                 <td>
@@ -100,42 +100,41 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteAdvertisingModal"
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal"
                         class="btn btn-outline-danger">
-                        <?= $this->lang->line("admin_advertising_detail_page_delete_btn"); ?>
+                        <?= $this->lang->line("delete"); ?>
                     </a>
                     <a href="<?= base_url('admin/advertising/' . $advertising['id'] . '/edit'); ?>"
                         class="btn btn-outline-warning">
-                        <?= $this->lang->line("admin_advertising_detail_page_edit_btn"); ?>
+                        <?= $this->lang->line("edit"); ?>
                     </a>
                     <a href="<?= base_url('admin/advertising'); ?>" class="btn btn-primary">
-                        <?= $this->lang->line("admin_advertising_detail_page_back_btn"); ?>
+                        <?= $this->lang->line("back"); ?>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteAdvertisingModal" tabindex="-1" aria-labelledby="deleteAdvertisingModalTitle"
-    aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteAdvertisingModalTitle">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_title"); ?>
+                <h5 class="modal-title" id="deleteModalTitle">
+                    <?= $this->lang->line("modal_confirm_delete_title"); ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->lang->line("admin_advertising_list_page_delete_modal_description"); ?>
+                <?= $this->lang->line("modal_confirm_delete_description"); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_close_btn"); ?>
+                    <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="<?= base_url('admin/avdertising/' . $advertising['id'] . '/delete'); ?>"
-                    id="deleteCategoryButton" class="btn btn-outline-danger">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_delete_btn"); ?>
+                <a href="<?= base_url('admin/advertising/' . $advertising['id'] . '/delete'); ?>" id="deleteButton"
+                    class="btn btn-outline-danger">
+                    <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
         </div>
