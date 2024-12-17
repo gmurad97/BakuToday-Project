@@ -28,6 +28,7 @@ class DashboardController extends BASE_Controller
             "advertising_count" => $this->AdvertisingModel->count(),
             "categories_count" => $this->CategoriesModel->count(),
             "news_count" => $this->NewsModel->count(),
+            "news_last_collection" => $this->NewsModel->last(3),
             "settings" => $this->SettingsModel->first(),
         ];
         $this->load->view("admin/dashboard", $context);

@@ -1,3 +1,8 @@
+<?php
+if (!$this->session->userdata("admin_credentials")) {
+    redirect(base_url("admin/login"));
+}
+?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
