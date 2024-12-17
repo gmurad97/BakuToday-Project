@@ -43,6 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
+ * @property Admin_roles $admin_roles
  */
 class MY_Controller extends CI_Controller
 {
@@ -54,6 +55,9 @@ class MY_Controller extends CI_Controller
         parent::__construct();
         $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
         $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
+        $this->load->vars([
+            "has_admin_access" => $this->admin_roles->has_access("admin")
+        ]);
     }
 
     public function alert_flashdata($alert_name, $alert_type, $alert_message)

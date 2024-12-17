@@ -8,10 +8,10 @@
                 <div class="card-body">
                     <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
-                        <?= $this->lang->line("admin_categories_edit_page_card_title"); ?> •
+                        <?= $this->lang->line("edit_category"); ?> •
                         <?= $category["name_$current_language"]; ?>
                     </h6>
-                    <?php $alert = $this->session->flashdata("categories_alert"); ?>
+                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -51,7 +51,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="category_name_az" class="form-label">
-                                                <?= $this->lang->line("admin_categories_edit_page_category_name_label"); ?>
+                                                <?= $this->lang->line("category_name"); ?>
                                             </label>
                                             <input name="category_name_az" maxlength="255" type="text"
                                                 class="form-control" placeholder="Siyasət" id="category_name_az"
@@ -65,7 +65,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="category_name_en" class="form-label">
-                                                <?= $this->lang->line("admin_categories_edit_page_category_name_label"); ?>
+                                                <?= $this->lang->line("category_name"); ?>
                                             </label>
                                             <input name="category_name_en" maxlength="255" type="text"
                                                 class="form-control" placeholder="Politics" id="category_name_en"
@@ -79,7 +79,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="category_name_ru" class="form-label">
-                                                <?= $this->lang->line("admin_categories_edit_page_category_name_label"); ?>
+                                                <?= $this->lang->line("category_name"); ?>
                                             </label>
                                             <input name="category_name_ru" maxlength="255" type="text"
                                                 class="form-control" placeholder="Политика" id="category_name_ru"
@@ -95,16 +95,16 @@
                                     <input name="category_status" type="checkbox" class="form-check-input"
                                         id="categoryStatus" <?= $category["status"] ? "checked" : ""; ?>>
                                     <label class="form-check-label" for="categoryStatus">
-                                        <?= $this->lang->line("admin_categories_edit_page_category_status_label"); ?>
+                                        <?= $this->lang->line("status"); ?>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-outline-warning">
-                            <?= $this->lang->line("admin_categories_edit_page_create_btn"); ?>
+                            <?= $this->lang->line("update"); ?>
                         </button>
                         <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
-                            <?= $this->lang->line("admin_categories_detail_page_back_btn"); ?>
+                            <?= $this->lang->line("back"); ?>
                         </a>
                     </form>
                 </div>

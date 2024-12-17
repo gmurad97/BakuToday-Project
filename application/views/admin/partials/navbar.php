@@ -54,61 +54,87 @@
                     <?php endforeach; ?>
                 </div>
             </li>
-
-
-
             <li class="nav-item dropdown">
+                <?php
+                $admin_id = $this->session->userdata("admin_credentials")["id"];
+                $admin_first_name = $this->session->userdata("admin_credentials")["first_name"];
+                $admin_last_name = $this->session->userdata("admin_credentials")["last_name"];
+                $admin_email = $this->session->userdata("admin_credentials")["email"];
+                $admin_role = $this->session->userdata("admin_credentials")["role"];
+                $admin_img = $this->session->userdata("admin_credentials")["img"];
 
-
+                $admin_roles = [
+                    "az" => [
+                        "root" => "Root",
+                        "moderator" => "Moderator",
+                        "administrator" => "Administrator"
+                    ],
+                    "en" => [
+                        "root" => "Root",
+                        "moderator" => "Moderator",
+                        "administrator" => "Administrator"
+                    ],
+                    "ru" => [
+                        "root" => "Рут",
+                        "moderator" => "Модератор",
+                        "administrator" => "Администратор"
+                    ]
+                ];
+                ?>
                 <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="w-30px h-30px ms-1 rounded-circle"
-                        src="<?= base_url('public/uploads/profiles/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>"
-                        alt="Profile">
+                    <img class="w-30px h-30px ms-1 rounded-circle" src="<?= !empty($admin_img) ?
+                        base_url('public/uploads/profiles/' . $admin_img) :
+                        base_url('public/admin/assets/images/faces/face0.jpg'); ?>" alt="Profile Image">
                 </a>
-
-
-
-
-
                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                     <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                         <div class="mb-3">
-                            <img class="w-80px h-80px rounded-circle"
-                                src="<?= base_url('public/admin/assets/images/faces/' . ($this->session->userdata('username') ?? 'default.jpg')); ?>"
-                                alt="Profile">
+                            <img class="w-80px h-80px rounded-circle" src="<?= !empty($admin_img) ?
+                                base_url('public/uploads/profiles/' . $admin_img) :
+                                base_url('public/admin/assets/images/faces/face0.jpg'); ?>" alt="Profile">
                         </div>
                         <div class="text-center">
-                            <p class="fs-16px fw-bolder"><?= $this->session->userdata('username'); ?></p>
-                            <p class="fs-12px text-secondary"><?= $this->session->userdata('email'); ?></p>
-                            <p class="fs-12px text-warning"><?= ucfirst($this->session->userdata('role')); ?></p>
+                            <p class="fs-16px fw-bolder">
+                                <?= $admin_first_name ?>
+                                <?= $admin_last_name; ?>
+                            </p>
+                            <p class="fs-12px text-secondary">
+                                <?= $admin_email; ?>
+                            </p>
+                            <p class="fs-12px <?= $admin_role === 'root' ? 'text-danger' : 'text-warning'; ?>">
+                                <?= ucfirst($admin_roles[$current_language][$admin_role]); ?>
+                            </p>
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
                         <li class="dropdown-item py-2">
-                            <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id')); ?>"
-                                class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="user"></i>
-                                <span>Profile</span>
+                            <a href="<?= base_url('admin/profiles/' . $admin_id); ?>" class="text-body ms-0">
+                                <i class="me-2 icon-md text-info" data-feather="user"></i>
+                                <span class="text-info">
+                                    <?= $this->lang->line("profile"); ?>
+                                </span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
-                            <a href="<?= base_url('admin/profiles/' . $this->session->userdata('user_id') . '/edit'); ?>"
-                                class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="edit"></i>
-                                <span>Edit Profile</span>
+                            <a href="<?= base_url('admin/profiles/' . $admin_id . '/edit'); ?>" class="text-body ms-0">
+                                <i class="me-2 icon-md text-warning" data-feather="edit"></i>
+                                <span class="text-warning">
+                                    <?= $this->lang->line("edit_profile"); ?>
+                                </span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
-                            <a href="<?= base_url('admin/profiles/logout'); ?>" class="text-body ms-0">
+                            <a href="<?= base_url('admin/logout'); ?>" class="text-body ms-0">
                                 <i class="me-2 icon-md text-danger" data-feather="log-out"></i>
-                                <span class="fw-bold text-danger">Log Out</span>
+                                <span class="fw-bold text-danger">
+                                    <?= $this->lang->line("log_out"); ?>
+                                </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-
         </ul>
         <a href="javascript:void(0);" class="sidebar-toggler">
             <i data-feather="menu"></i>

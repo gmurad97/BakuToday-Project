@@ -6,8 +6,8 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title"><?= $this->lang->line("admin_system_settings_page_title"); ?></h6>
-                    <?php $alert = $this->session->flashdata("settings_alert"); ?>
+                    <h6 class="card-title"><?= $this->lang->line("settings"); ?></h6>
+                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -24,10 +24,10 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <?= $this->lang->line("admin_settings_edit_page_setting_thead"); ?>
+                                        <?= $this->lang->line("setting"); ?>
                                     </th>
                                     <th>
-                                        <?= $this->lang->line("admin_settings_edit_page_status_thead"); ?>
+                                        <?= $this->lang->line("status"); ?>
                                     </th>
                                 </tr>
                             </thead>
@@ -35,7 +35,7 @@
                                 <tr>
                                     <th>
                                         <label for="maintenance_mode">
-                                            <?= $this->lang->line("admin_settings_edit_page_maintenance_mode_label"); ?>
+                                            <?= $this->lang->line("maintenance_mode"); ?>
                                         </label>
                                     </th>
                                     <td>
@@ -48,7 +48,7 @@
                                 <tr>
                                     <th>
                                         <label for="snow_mode">
-                                            <?= $this->lang->line("admin_settings_edit_page_snow_mode_label"); ?>
+                                            <?= $this->lang->line("snow_mode"); ?>
                                         </label>
                                     </th>
                                     <td>
@@ -61,7 +61,7 @@
                             </tbody>
                         </table>
                         <button type="submit" class="btn btn-outline-warning">
-                            <?= $this->lang->line("admin_settings_edit_page_update_btn"); ?>
+                            <?= $this->lang->line("update"); ?>
                         </button>
                     </form>
                 </div>

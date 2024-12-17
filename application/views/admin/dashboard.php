@@ -3,6 +3,17 @@
 <?php $this->load->view("admin/partials/navbar"); ?>
 <div class="page-content">
     <div class="row">
+        <div class="col-md-12">
+            <?php $alert = $this->session->flashdata("crud_alert"); ?>
+            <?php if ($alert): ?>
+                <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
+                    <i data-feather="<?= $alert['alert_icon']; ?>"></i>
+                    <strong><?= $alert['alert_message']['title'] ?></strong>
+                    <?= $alert['alert_message']['description'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                </div>
+            <?php endif; ?>
+        </div>
         <div class="col-md-12 grid-margin stretch-card">
             <div class="row flex-grow-1">
                 <div class="col-md-3 grid-margin stretch-card">

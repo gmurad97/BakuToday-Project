@@ -1,9 +1,8 @@
 <?php
-if($this->session->userdata("logged_in")){
+if ($this->session->userdata("admin_credentials")) {
     redirect(base_url("admin/dashboard"));
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,33 +37,41 @@ if($this->session->userdata("logged_in")){
                                             Noble<span>UI</span>
                                         </a>
                                         <h5 class="text-secondary fw-normal mb-4">
-                                            Welcome back! Log in to your account.
+                                            <?= $this->lang->line("login_welcome"); ?>
                                         </h5>
-
-                                        <!-- Выводим ошибку, если она есть -->
-                                        <?php if ($this->session->flashdata('error')): ?>
-                                            <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
+                                        <?php $alert = $this->session->flashdata("crud_alert"); ?>
+                                        <?php if ($alert): ?>
+                                            <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show"
+                                                role="alert">
+                                                <i data-feather="<?= $alert['alert_icon']; ?>"></i>
+                                                <strong><?= $alert['alert_message']['title'] ?></strong>
+                                                <?= $alert['alert_message']['description'] ?>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="btn-close"></button>
+                                            </div>
                                         <?php endif; ?>
-
                                         <form action="<?= base_url('admin/login/verify'); ?>" method="POST"
-                                            class="forms-sample">
+                                            enctype="application/x-www-form-urlencoded" class="forms-sample">
                                             <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-value="<?= $this->security->get_csrf_hash(); ?>">
-
+                                                value="<?= $this->security->get_csrf_hash(); ?>">
                                             <div class="mb-3">
                                                 <label for="admin_username" class="form-label">
-                                                    Email or Username
+                                                    <?= $this->lang->line("email_or_username"); ?>
                                                 </label>
                                                 <input name="admin_username" type="text" class="form-control"
                                                     id="admin_username" placeholder="example@domain.com" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="admin_password" class="form-label">Password</label>
+                                                <label for="admin_password" class="form-label">
+                                                    <?= $this->lang->line("password"); ?>
+                                                </label>
                                                 <input name="admin_password" type="password" class="form-control"
                                                     id="admin_password" placeholder="Enter your password" required>
                                             </div>
                                             <div class="d-grid gap-2">
-                                                <button class="btn btn-primary text-white" type="submit">Login</button>
+                                                <button class="btn btn-primary text-white" type="submit">
+                                                    <?= $this->lang->line("login"); ?>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

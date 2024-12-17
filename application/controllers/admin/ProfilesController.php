@@ -9,10 +9,7 @@ class ProfilesController extends BASE_Controller
         $this->load->model('admin/AdminsModel');
     }
 
-    public function index()
-    {
 
-    }
     // Отображение списка профилей
     public function list()
     {
@@ -108,15 +105,5 @@ class ProfilesController extends BASE_Controller
     }
 
     // Выход из системы
-    public function logout()
-    {
-        // Удаляем только данные о пользователе из сессии
-        $this->session->unset_userdata('admin_credentials'); // Замените 'user' на имя вашей переменной с данными пользователя
 
-        // Устанавливаем флеш-сообщение
-        $this->session->set_flashdata('success', 'You have logged out successfully.');
-
-        // Перенаправляем на страницу входа
-        redirect(base_url('admin/login'));
-    }
 }

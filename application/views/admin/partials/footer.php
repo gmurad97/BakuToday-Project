@@ -10,3 +10,6 @@
         <?= $this->lang->line("by"); ?> <a href="https://github.com/gmurad97" target="_blank">gmurad97</a>
     </p>
 </footer>
+
+</div>
+</div>

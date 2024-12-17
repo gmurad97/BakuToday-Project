@@ -1,55 +1,78 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @property AdminsModel $AdminsModel
  */
-class LoginController extends BASE_Controller
+class AuthController extends BASE_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/AdminsModel'); // Загружаем модель для работы с пользователями
+        $this->load->model("admin/AdminsModel");
     }
 
-    // Метод для отображения страницы логина
     public function index()
     {
-        $context["page_title"] = "Login";
+        $context["page_title"] = $this->lang->line("login");
         $this->load->view("admin/auth/login", $context);
     }
 
-    // Метод для проверки данных логина
     public function verify()
     {
-        // Получаем данные из формы
-        $username = $this->input->post('admin_username');
-        $password = $this->input->post('admin_password');
+        $admin_username = $this->input->post("admin_username");
+        $admin_password = $this->input->post("admin_password");
 
-        // Проверяем, что оба поля не пустые
-        if (empty($username) || empty($password)) {
-            $this->session->set_flashdata('error', 'Username and Password are required');
-            redirect(base_url('admin/login'));
+        if (empty($admin_username) || empty($admin_password)) {
+            $this->alert_flashdata("crud_alert", "warning", [
+                "title" => $this->lang->line("empty_fields_alert_title"),
+                "description" => $this->lang->line("empty_fields_alert_description")
+            ]);
+            redirect(base_url("admin/login"));
         }
 
-        // Проверка пользователя в базе данных
-        $user = $this->AdminsModel->findByUsernameOrEmail($username);
-        
-        // Если пользователь найден и хеш пароля совпадает
-        if ($user && hash('sha256', $password) === $user['password'] && $user['status'] == 1) {
-            // Создаём сессию для пользователя
-            $this->session->set_userdata("admin_credentials",[
-                'user_id' => $user['id'],
-                'role' => $user['role'],
-                'username' => $user['username'],
-                'logged_in' => TRUE
-            ]);
+        $admin = $this->AdminsModel->find(["username" => $admin_username]) ??
+            $this->AdminsModel->find(["email" => $admin_username]);
 
-            // Перенаправляем в админ панель
+        if ($admin && hash("sha256", $admin_password) === $admin["password"]) {
+            if (!$admin["status"]) {
+                $this->alert_flashdata("crud_alert", "info", [
+                    "title" => $this->lang->line("account_disabled_alert_title"),
+                    "description" => $this->lang->line("account_disabled_alert_description")
+                ]);
+                redirect(base_url('admin/login'));
+            }
+
+            $this->session->set_userdata("admin_credentials", [
+                "id" => $admin["id"],
+                "first_name" => $admin["first_name"],
+                "last_name" => $admin["last_name"],
+                "email" => $admin["email"],
+                "username" => $admin["username"],
+                "role" => $admin["role"],
+                "img" => $admin["img"],
+                "logged_in" => TRUE
+            ]);
             redirect(base_url('admin/dashboard'));
         } else {
-            // Если данные неверны или пользователь заблокирован
-            $this->session->set_flashdata('error', 'Invalid credentials or account is disabled');
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("login_failed_alert_title"),
+                "description" => $this->lang->line("login_failed_alert_description")
+            ]);
             redirect(base_url('admin/login'));
         }
+    }
+
+    public function logout()
+    {
+        if ($this->session->userdata("admin_credentials")) {
+            $this->session->unset_userdata('admin_credentials');
+
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("logout_alert_title"),
+                "description" => $this->lang->line("logout_alert_description")
+            ]);
+        }
+        redirect(base_url("admin/login"));
     }
 }

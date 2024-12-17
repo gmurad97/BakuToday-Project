@@ -6,8 +6,8 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title"><?= $this->lang->line("admin_categories_list_page_card_title"); ?></h6>
-                    <?php $alert = $this->session->flashdata("categories_alert"); ?>
+                    <h6 class="card-title"><?= $this->lang->line("all_categories"); ?></h6>
+                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
                             <i data-feather="<?= $alert['alert_icon']; ?>"></i>
@@ -20,11 +20,11 @@
                         <table id="categoriesDataTable" class="table">
                             <thead>
                                 <tr>
-                                    <th><?= $this->lang->line("admin_categories_list_page_table_id"); ?></th>
-                                    <th><?= $this->lang->line("admin_categories_list_page_table_name"); ?></th>
-                                    <th><?= $this->lang->line("admin_categories_list_page_table_status"); ?></th>
-                                    <th><?= $this->lang->line("admin_categories_list_page_table_created_at"); ?></th>
-                                    <th><?= $this->lang->line("admin_categories_list_page_table_updated_at"); ?></th>
+                                    <th><?= $this->lang->line("id"); ?></th>
+                                    <th><?= $this->lang->line("name"); ?></th>
+                                    <th><?= $this->lang->line("status"); ?></th>
+                                    <th><?= $this->lang->line("created_at"); ?></th>
+                                    <th><?= $this->lang->line("updated_at"); ?></th>
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
@@ -44,11 +44,11 @@
                                         <td>
                                             <?php if ($category["status"]): ?>
                                                 <span class="badge border border-success text-success">
-                                                    <?= $this->lang->line("admin_categories_list_page_status_enabled"); ?>
+                                                    <?= $this->lang->line("enabled"); ?>
                                                 </span>
                                             <?php else: ?>
                                                 <span class="badge border border-secondary text-secondary">
-                                                    <?= $this->lang->line("admin_categories_list_page_status_disabled"); ?>
+                                                    <?= $this->lang->line("disabled"); ?>
                                                 </span>
                                             <?php endif; ?>
                                         </td>
@@ -65,23 +65,23 @@
                                                         href="<?= base_url('admin/categories/' . $category['id']); ?>">
                                                         <i data-feather="eye" class="icon-sm text-info me-2"></i>
                                                         <span class="text-info">
-                                                            <?= $this->lang->line("admin_categories_list_page_control_view"); ?>
+                                                            <?= $this->lang->line("view"); ?>
                                                         </span>
                                                     </a>
                                                     <a class="dropdown-item d-flex align-items-center"
                                                         href="<?= base_url('admin/categories/' . $category['id']) . '/edit'; ?>">
                                                         <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
                                                         <span class="text-warning">
-                                                            <?= $this->lang->line("admin_categories_list_page_control_edit"); ?>
+                                                            <?= $this->lang->line("edit"); ?>
                                                         </span>
                                                     </a>
                                                     <a class="dropdown-item d-flex align-items-center"
                                                         href="javascript:void(0);" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteCategoryModal"
+                                                        data-bs-target="#deleteModal"
                                                         data-url="<?= base_url('admin/categories/' . $category['id']) . '/delete'; ?>">
                                                         <i data-feather="trash" class="icon-sm text-danger me-2"></i>
                                                         <span class="text-danger">
-                                                            <?= $this->lang->line("admin_categories_list_page_control_delete"); ?>
+                                                            <?= $this->lang->line("delete"); ?>
                                                         </span>
                                                     </a>
                                                 </div>
@@ -97,36 +97,35 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalTitle"
-    aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteCategoryModalTitle">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_title"); ?>
+                <h5 class="modal-title" id="deleteModalTitle">
+                    <?= $this->lang->line("modal_confirm_delete_title"); ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->lang->line("admin_categories_list_page_delete_modal_description"); ?>
+                <?= $this->lang->line("modal_confirm_delete_description"); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_close_btn"); ?>
+                    <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="javascript:void(0);" id="deleteCategoryButton" class="btn btn-outline-danger">
-                    <?= $this->lang->line("admin_categories_list_page_delete_modal_delete_btn"); ?>
+                <a href="javascript:void(0);" id="deleteButton" class="btn btn-outline-danger">
+                    <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
         </div>
     </div>
 </div>
+<?php $this->load->view("admin/partials/footer"); ?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
         item.addEventListener("click", function () {
-            document.getElementById("deleteCategoryButton").href = this.getAttribute("data-url");
+            document.getElementById("deleteButton").href = this.getAttribute("data-url");
         });
     });
 </script>
-<?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>
