@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @property NewsModel $NewsModel
+ * @property CategoriesModel $CategoriesModel
  */
 class NewsController extends CRUD_Controller
 {
@@ -10,6 +11,7 @@ class NewsController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/NewsModel");
+        $this->load->model("admin/CategoriesModel");
     }
 
     public function index()
@@ -40,6 +42,7 @@ class NewsController extends CRUD_Controller
     public function create()
     {
         $context["page_title"] = $this->lang->line("create_news");
+        $context["categories_collection"] = $this->CategoriesModel->all();
         $this->load->view("admin/news/create", $context);
     }
 
@@ -61,7 +64,7 @@ class NewsController extends CRUD_Controller
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
         $category_id = $this->input->post("category_id", true);
-        $author_id = $this->input->post("author_id", true);
+        $author_id = $this->session->userdata("admin_credentials")["id"];/*  $this->input->post("author_id", true); //$this->session from id */
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 

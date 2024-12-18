@@ -10,6 +10,8 @@
                     <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
                             value="<?= $this->security->get_csrf_hash(); ?>">
+                        
+                        <!-- Tabs for language selection -->
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
@@ -31,170 +33,94 @@
                             </li>
                         </ul>
 
-
-
-
-
-
-
-
-
-
-
+                        <!-- Tab content -->
                         <div class="tab-content mt-3" id="lineTabContent">
+                            <!-- AZ language tab -->
                             <div class="tab-pane fade show active" id="az" role="tabpanel"
                                 aria-labelledby="az-line-tab">
-
-
-
                                 <div class="row">
+                                    <!-- Title input -->
                                     <div class="mb-3">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name">
+                                        <label for="title_az" class="form-label">Title</label>
+                                        <input type="text" name="title_az" id="title_az" class="form-control" placeholder="Enter title in AZ">
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- Short description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                        <label for="short_description_az" class="form-label">Short desc</label>
+                                        <textarea name="short_description_az" id="short_description_az" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
-
-
                                 <div class="row">
+                                    <!-- Full description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample1"
-                                            rows="10"></textarea>
+                                        <label for="long_description_az" class="form-label">Full desc</label>
+                                        <textarea name="long_description_az" id="long_description_az" class="form-control" rows="10"></textarea>
                                     </div>
                                 </div>
-
-
-
                             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <!-- EN language tab -->
                             <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-line-tab">
                                 <div class="row">
+                                    <!-- Title input -->
                                     <div class="mb-3">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name">
+                                        <label for="title_en" class="form-label">Title</label>
+                                        <input type="text" name="title_en" id="title_en" class="form-control" placeholder="Enter title in EN">
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- Short description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                        <label for="short_description_en" class="form-label">Short desc</label>
+                                        <textarea name="short_description_en" id="short_description_en" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
-
-
                                 <div class="row">
+                                    <!-- Full description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample2"
-                                            rows="10"></textarea>
+                                        <label for="long_description_en" class="form-label">Full desc</label>
+                                        <textarea name="long_description_en" id="long_description_en" class="form-control" rows="10"></textarea>
                                     </div>
                                 </div>
-
-
-
-
-
                             </div>
+
+                            <!-- RU language tab -->
                             <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-line-tab">
-
-
-
-
-
                                 <div class="row">
+                                    <!-- Title input -->
                                     <div class="mb-3">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name">
+                                        <label for="title_ru" class="form-label">Title</label>
+                                        <input type="text" name="title_ru" id="title_ru" class="form-control" placeholder="Enter title in RU">
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!-- Short description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
+                                        <label for="short_description_ru" class="form-label">Short desc</label>
+                                        <textarea name="short_description_ru" id="short_description_ru" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
-
-
                                 <div class="row">
+                                    <!-- Full description input -->
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Example
-                                            textarea</label>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample3"
-                                            rows="10"></textarea>
+                                        <label for="long_description_ru" class="form-label">Full desc</label>
+                                        <textarea name="long_description_ru" id="long_description_ru" class="form-control" rows="10"></textarea>
                                     </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="advertising_title_ru" class="form-label">Title (RU)</label>
-                                    <input name="advertising_title_ru" id="advertising_title_ru" type="text"
-                                        class="form-control" placeholder="Siyasət" maxlength="255">
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Image upload -->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="img" class="form-label">Image</label>
                                     <input name="img" id="img" type="file" class="form-control" accept="image/*">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="multi_img" class="form-label">Multiple Images</label>
                                     <input name="multi_img[]" id="multi_img" type="file" class="form-control" multiple>
@@ -202,75 +128,43 @@
                             </div>
                         </div>
 
+                        <!-- Category and Type selection -->
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="category_id" class="form-label">Category</label>
                                     <select name="category_id" id="category_id" class="form-control">
-                                        <option value="">Select a category</option>
-                                        <option value="1">Category 1</option>
-                                        <option value="2">Category 2</option>
-                                        <option value="3">Category 3</option>
+                                        <?php foreach ($categories_collection as $category): ?>
+                                            <option value="<?= $category["id"]; ?>"><?= $category["name_en"] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="author_id" class="form-label">Author</label>
-                                    <select name="author_id" id="author_id" class="form-control">
-                                        <option value="">Select an author</option>
-                                        <option value="1">Author 1</option>
-                                        <option value="2">Author 2</option>
-                                        <option value="3">Author 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="type" class="form-label">Type</label>
                                     <select name="type" id="type" class="form-control">
-                                        <option value="">Select a type</option>
-                                        <option value="news">News</option>
-                                        <option value="article">Article</option>
-                                        <option value="blog">Blog</option>
+                                        <option value="daily_news">Daily News</option>
+                                        <option value="important_news">Important news</option>
+                                        <option value="general_news">General news</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- Status switch -->
+                        <div class="row mb-3">
                             <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                        <option value="archived">Archived</option>
-                                    </select>
+                                <div class="form-check form-switch">
+                                    <input name="status" type="checkbox" class="form-check-input" id="status" checked>
+                                    <label class="form-check-label" for="status">
+                                        <?= $this->lang->line("status"); ?>
+                                    </label>
                                 </div>
                             </div>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        <!-- Submit button -->
                         <button type="submit" class="btn btn-primary submit">Submit form</button>
                     </form>
                 </div>
@@ -281,7 +175,8 @@
 <?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>
 <script>
-    CKEDITOR.replace("tinymceExample1", {
+    // CKEditor initialization for each language description
+    CKEDITOR.replace("long_description_az", {
         on: {
             instanceReady: function (e) {
                 let editorElement = e.editor.container.$;
@@ -291,7 +186,7 @@
             }
         }
     });
-    CKEDITOR.replace("tinymceExample2", {
+    CKEDITOR.replace("long_description_en", {
         on: {
             instanceReady: function (e) {
                 let editorElement = e.editor.container.$;
@@ -301,7 +196,7 @@
             }
         }
     });
-    CKEDITOR.replace("tinymceExample3", {
+    CKEDITOR.replace("long_description_ru", {
         on: {
             instanceReady: function (e) {
                 let editorElement = e.editor.container.$;

@@ -208,8 +208,28 @@ $lang[""] = "";
 
 $lang["all_administrators"] = "All Administrators";
 $lang["add_administrator"] = "Add Administrator";
-$lang["register"] = "";
+/* $lang["register"] = ""; */
 $lang["edit_administrator"] = "Edit Administrator";
+
+$lang["first_name"] = "First Name";
+$lang["last_name"] = "Last Name";
+$lang["email"] = "Email";
+$lang["username"] = "Username";
+$lang["password"] = "Password";
+$lang["role"] = "Role";
+$lang["root"] = "Root";
+$lang["admin"] = "Admin";
+$lang["moderator"] = "Moderator";
+$lang["image"] = "Image";
+$lang["status"] = "Status";
+$lang["create"] = "Create";
+
+
+
+$lang[""] = "Create News";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
 
 
 
