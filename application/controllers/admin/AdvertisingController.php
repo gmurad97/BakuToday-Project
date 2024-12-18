@@ -63,14 +63,14 @@ class AdvertisingController extends CRUD_Controller
                     "title_az" => $title_az,
                     "title_en" => $title_en,
                     "title_ru" => $title_ru,
-                    "img" => $image_name,
                     "location" => $location,
+                    "img" => $image_name,
                     "status" => $status === "on"
                 ];
 
                 $this->AdvertisingModel->create($data);
 
-                $this->alert_flashdata("advertising_alert", "success", [
+                $this->alert_flashdata("crud_alert", "success", [
                     "title" => $this->lang->line("success_added_alert_title"),
                     "description" => $this->lang->line("success_added_alert_description")
                 ]);
@@ -113,119 +113,96 @@ class AdvertisingController extends CRUD_Controller
 
     public function update($id)
     {
-        
-        $advertising = $this->AdvertisingModel->find($id);
+        $context["advertising"] = $this->AdvertisingModel->find($id);
 
-
-
-
-        if (!$advertising) {
-            // Если запись не найдена, перенаправляем с сообщением об ошибке
-            $this->alert_flashdata("advertising_alert", "danger", [
-                "title" => "Error",
-                "description" => "Advertising not found."
+        if (!empty($context["advertising"])) {
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
             ]);
+
             redirect(base_url("admin/advertising"));
         }
 
-        $advertising_title_az = substr($this->input->post("advertising_title_az", true), 0, 255);
-        $advertising_title_en = substr($this->input->post("advertising_title_en", true), 0, 255);
-        $advertising_title_ru = substr($this->input->post("advertising_title_ru", true), 0, 255);
+        $title_az = substr($this->input->post("title_az", true), 0, 255);
+        $title_en = substr($this->input->post("title_en", true), 0, 255);
+        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
+        $location = substr($this->input->post("location", true), 0, 255);
+        $status = $this->input->post("status", true);
 
-        $advertising_status = $this->input->post("advertising_status", true);
-
-        if (!empty($advertising_title_az) && !empty($advertising_title_en) && !empty($advertising_title_ru)) {
+        if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/advertising/";
+            $current_img_name = $context["advertising"]["img"];
 
-            $image_name = $advertising["img"]; // Сохраняем текущее изображение
+            if (!empty($_FILES["img"]["name"])) {
+                $upload_result = $this->upload_image("img", $upload_path);
 
-            // Проверяем, загружен ли новый файл
-            if (!empty($_FILES["advertising_img"]["name"])) {
-                $result = $this->upload_and_resize_image("advertising_img", $upload_path);
-
-                if ($result["success"]) {
-                    // Успешная загрузка нового изображения
-                    $uploaded_img_data = $result["data"];
-                    $image_name = $uploaded_img_data["file_name"];
-
-                    // Удаляем старое изображение, если оно существует
-                    $old_image_path = $upload_path . $advertising["img"];
-                    if (file_exists($old_image_path)) {
-                        unlink($old_image_path);
-                    }
+                if ($upload_result["success"]) {
+                    $uploaded_img_data = $upload_result["data"];
+                    $current_img_name = $uploaded_img_data["file_name"];
+                    $old_image_path = $upload_path . $context["advertising"]["img"];
+                    $this->delete_file($old_image_path);
                 } else {
-                    // Ошибка загрузки нового изображения
-                    $this->alert_flashdata("advertising_alert", "danger", [
-                        "title" => "Image upload error",
-                        "description" => $result["error"]
+                    $this->alert_flashdata("crud_alert", "warning", [
+                        "title" => $this->lang->line("invalid_img_format_alert_title"),
+                        "description" => $this->lang->line("invalid_img_format_alert_description")
                     ]);
-                    redirect(base_url("admin/advertising/edit/" . $id));
+
+                    redirect(base_url("admin/advertising/$id/edit"));
                 }
             }
 
-            // Обновляем данные
             $data = [
-                "title_az" => $advertising_title_az,
-                "title_en" => $advertising_title_en,
-                "title_ru" => $advertising_title_ru,
-                "img" => $image_name,
-                "status" => $advertising_status === "on" // Преобразуем статус в boolean
+                "title_az" => $title_az,
+                "title_en" => $title_en,
+                "title_ru" => $title_ru,
+                "location" => $location,
+                "img" => $current_img_name,
+                "status" => $status === "on"
             ];
 
             $this->AdvertisingModel->update($id, $data);
 
-            // Успешное уведомление
-            $this->alert_flashdata("advertising_alert", "success", [
-                "title" => "Success",
-                "description" => "Advertising successfully updated."
+            $this->alert_flashdata("crud_alert", "success", [
+                "title" => $this->lang->line("success_update_alert_title"),
+                "description" => $this->lang->line("success_update_alert_description")
             ]);
 
-            redirect(base_url("admin/advertising"));
+            redirect(base_url("admin/advertising/$id/edit"));
         } else {
-            // Уведомление о незаполненных полях
-            $this->alert_flashdata("advertising_alert", "warning", [
-                "title" => "Empty fields error",
-                "description" => "Please fill in all required fields."
+            $this->alert_flashdata("crud_alert", "warning", [
+                "title" => $this->lang->line("empty_fields_alert_title"),
+                "description" => $this->lang->line("empty_fields_alert_description")
             ]);
 
-            redirect(base_url("admin/advertising/edit/" . $id));
+            redirect(base_url("admin/advertising/$id/edit"));
         }
     }
 
-
     public function destroy($id)
     {
-        // Находим запись по ID
-        $advertising = $this->AdvertisingModel->find($id);
+        $context["advertising"] = $this->AdvertisingModel->find($id);
 
-        if (!$advertising) {
-            // Если запись не найдена, перенаправляем с сообщением об ошибке
-            $this->alert_flashdata("advertising_alert", "danger", [
-                "title" => "Error",
-                "description" => "Advertising not found."
+        if (!empty($context["advertising"])) {
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
             ]);
+
             redirect(base_url("admin/advertising"));
         }
 
-        // Путь к изображению
         $upload_path = "./public/uploads/advertising/";
-        $image_path = $upload_path . $advertising["img"];
+        $current_image_path = $upload_path . $context["advertising"]["img"];
+        $this->delete_file($current_image_path);
 
-        // Удаляем изображение, если оно существует
-        if (file_exists($image_path) && is_file($image_path)) {
-            unlink($image_path);
-        }
-
-        // Удаляем запись из базы данных
         $this->AdvertisingModel->delete($id);
 
-        // Уведомление об успешном удалении
-        $this->alert_flashdata("advertising_alert", "success", [
-            "title" => "Success",
-            "description" => "Advertising successfully deleted."
+        $this->alert_flashdata("crud_alert", "success", [
+            "title" => $this->lang->line("success_delete_alert_title"),
+            "description" => $this->lang->line("success_delete_alert_description")
         ]);
 
         redirect(base_url("admin/advertising"));
     }
-
 }

@@ -139,8 +139,8 @@ class CategoriesController extends CRUD_Controller
 
     public function destroy($id)
     {
-        $category = $this->CategoriesModel->find($id);
-        if (!empty($category)) {
+        $context["category"] = $this->CategoriesModel->find($id);
+        if (!empty($context["category"])) {
             $this->CategoriesModel->delete($id);
 
             $this->alert_flashdata("crud_alert", "success", [
@@ -151,8 +151,8 @@ class CategoriesController extends CRUD_Controller
             redirect(base_url("admin/categories"));
         } else {
             $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("success_delete_alert_title"),
-                "description" => $this->lang->line("success_delete_alert_description")
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
             ]);
 
             redirect(base_url("admin/categories"));
