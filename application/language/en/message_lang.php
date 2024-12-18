@@ -188,6 +188,11 @@ $lang["delete"] = "Delete";
 
 
 
+$lang["all_news"] = "All News";
+$lang["create_news"] = "Create News";
+$lang[""] = "";
+
+
 
 
 

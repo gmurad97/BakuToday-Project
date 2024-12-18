@@ -8,6 +8,8 @@
                 <div class="card-body">
                     <h6 class="card-title">Create News</h6>
                     <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                            value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
@@ -195,8 +197,7 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label for="multi_img" class="form-label">Multiple Images</label>
-                                    <input name="multi_img[]" id="multi_img" type="file" class="form-control" multiple
-                                        accept="image/*">
+                                    <input name="multi_img[]" id="multi_img" type="file" class="form-control" multiple>
                                 </div>
                             </div>
                         </div>

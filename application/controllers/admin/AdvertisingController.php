@@ -24,8 +24,8 @@ class AdvertisingController extends CRUD_Controller
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
         if (!empty($context["advertising"])) {
-            $advertising_name = $context["advertising"]["title_{$this->current_admin_language}"];
-            $context["page_title"] = $this->lang->line("view") . " • $advertising_name";
+            $advertising_title = $context["advertising"]["title_{$this->current_admin_language}"];
+            $context["page_title"] = $this->lang->line("view") . " • $advertising_title";
             $this->load->view("admin/advertising/detail", $context);
         } else {
             $this->alert_flashdata("crud_alert", "info", [
@@ -39,7 +39,7 @@ class AdvertisingController extends CRUD_Controller
 
     public function create()
     {
-        $context["page_title"] = $this->lang->load("create_advertising");
+        $context["page_title"] = $this->lang->line("create_advertising");
         $this->load->view("admin/advertising/create", $context);
     }
 
@@ -115,7 +115,7 @@ class AdvertisingController extends CRUD_Controller
     {
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
-        if (!empty($context["advertising"])) {
+        if (empty($context["advertising"])) {
             $this->alert_flashdata("crud_alert", "info", [
                 "title" => $this->lang->line("invalid_id_alert_title"),
                 "description" => $this->lang->line("invalid_id_alert_description")
@@ -183,7 +183,7 @@ class AdvertisingController extends CRUD_Controller
     {
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
-        if (!empty($context["advertising"])) {
+        if (empty($context["advertising"])) {
             $this->alert_flashdata("crud_alert", "info", [
                 "title" => $this->lang->line("invalid_id_alert_title"),
                 "description" => $this->lang->line("invalid_id_alert_description")

@@ -127,7 +127,7 @@
                         <button type="submit" class="btn btn-outline-warning">
                             <?= $this->lang->line("update"); ?>
                         </button>
-                        <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
+                        <a href="<?= base_url('admin/advertising'); ?>" class="btn btn-primary">
                             <?= $this->lang->line("back"); ?>
                         </a>
                     </form>

@@ -85,6 +85,7 @@ class MY_Controller extends CI_Controller
 
     public function upload_image($field_name, $upload_path, $resize_options = [])
     {
+        // Настройки для загрузки
         $upload_config = [
             "upload_path" => $upload_path,
             "allowed_types" => "jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF",
@@ -95,28 +96,73 @@ class MY_Controller extends CI_Controller
 
         $this->load->library("upload", $upload_config);
 
-        if (!$this->upload->do_upload($field_name)) {
-            return ["success" => false, "error" => $this->upload->display_errors()];
-        }
+        // Проверяем, передан ли массив (для мультизагрузки) или одиночный файл
+        if (is_array($_FILES[$field_name]['name'])) {
+            // Мультизагрузка: создаем массив для обработки нескольких файлов
+            $files = $_FILES[$field_name];
+            $uploaded_files = [];
 
-        $uploaded_data = $this->upload->data();
+            for ($i = 0; $i < count($files['name']); $i++) {
+                $_FILES['userfile']['name'] = $files['name'][$i];
+                $_FILES['userfile']['type'] = $files['type'][$i];
+                $_FILES['userfile']['tmp_name'] = $files['tmp_name'][$i];
+                $_FILES['userfile']['error'] = $files['error'][$i];
+                $_FILES['userfile']['size'] = $files['size'][$i];
 
-        if (!empty($resize_options)) {
-            $resize_config = array_merge([
-                "image_library" => "gd2",
-                "source_image" => $uploaded_data["full_path"],
-                "maintain_ratio" => FALSE
-            ], $resize_options);
+                // Инициализируем библиотеку для загрузки и пытаемся загрузить файл
+                if ($this->upload->do_upload('userfile')) {
+                    $uploaded_data = $this->upload->data();
 
-            $this->load->library("image_lib", $resize_config);
+                    // Опционально изменяем размер изображения
+                    if (!empty($resize_options)) {
+                        $resize_config = array_merge([
+                            "image_library" => "gd2",
+                            "source_image" => $uploaded_data["full_path"],
+                            "maintain_ratio" => FALSE
+                        ], $resize_options);
 
-            if (!$this->image_lib->resize()) {
-                return ["success" => false, "error" => $this->image_lib->display_errors()];
+                        $this->load->library("image_lib", $resize_config);
+
+                        if (!$this->image_lib->resize()) {
+                            return ["success" => false, "error" => $this->image_lib->display_errors()];
+                        }
+                    }
+
+                    $uploaded_files[] = $uploaded_data; // Добавляем данные загруженного файла в массив
+                } else {
+                    // Возвращаем ошибку, если файл не загружен
+                    return ["success" => false, "error" => $this->upload->display_errors()];
+                }
             }
-        }
 
-        return ["success" => true, "data" => $uploaded_data];
+            return ["success" => true, "data" => $uploaded_files]; // Возвращаем массив данных о файлах
+        } else {
+            // Одиночная загрузка: обрабатываем один файл
+            if (!$this->upload->do_upload($field_name)) {
+                return ["success" => false, "error" => $this->upload->display_errors()];
+            }
+
+            $uploaded_data = $this->upload->data();
+
+            // Опционально изменяем размер изображения
+            if (!empty($resize_options)) {
+                $resize_config = array_merge([
+                    "image_library" => "gd2",
+                    "source_image" => $uploaded_data["full_path"],
+                    "maintain_ratio" => FALSE
+                ], $resize_options);
+
+                $this->load->library("image_lib", $resize_config);
+
+                if (!$this->image_lib->resize()) {
+                    return ["success" => false, "error" => $this->image_lib->display_errors()];
+                }
+            }
+
+            return ["success" => true, "data" => $uploaded_data]; // Возвращаем данные о загруженном файле
+        }
     }
+
 
     public function delete_file($file_path)
     {

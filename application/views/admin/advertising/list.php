@@ -114,19 +114,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalTitle">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_title"); ?>
+                    <?= $this->lang->line("modal_confirm_delete_title"); ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->lang->line("admin_advertising_list_page_delete_modal_description"); ?>
+                <?= $this->lang->line("modal_confirm_delete_description"); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_close_btn"); ?>
+                    <?= $this->lang->line("close"); ?>
                 </button>
                 <a href="javascript:void(0);" id="deleteButton" class="btn btn-outline-danger">
-                    <?= $this->lang->line("admin_advertising_list_page_delete_modal_delete_btn"); ?>
+                    <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
         </div>
