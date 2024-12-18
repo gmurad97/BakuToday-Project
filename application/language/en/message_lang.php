@@ -190,7 +190,26 @@ $lang["delete"] = "Delete";
 
 $lang["all_news"] = "All News";
 $lang["create_news"] = "Create News";
+$lang["edit_news"] = "Edit News";
 $lang[""] = "";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$lang["all_administrators"] = "All Administrators";
+$lang["add_administrator"] = "Add Administrator";
+$lang["register"] = "";
+$lang["edit_administrator"] = "Edit Administrator";
 
 
 

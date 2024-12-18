@@ -110,7 +110,7 @@
                 <li class="nav-item nav-category text-danger">
                     <?= $this->lang->line("administration"); ?>
                 </li>
-                <li class="nav-item <?= set_active_class(['admin/profiles', 'admin/register'], true, 'active'); ?>">
+                <li class="nav-item <?= set_active_class(['admin/profiles'], true, 'active'); ?>">
                     <a class="nav-link" data-bs-toggle="collapse" href="#menuAdministrators" role="button"
                         aria-expanded="false" aria-controls="menuAdministrators">
                         <i class="link-icon" data-feather="users"></i>
@@ -119,7 +119,7 @@
                         </span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
-                    <div class="collapse <?= set_active_class(['admin/profiles', 'admin/register'], true, 'show'); ?>"
+                    <div class="collapse <?= set_active_class(['admin/profiles'], true, 'show'); ?>"
                         data-bs-parent="#sidebarNav" id="menuAdministrators">
                         <ul class="nav sub-menu">
                             <li class="nav-item">

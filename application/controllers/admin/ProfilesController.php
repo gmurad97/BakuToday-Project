@@ -9,141 +9,226 @@ class ProfilesController extends CRUD_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/AdminsModel');
+        $this->load->model("admin/AdminsModel");
     }
 
     public function index()
     {
-        $context['page_title'] = 'All Profiles';
-        $context['profiles'] = $this->AdminsModel->get_all();
-        $this->load->view('admin/profiles/list', $context);
+        $context["page_title"] = $this->lang->line("all_administrators");
+        $context["profiles_collection"] = $this->AdminsModel->all();
+        $this->load->view("admin/profiles/list", $context);
     }
 
     public function show($id)
     {
-        $context['profile'] = $this->AdminsModel->find($id);
-        if ($context['profile']) {
-            $context['page_title'] = 'View Profile: ' . $context['profile']['username'];
-            $this->load->view('admin/profiles/detail', $context);
+        $context["profile"] = $this->AdminsModel->find($id);
+
+        if (!empty($context["profile"])) {
+            $profile_first_name = $context["profile"]["first_name"];
+            $profile_last_name = $context["profile"]["last_name"];
+
+            $context["page_title"] = $this->lang->line("view") . " • $profile_first_name $profile_last_name";
+
+            $this->load->view("admin/profiles/detail", $context);
         } else {
-            $this->session->set_flashdata('error', 'Profile not found.');
-            redirect(base_url('admin/profiles'));
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles"));
         }
     }
 
     public function create()
     {
-        $context['page_title'] = 'Create Profile';
-        $this->load->view('admin/profiles/create', $context);
+        $context["page_title"] = $this->lang->line("add_administrator");
+        $this->load->view("admin/profiles/create", $context);
     }
 
     public function store()
     {
-        $first_name = $this->input->post('first_name', true);
-        $last_name = $this->input->post('last_name', true);
-        $email = $this->input->post('email', true);
-        $username = $this->input->post('username', true);
-        $password = $this->input->post('password', true);
-        $confirm_password = $this->input->post('confirm_password', true);
-        $role = $this->input->post('role', true);
-        $status = $this->input->post('status', true);
+        $first_name = substr($this->input->post("first_name", true), 0, 255);
+        $last_name = substr($this->input->post("last_name", true), 0, 255);
+        $email = $this->input->post("email", true);
+        $username = $this->input->post("username", true);
+        $password = $this->input->post("password", true);
+        $role = $this->input->post("role", true);
+        $status = $this->input->post("status", true);
 
-        if (empty($first_name) || empty($last_name) || empty($email) || empty($username) || empty($password) || empty($confirm_password) || empty($role)) {
-            $this->session->set_flashdata('error', 'All fields are required.');
-            redirect(base_url('admin/profiles/create'));
-        }
+        if (
+            !empty($first_name) &&
+            !empty($last_name) &&
+            !empty($email) &&
+            !empty($username) &&
+            !empty($password) &&
+            !empty($role)
+        ) {
+            $upload_path = "./public/uploads/profiles/";
+            $upload_result = $this->upload_image("img", $upload_path);
 
-        if ($password !== $confirm_password) {
-            $this->session->set_flashdata('error', 'Passwords do not match.');
-            redirect(base_url('admin/profiles/create'));
-        }
+            if ($upload_result["success"]) {
+                $uploaded_img_data = $upload_result["data"];
+                $image_name = $uploaded_img_data["file_name"];
 
-        if ($this->AdminsModel->findByUsernameOrEmail($username) || $this->AdminsModel->findByUsernameOrEmail($email)) {
-            $this->session->set_flashdata('error', 'Username or email already exists.');
-            redirect(base_url('admin/profiles/create'));
-        }
+                $data = [
+                    "first_name" => $first_name,
+                    "last_name" => $last_name,
+                    "email" => $email,
+                    "username" => $username,
+                    "password" => hash("sha256", $password),
+                    "role" => $role,
+                    "img" => $image_name,
+                    "status" => $status === "on"
+                ];
 
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+                $this->AdminsModel->create($data);
 
-        $data = [
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-            'username' => $username,
-            'password' => $hashed_password,
-            'role' => $role,
-            'status' => $status === 'on',
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
+                $this->alert_flashdata("crud_alert", "success", [
+                    "title" => $this->lang->line("success_added_alert_title"),
+                    "description" => $this->lang->line("success_added_alert_description")
+                ]);
 
-        if ($this->AdminsModel->create($data)) {
-            $this->session->set_flashdata('success', 'Profile created successfully.');
-            redirect(base_url('admin/profiles'));
+                redirect(base_url("admin/profiles"));
+
+            } else {
+                $this->alert_flashdata("crud_alert", "warning", [
+                    "title" => $this->lang->line("invalid_img_format_alert_title"),
+                    "description" => $this->lang->line("invalid_img_format_alert_description")
+                ]);
+
+                redirect(base_url("admin/profiles/create"));
+            }
         } else {
-            $this->session->set_flashdata('error', 'An error occurred. Please try again.');
-            redirect(base_url('admin/profiles/create'));
+            $this->alert_flashdata("crud_alert", "warning", [
+                "title" => $this->lang->line("empty_fields_alert_title"),
+                "description" => $this->lang->line("empty_fields_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles/create"));
         }
     }
 
     public function edit($id)
     {
-        $context['profile'] = $this->AdminsModel->find($id);
-        if ($context['profile']) {
-            $context['page_title'] = 'Edit Profile: ' . $context['profile']['username'];
-            $this->load->view('admin/profiles/edit', $context);
+        $context["profile"] = $this->AdminsModel->find($id);
+        if (!empty($context["profile"])) {
+            $profile_first_name = $context["profile"]["first_name"];
+            $profile_last_name = $context["profile"]["last_name"];
+            $context["page_title"] = $this->lang->line("edit_administrator") . " • $profile_first_name $profile_last_name";
+            $this->load->view("admin/profiles/edit", $context);
         } else {
-            $this->session->set_flashdata('error', 'Profile not found.');
-            redirect(base_url('admin/profiles'));
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
+            ]);
+            redirect(base_url("admin/profiles"));
         }
     }
 
     public function update($id)
     {
-        $profile = $this->AdminsModel->find($id);
+        $context["profile"] = $this->AdminsModel->find($id);
 
-        if (!$profile) {
-            $this->session->set_flashdata('error', 'Profile not found.');
-            redirect(base_url('admin/profiles'));
+        if (empty($context["profile"])) {
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles"));
         }
 
-        $data = $this->input->post();
-        $data['status'] = isset($data['status']) && $data['status'] === 'on';
+        $first_name = substr($this->input->post("first_name", true), 0, 255);
+        $last_name = substr($this->input->post("last_name", true), 0, 255);
+        $email = $this->input->post("email", true);
+        $username = $this->input->post("username", true);
+        $password = $this->input->post("password", true);
+        $role = $this->input->post("role", true);
+        $status = $this->input->post("status", true);
 
-        if (!empty($data['password'])) {
-            if ($data['password'] !== $data['confirm_password']) {
-                $this->session->set_flashdata('error', 'Passwords do not match.');
-                redirect(base_url('admin/profiles/edit/' . $id));
+        if (
+            !empty($first_name) &&
+            !empty($last_name) &&
+            !empty($email) &&
+            !empty($username) &&
+            !empty($password) &&
+            !empty($role)
+        ) {
+            $upload_path = "./public/uploads/profiles/";
+            $current_img_name = $context["profile"]["img"];
+
+            if (!empty($_FILES["img"]["name"])) {
+                $upload_result = $this->upload_image("img", $upload_path);
+
+                if ($upload_result["success"]) {
+                    $uploaded_img_data = $upload_result["data"];
+                    $current_img_name = $uploaded_img_data["file_name"];
+                    $old_image_path = $upload_path . $context["profile"]["img"];
+                    $this->delete_file($old_image_path);
+                } else {
+                    $this->alert_flashdata("crud_alert", "warning", [
+                        "title" => $this->lang->line("invalid_img_format_alert_title"),
+                        "description" => $this->lang->line("invalid_img_format_alert_description")
+                    ]);
+
+                    redirect(base_url("admin/profiles/$id/edit"));
+                }
             }
-            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-        } else {
-            unset($data['password']);
-        }
-        unset($data['confirm_password']);
 
-        if ($this->AdminsModel->update($id, $data)) {
-            $this->session->set_flashdata('success', 'Profile updated successfully.');
-            redirect(base_url('admin/profiles'));
+            $data = [
+                "first_name" => $first_name,
+                "last_name" => $last_name,
+                "email" => $email,
+                "username" => $username,
+                "password" => hash("sha256", $password),
+                "role" => $role,
+                "img" => $current_img_name,
+                "status" => $status === "on"
+            ];
+
+            $this->AdminsModel->update($id, $data);
+
+            $this->alert_flashdata("crud_alert", "success", [
+                "title" => $this->lang->line("success_update_alert_title"),
+                "description" => $this->lang->line("success_update_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles/$id/edit"));
         } else {
-            $this->session->set_flashdata('error', 'An error occurred. Please try again.');
-            redirect(base_url('admin/profiles/edit/' . $id));
+            $this->alert_flashdata("crud_alert", "warning", [
+                "title" => $this->lang->line("empty_fields_alert_title"),
+                "description" => $this->lang->line("empty_fields_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles/$id/edit"));
         }
     }
 
     public function destroy($id)
     {
-        $profile = $this->AdminsModel->find($id);
+        $context["profile"] = $this->AdminsModel->find($id);
 
-        if (!$profile) {
-            $this->session->set_flashdata('error', 'Profile not found.');
-            redirect(base_url('admin/profiles'));
+        if (empty($context["profile"])) {
+            $this->alert_flashdata("crud_alert", "info", [
+                "title" => $this->lang->line("invalid_id_alert_title"),
+                "description" => $this->lang->line("invalid_id_alert_description")
+            ]);
+
+            redirect(base_url("admin/profiles"));
         }
 
-        if ($this->AdminsModel->delete($id)) {
-            $this->session->set_flashdata('success', 'Profile deleted successfully.');
-        } else {
-            $this->session->set_flashdata('error', 'An error occurred. Please try again.');
-        }
+        $upload_path = "./public/uploads/profiles/";
+        $current_image_path = $upload_path . $context["profile"]["img"];
+        $this->delete_file($current_image_path);
 
-        redirect(base_url('admin/profiles'));
+        $this->AdminsModel->delete($id);
+
+        $this->alert_flashdata("crud_alert", "success", [
+            "title" => $this->lang->line("success_delete_alert_title"),
+            "description" => $this->lang->line("success_delete_alert_description")
+        ]);
+
+        redirect(base_url("admin/profiles"));
     }
 }
