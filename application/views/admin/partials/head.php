@@ -20,6 +20,7 @@ if (!$this->session->userdata("admin_credentials")) {
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/lity/lity.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/fonts/feather-font/css/iconfont.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/style.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/custom.css'); ?>">
 </head>
 
 <body>

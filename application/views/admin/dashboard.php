@@ -52,11 +52,12 @@
                                 <img src="<?= base_url('public/uploads/news/') . $news["img"]; ?>" class="card-img-top"
                                     alt="<?= $news["title_en"] ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $news["title_$current_language"]; ?></h5>
-                                    <p class="card-text"><?= $news["short_description_$current_language"]; ?></p>
-                                    <a href="<?= base_url('admin/news/') . $news['id']; ?>">
-                                        <?= $this->lang->line("read_more"); ?>
+                                    <a class=" fs-16px" href="<?= base_url('admin/news/') . $news['id']; ?>">
+                                        <?= $news["title_$current_language"]; ?>
                                     </a>
+                                    <p class="card-text text-truncate-multiline">
+                                        <?= $news["short_description_$current_language"]; ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @property NewsModel $NewsModel
  * @property CategoriesModel $CategoriesModel
+ * @property AdminsModel $AdminsModel
  */
 class NewsController extends CRUD_Controller
 {
@@ -12,6 +13,7 @@ class NewsController extends CRUD_Controller
         parent::__construct();
         $this->load->model("admin/NewsModel");
         $this->load->model("admin/CategoriesModel");
+        $this->load->model("admin/AdminsModel");
     }
 
     public function index()
@@ -68,12 +70,19 @@ class NewsController extends CRUD_Controller
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 
+        $categories_collection = $this->CategoriesModel->all();
+        $categories_ids = array_column($categories_collection, "id");
+        $admins_collection = $this->AdminsModel->all();
+        $admins_ids = array_column($admins_collection, "id");
 
+        if (!in_array($category_id, $categories_ids) || !in_array($author_id, $admins_ids)) {
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("hacking_data_alert_title"),
+                "description" => $this->lang->line("hacking_data_alert_description")
+            ]);
 
-
-
-
-
+            redirect(base_url("admin/news/create"));
+        }
 
         $upload_path = "./public/uploads/news/";
         $data = [];
@@ -215,6 +224,22 @@ class NewsController extends CRUD_Controller
         $author_id = $this->input->post("author_id", true);
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
+
+
+        $categories_collection = $this->CategoriesModel->all();
+        $categories_ids = array_column($categories_collection, "id");
+        $admins_collection = $this->AdminsModel->all();
+        $admins_ids = array_column($admins_collection, "id");
+
+        if (!in_array($category_id, $categories_ids) || !in_array($author_id, $admins_ids)) {
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("hacking_data_alert_title"),
+                "description" => $this->lang->line("hacking_data_alert_description")
+            ]);
+
+            redirect(base_url("admin/news/$id/edit"));
+        }
+
 
         if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/news/";

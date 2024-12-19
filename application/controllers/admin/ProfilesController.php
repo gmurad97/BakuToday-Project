@@ -10,6 +10,15 @@ class ProfilesController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/AdminsModel");
+
+        if (!$this->admin_roles->has_access("admin")) {
+            $this->lang->load("message", $this->current_admin_language);
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("access_denied_alert_title"),
+                "description" => $this->lang->line("access_denied_alert_description")
+            ]);
+            redirect(base_url("admin/dashboard"));
+        }
     }
 
     public function index()
@@ -152,7 +161,6 @@ class ProfilesController extends CRUD_Controller
             !empty($last_name) &&
             !empty($email) &&
             !empty($username) &&
-            !empty($password) &&
             !empty($role)
         ) {
             $upload_path = "./public/uploads/profiles/";
@@ -176,18 +184,29 @@ class ProfilesController extends CRUD_Controller
                 }
             }
 
+            // Если пароль не был введен, сохраняем старый
+            if (empty($password)) {
+                $password = $context["profile"]["password"];
+            } else {
+                $password = hash("sha256", $password); // Хэшируем новый пароль
+            }
+
             $data = [
                 "first_name" => $first_name,
                 "last_name" => $last_name,
                 "email" => $email,
                 "username" => $username,
-                "password" => hash("sha256", $password),
+                "password" => $password,
                 "role" => $role,
                 "img" => $current_img_name,
                 "status" => $status === "on"
             ];
 
             $this->AdminsModel->update($id, $data);
+
+            $current_admin_credentials = $this->session->userdata("admin_credentials");
+            $current_admin_credentials["img"] = $this->AdminsModel->find($current_admin_credentials["id"])["img"];
+            $this->session->set_userdata("admin_credentials", $current_admin_credentials);
 
             $this->alert_flashdata("crud_alert", "success", [
                 "title" => $this->lang->line("success_update_alert_title"),

@@ -62,35 +62,17 @@
                 $admin_email = $this->session->userdata("admin_credentials")["email"];
                 $admin_role = $this->session->userdata("admin_credentials")["role"];
                 $admin_img = $this->session->userdata("admin_credentials")["img"];
-
-                $admin_roles = [
-                    "az" => [
-                        "root" => "Root",
-                        "moderator" => "Moderator",
-                        "administrator" => "Administrator"
-                    ],
-                    "en" => [
-                        "root" => "Root",
-                        "moderator" => "Moderator",
-                        "administrator" => "Administrator"
-                    ],
-                    "ru" => [
-                        "root" => "Рут",
-                        "moderator" => "Модератор",
-                        "administrator" => "Администратор"
-                    ]
-                ];
                 ?>
                 <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="w-30px h-30px ms-1 rounded-circle" src="<?= !empty($admin_img) ?
+                    <img class="w-30px h-30px ms-1 rounded-circle object-fit-cover" src="<?= !empty($admin_img) ?
                         base_url('public/uploads/profiles/' . $admin_img) :
                         base_url('public/admin/assets/images/faces/face0.jpg'); ?>" alt="Profile Image">
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                     <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                         <div class="mb-3">
-                            <img class="w-80px h-80px rounded-circle" src="<?= !empty($admin_img) ?
+                            <img class="w-80px h-80px rounded-circle object-fit-cover" src="<?= !empty($admin_img) ?
                                 base_url('public/uploads/profiles/' . $admin_img) :
                                 base_url('public/admin/assets/images/faces/face0.jpg'); ?>" alt="Profile">
                         </div>
@@ -102,8 +84,9 @@
                             <p class="fs-12px text-secondary">
                                 <?= $admin_email; ?>
                             </p>
-                            <p class="fs-12px <?= $admin_role === 'root' ? 'text-danger' : 'text-warning'; ?>">
-                                <?= ucfirst($admin_roles[$current_language][$admin_role]); ?>
+                            <p
+                                class="fs-12px <?= ($admin_role === 'root' || $admin_role === 'admin') ? 'text-danger' : 'text-primary'; ?>">
+                                <?= ucfirst($this->lang->line($admin_role)); ?>
                             </p>
                         </div>
                     </div>

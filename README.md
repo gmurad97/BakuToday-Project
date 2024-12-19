@@ -1,6 +1,6 @@
 # 🚀 Project Information
 
-- **Builds:** 24  
+- **Builds:** 32  
 - **Author:** gmurad97  
 - **Template:** Nouble UI  
 - **Template Folder Path:** `BASE_DIR.'/public/admin/template'`  

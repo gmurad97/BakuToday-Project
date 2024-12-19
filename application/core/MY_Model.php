@@ -107,7 +107,7 @@ class ELOQUENT_Model extends MY_Model
         return $this->db
             ->limit($limit)
             ->get($this->tableName)
-            ->row_array();
+            ->result_array();
     }
 
     public function last($limit = 1)
@@ -116,7 +116,7 @@ class ELOQUENT_Model extends MY_Model
             ->order_by($this->primaryKey, "DESC")
             ->limit($limit)
             ->get($this->tableName)
-            ->row_array();
+            ->result_array();
     }
 
     public function create($data)

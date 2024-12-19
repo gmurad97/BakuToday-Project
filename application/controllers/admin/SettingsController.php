@@ -25,7 +25,7 @@ class SettingsController extends BASE_Controller
     public function index()
     {
         $context["page_title"] = $this->lang->line("settings");
-        $context["settings"] = json_decode($this->SettingsModel->first()["collection"]);
+        $context["settings"] = json_decode($this->SettingsModel->first()[0]["collection"]);
 
         if ($context["settings"]) {
             $this->load->view("admin/settings/edit", $context);

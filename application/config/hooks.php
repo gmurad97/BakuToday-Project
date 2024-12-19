@@ -19,6 +19,17 @@ $hook["post_controller_constructor"][] = [
     "filepath" => "hooks"
 ];
 
+$hook["post_controller_constructor"][] = [
+    "class" => "SessionCheck",
+    "function" => "initialize",
+    "filename" => "SessionCheck.php",
+    "filepath" => "hooks",
+    "params" => [
+        "check_admin" => true,
+        "check_user" => false
+    ]
+];
+
 /* $hook["post_controller"][] = [
     "class" => "DebugPanel",
     "function" => "renderDebugPanel",

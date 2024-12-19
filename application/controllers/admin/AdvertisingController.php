@@ -51,6 +51,17 @@ class AdvertisingController extends CRUD_Controller
         $location = substr($this->input->post("location", true), 0, 255);
         $status = $this->input->post("status", true);
 
+        $location_allowed = [1, 2, 3];
+
+        if (!in_array($location, $location_allowed)) {
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("hacking_data_alert_title"),
+                "description" => $this->lang->line("hacking_data_alert_description")
+            ]);
+
+            redirect(base_url("admin/news/create"));
+        }
+
         if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/advertising/";
             $upload_result = $this->upload_image("img", $upload_path);
@@ -129,6 +140,17 @@ class AdvertisingController extends CRUD_Controller
         $title_ru = substr($this->input->post("title_ru", true), 0, 255);
         $location = substr($this->input->post("location", true), 0, 255);
         $status = $this->input->post("status", true);
+
+        $location_allowed = [1, 2, 3];
+
+        if (!in_array($location, $location_allowed)) {
+            $this->alert_flashdata("crud_alert", "danger", [
+                "title" => $this->lang->line("hacking_data_alert_title"),
+                "description" => $this->lang->line("hacking_data_alert_description")
+            ]);
+
+            redirect(base_url("admin/news/create"));
+        }
 
         if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/advertising/";

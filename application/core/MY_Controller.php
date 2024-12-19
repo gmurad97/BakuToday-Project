@@ -43,6 +43,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
+ * 
+ * @property AdminsModel $AdminsModel
+ * @property AdminsModel $AdminsModel
+ * @property AdminsModel $AdminsModel
+ * @property AdminsModel $AdminsModel
+ * @property AdminsModel $AdminsModel
+ * @property AdminsModel $AdminsModel
+ * 
  * @property Admin_roles $admin_roles
  */
 class MY_Controller extends CI_Controller
@@ -85,7 +93,6 @@ class MY_Controller extends CI_Controller
 
     public function upload_image($field_name, $upload_path, $resize_options = [])
     {
-        // Настройки для загрузки
         $upload_config = [
             "upload_path" => $upload_path,
             "allowed_types" => "jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF",
@@ -96,24 +103,20 @@ class MY_Controller extends CI_Controller
 
         $this->load->library("upload", $upload_config);
 
-        // Проверяем, передан ли массив (для мультизагрузки) или одиночный файл
         if (is_array($_FILES[$field_name]['name'])) {
-            // Мультизагрузка: создаем массив для обработки нескольких файлов
             $files = $_FILES[$field_name];
             $uploaded_files = [];
 
-            for ($i = 0; $i < count($files['name']); $i++) {
-                $_FILES['userfile']['name'] = $files['name'][$i];
-                $_FILES['userfile']['type'] = $files['type'][$i];
-                $_FILES['userfile']['tmp_name'] = $files['tmp_name'][$i];
-                $_FILES['userfile']['error'] = $files['error'][$i];
-                $_FILES['userfile']['size'] = $files['size'][$i];
+            for ($idx = 0; $idx < count($files["name"]); $idx++) {
+                $_FILES["userfile"]["name"] = $files["name"][$idx];
+                $_FILES["userfile"]["type"] = $files["type"][$idx];
+                $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
+                $_FILES["userfile"]["error"] = $files["error"][$idx];
+                $_FILES["userfile"]["size"] = $files["size"][$idx];
 
-                // Инициализируем библиотеку для загрузки и пытаемся загрузить файл
-                if ($this->upload->do_upload('userfile')) {
+                if ($this->upload->do_upload("userfile")) {
                     $uploaded_data = $this->upload->data();
 
-                    // Опционально изменяем размер изображения
                     if (!empty($resize_options)) {
                         $resize_config = array_merge([
                             "image_library" => "gd2",
@@ -128,23 +131,19 @@ class MY_Controller extends CI_Controller
                         }
                     }
 
-                    $uploaded_files[] = $uploaded_data; // Добавляем данные загруженного файла в массив
+                    $uploaded_files[] = $uploaded_data;
                 } else {
-                    // Возвращаем ошибку, если файл не загружен
                     return ["success" => false, "error" => $this->upload->display_errors()];
                 }
             }
-
-            return ["success" => true, "data" => $uploaded_files]; // Возвращаем массив данных о файлах
+            return ["success" => true, "data" => $uploaded_files];
         } else {
-            // Одиночная загрузка: обрабатываем один файл
             if (!$this->upload->do_upload($field_name)) {
                 return ["success" => false, "error" => $this->upload->display_errors()];
             }
 
             $uploaded_data = $this->upload->data();
 
-            // Опционально изменяем размер изображения
             if (!empty($resize_options)) {
                 $resize_config = array_merge([
                     "image_library" => "gd2",
@@ -159,10 +158,9 @@ class MY_Controller extends CI_Controller
                 }
             }
 
-            return ["success" => true, "data" => $uploaded_data]; // Возвращаем данные о загруженном файле
+            return ["success" => true, "data" => $uploaded_data];
         }
     }
-
 
     public function delete_file($file_path)
     {
