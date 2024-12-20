@@ -34,11 +34,4 @@ class LanguageLoader
         }
         $this->CI->lang->load("message", $lang);
     }
-
-
-
-
-
-
-
 }

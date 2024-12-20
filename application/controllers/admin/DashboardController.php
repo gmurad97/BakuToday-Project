@@ -1,13 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property AdminsModel $AdminsModel
- * @property AdvertisingModel $AdvertisingModel
- * @property CategoriesModel $CategoriesModel
- * @property NewsModel $NewsModel
- * @property SettingsModel $SettingsModel
- */
 class DashboardController extends BASE_Controller
 {
     public function __construct()

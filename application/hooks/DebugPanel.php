@@ -3,14 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class DebugPanel
 {
-    public function renderDebugPanel()
+    /**
+     * @var MY_Controller $CI
+     */
+    private $CI;
+
+    public function __construct()
     {
-        /**
-         * @var MY_Controller $CI
-         */
-        $CI =& get_instance();
-        $CI->load->library("session");
-        $session_data = $CI->session->all_userdata();
+        $this->CI =& get_instance();
+    }
+
+    public function initialize()
+    {
+        $this->CI->load->library("session");
+        $session_data = $this->CI->session->all_userdata();
 
         echo '<div id="debug-panel" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.8); color: white; font-family: Arial, sans-serif; font-size: 14px; z-index: 9999;">';
         echo '<div style="padding: 5px; background: #444; text-align: right; cursor: pointer;" onclick="toggleDebugPanel()">';

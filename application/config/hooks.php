@@ -20,9 +20,9 @@ $hook["post_controller_constructor"][] = [
 ];
 
 $hook["post_controller_constructor"][] = [
-    "class" => "SessionCheck",
+    "class" => "AdminSessionGuard",
     "function" => "initialize",
-    "filename" => "SessionCheck.php",
+    "filename" => "AdminSessionGuard.php",
     "filepath" => "hooks",
     "params" => [
         "check_admin" => true,
@@ -32,7 +32,7 @@ $hook["post_controller_constructor"][] = [
 
 /* $hook["post_controller"][] = [
     "class" => "DebugPanel",
-    "function" => "renderDebugPanel",
+    "function" => "initialize",
     "filename" => "DebugPanel.php",
     "filepath" => "hooks"
 ]; */

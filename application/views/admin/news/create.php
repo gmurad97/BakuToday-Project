@@ -127,6 +127,11 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- <script>
+                            let textFile = document.getElementById('multi_img');
+                            textFile[0].innerHTML = "really?!";
+
+                        </script> -->
 
                         <!-- Category and Type selection -->
                         <div class="row">
@@ -134,8 +139,9 @@
                                 <div class="mb-3">
                                     <label for="category_id" class="form-label">Category</label>
                                     <select name="category_id" id="category_id" class="form-control">
+                                        <?php $cure = $this->session->userdata("admin_lang"); ?>
                                         <?php foreach ($categories_collection as $category): ?>
-                                            <option value="<?= $category["id"]; ?>"><?= $category["name_en"] ?></option>
+                                            <option value="<?= $category["id"]; ?>"><?= $category["name_$cure"] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

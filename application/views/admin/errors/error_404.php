@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/core/core.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/fonts/feather-font/css/iconfont.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/style.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/custom.css'); ?>">
 </head>
 
 <body>
@@ -23,15 +24,15 @@
                     <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
                         <img src="<?= base_url('public/admin/assets/images/others/404.svg'); ?>" class="img-fluid mb-2"
                             alt="404">
-                        <h1 class="fw-bolder mb-22 mt-2 fs-80px text-secondary">
-                            <?= $this->lang->line("admin_404_error_title") ?>
-                        </h1>
-                        <h4 class="mb-2"><?= $this->lang->line("admin_404_error_description_1") ?></h4>
+                        <h1 class="fw-bolder mb-22 mt-2 fs-80px text-secondary">404</h1>
+                        <h4 class="mb-2">
+                            <?= $this->lang->line("page_not_found"); ?>
+                        </h4>
                         <h6 class="text-secondary mb-3 text-center">
-                            <?= $this->lang->line("admin_404_error_description_2") ?>
+                            <?= $this->lang->line("admin_404_error_oopps"); ?>
                         </h6>
                         <a href="<?= base_url('admin/dashboard'); ?>">
-                            <?= $this->lang->line("admin_404_error_back_to_home") ?>
+                            <?= $this->lang->line("back_to_home"); ?>
                         </a>
                     </div>
                 </div>

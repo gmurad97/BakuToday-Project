@@ -43,15 +43,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
- * 
- * @property AdminsModel $AdminsModel
- * @property AdminsModel $AdminsModel
- * @property AdminsModel $AdminsModel
- * @property AdminsModel $AdminsModel
- * @property AdminsModel $AdminsModel
- * @property AdminsModel $AdminsModel
- * 
  * @property Admin_roles $admin_roles
+ * @property AdminsModel $AdminsModel
+ * @property AdvertisingModel $AdvertisingModel
+ * @property CategoriesModel $CategoriesModel
+ * @property NewsModel $NewsModel
+ * @property SettingsModel $SettingsModel
  */
 class MY_Controller extends CI_Controller
 {

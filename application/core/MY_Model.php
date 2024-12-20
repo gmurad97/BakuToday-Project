@@ -43,6 +43,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
+ * @property Admin_roles $admin_roles
+ * @property AdminsModel $AdminsModel
+ * @property AdvertisingModel $AdvertisingModel
+ * @property CategoriesModel $CategoriesModel
+ * @property NewsModel $NewsModel
+ * @property SettingsModel $SettingsModel
  */
 class MY_Model extends CI_Model
 {
@@ -81,9 +87,23 @@ class ELOQUENT_Model extends MY_Model
         }
     }
 
-    public function all()
+    public function all($status = null)
     {
+        if ($status !== null)
+            $this->db->where("status", $status);
         return $this->db
+            ->get($this->tableName)
+            ->result_array();
+    }
+
+    public function all_paginated($limit, $offset = 0, $status = null)
+    {
+        if ($status !== null) {
+            $this->db->where("status", $status);
+        }
+
+        return $this->db
+            ->limit($limit, $offset)
             ->get($this->tableName)
             ->result_array();
     }
@@ -102,50 +122,57 @@ class ELOQUENT_Model extends MY_Model
         return $this->db->get($this->tableName)->row_array();
     }
 
-    public function first($limit = 1)
+    public function first($limit = 1, $status = null)
     {
-        return $this->db
+        if ($status !== null)
+            $this->db->where("status", $status);
+        $result = $this->db
             ->limit($limit)
             ->get($this->tableName)
             ->result_array();
+
+        if ($limit === 1 && count($result) === 1)
+            return $result[0];
+        return $result;
     }
 
-    public function last($limit = 1)
+    public function last($limit = 1, $status = null)
     {
-        return $this->db
+        if ($status !== null)
+            $this->db->where("status", $status);
+        $result = $this->db
             ->order_by($this->primaryKey, "DESC")
             ->limit($limit)
             ->get($this->tableName)
             ->result_array();
+
+        if ($limit === 1 && count($result) === 1)
+            return $result[0];
+        return $result;
     }
 
     public function create($data)
     {
-        return $this->db
-            ->insert($this->tableName, $data);
+        return $this->db->insert($this->tableName, $data);
     }
 
     public function update($id, $data)
     {
-        return $this->db
-            ->update($this->tableName, $data, [$this->primaryKey => $id]);
+        return $this->db->update($this->tableName, $data, [$this->primaryKey => $id]);
     }
 
     public function delete($id)
     {
-        return $this->db
-            ->delete($this->tableName, [$this->primaryKey => $id]);
+        return $this->db->delete($this->tableName, [$this->primaryKey => $id]);
     }
 
     public function count()
     {
-        return $this->db
-            ->count_all($this->tableName);
+        return $this->db->count_all($this->tableName);
     }
 
     public function truncate()
     {
-        return $this->db
-            ->truncate($this->tableName);
+        return $this->db->truncate($this->tableName);
     }
 }
