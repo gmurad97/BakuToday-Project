@@ -53,8 +53,8 @@
                                             <label for="category_name_az" class="form-label">
                                                 <?= $this->lang->line("category_name"); ?>
                                             </label>
-                                            <input name="category_name_az" maxlength="255" type="text"
-                                                class="form-control" placeholder="Siyasət" id="category_name_az"
+                                            <input name="category_name_az" type="text" class="form-control"
+                                                placeholder="Siyasət" id="category_name_az"
                                                 value="<?= $category['name_az']; ?>" required>
                                         </div>
                                     </div>
@@ -67,8 +67,8 @@
                                             <label for="category_name_en" class="form-label">
                                                 <?= $this->lang->line("category_name"); ?>
                                             </label>
-                                            <input name="category_name_en" maxlength="255" type="text"
-                                                class="form-control" placeholder="Politics" id="category_name_en"
+                                            <input name="category_name_en" type="text" class="form-control"
+                                                placeholder="Politics" id="category_name_en"
                                                 value="<?= $category['name_en']; ?>" required>
                                         </div>
                                     </div>
@@ -81,8 +81,8 @@
                                             <label for="category_name_ru" class="form-label">
                                                 <?= $this->lang->line("category_name"); ?>
                                             </label>
-                                            <input name="category_name_ru" maxlength="255" type="text"
-                                                class="form-control" placeholder="Политика" id="category_name_ru"
+                                            <input name="category_name_ru" type="text" class="form-control"
+                                                placeholder="Политика" id="category_name_ru"
                                                 value="<?= $category['name_ru']; ?>" required>
                                         </div>
                                     </div>

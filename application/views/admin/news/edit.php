@@ -161,7 +161,7 @@
                                     <label for="category_id" class="form-label">
                                         <?= $this->lang->line("category"); ?>
                                     </label>
-                                    <select name="category_id" id="category_id" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-select">
                                         <?php foreach ($categories_collection as $category): ?>
                                             <option value="<?= $category["id"]; ?>" <?= $news['category_id'] == $category["id"] ? 'selected' : ''; ?>>
                                                 <?= $category["name_en"] ?>
@@ -175,7 +175,7 @@
                                     <label for="type" class="form-label">
                                         <?= $this->lang->line("type"); ?>
                                     </label>
-                                    <select name="type" id="type" class="form-control">
+                                    <select name="type" id="type" class="form-select">
                                         <option value="daily_news" <?= $news['type'] == 'daily_news' ? 'selected' : ''; ?>>
                                             <?= $this->lang->line("daily_news"); ?>
                                         </option>

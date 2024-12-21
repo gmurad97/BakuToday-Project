@@ -43,34 +43,27 @@ class NewsController extends CRUD_Controller
         $this->load->view("admin/news/create", $context);
     }
 
-
-
-
-
-
-
     public function store()
     {
-        $title_az = substr($this->input->post("title_az", true), 0, 255);
-        $title_en = substr($this->input->post("title_en", true), 0, 255);
-        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
-        $short_description_az = $this->input->post("short_description_az", true);
-        $short_description_en = $this->input->post("short_description_en", true);
-        $short_description_ru = $this->input->post("short_description_ru", true);
+        $title_az = trim($this->input->post("title_az", true));
+        $title_en = trim($this->input->post("title_en", true));
+        $title_ru = trim($this->input->post("title_ru", true));
+        $short_description_az = trim($this->input->post("short_description_az", true));
+        $short_description_en = trim($this->input->post("short_description_en", true));
+        $short_description_ru = trim($this->input->post("short_description_ru", true));
         $long_description_az = $this->input->post("long_description_az", false);
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
         $category_id = $this->input->post("category_id", true);
-        $author_id = $this->session->userdata("admin_credentials")["id"];/*  $this->input->post("author_id", true); //$this->session from id */
+        $author_id = $this->session->userdata("admin_credentials")["id"];
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 
         $categories_collection = $this->CategoriesModel->all();
         $categories_ids = array_column($categories_collection, "id");
-        $admins_collection = $this->AdminsModel->all();
-        $admins_ids = array_column($admins_collection, "id");
+        $types_allowed = ["daily_news", "important_news", "general_news"];
 
-        if (!in_array($category_id, $categories_ids) || !in_array($author_id, $admins_ids)) {
+        if (!in_array($category_id, $categories_ids) || !in_array($type, $types_allowed)) {
             $this->alert_flashdata("crud_alert", "danger", [
                 "title" => $this->lang->line("hacking_data_alert_title"),
                 "description" => $this->lang->line("hacking_data_alert_description")
@@ -102,7 +95,6 @@ class NewsController extends CRUD_Controller
             }
         }
 
-        // Обработка одиночного изображения
         $upload_result = $this->upload_image("img", $upload_path);
         if ($upload_result["success"]) {
             $uploaded_img_data = $upload_result["data"];
@@ -117,8 +109,17 @@ class NewsController extends CRUD_Controller
             return;
         }
 
-        // Проверка обязательных полей
-        if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
+        if (
+            !empty($title_az)
+            && !empty($title_en)
+            && !empty($title_ru)
+            && !empty($short_description_az)
+            && !empty($short_description_en)
+            && !empty($short_description_ru)
+            && !empty($long_description_az)
+            && !empty($long_description_en)
+            && !empty($long_description_ru)
+        ) {
             $data = array_merge($data, [
                 "title_az" => $title_az,
                 "title_en" => $title_en,
@@ -135,7 +136,6 @@ class NewsController extends CRUD_Controller
                 "status" => $status === "on",
             ]);
 
-            // Сохраняем данные в модель
             $this->NewsModel->create($data);
 
             $this->alert_flashdata("crud_alert", "success", [
@@ -152,20 +152,7 @@ class NewsController extends CRUD_Controller
 
             redirect(base_url("admin/news/create"));
         }
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function edit($id)
     {
@@ -184,17 +171,8 @@ class NewsController extends CRUD_Controller
         }
     }
 
-
-
-
-
-
-
-
-
     public function update($id)
     {
-        // Получаем новость по ID
         $context["news"] = $this->NewsModel->find($id);
 
         if (empty($context["news"])) {
@@ -206,13 +184,12 @@ class NewsController extends CRUD_Controller
             redirect(base_url("admin/news"));
         }
 
-        // Получаем данные из формы
-        $title_az = substr($this->input->post("title_az", true), 0, 255);
-        $title_en = substr($this->input->post("title_en", true), 0, 255);
-        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
-        $short_description_az = $this->input->post("short_description_az", true);
-        $short_description_en = $this->input->post("short_description_en", true);
-        $short_description_ru = $this->input->post("short_description_ru", true);
+        $title_az = trim($this->input->post("title_az", true));
+        $title_en = trim($this->input->post("title_en", true));
+        $title_ru = trim($this->input->post("title_ru", true));
+        $short_description_az = trim($this->input->post("short_description_az", true));
+        $short_description_en = trim($this->input->post("short_description_en", true));
+        $short_description_ru = trim($this->input->post("short_description_ru", true));
         $long_description_az = $this->input->post("long_description_az", false);
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
@@ -221,16 +198,11 @@ class NewsController extends CRUD_Controller
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 
-
-
-
         $categories_collection = $this->CategoriesModel->all();
         $categories_ids = array_column($categories_collection, "id");
+        $types_allowed = ["daily_news", "important_news", "general_news"];
 
-        $types_allowed = ["daily_news","important_news","general_news"];
-
-
-        if (!in_array($category_id, $categories_ids) || !in_array($type,$types_allowed)) {
+        if (!in_array($category_id, $categories_ids) || !in_array($type, $types_allowed)) {
             $this->alert_flashdata("crud_alert", "danger", [
                 "title" => $this->lang->line("hacking_data_alert_title"),
                 "description" => $this->lang->line("hacking_data_alert_description")
@@ -239,21 +211,29 @@ class NewsController extends CRUD_Controller
             redirect(base_url("admin/news/$id/edit"));
         }
 
-
-        if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
+        if (
+            !empty($title_az)
+            && !empty($title_en)
+            && !empty($title_ru)
+            && !empty($short_description_az)
+            && !empty($short_description_en)
+            && !empty($short_description_ru)
+            && !empty($long_description_az)
+            && !empty($long_description_en)
+            && !empty($long_description_ru)
+        ) {
             $upload_path = "./public/uploads/news/";
 
-            // Обработка мультизагрузки изображений
-            if (!empty($_FILES['multi_img']['name'][0])) {
+            if (!empty($_FILES["multi_img"]["name"][0])) {
                 $multi_images = [];
-                $upload_result = $this->upload_image('multi_img', $upload_path);
+                $upload_result = $this->upload_image("multi_img", $upload_path);
 
-                if ($upload_result['success']) {
-                    foreach ($upload_result['data'] as $file_data) {
-                        $multi_images[] = $file_data['file_name'];
+                if ($upload_result["success"]) {
+                    foreach ($upload_result["data"] as $file_data) {
+                        $multi_images[] = $file_data["file_name"];
                     }
 
-                    $data['multi_img'] = json_encode($multi_images);
+                    $data["multi_img"] = json_encode($multi_images);
                 } else {
                     $this->alert_flashdata("crud_alert", "warning", [
                         "title" => $this->lang->line("invalid_img_format_alert_title"),
@@ -264,7 +244,6 @@ class NewsController extends CRUD_Controller
                 }
             }
 
-            // Обработка одиночного изображения
             $current_img_name = $context["news"]["img"];
             if (!empty($_FILES["img"]["name"])) {
                 $upload_result = $this->upload_image("img", $upload_path);
@@ -272,8 +251,6 @@ class NewsController extends CRUD_Controller
                 if ($upload_result["success"]) {
                     $uploaded_img_data = $upload_result["data"];
                     $current_img_name = $uploaded_img_data["file_name"];
-
-                    // Удаляем старое изображение
                     $old_image_path = $upload_path . $context["news"]["img"];
                     $this->delete_file($old_image_path);
                 } else {
@@ -287,7 +264,6 @@ class NewsController extends CRUD_Controller
                 }
             }
 
-            // Подготовка данных для обновления
             $data = [
                 "title_az" => $title_az,
                 "title_en" => $title_en,
@@ -301,11 +277,10 @@ class NewsController extends CRUD_Controller
                 "category_id" => $category_id,
                 "author_id" => $author_id,
                 "type" => $type,
-                "status" => $status === "on" ? 1 : 0,
-                "img" => $current_img_name, // Сохраняем изображение
+                "status" => $status === "on",
+                "img" => $current_img_name,
             ];
 
-            // Обновление данных в базе
             $this->NewsModel->update($id, $data);
 
             $this->alert_flashdata("crud_alert", "success", [
@@ -324,8 +299,6 @@ class NewsController extends CRUD_Controller
         }
     }
 
-
-
     public function destroy($id)
     {
         $context["news"] = $this->NewsModel->find($id);
@@ -341,7 +314,6 @@ class NewsController extends CRUD_Controller
 
         $upload_path = "./public/uploads/news/";
         $current_img_path = $upload_path . $context["news"]["img"];
-
         $this->delete_file($current_img_path);
 
         $multi_images = json_decode($context["news"]["multi_img"], true);

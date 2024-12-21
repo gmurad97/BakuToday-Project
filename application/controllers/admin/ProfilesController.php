@@ -202,6 +202,8 @@ class ProfilesController extends CRUD_Controller
 
             $current_admin_credentials = $this->session->userdata("admin_credentials");
             $current_admin_credentials["img"] = $this->AdminsModel->find($current_admin_credentials["id"])["img"];
+            $current_admin_credentials["email"] = $this->AdminsModel->find($current_admin_credentials["id"])["email"];
+            $current_admin_credentials["role"] = $this->AdminsModel->find($current_admin_credentials["id"])["role"];
             $this->session->set_userdata("admin_credentials", $current_admin_credentials);
 
             $this->alert_flashdata("crud_alert", "success", [

@@ -28,7 +28,7 @@
                                 <label for="first_name" class="form-label">
                                     <?= $this->lang->line("first_name"); ?>
                                 </label>
-                                <input name="first_name" maxlength="255" type="text" class="form-control"
+                                <input name="first_name" type="text" class="form-control"
                                     placeholder="<?= $this->lang->line("enter_your_first_name"); ?>" id="first_name"
                                     value="<?= $profile['first_name']; ?>" required>
                             </div>
@@ -36,7 +36,7 @@
                                 <label for="last_name" class="form-label">
                                     <?= $this->lang->line("last_name"); ?>
                                 </label>
-                                <input name="last_name" maxlength="255" type="text" class="form-control"
+                                <input name="last_name" type="text" class="form-control"
                                     placeholder="<?= $this->lang->line("enter_your_last_name"); ?>" id="last_name"
                                     value="<?= $profile['last_name']; ?>" required>
                             </div>
@@ -53,7 +53,7 @@
                                 <label for="username" class="form-label">
                                     <?= $this->lang->line("username"); ?>
                                 </label>
-                                <input name="username" maxlength="255" type="text" class="form-control"
+                                <input name="username" type="text" class="form-control"
                                     placeholder="<?= $this->lang->line("enter_your_username"); ?>" id="username"
                                     value="<?= $profile['username']; ?>" required>
                             </div>

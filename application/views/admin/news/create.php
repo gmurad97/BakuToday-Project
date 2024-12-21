@@ -152,7 +152,7 @@
                                     <label for="category_id" class="form-label">
                                         <?= $this->lang->line("category"); ?>
                                     </label>
-                                    <select name="category_id" id="category_id" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-select">
                                         <?php $cure = $this->session->userdata("admin_lang"); ?>
                                         <?php foreach ($categories_collection as $category): ?>
                                             <option value="<?= $category["id"]; ?>"><?= $category["name_$cure"] ?></option>
@@ -165,7 +165,7 @@
                                     <label for="type" class="form-label">
                                         <?= $this->lang->line("type"); ?>
                                     </label>
-                                    <select name="type" id="type" class="form-control">
+                                    <select name="type" id="type" class="form-select">
                                         <option value="daily_news">
                                             <?= $this->lang->line("daily_news"); ?>
                                         </option>
