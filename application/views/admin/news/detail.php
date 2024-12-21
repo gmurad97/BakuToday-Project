@@ -6,33 +6,53 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    <?php $current_language = $this->session->userdata("admin_lang"); ?>
                     <h6 class="card-title">
                         <?= $this->lang->line("view"); ?> •
-                        <?= $news["title_en"]; ?>
+                        <?= $news["title_$current_language"]; ?>
                     </h6>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("id"); ?>
+                                        <?= $this->lang->line("title"); ?>
                                     </span>
                                 </td>
                                 <td>
                                     <span class="text-secondary">
-                                        <?= $news["id"]; ?>
+                                        <?= $news["title_$current_language"]; ?>
                                     </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("title"); ?> (EN)
+                                        <?= $this->lang->line("short_description"); ?>
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="text-secondary">
-                                        <?= $news["title_en"]; ?>
+                                    <span class="text-secondary text-wrap">
+                                        <?= $news["short_description_$current_language"]; ?>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="text-uppercase text-primary">
+                                        <?= $this->lang->line("long_description"); ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <style>
+                                        .table td img {
+                                            width: auto;
+                                            height: auto;
+                                            border-radius: 0;
+                                        }
+                                    </style>
+                                    <span class="text-secondary text-wrap">
+                                        <?= $news["long_description_$current_language"]; ?>
                                     </span>
                                 </td>
                             </tr>
@@ -44,7 +64,9 @@
                                 </td>
                                 <td>
                                     <span class="text-secondary">
-                                        <?= $news["category_id"]; ?>
+                                        <a href="<?= base_url('admin/categories/') . $news['category_id']; ?>">
+                                            <?= $news["category_name_$current_language"]; ?>
+                                        </a>
                                     </span>
                                 </td>
                             </tr>
@@ -56,7 +78,10 @@
                                 </td>
                                 <td>
                                     <span class="text-secondary">
-                                        <?= $news["author_id"]; ?>
+                                        <a href="<?= base_url('admin/profiles/') . $news['author_id']; ?>">
+                                            <?= $news["author_first_name"]; ?>
+                                            <?= $news["author_last_name"]; ?>
+                                        </a>
                                     </span>
                                 </td>
                             </tr>
@@ -67,9 +92,19 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="text-secondary">
-                                        <?= $news["type"]; ?>
-                                    </span>
+                                    <?php if ($news["type"] === "daily_news"): ?>
+                                        <span class="badge border border-info text-info">
+                                            <?= $this->lang->line($news["type"]); ?>
+                                        </span>
+                                    <?php elseif ($news["type"] === "general_news"): ?>
+                                        <span class="badge border border-primary text-primary">
+                                            <?= $this->lang->line($news["type"]); ?>
+                                        </span>
+                                    <?php elseif ($news["type"] === "important_news"): ?>
+                                        <span class="badge border border-danger text-danger">
+                                            <?= $this->lang->line($news["type"]); ?>
+                                        </span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <tr>
@@ -114,21 +149,6 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("image"); ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a href="<?= base_url('uploads/' . $news["img"]); ?>" data-lity>
-                                            <img style="object-fit:cover;"
-                                                src="<?= base_url('uploads/' . $news["img"]); ?>" alt="Image">
-                                        </a>
-                                    </span>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>
@@ -137,11 +157,10 @@
                         class="btn btn-outline-danger">
                         <?= $this->lang->line("delete"); ?>
                     </a>
-                    <a href="<?= base_url('admin/items/' . $news['id'] . '/edit'); ?>"
-                        class="btn btn-outline-warning">
+                    <a href="<?= base_url('admin/news/' . $news['id'] . '/edit'); ?>" class="btn btn-outline-warning">
                         <?= $this->lang->line("edit"); ?>
                     </a>
-                    <a href="<?= base_url('admin/items'); ?>" class="btn btn-primary">
+                    <a href="<?= base_url('admin/news'); ?>" class="btn btn-primary">
                         <?= $this->lang->line("back"); ?>
                     </a>
                 </div>
@@ -165,7 +184,7 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="<?= base_url('admin/items/' . $news['id'] . '/delete'); ?>" id="deleteButton"
+                <a href="<?= base_url('admin/news/' . $news['id'] . '/delete'); ?>" id="deleteButton"
                     class="btn btn-outline-danger">
                     <?= $this->lang->line("delete"); ?>
                 </a>

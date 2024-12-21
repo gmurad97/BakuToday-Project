@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">
-                        <?= $this->lang->line("edit_administrator"); ?> • <?= $profile['first_name'] . ' ' . $profile['last_name']; ?>
+                        <?= $this->lang->line("edit_administrator"); ?> •
+                        <?= $profile['first_name'] . ' ' . $profile['last_name']; ?>
                     </h6>
                     <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
@@ -18,8 +19,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
-
-                    <form action="<?= base_url('admin/profiles/' . $profile['id'] . '/update'); ?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/profiles/' . $profile['id'] . '/update'); ?>" method="POST"
+                        enctype="multipart/form-data">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
                             value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="row mb-3">
@@ -28,14 +29,16 @@
                                     <?= $this->lang->line("first_name"); ?>
                                 </label>
                                 <input name="first_name" maxlength="255" type="text" class="form-control"
-                                    placeholder="John" id="first_name" value="<?= $profile['first_name']; ?>" required>
+                                    placeholder="<?= $this->lang->line("enter_your_first_name"); ?>" id="first_name"
+                                    value="<?= $profile['first_name']; ?>" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="last_name" class="form-label">
                                     <?= $this->lang->line("last_name"); ?>
                                 </label>
                                 <input name="last_name" maxlength="255" type="text" class="form-control"
-                                    placeholder="Doe" id="last_name" value="<?= $profile['last_name']; ?>" required>
+                                    placeholder="<?= $this->lang->line("enter_your_last_name"); ?>" id="last_name"
+                                    value="<?= $profile['last_name']; ?>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -51,18 +54,17 @@
                                     <?= $this->lang->line("username"); ?>
                                 </label>
                                 <input name="username" maxlength="255" type="text" class="form-control"
-                                    placeholder="Enter username" id="username" value="<?= $profile['username']; ?>" required>
+                                    placeholder="<?= $this->lang->line("enter_your_username"); ?>" id="username"
+                                    value="<?= $profile['username']; ?>" required>
                             </div>
                         </div>
-
-                        <!-- Password and Role -->
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="password" class="form-label">
                                     <?= $this->lang->line("password"); ?>
                                 </label>
-                                <input name="password" type="password" class="form-control" placeholder="Leave blank to keep current password"
-                                    id="password">
+                                <input name="password" type="password" class="form-control"
+                                    placeholder="<?= $this->lang->line("unchange_current_password"); ?>" id="password">
                             </div>
                             <div class="col-md-6">
                                 <label for="role" class="form-label">
@@ -81,31 +83,27 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!-- Image Upload -->
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="img" class="form-label">
                                     <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="img" type="file" class="form-control" id="img" accept="image/*">
-                                <?php if (!empty($profile['img'])): ?>
-                                    <img src="<?= base_url('uploads/' . $profile['img']); ?>" alt="Current Image" class="mt-2 img-thumbnail" style="max-width: 150px;">
-                                <?php endif; ?>
+                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon"
+                                    type="file" class="form-control" id="img">
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="form-check form-switch">
-                                    <input name="status" type="checkbox" class="form-check-input" id="status" <?= $profile['status'] ? 'checked' : ''; ?>>
+                                    <input name="status" type="checkbox" class="form-check-input" id="status"
+                                        <?= $profile['status'] ? 'checked' : ''; ?>>
                                     <label class="form-check-label" for="status">
                                         <?= $this->lang->line("status"); ?>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-warning submit">
+                        <button type="submit" class="btn btn-outline-warning submit">
                             <?= $this->lang->line("update"); ?>
                         </button>
                         <a href="<?= base_url('admin/profiles'); ?>" class="btn btn-primary">

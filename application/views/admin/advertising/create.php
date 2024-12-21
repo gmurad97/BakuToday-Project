@@ -101,7 +101,8 @@
                                 <label for="img" class="form-label">
                                     <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="img" type="file" class="form-control" id="img" required>
+                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon"
+                                    type="file" class="form-control" id="img" required>
                             </div>
                         </div>
                         <div class="row">

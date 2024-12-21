@@ -76,8 +76,8 @@ $lang["last_name"] = "Last Name";
 $lang["email"] = "Email";
 $lang["username"] = "Username";
 $lang["role"] = "Role";
-$lang["root"] = "Root";
-$lang["admin"] = "Admin";
+$lang["root"] = "Super Administrator";
+$lang["admin"] = "Administrator";
 $lang["moderator"] = "Moderator";
 $lang["admin_404_error_oopps"] = "Oopps!! The page you were looking for doesn't exist.";
 $lang["back_to_home"] = "Back to home";
@@ -85,9 +85,6 @@ $lang["view_news"] = "View News";
 $lang["author"] = "Author";
 $lang["category"] = "Category";
 $lang["type"] = "Type";
-$lang["daily_news"] = "Daily News";
-$lang["important_news"] = "Important News";
-$lang["general_news"] = "General News";
 $lang["short_description"] = "Short Description";
 $lang["long_description"] = "Long Description";
 $lang["multiple_images"] = "Multiple Images";
@@ -120,10 +117,23 @@ $lang["hacking_data_alert_description"] = "The provided data failed validation a
 
 
 
+$lang["daily_news"] = "Daily";
+$lang["general_news"] = "General";
+$lang["important_news"] = "Important";
+
+
+
+
 $lang["maintenance"] = "Maintenance";
 $lang["maintenance_title"] = "Maintenance Mode";
 $lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
 $lang["enter_your_password"] = "Enter your password";
 $lang["enter_your_email_or_username"] = "Enter your email or username";
-$lang[""] = "";
-$lang[""] = "";
+
+
+$lang["enter_your_first_name"] = "Enter your first name";
+$lang["enter_your_last_name"] = "Enter your last name";
+$lang["enter_your_username"] = "Enter your username";
+$lang["enter_your_password"] = "Enter your password";
+$lang["unchange_current_password"] = "Leave blank to keep current password";
+

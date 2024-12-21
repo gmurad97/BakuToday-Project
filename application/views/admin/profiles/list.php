@@ -58,15 +58,10 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <?php if ($profile["role"]): ?>
-                                                <span class="badge border border-success text-success">
-                                                    <?= $profile["role"]; ?>
-                                                </span>
-                                            <?php else: ?>
-                                                <span class="badge border border-secondary text-secondary">
-                                                    <?= $this->lang->line("disabled"); ?>
-                                                </span>
-                                            <?php endif; ?>
+                                            <span
+                                                class="badge rounded-pill <?= in_array($profile["role"], ['root', 'admin']) ? 'bg-danger' : 'bg-primary'; ?>">
+                                                <?= $this->lang->line($profile["role"]); ?>
+                                            </span>
                                         </td>
                                         <td>
                                             <?php if ($profile["status"]): ?>
@@ -81,7 +76,6 @@
                                         </td>
                                         <td><?= $profile["created_at"]; ?></td>
                                         <td><?= $profile["updated_at"]; ?></td>
-
                                         <td>
                                             <div class="dropdown mb-2">
                                                 <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
@@ -148,6 +142,7 @@
         </div>
     </div>
 </div>
+<?php $this->load->view("admin/partials/footer"); ?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
         item.addEventListener("click", function () {
@@ -155,5 +150,4 @@
         });
     });
 </script>
-<?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>

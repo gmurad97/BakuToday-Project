@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property NewsModel $NewsModel
- * @property CategoriesModel $CategoriesModel
- * @property AdminsModel $AdminsModel
- */
 class NewsController extends CRUD_Controller
 {
     public function __construct()
@@ -19,13 +14,13 @@ class NewsController extends CRUD_Controller
     public function index()
     {
         $context["page_title"] = $this->lang->line("all_news");
-        $context["news_collection"] = $this->NewsModel->all();
+        $context["news_collection"] = $this->NewsModel->with_author_category();
         $this->load->view("admin/news/list", $context);
     }
 
     public function show($id)
     {
-        $context["news"] = $this->NewsModel->find($id);
+        $context["news"] = $this->NewsModel->with_author_category($id);
 
         if (!empty($context["news"])) {
             $news_title = $context["news"]["title_{$this->current_admin_language}"];
@@ -46,10 +41,6 @@ class NewsController extends CRUD_Controller
         $context["page_title"] = $this->lang->line("create_news");
         $context["categories_collection"] = $this->CategoriesModel->all();
         $this->load->view("admin/news/create", $context);
-
-        /* print_r("<pre>");
-        print_r($this->NewsModel->all_paginated(1,2)); */
-        
     }
 
 
@@ -179,6 +170,7 @@ class NewsController extends CRUD_Controller
     public function edit($id)
     {
         $context["news"] = $this->NewsModel->find($id);
+        $context["categories_collection"] = $this->CategoriesModel->all();
         if (!empty($context["news"])) {
             $news_title = $context["news"]["title_{$this->current_admin_language}"];
             $context["page_title"] = $this->lang->line("edit_news") . " • $news_title";
@@ -225,17 +217,20 @@ class NewsController extends CRUD_Controller
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
         $category_id = $this->input->post("category_id", true);
-        $author_id = $this->input->post("author_id", true);
+        $author_id = $this->session->userdata("admin_credentials")["id"];
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 
 
+
+
         $categories_collection = $this->CategoriesModel->all();
         $categories_ids = array_column($categories_collection, "id");
-        $admins_collection = $this->AdminsModel->all();
-        $admins_ids = array_column($admins_collection, "id");
 
-        if (!in_array($category_id, $categories_ids) || !in_array($author_id, $admins_ids)) {
+        $types_allowed = ["daily_news","important_news","general_news"];
+
+
+        if (!in_array($category_id, $categories_ids) || !in_array($type,$types_allowed)) {
             $this->alert_flashdata("crud_alert", "danger", [
                 "title" => $this->lang->line("hacking_data_alert_title"),
                 "description" => $this->lang->line("hacking_data_alert_description")

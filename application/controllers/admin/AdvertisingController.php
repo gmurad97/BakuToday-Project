@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property AdvertisingModel $AdvertisingModel
- */
 class AdvertisingController extends CRUD_Controller
 {
     public function __construct()
@@ -45,10 +42,10 @@ class AdvertisingController extends CRUD_Controller
 
     public function store()
     {
-        $title_az = substr($this->input->post("title_az", true), 0, 255);
-        $title_en = substr($this->input->post("title_en", true), 0, 255);
-        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
-        $location = substr($this->input->post("location", true), 0, 255);
+        $title_az = trim($this->input->post("title_az", true));
+        $title_en = trim($this->input->post("title_en", true));
+        $title_ru = trim($this->input->post("title_ru", true));
+        $location = $this->input->post("location", true);
         $status = $this->input->post("status", true);
 
         $location_allowed = [1, 2, 3];
@@ -135,10 +132,10 @@ class AdvertisingController extends CRUD_Controller
             redirect(base_url("admin/advertising"));
         }
 
-        $title_az = substr($this->input->post("title_az", true), 0, 255);
-        $title_en = substr($this->input->post("title_en", true), 0, 255);
-        $title_ru = substr($this->input->post("title_ru", true), 0, 255);
-        $location = substr($this->input->post("location", true), 0, 255);
+        $title_az = trim($this->input->post("title_az", true));
+        $title_en = trim($this->input->post("title_en", true));
+        $title_ru = trim($this->input->post("title_ru", true));
+        $location = $this->input->post("location", true);
         $status = $this->input->post("status", true);
 
         $location_allowed = [1, 2, 3];

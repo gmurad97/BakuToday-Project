@@ -18,9 +18,6 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
-
-
-
                     <form action="<?= base_url('admin/profiles/store'); ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
                             value="<?= $this->security->get_csrf_hash(); ?>">
@@ -30,14 +27,16 @@
                                     <?= $this->lang->line("first_name"); ?>
                                 </label>
                                 <input name="first_name" maxlength="255" type="text" class="form-control"
-                                    placeholder="John" id="first_name" required>
+                                    placeholder="<?= $this->lang->line("enter_your_first_name"); ?>" id="first_name"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label for="last_name" class="form-label">
                                     <?= $this->lang->line("last_name"); ?>
                                 </label>
                                 <input name="last_name" maxlength="255" type="text" class="form-control"
-                                    placeholder="Doe" id="last_name" required>
+                                    placeholder="<?= $this->lang->line("enter_your_last_name"); ?>" id="last_name"
+                                    required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -53,18 +52,18 @@
                                     <?= $this->lang->line("username"); ?>
                                 </label>
                                 <input name="username" maxlength="255" type="text" class="form-control"
-                                    placeholder="Enter username" id="username" required>
+                                    placeholder="<?= $this->lang->line("enter_your_username"); ?>" id="username"
+                                    required>
                             </div>
                         </div>
-
-                        <!-- Password and Role -->
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="password" class="form-label">
                                     <?= $this->lang->line("password"); ?>
                                 </label>
-                                <input name="password" type="password" class="form-control" placeholder="Password"
-                                    id="password" required>
+                                <input name="password" type="password" class="form-control"
+                                    placeholder="<?= $this->lang->line("enter_your_password"); ?>" id="password"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label for="role" class="form-label">
@@ -83,17 +82,15 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!-- Image Upload -->
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="img" class="form-label">
                                     <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="img" type="file" class="form-control" id="img" accept="image/*" required>
+                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon"
+                                    type="file" class="form-control" id="img" required>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="form-check form-switch">

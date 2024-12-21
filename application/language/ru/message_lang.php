@@ -113,3 +113,6 @@ $lang["success_delete_alert_title"] = "Успех!";
 $lang["success_delete_alert_description"] = "Элемент был успешно удалён.";
 $lang["hacking_data_alert_title"] = "Опасность!";
 $lang["hacking_data_alert_description"] = "Предоставленные данные не прошли проверку и не были приняты.";
+
+
+$lang["unchange_current_password"] = "Оставьте поле пустым, чтобы сохранить текущий пароль";

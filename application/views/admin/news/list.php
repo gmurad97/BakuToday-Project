@@ -6,7 +6,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title"><?= $this->lang->line("all_items"); ?></h6>
+                    <h6 class="card-title"><?= $this->lang->line("all_news"); ?></h6>
                     <?php $alert = $this->session->flashdata("crud_alert"); ?>
                     <?php if ($alert): ?>
                         <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
@@ -17,12 +17,12 @@
                         </div>
                     <?php endif; ?>
                     <div class="table-responsive">
-                        <table id="itemsDataTable" class="table">
+                        <table id="newsDataTable" class="table">
                             <thead>
                                 <tr>
                                     <th><?= $this->lang->line("id"); ?></th>
                                     <th><?= $this->lang->line("image"); ?></th>
-                                    <th><?= $this->lang->line("title_en"); ?></th>
+                                    <th><?= $this->lang->line("title"); ?></th>
                                     <th><?= $this->lang->line("category"); ?></th>
                                     <th><?= $this->lang->line("author"); ?></th>
                                     <th><?= $this->lang->line("type"); ?></th>
@@ -37,38 +37,52 @@
                                 $current_language = $this->session->userdata("admin_lang");
                                 $counter = 0;
                                 ?>
-                                <?php foreach ($news_collection as $item): ?>
+                                <?php foreach ($news_collection as $news): ?>
                                     <tr>
                                         <td><?= ++$counter; ?></td>
                                         <td>
-                                            <a href="<?= base_url('public/uploads/news/') . $item["img"]; ?>" data-lity>
+                                            <a href="<?= base_url('public/uploads/news/') . $news["img"]; ?>" data-lity>
                                                 <img style="object-fit:cover;"
-                                                    src="<?= base_url('public/uploads/news/') . $item["img"]; ?>"
+                                                    src="<?= base_url('public/uploads/news/') . $news["img"]; ?>"
                                                     alt="Item Image">
                                             </a>
                                         </td>
                                         <td>
                                             <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $item["title_en"]; ?>
+                                                <?= $news["title_$current_language"]; ?>
                                             </span>
                                         </td>
                                         <td>
                                             <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $item["category_id"]; ?>
+                                                <a href="<?= base_url('admin/categories/') . $news['category_id']; ?>">
+                                                    <?= $news["category_name_$current_language"]; ?>
+                                                </a>
                                             </span>
                                         </td>
                                         <td>
                                             <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $item["author_id"]; ?>
+                                                <a href="<?= base_url('admin/profiles/') . $news['author_id']; ?>">
+                                                    <?= $news["author_first_name"]; ?>
+                                                </a>
                                             </span>
                                         </td>
                                         <td>
-                                            <span class="badge border border-success text-success">
-                                                <?= $item["type"]; ?>
-                                            </span>
+                                            <?php if ($news["type"] === "daily_news"): ?>
+                                                <span class="badge border border-info text-info">
+                                                    <?= $this->lang->line($news["type"]); ?>
+                                                </span>
+                                            <?php elseif ($news["type"] === "general_news"): ?>
+                                                <span class="badge border border-primary text-primary">
+                                                    <?= $this->lang->line($news["type"]); ?>
+                                                </span>
+                                            <?php elseif ($news["type"] === "important_news"): ?>
+                                                <span class="badge border border-danger text-danger">
+                                                    <?= $this->lang->line($news["type"]); ?>
+                                                </span>
+                                            <?php endif; ?>
                                         </td>
                                         <td>
-                                            <?php if ($item["status"]): ?>
+                                            <?php if ($news["status"]): ?>
                                                 <span class="badge border border-success text-success">
                                                     <?= $this->lang->line("enabled"); ?>
                                                 </span>
@@ -78,8 +92,8 @@
                                                 </span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?= $item["created_at"]; ?></td>
-                                        <td><?= $item["updated_at"]; ?></td>
+                                        <td><?= $news["created_at"]; ?></td>
+                                        <td><?= $news["updated_at"]; ?></td>
 
                                         <td>
                                             <div class="dropdown mb-2">
@@ -89,14 +103,14 @@
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/news/' . $item['id']); ?>">
+                                                        href="<?= base_url('admin/news/' . $news['id']); ?>">
                                                         <i data-feather="eye" class="icon-sm text-info me-2"></i>
                                                         <span class="text-info">
                                                             <?= $this->lang->line("view"); ?>
                                                         </span>
                                                     </a>
                                                     <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/news/' . $item['id']) . '/edit'; ?>">
+                                                        href="<?= base_url('admin/news/' . $news['id']) . '/edit'; ?>">
                                                         <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
                                                         <span class="text-warning">
                                                             <?= $this->lang->line("edit"); ?>
@@ -105,7 +119,7 @@
                                                     <a class="dropdown-item d-flex align-items-center"
                                                         href="javascript:void(0);" data-bs-toggle="modal"
                                                         data-bs-target="#deleteModal"
-                                                        data-url="<?= base_url('admin/news/' . $item['id']) . '/delete'; ?>">
+                                                        data-url="<?= base_url('admin/news/' . $news['id']) . '/delete'; ?>">
                                                         <i data-feather="trash" class="icon-sm text-danger me-2"></i>
                                                         <span class="text-danger">
                                                             <?= $this->lang->line("delete"); ?>
@@ -148,7 +162,7 @@
         </div>
     </div>
 </div>
-
+<?php $this->load->view("admin/partials/footer"); ?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
         item.addEventListener("click", function () {
@@ -156,6 +170,4 @@
         });
     });
 </script>
-
-<?php $this->load->view("admin/partials/footer"); ?>
 <?php $this->load->view("admin/partials/scripts"); ?>

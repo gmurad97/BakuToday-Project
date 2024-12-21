@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property AdminsModel $AdminsModel
- */
 class ProfilesController extends CRUD_Controller
 {
     public function __construct()
@@ -19,18 +16,6 @@ class ProfilesController extends CRUD_Controller
             ]);
             redirect(base_url("admin/dashboard"));
         }
-
-
-
-        
-/*         if (!$this->admin_roles->has_access("admin")) {
-            $this->lang->load("message", $this->current_admin_language);
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("access_denied_alert_title"),
-                "description" => $this->lang->line("access_denied_alert_description")
-            ]);
-            redirect(base_url("admin/dashboard"));
-        } */
     }
 
     public function index()
@@ -69,10 +54,10 @@ class ProfilesController extends CRUD_Controller
 
     public function store()
     {
-        $first_name = substr($this->input->post("first_name", true), 0, 255);
-        $last_name = substr($this->input->post("last_name", true), 0, 255);
-        $email = $this->input->post("email", true);
-        $username = $this->input->post("username", true);
+        $first_name = trim($this->input->post("first_name", true));
+        $last_name = trim($this->input->post("last_name", true));
+        $email = trim($this->input->post("email", true));
+        $username = trim($this->input->post("username", true));
         $password = $this->input->post("password", true);
         $role = $this->input->post("role", true);
         $status = $this->input->post("status", true);
@@ -160,10 +145,10 @@ class ProfilesController extends CRUD_Controller
             redirect(base_url("admin/profiles"));
         }
 
-        $first_name = substr($this->input->post("first_name", true), 0, 255);
-        $last_name = substr($this->input->post("last_name", true), 0, 255);
-        $email = $this->input->post("email", true);
-        $username = $this->input->post("username", true);
+        $first_name = trim($this->input->post("first_name", true));
+        $last_name = trim($this->input->post("last_name", true));
+        $email = trim($this->input->post("email", true));
+        $username = trim($this->input->post("username", true));
         $password = $this->input->post("password", true);
         $role = $this->input->post("role", true);
         $status = $this->input->post("status", true);
@@ -196,11 +181,10 @@ class ProfilesController extends CRUD_Controller
                 }
             }
 
-            // Если пароль не был введен, сохраняем старый
             if (empty($password)) {
                 $password = $context["profile"]["password"];
             } else {
-                $password = hash("sha256", $password); // Хэшируем новый пароль
+                $password = hash("sha256", $password);
             }
 
             $data = [

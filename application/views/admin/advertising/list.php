@@ -65,7 +65,6 @@
                                         </td>
                                         <td><?= $advertising["created_at"]; ?></td>
                                         <td><?= $advertising["updated_at"]; ?></td>
-
                                         <td>
                                             <div class="dropdown mb-2">
                                                 <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"

@@ -10,6 +10,13 @@
                         <?= $this->lang->line("view"); ?> •
                         <?= $profile["first_name"] . ' ' . $profile["last_name"]; ?>
                     </h6>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-3">
+                        <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-lity>
+                            <img style="object-fit:cover;width:128px;height:128px;border-radius:50%;"
+                                src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>"
+                                alt="Profile Image">
+                        </a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
@@ -44,7 +51,9 @@
                                 </td>
                                 <td>
                                     <span class="text-secondary">
-                                        <?= $profile["email"]; ?>
+                                        <a href="mailto:<?= $profile['email']; ?>">
+                                            <?= $profile["email"]; ?>
+                                        </a>
                                     </span>
                                 </td>
                             </tr>
@@ -67,8 +76,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="text-secondary">
-                                        <?= $profile["role"]; ?>
+                                    <span
+                                        class="badge rounded-pill <?= in_array($profile["role"], ['root', 'admin']) ? 'bg-danger' : 'bg-primary'; ?>">
+                                        <?= $this->lang->line($profile["role"]); ?>
                                     </span>
                                 </td>
                             </tr>
@@ -111,21 +121,6 @@
                                 <td>
                                     <span class="text-secondary">
                                         <?= $profile["updated_at"]; ?>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="text-uppercase text-primary">
-                                        <?= $this->lang->line("image"); ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a href="<?= base_url('uploads/' . $profile["img"]); ?>" data-lity>
-                                            <img style="object-fit:cover;"
-                                                src="<?= base_url('uploads/' . $profile["img"]); ?>" alt="Profile Image">
-                                        </a>
                                     </span>
                                 </td>
                             </tr>
