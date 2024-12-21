@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property AdminsModel $AdminsModel
- */
 class AuthController extends BASE_Controller
 {
     public function __construct()
@@ -20,8 +17,8 @@ class AuthController extends BASE_Controller
 
     public function verify()
     {
-        $admin_username = $this->input->post("admin_username");
-        $admin_password = $this->input->post("admin_password");
+        $admin_username = trim($this->input->post("admin_username"), true);
+        $admin_password = $this->input->post("admin_password", true);
 
         if (empty($admin_username) || empty($admin_password)) {
             $this->alert_flashdata("crud_alert", "warning", [
@@ -59,14 +56,14 @@ class AuthController extends BASE_Controller
                 "title" => $this->lang->line("login_failed_alert_title"),
                 "description" => $this->lang->line("login_failed_alert_description")
             ]);
-            redirect(base_url('admin/login'));
+            redirect(base_url("admin/login"));
         }
     }
 
     public function logout()
     {
         if ($this->session->userdata("admin_credentials")) {
-            $this->session->unset_userdata('admin_credentials');
+            $this->session->unset_userdata("admin_credentials");
 
             $this->alert_flashdata("crud_alert", "info", [
                 "title" => $this->lang->line("logout_alert_title"),

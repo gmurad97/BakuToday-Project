@@ -43,12 +43,12 @@ class NewsController extends CRUD_Controller
 
     public function create()
     {
-        /* $context["page_title"] = $this->lang->line("create_news");
+        $context["page_title"] = $this->lang->line("create_news");
         $context["categories_collection"] = $this->CategoriesModel->all();
-        $this->load->view("admin/news/create", $context); */
+        $this->load->view("admin/news/create", $context);
 
-        print_r("<pre>");
-        print_r($this->NewsModel->all_paginated(1,2));
+        /* print_r("<pre>");
+        print_r($this->NewsModel->all_paginated(1,2)); */
         
     }
 

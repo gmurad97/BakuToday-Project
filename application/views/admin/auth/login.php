@@ -59,14 +59,18 @@ if ($this->session->userdata("admin_credentials")) {
                                                     <?= $this->lang->line("email_or_username"); ?>
                                                 </label>
                                                 <input name="admin_username" type="text" class="form-control"
-                                                    id="admin_username" placeholder="example@domain.com" required>
+                                                    id="admin_username"
+                                                    placeholder="<?= $this->lang->line("enter_your_email_or_username"); ?>"
+                                                    required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="admin_password" class="form-label">
                                                     <?= $this->lang->line("password"); ?>
                                                 </label>
                                                 <input name="admin_password" type="password" class="form-control"
-                                                    id="admin_password" placeholder="Enter your password" required>
+                                                    id="admin_password"
+                                                    placeholder="<?= $this->lang->line("enter_your_password"); ?>"
+                                                    required>
                                             </div>
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-primary text-white" type="submit">
@@ -83,7 +87,6 @@ if ($this->session->userdata("admin_credentials")) {
             </div>
         </div>
     </div>
-
     <script src="<?= base_url('public/admin/assets/js/color-modes.js'); ?>"></script>
     <script src="<?= base_url('public/admin/assets/vendors/core/core.js'); ?>"></script>
     <script src="<?= base_url('public/admin/assets/vendors/feather-icons/feather.min.js'); ?>"></script>

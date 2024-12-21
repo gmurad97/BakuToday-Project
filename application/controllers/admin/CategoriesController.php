@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- * @property CategoriesModel $CategoriesModel
- */
 class CategoriesController extends CRUD_Controller
 {
     public function __construct()
@@ -44,9 +41,9 @@ class CategoriesController extends CRUD_Controller
 
     public function store()
     {
-        $category_name_az = substr($this->input->post("category_name_az", true), 0, 255);
-        $category_name_en = substr($this->input->post("category_name_en", true), 0, 255);
-        $category_name_ru = substr($this->input->post("category_name_ru", true), 0, 255);
+        $category_name_az = trim($this->input->post("category_name_az", true));
+        $category_name_en = trim($this->input->post("category_name_en", true));
+        $category_name_ru = trim($this->input->post("category_name_ru", true));
         $category_status = $this->input->post("category_status", true);
 
         if (!empty($category_name_az) && !empty($category_name_en) && !empty($category_name_ru)) {
@@ -98,9 +95,9 @@ class CategoriesController extends CRUD_Controller
         $context["category"] = $this->CategoriesModel->find($id);
 
         if (!empty($context["category"])) {
-            $category_name_az = substr($this->input->post("category_name_az", true), 0, 255);
-            $category_name_en = substr($this->input->post("category_name_en", true), 0, 255);
-            $category_name_ru = substr($this->input->post("category_name_ru", true), 0, 255);
+            $category_name_az = trim($this->input->post("category_name_az", true));
+            $category_name_en = trim($this->input->post("category_name_en", true));
+            $category_name_ru = trim($this->input->post("category_name_ru", true));
             $category_status = $this->input->post("category_status", true);
 
             if (!empty($category_name_az) && !empty($category_name_en) && !empty($category_name_ru)) {

@@ -161,8 +161,9 @@ class MY_Controller extends CI_Controller
 
     public function delete_file($file_path)
     {
-        if (file_exists($file_path))
+        if (file_exists($file_path)) {
             return unlink($file_path);
+        }
         return false;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class AdminSessionGuard
+class SessionGuard
 {
     /**
      * @var MY_Controller $CI

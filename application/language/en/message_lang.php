@@ -113,3 +113,17 @@ $lang["success_delete_alert_title"] = "Success!";
 $lang["success_delete_alert_description"] = "The item has been successfully deleted.";
 $lang["hacking_data_alert_title"] = "Danger!";
 $lang["hacking_data_alert_description"] = "The provided data failed validation and was not accepted.";
+
+
+
+
+
+
+
+$lang["maintenance"] = "Maintenance";
+$lang["maintenance_title"] = "Maintenance Mode";
+$lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
+$lang["enter_your_password"] = "Enter your password";
+$lang["enter_your_email_or_username"] = "Enter your email or username";
+$lang[""] = "";
+$lang[""] = "";

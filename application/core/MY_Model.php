@@ -60,28 +60,28 @@ class MY_Model extends CI_Model
 
 /*========== ELOQUENT_Model - Abstract model implementing core database operations in ORM style ==========*/
 /**
- * @property string $tableName
- * @property string $primaryKey
+ * @property string $table_name
+ * @property string $primary_key
  */
 class ELOQUENT_Model extends MY_Model
 {
-    protected $tableName = "";
-    protected $primaryKey = "";
-    private $requiredProperties = ["tableName", "primaryKey"];
+    protected $table_name = "";
+    protected $primary_key = "";
+    private $required_properties = ["table_name", "primary_key"];
 
     public function __construct()
     {
-        $missingProperties = array_filter(
-            $this->requiredProperties,
+        $missing_properties = array_filter(
+            $this->required_properties,
             fn($property) => empty ($this->{$property})
         );
 
-        if ($missingProperties) {
+        if ($missing_properties) {
             throw new LogicException(
                 "Configuration error in "
                 . get_class($this)
                 . ": Missing required properties: "
-                . implode(", ", array_map(fn($property) => "\"$property\"", $missingProperties))
+                . implode(", ", array_map(fn($property) => "\"$property\"", $missing_properties))
                 . "."
             );
         }
@@ -92,7 +92,7 @@ class ELOQUENT_Model extends MY_Model
         if ($status !== null)
             $this->db->where("status", $status);
         return $this->db
-            ->get($this->tableName)
+            ->get($this->table_name)
             ->result_array();
     }
 
@@ -104,13 +104,13 @@ class ELOQUENT_Model extends MY_Model
 
         return $this->db
             ->limit($limit, $offset)
-            ->get($this->tableName)
+            ->get($this->table_name)
             ->result_array();
     }
 
     public function find($query)
     {
-        $query = is_array($query) ? $query : [$this->primaryKey => $query];
+        $query = is_array($query) ? $query : [$this->primary_key => $query];
 
         foreach ($query as $field => $value) {
             if (is_array($value))
@@ -119,7 +119,7 @@ class ELOQUENT_Model extends MY_Model
                 $this->db->where($field, $value);
         }
 
-        return $this->db->get($this->tableName)->row_array();
+        return $this->db->get($this->table_name)->row_array();
     }
 
     public function first($limit = 1, $status = null)
@@ -128,7 +128,7 @@ class ELOQUENT_Model extends MY_Model
             $this->db->where("status", $status);
         $result = $this->db
             ->limit($limit)
-            ->get($this->tableName)
+            ->get($this->table_name)
             ->result_array();
 
         if ($limit === 1 && count($result) === 1)
@@ -141,9 +141,9 @@ class ELOQUENT_Model extends MY_Model
         if ($status !== null)
             $this->db->where("status", $status);
         $result = $this->db
-            ->order_by($this->primaryKey, "DESC")
+            ->order_by($this->primary_key, "DESC")
             ->limit($limit)
-            ->get($this->tableName)
+            ->get($this->table_name)
             ->result_array();
 
         if ($limit === 1 && count($result) === 1)
@@ -153,26 +153,26 @@ class ELOQUENT_Model extends MY_Model
 
     public function create($data)
     {
-        return $this->db->insert($this->tableName, $data);
+        return $this->db->insert($this->table_name, $data);
     }
 
     public function update($id, $data)
     {
-        return $this->db->update($this->tableName, $data, [$this->primaryKey => $id]);
+        return $this->db->update($this->table_name, $data, [$this->primary_key => $id]);
     }
 
     public function delete($id)
     {
-        return $this->db->delete($this->tableName, [$this->primaryKey => $id]);
+        return $this->db->delete($this->table_name, [$this->primary_key => $id]);
     }
 
     public function count()
     {
-        return $this->db->count_all($this->tableName);
+        return $this->db->count_all($this->table_name);
     }
 
     public function truncate()
     {
-        return $this->db->truncate($this->tableName);
+        return $this->db->truncate($this->table_name);
     }
 }

@@ -20,10 +20,10 @@ class DashboardController extends BASE_Controller
             "admins_count" => $this->AdminsModel->count(),
             "advertising_count" => $this->AdvertisingModel->count(),
             "categories_count" => $this->CategoriesModel->count(),
-            "news_count" => $this->NewsModel->count(),
-            "settings" => $this->SettingsModel->first(),
+            "news_count" => $this->NewsModel->count()
         ];
-        $context["news_last_collection"] = $this->NewsModel->last(4);
+        $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
+        $context["news_last_collection"] = $this->NewsModel->last(4, true);
         $this->load->view("admin/dashboard", $context);
     }
 }

@@ -1,7 +1,5 @@
 <?php
 $vendor_scripts = [
-    "jquery/jquery.min.js",
-    "bootstrap-maxlength/bootstrap-maxlength.min.js",
     "feather-icons/feather.min.js",
     "datatables.net/dataTables.js",
     "datatables.net-bs5/dataTables.bootstrap5.js",
@@ -11,7 +9,6 @@ $vendor_scripts = [
 ];
 
 $custom_scripts = [
-    "bootstrap-maxlength.js",
     "data-table.js",
     "color-modes.js",
     "app.js",

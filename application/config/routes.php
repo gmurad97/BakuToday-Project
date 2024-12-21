@@ -63,6 +63,7 @@ $route["admin/lang/switch/(:any)"]["GET"] = "admin/LanguageController/index/$1";
 $route["home"]["GET"] = "user/HomeController/index";
 $route["contact"]["GET"] = "user/ContactController/index";
 $route["about"]["GET"] = "user/AboutController/index";
+$route["maintenance"]["GET"] = "user/MaintenanceController/index";
 
 /*========== Admin Routes ==========*/
 

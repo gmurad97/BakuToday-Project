@@ -1,3 +1,10 @@
+<?php
+$admin_credentials = $this->session->userdata("admin_credentials");
+$current_route = $this->uri->segment(1);
+if ($settings->maintenance_mode && empty($admin_credentials) && $current_route !== "maintenance") {
+    redirect(base_url("maintenance"));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

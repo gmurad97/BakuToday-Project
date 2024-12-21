@@ -20,9 +20,9 @@ $hook["post_controller_constructor"][] = [
 ];
 
 $hook["post_controller_constructor"][] = [
-    "class" => "AdminSessionGuard",
+    "class" => "SessionGuard",
     "function" => "initialize",
-    "filename" => "AdminSessionGuard.php",
+    "filename" => "SessionGuard.php",
     "filepath" => "hooks",
     "params" => [
         "check_admin" => true,
