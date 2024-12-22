@@ -2,7 +2,29 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
+
+
+
+
+$config["admin_session_key"] = "admin_credentials";
+$config[""] = "";
+
+
+
+/* $config["user_assets_path"] = "public/user/assets/";
+$config["admin_assets_path"] = "public/admin/assets/";
+$config["uploads_path"] = "public/admin/assets/"; */
+
+
+
+
+/* $config["admin_session"] = ""; */
+/* $config[""] = "";
+$config[""] = "";
+
+
 $config["grecaptcha"] = "0x123";
+$config["project_namechik"] = "Noble<span>UI</span>"; */
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

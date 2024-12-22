@@ -16,7 +16,9 @@
             </li>
             <li class="nav-item <?= set_active_class(['admin/dashboard'], false, 'active'); ?>">
                 <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
+                    <!-- <i class="link-icon" data-feather="box"></i> -->
+                    <i class="link-icon icon-lg mdi mdi-star"></i>
+                    <!-- <i class="link-icon ri-map-pin-fill"></i> -->
                     <span class="link-title">
                         <?= $this->lang->line("dashboard"); ?>
                     </span>

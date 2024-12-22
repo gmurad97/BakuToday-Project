@@ -18,6 +18,18 @@ if (!function_exists("set_active_class")) {
     }
 }
 
-if (!function_exists("core_loader_force")) {
-    return; //core loader force for force load myController(нужно для того чтобы решить проблему на уровне преконтроллера)
+/******************************** */
+
+
+
+/* if (!function_exists("assets")) {
+    function assets($type = "user", $path = "")
+    {
+        $allowed_types = ["admin", "user", "uploads"];
+        if (in_array($type, $allowed_types)) {
+            return base_url("");
+        }
+        return base_url("public/user/assets");
+    }
 }
+ */

@@ -11,11 +11,25 @@
                         <?= $profile["first_name"] . ' ' . $profile["last_name"]; ?>
                     </h6>
                     <div class="d-flex flex-row justify-content-center align-items-center mb-3">
-                        <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-lity>
+
+                        <form id="myForm" action="" class="was-validated">
+                            <input type="text" REQUIRED class="form-control" minlength="10">
+                        </form>
+
+
+
+
+                        <!-- <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-fancybox
+                            data-caption="Single image">
+                            <img src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" />
+                        </a> -->
+
+
+                        <!-- <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-lity>
                             <img style="object-fit:cover;width:128px;height:128px;border-radius:50%;"
                                 src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>"
                                 alt="Profile Image">
-                        </a>
+                        </a> -->
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -169,4 +183,24 @@
     </div>
 </div>
 <?php $this->load->view("admin/partials/footer"); ?>
+
 <?php $this->load->view("admin/partials/scripts"); ?>
+<script>
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
+
+
+</script>
+
+<script>
+/*     $(document).ready(function () {
+        $("#myForm").validate({
+            errorClass: "is-invalid", // Класс для ошибочных полей
+            validClass: "is-valid",   // Класс для валидных полей
+            errorPlacement: function (error, element) {
+                error.insertAfter(element); // Размещение ошибки после поля
+            }
+        });
+    }); */
+</script>
