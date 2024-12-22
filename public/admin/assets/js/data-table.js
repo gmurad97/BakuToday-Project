@@ -4,7 +4,7 @@
 "use strict";
 
 (function () {
-    $("#categoriesDataTable").DataTable({
+ /*    $("#categoriesDataTable").DataTable({
         "layout": {
             "topEnd": {
                 "search": {
@@ -28,7 +28,7 @@
                 "className": 'text-start'
             }
         ]
-    });
+    }); */
 
     $("#advertisingDataTable").DataTable({
         "layout": {

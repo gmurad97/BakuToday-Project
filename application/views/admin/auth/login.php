@@ -72,11 +72,28 @@ if ($this->session->userdata("admin_credentials")) {
                                                     placeholder="<?= $this->lang->line("enter_your_password"); ?>"
                                                     required>
                                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <!-- render reCAPTCHA beta ver for testing. -->
+                                            <?= $this->recaptcha->render(); ?>
+
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-primary text-white" type="submit">
                                                     <?= $this->lang->line("login"); ?>
                                                 </button>
                                             </div>
+                                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
                                         </form>
                                     </div>
                                 </div>

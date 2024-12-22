@@ -7,6 +7,7 @@ class AuthController extends BASE_Controller
     {
         parent::__construct();
         $this->load->model("admin/AdminsModel");
+        $this->load->library('recaptcha');
     }
 
     public function index()
@@ -17,6 +18,15 @@ class AuthController extends BASE_Controller
 
     public function verify()
     {
+        // check reCAPTCHA
+/*         $recaptcha_response = $this->input->post('g-recaptcha-response');
+        $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
+
+
+                /* print_r($this->config->item("grecaptcha"));
+                die(); */
+
+
         $admin_username = trim($this->input->post("admin_username"), true);
         $admin_password = $this->input->post("admin_password", true);
 

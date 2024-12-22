@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
+$config["grecaptcha"] = "0x123";
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

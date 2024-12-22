@@ -17,3 +17,7 @@ if (!function_exists("set_active_class")) {
         return "";
     }
 }
+
+if (!function_exists("core_loader_force")) {
+    return; //core loader force for force load myController(нужно для того чтобы решить проблему на уровне преконтроллера)
+}
