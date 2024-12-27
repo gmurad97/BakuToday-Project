@@ -21,7 +21,10 @@ class AuthController extends BASE_Controller
         // check reCAPTCHA
 /*         $recaptcha_response = $this->input->post('g-recaptcha-response');
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
-
+        // if (!$recaptcha_result->success) {
+        //     $this->session->set_flashdata('error', 'reCAPTCHA не пройдена. Попробуйте снова.');
+        //     redirect('auth/login');
+        // }
 
                 /* print_r($this->config->item("grecaptcha"));
                 die(); */

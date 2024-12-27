@@ -52,8 +52,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class MY_Controller extends CI_Controller
 {
-    public $current_admin_language;
-    public $current_user_language;
+    private $_admin_language;
+    private $_user_language;
+
+    public function admin_language(){
+        return $this->_admin_language;
+    }
+
+    public function get_user_language(){
+        return $this->_user_language;
+    }
+
+
+    public function get_admin_language(){
+        return $this->admin_language;
+    }
+
+
+
+
 
     public function __construct()
     {
@@ -61,7 +78,9 @@ class MY_Controller extends CI_Controller
         $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
         $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
         $this->load->vars([
-            "has_admin_access" => $this->admin_roles->has_access("admin")
+            "has_root_access" => $this->admin_roles->has_access("admin"),
+            "has_admin_access" => $this->admin_roles->has_access("admin"),
+            "has_moderator_access" => $this->admin_roles->has_access("admin"),
         ]);
     }
 
@@ -167,6 +186,26 @@ class MY_Controller extends CI_Controller
         return false;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
 abstract class BASE_Controller extends MY_Controller

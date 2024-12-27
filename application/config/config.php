@@ -1,30 +1,42 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+/*========== Custom Configs ==========*/
 
+/*===== Auth Config =====*/
+$config["auth_session_key"] = "identity";
 
+/*===== Roles Config =====*/
+$config["roles"] = [
+    "root" => ["root"],
+    "admin" => ["admin", "root"],
+    "moderator" => ["moderator", "admin", "root"]
+];
 
+/*===== Language Config =====*/
+$config["default_language"] = [
+    "admin" => "en",
+    "user" => "en"
+];
+$config["languages"] = [
+    "az" => [
+        "logo" => "public/shared/flags/az.svg",
+        "lang" => "Azərbaycan"
+    ],
+    "en" => [
+        "logo" => "public/shared/flags/us.svg",
+        "lang" => "English"
+    ],
+    "ru" => [
+        "logo" => "public/shared/flags/ru.svg",
+        "lang" => "Русский"
+    ]
+];
 
+/*===== Google ReCaptcha V2 Config =====*/
+$config["grecaptcha_site_key"] = "6LeAB6YqAAAAABQgNkslt9gigmwH0rpIZzJyVTdT";
+$config["grecaptcha_secret_key"] = "6LeAB6YqAAAAADi6ru9_YbC5LrLwwBEii1m-4__K";
 
-$config["admin_session_key"] = "admin_credentials";
-$config[""] = "";
-
-
-
-/* $config["user_assets_path"] = "public/user/assets/";
-$config["admin_assets_path"] = "public/admin/assets/";
-$config["uploads_path"] = "public/admin/assets/"; */
-
-
-
-
-/* $config["admin_session"] = ""; */
-/* $config[""] = "";
-$config[""] = "";
-
-
-$config["grecaptcha"] = "0x123";
-$config["project_namechik"] = "Noble<span>UI</span>"; */
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
