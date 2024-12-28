@@ -52,7 +52,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class MY_Controller extends CI_Controller
 {
-    private $_admin_language;
+    private $CI;
+
+    private $current_admin_language;
+    private $current_user_language;
+
+    public function getAdminLanguage(){
+        return $this->current_admin_language;
+    }
+
+    public function getUserLanguage(){
+        return $this->current_user_language;
+    }
+
+
+/*     private $_admin_language;
     private $_user_language;
 
     public function admin_language(){
@@ -67,7 +81,7 @@ class MY_Controller extends CI_Controller
     public function get_admin_language(){
         return $this->admin_language;
     }
-
+ */
 
 
 
