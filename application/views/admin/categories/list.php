@@ -42,43 +42,53 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <?php if ($category["status"]): ?>
-                                                <span class="badge border border-success text-success">
-                                                    <?= $this->lang->line("enabled"); ?>
-                                                </span>
-                                            <?php else: ?>
-                                                <span class="badge border border-secondary text-secondary">
-                                                    <?= $this->lang->line("disabled"); ?>
-                                                </span>
-                                            <?php endif; ?>
-                                        </td>
+
+
+    <form action="<?= base_url('admin/categories/'.$category['id'].'/status'); ?>" method="post">
+    <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+    value="<?= $this->security->get_csrf_hash(); ?>">
+        <input type="hidden" name="id" value="<?= $category['id']; ?>">
+        
+        <div class="form-check form-switch mb-2">
+            <input 
+                name="status" 
+                type="checkbox" 
+                class="form-check-input" 
+                id="categoryStatus_<?= $category['id']; ?>" 
+                <?= $category["status"] ? "checked" : ""; ?> 
+                onchange="this.form.submit()">
+            <label class="form-check-label" for="categoryStatus_<?= $category['id']; ?>">
+                <?= $this->lang->line("status"); ?>
+            </label>
+        </div>
+    </form>
+
+
+
+    
+</td>
+
                                         <td><?= $category["created_at"]; ?></td>
                                         <td><?= $category["updated_at"]; ?></td>
                                         <td>
                                             <div class="dropdown mb-2">
-                                                <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/categories/' . $category['id']); ?>">
+                                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin/categories/' . $category['id']); ?>">
                                                         <i data-feather="eye" class="icon-sm text-info me-2"></i>
                                                         <span class="text-info">
                                                             <?= $this->lang->line("view"); ?>
                                                         </span>
                                                     </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/categories/' . $category['id']) . '/edit'; ?>">
+                                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin/categories/' . $category['id']) . '/edit'; ?>">
                                                         <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
                                                         <span class="text-warning">
                                                             <?= $this->lang->line("edit"); ?>
                                                         </span>
                                                     </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="javascript:void(0);" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal"
-                                                        data-url="<?= base_url('admin/categories/' . $category['id']) . '/delete'; ?>">
+                                                    <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="<?= base_url('admin/categories/' . $category['id']) . '/delete'; ?>">
                                                         <i data-feather="trash" class="icon-sm text-danger me-2"></i>
                                                         <span class="text-danger">
                                                             <?= $this->lang->line("delete"); ?>

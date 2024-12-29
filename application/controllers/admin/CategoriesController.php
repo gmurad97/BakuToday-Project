@@ -155,4 +155,27 @@ class CategoriesController extends CRUD_Controller
             redirect(base_url("admin/categories"));
         }
     }
+
+
+    public function upd($id)
+    {
+        
+        $id = $this->input->post('id');
+        $status = $this->input->post('status') === 'on' ? 1 : 0; // Чекбокс передаёт "on" при включении
+
+        if (!isset($id)) {
+            show_error('Некорректный запрос', 400);
+        }
+
+        $update = $this->CategoriesModel->update_status($id, $status);
+
+        if ($update) {
+            // Опционально: добавь флеш-сообщение
+            $this->session->set_flashdata('success', 'Статус успешно обновлён.');
+        } else {
+            $this->session->set_flashdata('error', 'Ошибка при обновлении статуса.');
+        }
+
+        redirect($_SERVER['HTTP_REFERER']); // Вернёмся обратно на список
+    }
 }

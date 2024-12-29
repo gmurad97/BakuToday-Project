@@ -92,9 +92,9 @@ class MY_Controller extends CI_Controller
         $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
         $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
         $this->load->vars([
-            "has_root_access" => $this->admin_roles->has_access("admin"),
-            "has_admin_access" => $this->admin_roles->has_access("admin"),
-            "has_moderator_access" => $this->admin_roles->has_access("admin"),
+            "has_root_access" => $this->roles_manager->has_access("admin"),
+            "has_admin_access" => $this->roles_manager->has_access("admin"),
+            "has_moderator_access" => $this->roles_manager->has_access("admin"),
         ]);
     }
 

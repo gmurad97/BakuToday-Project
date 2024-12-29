@@ -14,9 +14,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $smileys = array(
-
-	//	smiley			image name						width	height	alt
-
 	':-)' => array('grin.gif', '19', '19', 'grin'),
 	':lol:' => array('lol.gif', '19', '19', 'LOL'),
 	':cheese:' => array('cheese.gif', '19', '19', 'cheese'),
@@ -60,5 +57,4 @@ $smileys = array(
 	':snake:' => array('snake.gif', '19', '19', 'snake'),
 	':exclaim:' => array('exclaim.gif', '19', '19', 'exclaim'),
 	':question:' => array('question.gif', '19', '19', 'question')
-
 );

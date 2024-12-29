@@ -161,6 +161,11 @@ class ELOQUENT_Model extends MY_Model
         return $this->db->update($this->table_name, $data, [$this->primary_key => $id]);
     }
 
+    public function update_where($id, $status){ #update only status
+        $this->db->where('id', $id);
+        return $this->db->update('categories', ['status' => $status]);
+    }
+
     public function delete($id)
     {
         return $this->db->delete($this->table_name, [$this->primary_key => $id]);
