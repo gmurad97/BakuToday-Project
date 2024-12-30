@@ -29,10 +29,10 @@ $hook["post_controller_constructor"][] = [
         "check_user" => false
     ]
 ];
-
+/* 
 $hook["post_controller"][] = [
     "class" => "DebugPanel",
     "function" => "initialize",
     "filename" => "DebugPanel.php",
     "filepath" => "hooks"
-];
+]; */

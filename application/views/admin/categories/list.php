@@ -28,79 +28,29 @@
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-                                $current_language = $this->session->userdata("admin_lang");
-                                $counter = 0;
-                                ?>
-                                <?php foreach ($categories_collection as $category): ?>
-                                    <tr>
-                                        <td><?= ++$counter; ?></td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $category["name_$current_language"]; ?>
-                                            </span>
-                                        </td>
-                                        <td>
 
-
-    <form action="<?= base_url('admin/categories/'.$category['id'].'/status'); ?>" method="post">
-    <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-    value="<?= $this->security->get_csrf_hash(); ?>">
-        <input type="hidden" name="id" value="<?= $category['id']; ?>">
-        
-        <div class="form-check form-switch mb-2">
-            <input 
-                name="status" 
-                type="checkbox" 
-                class="form-check-input" 
-                id="categoryStatus_<?= $category['id']; ?>" 
-                <?= $category["status"] ? "checked" : ""; ?> 
-                onchange="this.form.submit()">
-            <label class="form-check-label" for="categoryStatus_<?= $category['id']; ?>">
-                <?= $this->lang->line("status"); ?>
-            </label>
-        </div>
-    </form>
-
-
-
-    
-</td>
-
-                                        <td><?= $category["created_at"]; ?></td>
-                                        <td><?= $category["updated_at"]; ?></td>
-                                        <td>
-                                            <div class="dropdown mb-2">
-                                                <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin/categories/' . $category['id']); ?>">
-                                                        <i data-feather="eye" class="icon-sm text-info me-2"></i>
-                                                        <span class="text-info">
-                                                            <?= $this->lang->line("view"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin/categories/' . $category['id']) . '/edit'; ?>">
-                                                        <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
-                                                        <span class="text-warning">
-                                                            <?= $this->lang->line("edit"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="<?= base_url('admin/categories/' . $category['id']) . '/delete'; ?>">
-                                                        <i data-feather="trash" class="icon-sm text-danger me-2"></i>
-                                                        <span class="text-danger">
-                                                            <?= $this->lang->line("delete"); ?>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
                         </table>
+
+                        <!-- DataTables CSS and JS library -->
+                        <script src="<?= base_url('public/admin/assets/vendors/datatables@2.1.8/datatables.min.js'); ?>"></script>
+                        <script>
+
+                            $('#categoriesDataTable').DataTable({
+                                processing: true,
+                                serverSide: true,
+                                ajax: {
+                                    url: '<?= base_url("admin/categories/zn"); ?>',
+                                    type: 'POST',
+                                    data: function (d) {
+                                        d['<?= $this->security->get_csrf_token_name(); ?>'] = '<?= $this->security->get_csrf_hash(); ?>';
+                                    }
+                                },
+                                pageLength: 2, // Лимит записей на странице
+                                lengthMenu: [2, 5, 10, 25, 50, 100], // Опции для выбора количества записей
+                                order: [[0, 'asc']]
+                            });
+
+                        </script>
                     </div>
                 </div>
             </div>
@@ -138,4 +88,5 @@
         });
     });
 </script>
+
 <?php $this->load->view("admin/partials/scripts"); ?>

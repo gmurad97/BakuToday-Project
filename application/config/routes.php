@@ -86,6 +86,7 @@ $route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfilesController/destro
 
 /*===== Categories Routes ===== */
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";
+$route["admin/categories/zn"]["POST"] = "admin/CategoriesController/zn";
 $route["admin/categories/create"]["GET"] = "admin/CategoriesController/create";
 $route["admin/categories/store"]["POST"] = "admin/CategoriesController/store";
 $route["admin/categories/(:any)"]["GET"] = "admin/CategoriesController/show/$1";

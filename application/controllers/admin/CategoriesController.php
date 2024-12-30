@@ -9,6 +9,45 @@ class CategoriesController extends CRUD_Controller
         $this->load->model("admin/CategoriesModel");
     }
 
+
+    public function zn(){
+        // Получение параметров запроса
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $order = $this->input->post('order')[0]['column'];
+        $dir = $this->input->post('order')[0]['dir'];
+        $search = $this->input->post('search')['value'];
+
+        // Названия колонок для сортировки
+        $columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
+        $order = $columns[$order] ?? 'id';
+
+        // Получение данных
+        $data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
+        $total = $this->CategoriesModel->get_total_count();
+        $filtered = $this->CategoriesModel->get_filtered_count($search);
+
+        // Формируем ответ для DataTables
+        $response = [
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => $total,
+            "recordsFiltered" => $filtered,
+            "data" => array_map(function ($row) {
+                return [
+                    $row['id'],
+                    $row['id'],
+                    $row['id'],
+                    $row['id'],
+                    $row['created_at'],
+                    $row['updated_at'],
+                    $row['updated_at'],
+                ];
+            }, $data)
+        ];
+
+        echo json_encode($response);
+    }
+
     public function index()
     {
         $context["page_title"] = $this->lang->line("all_categories");
