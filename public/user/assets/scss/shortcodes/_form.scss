@@ -1,0 +1,160 @@
+/*****************************
+	Form
+*****************************/
+.sign-in {
+  background-color: $light;
+  padding: 146px 0px;
+  .sign-in-bg{
+    height: 100%;
+    width: 100%;
+    background: url(../images/bg/sign-in-bg.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 6px 0px 0px 6px;
+  }
+  .sign-in-box {
+    padding: 80px 50px; 
+    background: $white;
+    border-radius: 0px 6px 6px 0px;
+    .login-social-media {
+        .btn {
+            padding: 13px 20px;
+            color:$white;
+             border-radius: inherit;
+        }
+        .btn.google {
+            background-color: #cc3333;
+        }
+        .btn.twitter {
+            background-color: #20b5e6;
+        }
+        .btn.Facebook {
+            background-color: #3b5998;
+        }
+    }
+	.login-with {
+        position: relative;
+
+        &:before {
+            content:"";
+            border-top: 1px solid #dbdbdb;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+        }
+        >span{
+          background-color: $white;
+          padding: 0 10px;
+          position: relative;
+          z-index: 2;
+        }
+    }
+	.form-control {
+		padding: 14px 20px;
+    height: 50px;
+    font-size: 14px;
+    border-color: #ededed;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    color: #7c8087;
+    border-radius: 6px;
+    box-shadow: inherit;
+  }
+  form {
+     .form-check {
+					.form-check-label {
+					    padding-left: 15px;
+					}
+					.form-check-input {
+						float: inherit;
+					}
+     }
+     .sign-btn {
+     	 margin-top: 30px;
+     }
+     ul {
+     	display: flex;
+     	justify-content: center;
+     	margin-top: 20px;
+     }
+  }
+
+}
+}
+
+.sign-up.sign-in{
+  padding: 100px 0px;
+}
+
+/*Contact-form*/
+.form-info {
+  box-shadow: $box-shadow;
+  form {
+    .form-control {
+      height: 50px;
+      border-radius: $border-radius;
+      border-color: transparent;
+    }
+    textarea.form-control {
+        min-height: calc(1.5em + (0.75rem + 2px));
+        height: auto !important;
+    }
+  }
+}
+
+
+
+
+@media (max-width: 1199px) {
+  .sign-in {
+    .sign-in-box{
+      padding: 50px 30px;
+      border-radius: 6px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .sign-in {
+    padding: 80px 0px;
+    .sign-in-box{
+      border-radius: 6px;
+    }
+  }
+  .sign-up.sign-in{
+    padding: 80px 0px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sign-in {
+    padding: 60px 0px;
+    .sign-in-box{
+      padding: 30px 30px;
+    }
+  }
+
+  .sign-up.sign-in{
+    padding: 60px 0px;
+  }
+}
+@media (max-width: 575px) {
+
+  .sign-in {
+     padding: 40px 0px;
+    .sign-in-box{
+      .login-social-media{
+        .btn{
+          width: 100%;
+        }
+      }
+    }
+  }
+  .sign-up.sign-in{
+    padding: 40px 0px;
+  }
+}

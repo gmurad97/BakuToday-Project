@@ -1,0 +1,39 @@
+// Font family
+$font-base: 		'Red Hat Display', sans-serif;
+$font-hedding: 		'Zilla Slab', serif;
+
+// Colors
+$body-color:	     #5c667d;
+$primary:			 #30c96a;
+$secondary:		     #041f42;
+$white:			     #ffffff;
+$black:  			 #000000;
+$heading-color:  	 #023a51;
+$dark:           	 #051830;
+$dark-02:            #0f2541;
+$light:              #e4eaf7;
+$light-01:           #d1d8e6;
+$red:                #dc3545;
+$blue:               #0d6efd;
+$yellow:             #ffc107;
+$pink:               #d63384;
+$orange:             #fd7e14;
+$purple:             #6610f2;
+$skyblue:            #0dcaf0;
+$green:              #5d9711;
+
+// border color
+$border-color: 	     $light;
+$border-color-01: 	 rgba($white, 0.1);
+$border-color-02: 	 $light-01;
+$border-color-03: 	 $dark-02;
+
+// border radius
+$border-radius: 6px;
+$border-radius-01: 10px;
+$border-radius-full: 100px;
+
+// box shadow
+$box-shadow: 1px 1px 5px 1px rgba($secondary, 0.10);
+$box-shadow-sm:	0px 2px 5px 0px rgba($dark, .10);
+

@@ -1,0 +1,79 @@
+/*****************************
+  Shortcodes
+*****************************/
+
+/*****************************
+  Accordion
+*****************************/
+
+.accordion {
+ 	.accordion-item{
+  	border: none;
+    padding: 0 12px;
+    margin-bottom: 10px;
+		.accordion-header{
+			background: none;
+			padding: 0;
+			margin-bottom: 0;
+			border: none;
+			&:before {
+				border-bottom: 1px solid $border-color;
+			}
+		  .accordion-button {
+				position: relative;
+		    font-size: 18px;
+		    font-weight: 700;
+				color: $primary;
+	 			padding:10px 0px 10px 30px;
+				width: 100%;
+				text-align: left;
+				border: none;
+				&:focus{
+					box-shadow:inherit;
+				}
+				&:before{
+          line-height: 12px;
+          font-size: 8px;
+          position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					left: 0;
+					content: "\f068";
+					font-family: "Font Awesome 5 Free";
+					border: 1px solid $secondary;
+					width: 15px;
+					height: 15px;
+					line-height: 12px;
+					border-radius: 50%;
+					z-index: 9;
+					text-align: center;
+				}
+				&:after{
+					display: none;
+		    }
+		  }
+		  .accordion-button.collapsed{
+		  	color: $secondary;
+		  }
+		  .accordion-button:not(.collapsed) {
+	   		&:before{
+	   			border: 1px solid $primary;
+	   		}
+	   	}
+		}
+		.accordion-collapse{
+		  border: none;
+		 	.accordion-body {
+			  padding: 0;
+	      border: none;
+	      color: $body-color;
+	 		}
+ 	  }
+  }
+}
+
+.accordion-button:not(.collapsed) {
+	background-color: transparent;
+	color: $primary;
+	box-shadow: inherit;
+}

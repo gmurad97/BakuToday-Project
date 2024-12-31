@@ -1,0 +1,225 @@
+/*****************************
+  Sidebar
+*****************************/
+.sidebar{
+	border: 1px solid $light-01;
+	padding: 25px 30px 30px 30px;
+	border-radius: $border-radius;
+	.widget{
+		margin-bottom: 30px;
+
+		.filters-group{
+				position: inherit;
+		  	top: 0px;
+		  	right: 0px;
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			.price-filter {
+				display: flex;
+				a {
+					margin-left: auto;
+				}
+			}
+			.sidebar-img {
+				img {
+					border-radius: $border-radius;
+				}
+			}
+	}
+	.widget.widget-tag{
+		.widget-title{
+			margin-bottom: 10px;
+		}
+		ul{
+			display: flex;
+	    flex-wrap: wrap;
+			li{
+				display: inline-block;
+				margin-right: 10px;
+				margin-top: 10px;
+				a{
+					padding:10px 20px;
+					display:block;
+					color: $secondary;
+					background:$light;
+					border-radius:$border-radius;
+					&:hover{
+						background:$secondary;
+						color:$white;
+					}
+				}
+			}
+		}
+	}
+	.widget-title{
+		border-bottom: 1px solid $light-01;
+		padding-bottom: 15px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	.sidebar-category{
+		ul{
+			margin-bottom: 0px;
+
+				li{
+					margin-bottom: 15px;
+
+					&:last-child {
+						margin-bottom: 0;
+						.category{
+							margin-bottom: 0;
+						}
+					}
+			}
+		}
+		.sidebar-img {
+			margin-top: 30px;
+			img {
+				border-radius: $border-radius;
+			}
+		}
+	}
+
+	.news-tab{
+		.nav{
+			position: inherit;
+			top: 0;
+			margin-bottom: 20px;
+		}
+	}
+
+	.voting-widget{
+		background-color: $light;
+		border-radius: $border-radius;
+		border: 5px solid rgba($light,0.3);
+		padding:25px;
+		margin-bottom: 0px;
+		.voting-header{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 25px;
+		}
+
+		.title{
+			font-size: 20px;
+			font-weight: 700;
+			margin-bottom: 20px;
+		}
+
+		.team-progress{
+			.team{
+				margin-bottom: 10px;
+				position: relative;
+				.progress{
+					position: relative;
+					height: 30px;
+					border-radius: $border-radius;
+					background-color: $white;
+					.percentage{
+						position: absolute;
+						right: 15px;
+						top: 50%;
+						transform: translateY(-50%);
+						color: $heading-color;
+					}
+					.team-name {
+				    position: absolute;
+				    top: 50%;
+				    transform: translateY(-50%);
+				    left: 15px;
+				    display: flex;
+				    align-items: center;
+				    color: $white;
+				    .flags-icon{
+				    	padding-right: 10px;
+				    }
+					}
+				}
+			}
+			.team-1{
+				.progress{
+					.progress-bar{
+						background-color:$orange;
+					}
+				}
+			}
+
+			.team-2{
+				margin-bottom: 0px;
+				.progress{
+					.progress-bar{
+						background-color:$blue;
+					}
+				}
+			}
+
+		}
+	}
+
+	.search-widget{
+		position: relative;
+		input[type=search]{
+			width: 100%;
+    	color: #5c667d;
+	    background: $white;
+	    border: 1px solid $border-color;
+	    font-size: 16px;
+	    height: 50px;
+	    font-weight: 300;
+	    border-radius: $border-radius;
+	    margin-top: 0px;
+	    padding-left: 20px;
+	    padding-right: 60px;
+	    outline: none;
+	    text-transform: capitalize;
+		}
+		.btn{
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 13px 20px;
+			border-radius: 0px 6px 6px 0px;
+
+			i{
+				padding-right: 0px;
+			}
+		}
+	}
+
+
+
+}
+
+
+/* Responsive */
+@media (max-width:1199px) {
+  .sidebar {
+  	.widget.post-widget {
+  		.news-tab {
+  			padding-top: 0;
+  		}
+  	}
+  	.widget.sidebar-category {
+  		.follow-style-01 {
+  			margin-bottom: 15px;
+  		}
+  	}
+  }
+}
+
+@media (max-width:991px) {
+	.sidebar {
+		margin-top: 30px;
+	}
+}
+
+@media (max-width:767px) { 
+  .sidebar {
+    padding: 25px 20px;
+  }
+}

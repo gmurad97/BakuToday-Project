@@ -1,0 +1,86 @@
+/*****************************
+  Button
+*****************************/
+.btn {
+	border: none;
+	z-index: 1;
+	position: relative;
+	font-size: 16px;
+	padding: 13px 40px;
+	overflow: hidden;
+	border-radius: $border-radius;
+	transition: all 0.3s ease-in-out;
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+		color: $white;
+	}
+
+	&:active {
+		box-shadow: none;
+		outline: none;
+		color: $white;
+	}
+	&:active:focus{
+		box-shadow: none;
+	}
+}
+
+.btn-primary{
+	background: $primary;
+	color: $white;
+		&:hover {
+			color: $white;
+			background:$secondary;
+		}
+		&:focus {
+			box-shadow: none;
+			outline: none;
+			color: $white;
+			background: $secondary;
+		}
+		&:active {
+			box-shadow: none;
+			outline: none;
+			color: $white;
+			background: $secondary;
+		}
+}
+
+
+.btn-secondary{
+	background: $secondary;
+	color: $white;
+		&:hover {
+			color: $white;
+			background:$primary;
+		}
+		&:focus {
+			box-shadow: none;
+			outline: none;
+			color: $white;
+			background: $primary;
+		}
+		&:active {
+			box-shadow: none;
+			outline: none;
+			color: $white;
+			background: $primary;
+		}
+}
+
+
+
+.btn-link{
+  padding: 0;
+  margin-top: 15px;
+  text-decoration: none;
+  color: $primary;
+  font-weight: 600;
+  &:hover{
+  	color: $heading-color;
+  }
+}
+
+

@@ -1,0 +1,189 @@
+/*****************************
+    Typography
+*****************************/
+body {
+	font-family: $font-base;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 16px;
+	color: $body-color;
+	overflow-x: hidden;
+}
+
+a {
+	outline: medium none !important;
+	color: $primary;
+	transition: all 0.3s ease-in-out;
+	text-decoration: none !important;
+
+	&:focus {
+		color: $primary;
+		text-decoration: none !important;
+	}
+
+	&:hover {
+		color: $primary;
+		text-decoration: none !important;
+	}
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-hedding;
+	font-weight: normal;
+	color: $heading-color;
+	margin-top: 0px;
+	text-transform: capitalize;
+
+	a {
+		color: inherit;
+	}
+
+}
+
+
+h1 {
+	font-size: 62px;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+h3 {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+h4 {
+	font-size: 28px;
+}
+
+h5 {
+	font-size: 24px;
+}
+
+h6 {
+	font-size: 22px;
+}
+
+small{
+	font-size: 14px;
+	font-weight: normal;
+}
+
+p {
+	font-weight: normal;
+	line-height: 24px;
+}
+
+.container {
+	max-width: 1430px;
+}
+
+ul{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+
+input.form-control {
+    height: 50px;
+}
+
+.blockquote {
+	font-size: 16px;
+    font-style: italic;
+    display: block;
+    padding: 40px;
+    background:  $light;
+    border: 1px solid $light;
+    position: relative;
+    border-radius: $border-radius;
+    i{
+	    z-index: 0;
+	    font-size: 30px;
+	    line-height: 30px;
+    }
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: $primary;
+}
+
+input {
+    outline: medium none !important;
+}
+
+
+
+
+@media (max-width:991px) {
+
+	h1 {
+		font-size: 52px;
+		font-weight: 700;
+	}
+
+	h2 {
+		font-size: 32px;
+		font-weight: 700;
+	}
+
+	h3 {
+		font-size: 28px;
+		font-weight: 700;
+	}
+
+	h4 {
+		font-size: 28px;
+	}
+
+	h5 {
+		font-size: 22px;
+	}
+
+	h6 {
+		font-size: 20px;
+	}
+
+}
+
+@media (max-width:767px) {
+
+	h1 {
+		font-size: 42px;
+		font-weight: 700;
+	}
+
+	h2 {
+		font-size: 28px;
+		font-weight: 700;
+	}
+
+	h3 {
+		font-size: 26px;
+		font-weight: 700;
+	}
+
+	h4 {
+		font-size: 24px;
+	}
+
+	h5 {
+		font-size: 20px;
+	}
+
+	h6 {
+		font-size: 18px;
+	}
+ 	
+}

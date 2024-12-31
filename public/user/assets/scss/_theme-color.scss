@@ -1,0 +1,82 @@
+body.dark-theme,
+body.dark-theme .offcanvas.offcanvas-start,
+body.dark-theme .news-popup.modal .modal-content,
+body.dark-theme .header.is-sticky {
+	background-color: $dark;
+}
+
+body.dark-theme .sidebar .widget .widget-tag ul li a,
+body.dark-theme .newsletter,
+body.dark-theme .news-popup.modal .modal-content .modal-body .popup-content .newsletter .newsletter-box button.submit-btn {
+	background-color: $dark-02;
+}
+
+body.dark-theme .sidebar .widget .widget-tag ul li a:hover {
+	background-color: $secondary;
+}
+
+body.dark-theme .news-popup.modal {
+	background-color: rgba($black, 0.1);
+}
+
+body.dark-theme .news-popup.modal .modal-content .modal-body .popup-content .newsletter .newsletter-box button.submit-btn:hover {
+	background-color: $primary;
+}
+
+body.dark-theme .dark-mode .switch {
+	background-color: $body-color;
+}
+
+body.dark-theme .header .topbar,
+body.dark-theme .section-title,
+body.dark-theme .sidebar,
+body.dark-theme .sidebar .widget-title,
+body.dark-theme .follow-style-01 .social-box,
+body.dark-theme .follow-style-01 .social-box .social:before,
+body.dark-theme .header .topbar .topbar-date,
+body.dark-theme .offcanvas.offcanvas-start .offcanvas-body ul.navbar-nav-style-03 li .sidebar-post {
+	border-color: $border-color-03;
+}
+
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme h4, 
+body.dark-theme h5, 
+body.dark-theme h6,
+body.dark-theme .blog-post.post-style-02 .blog-post-details h6,
+body.dark-theme .news-tab .nav .nav-item .nav-link,
+body.dark-theme .blog-post.post-style-04 .blog-post-details h6,
+body.dark-theme .blog-post.post-style-03 .blog-post-details h6,
+body.dark-theme .blog-post.post-style-05 .blog-post-details h6,
+body.dark-theme .sidebar .widget .widget-tag ul li a,
+body.dark-theme .blog-post.post-style-02 .blog-post-details h6 a:hover,
+body.dark-theme .blog-post.post-style-04 .blog-post-details h6 a:hover,
+body.dark-theme .blog-post.post-style-05 .blog-post-details h6 a:hover,
+body.dark-theme .news-popup.modal .modal-content .btn-close i {
+	color: $white;
+}
+
+body.dark-theme .news-tab .nav .nav-item .nav-link:hover,
+body.dark-theme .news-tab .nav .nav-item .nav-link.active {
+	color: $primary;
+}
+
+body.dark-theme header .blog-post.post-style-02 .blog-post-details h6,
+body.dark-theme .blog-post.post-style-02 .blog-post-details h6 a:hover {
+	color: $heading-color;
+}
+
+
+
+body.dark-theme .navbar-brand .logo-dark {
+	display: none;
+}
+
+body.dark-theme .navbar-brand .logo-light {
+    display: block;
+}
+
+body.dark-theme .progress-wrap {
+	box-shadow: inset 0 0 0 2px $white;
+}

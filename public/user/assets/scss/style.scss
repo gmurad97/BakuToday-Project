@@ -1,0 +1,100 @@
+/*
+
+Template: News and Magazine HTML Template
+Version: 2.0.0
+Author: potenzaglobalsolutions
+Design and Developed by: potenzaglobalsolutions.com
+
+NOTE: This is main stylesheet of template, This file contains the styling for the actual Template.
+
+*/
+
+/*==============================================
+[  Table of contents  ]
+================================================
+
+ :: Typography
+ :: Helper Classes
+ :: Shortcodes
+    - Accordion
+    - Badge
+    - Button
+    - Category
+    - Form
+    - Owl carousel
+    - Range Slider
+    - Select
+    - Sidebar
+    - Tabs
+    - Team
+ :: Header
+   - Header
+   - Header Transparent
+   - Header Style 02
+   - Header Style 03
+   - Header Style 04
+   - Header Style 06
+ :: Banner
+   - Banner
+ :: Layout
+   - Section Title
+   - follow style 01
+   - follow style 02
+   - follow style 03
+   - follow style 04
+   - follow style 05
+ :: Blog
+   - Blog Post
+   - Post Style 01
+   - Post Style 02
+   - Post Style 03
+   - Post Style 04
+   - Post Style 05
+   - Post Style 06
+   - Post Style 07
+   - Post Style 08
+   - Post Style 09
+   - Post style 10
+   - Post style 11
+   - Post style 12
+   - Post style 13
+ :: Shop
+   - Product
+   - Product Detail
+    - Shop Sidebar
+    - Checkout
+    - Cart
+ :: Not Found
+ :: Footer
+
+======================================
+[ End table content ]
+======================================*/
+
+// Core files
+@import "variables";
+@import "helpers";
+@import "typography";
+@import "layout";
+
+// Shortcodes
+@import "shortcodes/accordion";
+@import "shortcodes/badge";
+@import "shortcodes/banner";
+@import "shortcodes/blog";
+@import "shortcodes/button";
+@import "shortcodes/category";
+@import "shortcodes/form";
+@import "shortcodes/owl-carousel";
+@import "shortcodes/range-slider";
+@import "shortcodes/select";
+@import "shortcodes/shop";
+@import "shortcodes/sidebar";
+@import "shortcodes/tabs";
+@import "shortcodes/team";
+
+// Structure
+@import "header";
+
+// Pages
+@import "footer";

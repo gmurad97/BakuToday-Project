@@ -11,41 +11,49 @@ class CategoriesController extends CRUD_Controller
 
 
     public function zn(){
-        // Получение параметров запроса
-        $limit = $this->input->post('length');
-        $start = $this->input->post('start');
-        $order = $this->input->post('order')[0]['column'];
-        $dir = $this->input->post('order')[0]['dir'];
-        $search = $this->input->post('search')['value'];
+// Получение параметров запроса
+$limit = $this->input->post('length');
+$start = $this->input->post('start');
+$order = $this->input->post('order')[0]['column'];
+$dir = $this->input->post('order')[0]['dir'];
+$search = $this->input->post('search')['value'];
 
-        // Названия колонок для сортировки
-        $columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
-        $order = $columns[$order] ?? 'id';
+// Названия колонок для сортировки
+$columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
+$order = $columns[$order] ?? 'id';
 
-        // Получение данных
-        $data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
-        $total = $this->CategoriesModel->get_total_count();
-        $filtered = $this->CategoriesModel->get_filtered_count($search);
+// Получение данных
+$data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
+$total = $this->CategoriesModel->get_total_count();
+$filtered = $this->CategoriesModel->get_filtered_count($search);
 
-        // Формируем ответ для DataTables
-        $response = [
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => $total,
-            "recordsFiltered" => $filtered,
-            "data" => array_map(function ($row) {
-                return [
-                    $row['id'],
-                    $row['id'],
-                    $row['id'],
-                    $row['id'],
-                    $row['created_at'],
-                    $row['updated_at'],
-                    $row['updated_at'],
-                ];
-            }, $data)
+// Формируем ответ для DataTables
+$response = [
+    "draw" => intval($this->input->post('draw')),
+    "recordsTotal" => $total,
+    "recordsFiltered" => $filtered,
+    "data" => array_map(function ($row) {
+        return [
+            $row['id'],
+            $row['name_en'],
+            '<form action="' . base_url('admin/categories/' . $row['id'] . '/status') . '" method="post">
+                <input type="hidden" name="' . $this->security->get_csrf_token_name() . '" value="' . $this->security->get_csrf_hash() . '">
+                <div class="form-check form-switch">
+                    <input 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        onchange="this.form.submit()" 
+                        ' . ($row['status'] ? 'checked' : '') . '>
+                </div>
+            </form>',
+            $row['created_at'],
+            $row['updated_at'],
         ];
+    }, $data)
+];
 
-        echo json_encode($response);
+echo json_encode($response);
+
     }
 
     public function index()
@@ -199,7 +207,6 @@ class CategoriesController extends CRUD_Controller
     public function upd($id)
     {
         
-        $id = $this->input->post('id');
         $status = $this->input->post('status') === 'on' ? 1 : 0; // Чекбокс передаёт "on" при включении
 
         if (!isset($id)) {

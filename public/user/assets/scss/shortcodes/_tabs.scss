@@ -1,0 +1,119 @@
+/*****************************
+	Tabs
+*****************************/
+
+.news-tab{
+	position: relative;
+	.nav{
+		position: absolute;
+		right: 0;
+		top: -70px;
+		.nav-item{
+			margin-right: 25px;
+			.nav-link{
+				font-size: 14px;
+				font-weight: 700;
+				text-transform: uppercase;
+				color: $body-color;
+				border-bottom: 1px solid transparent;
+				padding:0px;
+				border-radius: 0px;
+				outline: none;
+				&:hover{
+					color: $primary;
+					border-bottom: 1px solid rgba($primary,0.5);
+				}
+
+				&:focus{
+					color: $body-color;
+				}
+				&:focus-visible {
+					outline: none;
+				}
+			}
+			.nav-link.active{
+				background-color: inherit;
+				color: $primary;
+				border-bottom: 1px solid rgba($primary,0.5); 
+			}
+
+			&:last-child{
+				margin-right: 0px;
+			}
+		}
+	}
+
+	.current-news.blog-title{
+		font-size: 18px;
+		font-weight: 600;
+		padding-right: 24px;
+		line-height: 24px;
+		position: relative;
+		color: $body-color;
+		border-right: 1px solid $border-color;
+	}
+}
+
+/* Responsive */
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	.news-tab .nav {
+   	position: inherit;
+    top: 0px;
+	}
+}
+
+@media (max-width:767px) {
+	.news-tab {
+		.nav {
+	   	position: inherit;
+	    top: 0px;
+		}
+
+		.current-news.blog-title{
+			border-right: none;
+			padding-right: 0;
+		}
+	}
+
+	.news-medical-posts{
+		.current-news{
+			margin-bottom: 20px;
+		}
+	} 
+}
+
+@media (max-width:575px) {
+
+	.news-tab {
+    padding-top: 0px;
+     .nav {
+    	top: 0;
+    	.nav-item {
+    		margin-right: 16px;
+    	}
+    }
+	}
+
+
+.news-politics-posts {
+	.blog-post.post-style-06 {
+		margin-bottom: 30px;
+	}
+}
+
+}
+
+@media (max-width:479px) {
+	.news-tab {
+     .nav {
+    	.nav-item {
+    		margin-right: 10px;
+    		margin-bottom:5px;
+    		.nav-link{
+    			font-size: 12px;
+    		}
+    	}
+    }
+	}
+}

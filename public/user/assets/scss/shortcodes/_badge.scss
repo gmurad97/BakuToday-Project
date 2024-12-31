@@ -1,0 +1,108 @@
+/*****************************
+  Badge
+*****************************/
+.badge {
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0;
+    z-index: 1;
+    font-weight: 600;
+}
+
+.badge-small {
+	padding: 4px 15px;
+    font-weight: 600;
+}
+
+.badge-medium {
+	padding: 6px 15px;
+    font-weight: 600;
+}
+
+.badge-large {
+	padding: 7px 15px;
+    font-weight: 600;
+}
+
+
+/*badge-style-02*/
+
+.badge-style-02 {
+	position: relative;
+	color: $blue;
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 6px;
+    &:before {
+        content: '';
+        height: 2px;
+        display: block;
+        width: 5px;
+        background: $blue;
+        top: 50%;
+        position: absolute;
+        left: -10px;
+        margin-right: 0px;
+    }
+    &.text-red {
+        &:before {
+            background:$red;
+        }
+    }
+    &.text-blue {
+        &:before {
+            background:$blue;
+        }
+    }
+    &.text-yellow {
+        &:before {
+            background:$yellow;
+        }
+    }
+    &.text-pink {
+        &:before {
+            background:$pink;
+        }
+    }
+    &.text-orange {
+        &:before {
+            background:$orange;
+        }
+    }
+    &.text-purple {
+        &:before {
+            background:$purple;
+        }
+    }
+    &.text-skyblue {
+        &:before {
+            background:$skyblue;
+        }
+    }
+    &.text-primary {
+        &:before {
+            background:$primary;
+        }
+    }
+}
+
+/*badge-style-03*/
+
+.badge-style-03 {
+	position: relative;
+	color: $secondary;
+	font-size: 14px;
+    margin-left: 52px;
+    font-weight: 700;
+    &:before {
+        content:'';
+        height: 2px;
+        display: block;
+        width: 20px;
+        background: $secondary;
+        top: 6px;
+        position: absolute;
+        left: -32px;
+        margin-right: 0px;
+    }
+}

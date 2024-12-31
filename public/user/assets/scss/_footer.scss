@@ -1,0 +1,403 @@
+/*****************************
+  Footer
+*****************************/
+
+.footer {
+	background-color: $secondary;
+	padding-top:60px;
+	.main-footer{
+		padding-bottom: 36px;
+	}
+
+	.footer-about{
+		padding-right: 40px;
+		.footer-logo{
+			margin-bottom: 25px;
+			display: block;
+		}
+		p{
+			color: $white;
+			font-size: 14px;
+			line-height: 24px;
+			margin-bottom: 35px;
+		}
+	}
+
+	.footer-title{
+		color: $white;
+		font-size: 22px;
+		font-weight: 600;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		position: relative;
+		&:before{
+			position:absolute;
+			content: "";
+			height: 2px;
+			width: 60px;
+			background-color: $primary;
+			left: 0;
+			bottom: 0;
+		}
+
+	}
+
+	.footer-menu {
+		li {
+			a {
+				margin-bottom: 17px;
+		    display: block;
+		    transition: 0.5s;
+		    position: relative;
+		    color: #e2e2e2;
+		    i {
+		    	margin-right: 10px;
+		    	font-size: 12px;
+		    }
+		    &:hover{
+		    	color: $primary;
+		    	padding-left: 5px;
+		    }
+			}
+		}
+	}
+
+	.footer-post{
+		padding-right: 35px;
+		.blog-post{
+			display: flex;
+			margin-bottom: 20px;
+			.blog-image{
+				width: 110px;
+				flex: 0 0 110px;
+				margin-right: 24px;
+				border-radius: $border-radius;
+				img{
+					border-radius: $border-radius;
+				}
+				&:before{
+				  
+				  background: linear-gradient(to bottom, rgba($black, 0) 0, rgba($black, 0.3) 100%);
+				  height: 70%;
+		    }
+			}
+			.blog-post-details{
+				.blog-title{
+					a{
+						font-size: 18px;
+						color: $white;
+						font-weight: 600;
+						&:hover{
+							color:$primary;
+						}
+					}
+				}
+			}
+			.blog-post-meta{
+				.blog-post-time{
+					a{
+						color: $white;
+						i{
+							color: $white;
+							transition: all 0.3s ease-in-out;
+						}
+						&:hover{
+							color:$primary;
+							i{
+								color:$primary;
+							}
+						}
+					}
+				}
+			}
+		}  
+	}
+
+	.footer-insta{
+		display: flex;
+		flex-wrap: wrap;
+
+		li{
+			position: relative;
+			width:30%;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			a{
+				display: block;
+				border-radius: $border-radius;
+				img{
+					border-radius: $border-radius;
+				}
+			}
+			span{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				background-color: rgba($white,0.6);
+				height: 40px;
+				width: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: $border-radius;
+				transition: all 0.3s ease-in-out;
+				opacity: 0;
+				cursor: pointer;
+				i{
+					font-size:26px;
+					color: $secondary;
+				}
+			}
+
+			&:hover{
+				span{
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.footer-social{
+		.social-icons{
+			display: flex;
+			li{
+				margin-right: 30px;
+				&:last-child{
+					margin-right:0px;
+				}
+
+				a{
+					font-size: 22px;
+					color: $white;
+					&:hover{
+						color:$primary;
+					}
+				}
+			}
+		}
+	}
+
+	.footer-bottom{
+		background-color: $dark;
+		padding: 25px 0px;
+		.copyright{
+			color: $white;
+		}
+	}
+
+	.footer-useful-List{
+		.footer-menu{
+			width: 50%;
+    		display: inline-block;
+		}
+	}
+}
+
+/*footer-style-02*/
+.footer.footer-style-02{
+	.footer-logo{
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	.footer-menu{
+    ul{
+    	padding: 0;
+    	margin: 0;
+    	display: flex;
+    	justify-content: center;
+    	flex-wrap: wrap;
+    	li{
+    		a{
+    			padding: 12px 18px;
+    			margin-bottom: 0px;
+    		}
+    	}
+    }
+  }
+  .social-icon.social-rounded{
+  	 ul{
+    	padding: 0;
+    	display: flex;
+    	justify-content: center;
+    	li{
+    		a{
+    			margin: 0px 15px;
+    		}
+    	}
+    }
+  }
+	.footer-bottom{
+		background-color: $secondary;
+		.copyright{
+	  		p.text-white{
+	  			a{
+	  				color:$white;
+			  		&:hover{
+			        color: $primary;
+			      }
+			  	}
+	  		}
+	  	}
+	}
+	hr{
+		opacity: 0.1;
+	}
+}
+
+/*footer-style-03*/
+.footer.footer-style-03{
+	background: $dark;
+	.blog-post {
+		margin-bottom: 30px;
+		.blog-post-details {
+			.blog-title {
+	    		color: $white;
+	    		font-size: 18px;
+			}
+			.blog-post-meta{
+				    margin-top: 5px;
+				a{
+					color: $white;
+					font-size: 14px;
+				}
+			}
+		}
+		&:last-child{
+			margin-bottom: 0px;
+		}
+	}
+
+	.newsletter-box{
+		position: relative;
+		input{
+			height: 50px;
+			background: transparent;
+			border: 1px solid #1e3045;
+			font-size: 14px;
+			color: $white;
+			padding-left: 20px;
+			padding-right: 130px;
+			&:focus{
+				box-shadow:none;
+			}		
+		}
+		input::placeholder{
+			color: $white;
+		}
+		.submit-btn{
+			position: absolute;
+		    top: 1px;
+		    right: 0;
+		    border-radius: 0px 6px 6px 0px;
+		    font-size: 14px;
+		    padding: 14px 30px 13px;
+		    width: auto;
+		    color: $white;
+		}
+	}
+
+	.footer-botoom{
+		border-top: 1px solid #1e3655;
+		padding-top: 40px;
+		align-items:center;
+		display: flex;
+		flex-wrap: wrap;
+		h6{
+			padding-right: 40px;
+		}
+		ul{
+			li{
+				display:inline-block;
+				margin-bottom: 10px;
+    			margin-top: 10px;
+				padding-right: 30px;
+				a{
+					margin-bottom: 0px;
+					&:after{
+						content: "";
+					    position: absolute;
+					    width: 8px;
+					    height: 8px;
+					    background-color: $primary;
+					    top: 50%;
+					    left: -16px;
+					    transform: translateY(-50%);
+					    border-radius: 50px;
+					    opacity: 0;
+					    visibility: hidden;
+					    transition: 0.5s;
+					}
+
+					&:hover{
+						color: $primary;
+						background-color: inherit;
+    					padding-left: 16px;
+    					&:after{
+    						opacity: 1;
+							visibility: visible;
+							left: 0;
+    					}
+    				}
+				}
+			}
+		}
+	}
+
+
+}
+
+
+@media (max-width:1299px) {
+
+	.footer {
+		.footer-insta{
+			li{
+				width: 29%;
+			}
+		} 
+	}
+
+}
+@media (max-width:991px) {
+	.footer{
+		.footer-about{
+			padding-right: 0;
+			p{
+				margin-bottom: 15px;
+			}
+		}
+		.footer-post{
+			padding-right: 0;
+		}
+	} 
+}
+
+@media (max-width:767px) {
+	.footer{
+		padding-top: 50px;
+		.main-footer{
+			padding-bottom: 16px;
+		}
+	}
+}
+
+@media (max-width:479px) {
+
+	.footer {
+		padding-top: 40px;
+		.main-footer{
+			padding-bottom:6px;
+		}
+		.footer-post{
+			.blog-post{
+				display: block;
+				.blog-image{
+					width: 100%;
+    			margin-bottom: 15px;
+				}
+			}
+		}
+	}
+}

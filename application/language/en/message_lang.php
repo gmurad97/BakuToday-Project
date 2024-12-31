@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$lang["home"] = "Home";
-$lang["contact"] = "Contact";
-$lang["about"] = "About";
-$lang["page_not_found"] = "Page Not Found";
-$lang["about_title"] = "About page";
-$lang["about_description"] = "About Us. We are a team of professionals with years of experience in the field of [your field]. Our goal is to help you succeed by providing quality and effective solutions. We believe in long-term relationships with our clients and always put their interests first.";
-$lang["contact_title"] = "Contact page";
-$lang["contact_description"] = "Contact us! We are always ready to answer your questions and provide the necessary information. Use the form below or our contact details to send an inquiry. We value your time and aim for fast and convenient service.";
-$lang["home_title"] = "Home page";
-$lang["home_description"] = "Welcome to our website! We offer innovative solutions for your business and provide high-quality service at every stage. Our team of professionals is always ready to offer effective and reliable methods to help you achieve your goals. Discover new opportunities with us!";
+// $lang["home"] = "Home";
+// $lang["contact"] = "Contact";
+// $lang["about"] = "About";
+// $lang["page_not_found"] = "Page Not Found";
+// $lang["about_title"] = "About page";
+// $lang["about_description"] = "About Us. We are a team of professionals with years of experience in the field of [your field]. Our goal is to help you succeed by providing quality and effective solutions. We believe in long-term relationships with our clients and always put their interests first.";
+// $lang["contact_title"] = "Contact page";
+// $lang["contact_description"] = "Contact us! We are always ready to answer your questions and provide the necessary information. Use the form below or our contact details to send an inquiry. We value your time and aim for fast and convenient service.";
+// $lang["home_title"] = "Home page";
+// $lang["home_description"] = "Welcome to our website! We offer innovative solutions for your business and provide high-quality service at every stage. Our team of professionals is always ready to offer effective and reliable methods to help you achieve your goals. Discover new opportunities with us!";
 $lang["undefined"] = "Undefined";
-$lang["user_404_error_title"] = "Error 404!";
+// $lang["user_404_error_title"] = "Error 404!";
 $lang["copyright"] = "Copyright";
 /* $lang["developed_with"] = "Developed with"; */
 /* $lang["by"] = "by"; */
@@ -114,8 +114,8 @@ $lang["daily_news"] = "Daily";
 $lang["general_news"] = "General";
 $lang["important_news"] = "Important";
 $lang["maintenance"] = "Maintenance";
-$lang["maintenance_title"] = "Maintenance Mode";
-$lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
+// $lang["maintenance_title"] = "Maintenance Mode";
+// $lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
 $lang["enter_your_password"] = "Enter your password";
 $lang["enter_your_email_or_username"] = "Enter your email or username";
 $lang["enter_your_first_name"] = "Enter your first name";
