@@ -14,6 +14,10 @@ $config["roles"] = [
 ];
 
 /*===== Language Config =====*/
+$config["language_session_key"] = [
+    "admin" => "admin_lang",
+    "user" => "user_lang"
+];
 $config["default_language"] = [
     "admin" => "en",
     "user" => "en"
@@ -34,8 +38,8 @@ $config["languages"] = [
 ];
 
 /*===== Google ReCaptcha V2 Config =====*/
-$config["grecaptcha_site_key"] = "6LeAB6YqAAAAABQgNkslt9gigmwH0rpIZzJyVTdT";
-$config["grecaptcha_secret_key"] = "6LeAB6YqAAAAADi6ru9_YbC5LrLwwBEii1m-4__K";
+$config["grecaptcha_site_key"] = "6LeL9KoqAAAAAOYj484YU3w_cfRODTVrl9U7XXTy";
+$config["grecaptcha_secret_key"] = "6LeL9KoqAAAAANJxOJT8hNLK87MKyPsK4eycGOpe";
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +63,7 @@ $config["grecaptcha_secret_key"] = "6LeAB6YqAAAAADi6ru9_YbC5LrLwwBEii1m-4__K";
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://news.local/';
+$config['base_url'] = 'http://baku.today/';
 
 /*
 |--------------------------------------------------------------------------

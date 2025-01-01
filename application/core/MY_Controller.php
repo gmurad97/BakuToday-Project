@@ -43,8 +43,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
- * @property Admin_roles $admin_roles
- * @property AdminsModel $AdminsModel
+ * @property Roles_manager $roles_manager
+ * @property ProfilesModel $ProfilesModel
  * @property AdvertisingModel $AdvertisingModel
  * @property CategoriesModel $CategoriesModel
  * @property NewsModel $NewsModel
@@ -52,174 +52,68 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class MY_Controller extends CI_Controller
 {
-    private $CI;
+    private $_admin_language = "";
+    private $_user_language = "";
 
-    private $current_admin_language;
-    private $current_user_language;
-
-    public function getAdminLanguage(){
-        return $this->current_admin_language;
-    }
-
-    public function getUserLanguage(){
-        return $this->current_user_language;
-    }
-
-
-/*     private $_admin_language;
-    private $_user_language;
-
-    public function admin_language(){
+    public function get_admin_language()
+    {
         return $this->_admin_language;
     }
 
-    public function get_user_language(){
+    public function get_user_language()
+    {
         return $this->_user_language;
     }
-
-
-    public function get_admin_language(){
-        return $this->admin_language;
-    }
- */
-
-
-
 
     public function __construct()
     {
         parent::__construct();
-        $this->current_admin_language = $this->session->userdata("admin_lang") ?? "en";
-        $this->current_user_language = $this->session->userdata("user_lang") ?? "en";
-        $this->load->vars([
-            "has_root_access" => $this->roles_manager->has_access("admin"),
-            "has_admin_access" => $this->roles_manager->has_access("admin"),
-            "has_moderator_access" => $this->roles_manager->has_access("admin"),
-        ]);
+        $language_session_key = $this->config->item("language_session_key");
+        $default_language = $this->config->item("default_language");
+        $roles_hierarchy = $this->config->item("roles");
+        $this->_admin_language = $this->session->userdata($language_session_key["admin"]) ?? $default_language["admin"];
+        $this->_user_language = $this->session->userdata($language_session_key["user"]) ?? $default_language["user"];
+
+        if (is_array($roles_hierarchy)) {
+            $roles = array_keys($roles_hierarchy);
+            $roles_access = [];
+            foreach ($roles as $role) {
+                $roles_access["{$role}_access"] = $this->roles_manager->has_access($role);
+            }
+            $this->load->vars($roles_access);
+        }
     }
 
     public function alert_flashdata($alert_name, $alert_type, $alert_message)
     {
+        if (empty($alert_name) || empty($alert_type) || !is_array($alert_message)) {
+            throw new InvalidArgumentException("Invalid arguments provided.");
+        }
+
         $alert_types = [
             "info" => ["class" => "alert-info", "icon" => "alert-circle"],
             "success" => ["class" => "alert-success", "icon" => "check-circle"],
             "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
-            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"],
+            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"]
         ];
 
-        $alert_type = strtolower($alert_type) ?? "info";
-        $alert_class = $alert_types[$alert_type]["class"];
-        $alert_icon = $alert_types[$alert_type]["icon"];
+        $alert_type = strtolower($alert_type);
+        if (!array_key_exists($alert_type, $alert_types)) {
+            $alert_type = "info";
+        }
+
+        $alert_message = [
+            "title" => $alert_message["title"] ?? "No title provided.",
+            "description" => $alert_message["description"] ?? "No description provided."
+        ];
 
         $this->session->set_flashdata($alert_name, [
-            'alert_class' => $alert_class,
-            'alert_icon' => $alert_icon,
-            'alert_message' => [
-                "title" => $alert_message["title"],
-                "description" => $alert_message["description"]
-            ]
+            "alert_class" => $alert_types[$alert_type]["class"],
+            "alert_icon" => $alert_types[$alert_type]["icon"],
+            "alert_message" => $alert_message
         ]);
     }
-
-    public function upload_image($field_name, $upload_path, $resize_options = [])
-    {
-        $upload_config = [
-            "upload_path" => $upload_path,
-            "allowed_types" => "jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF",
-            "file_ext_tolower" => TRUE,
-            "remove_spaces" => TRUE,
-            "encrypt_name" => TRUE
-        ];
-
-        $this->load->library("upload", $upload_config);
-
-        if (is_array($_FILES[$field_name]['name'])) {
-            $files = $_FILES[$field_name];
-            $uploaded_files = [];
-
-            for ($idx = 0; $idx < count($files["name"]); $idx++) {
-                $_FILES["userfile"]["name"] = $files["name"][$idx];
-                $_FILES["userfile"]["type"] = $files["type"][$idx];
-                $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
-                $_FILES["userfile"]["error"] = $files["error"][$idx];
-                $_FILES["userfile"]["size"] = $files["size"][$idx];
-
-                if ($this->upload->do_upload("userfile")) {
-                    $uploaded_data = $this->upload->data();
-
-                    if (!empty($resize_options)) {
-                        $resize_config = array_merge([
-                            "image_library" => "gd2",
-                            "source_image" => $uploaded_data["full_path"],
-                            "maintain_ratio" => FALSE
-                        ], $resize_options);
-
-                        $this->load->library("image_lib", $resize_config);
-
-                        if (!$this->image_lib->resize()) {
-                            return ["success" => false, "error" => $this->image_lib->display_errors()];
-                        }
-                    }
-
-                    $uploaded_files[] = $uploaded_data;
-                } else {
-                    return ["success" => false, "error" => $this->upload->display_errors()];
-                }
-            }
-            return ["success" => true, "data" => $uploaded_files];
-        } else {
-            if (!$this->upload->do_upload($field_name)) {
-                return ["success" => false, "error" => $this->upload->display_errors()];
-            }
-
-            $uploaded_data = $this->upload->data();
-
-            if (!empty($resize_options)) {
-                $resize_config = array_merge([
-                    "image_library" => "gd2",
-                    "source_image" => $uploaded_data["full_path"],
-                    "maintain_ratio" => FALSE
-                ], $resize_options);
-
-                $this->load->library("image_lib", $resize_config);
-
-                if (!$this->image_lib->resize()) {
-                    return ["success" => false, "error" => $this->image_lib->display_errors()];
-                }
-            }
-
-            return ["success" => true, "data" => $uploaded_data];
-        }
-    }
-
-    public function delete_file($file_path)
-    {
-        if (file_exists($file_path)) {
-            return unlink($file_path);
-        }
-        return false;
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
 abstract class BASE_Controller extends MY_Controller
@@ -232,6 +126,7 @@ abstract class BASE_Controller extends MY_Controller
     abstract public function index();
 }
 
+/*========== ERROR_Controller - Abstract base controller for handling error-specific functionality ==========*/
 abstract class ERROR_Controller extends MY_Controller
 {
     public function __construct()
@@ -239,7 +134,7 @@ abstract class ERROR_Controller extends MY_Controller
         parent::__construct();
     }
 
-    abstract function index();
+    abstract public function index();
 }
 
 /*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
@@ -255,21 +150,6 @@ abstract class CRUD_Controller extends MY_Controller
     abstract public function create();
     abstract public function store();
     abstract public function edit($id);
-    abstract public function update($id);
-    abstract public function destroy($id);
-}
-
-/*========== API_Controller - Abstract controller for implementing CRUD operations ==========*/
-abstract class API_Controller extends MY_Controller
-{
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    abstract public function index();
-    abstract public function show($id);
-    abstract public function store();
     abstract public function update($id);
     abstract public function destroy($id);
 }

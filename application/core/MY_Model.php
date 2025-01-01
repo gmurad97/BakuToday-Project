@@ -43,8 +43,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
- * @property Admin_roles $admin_roles
- * @property AdminsModel $AdminsModel
+ * @property Roles_manager $roles_manager
+ * @property ProfilesModel $ProfilesModel
  * @property AdvertisingModel $AdvertisingModel
  * @property CategoriesModel $CategoriesModel
  * @property NewsModel $NewsModel
@@ -57,6 +57,21 @@ class MY_Model extends CI_Model
         parent::__construct();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*========== ELOQUENT_Model - Abstract model implementing core database operations in ORM style ==========*/
 /**
@@ -73,7 +88,7 @@ class ELOQUENT_Model extends MY_Model
     {
         $missing_properties = array_filter(
             $this->required_properties,
-            fn($property) => empty ($this->{$property})
+            fn($property) => empty($this->{$property})
         );
 
         if ($missing_properties) {
@@ -87,6 +102,7 @@ class ELOQUENT_Model extends MY_Model
         }
     }
 
+    //asc desc
     public function all($status = null)
     {
         if ($status !== null)
@@ -96,6 +112,7 @@ class ELOQUENT_Model extends MY_Model
             ->result_array();
     }
 
+    //asc desc
     public function all_paginated($limit, $offset = 0, $status = null)
     {
         if ($status !== null) {
@@ -108,6 +125,7 @@ class ELOQUENT_Model extends MY_Model
             ->result_array();
     }
 
+    //asc desc
     public function find($query)
     {
         $query = is_array($query) ? $query : [$this->primary_key => $query];
@@ -122,6 +140,7 @@ class ELOQUENT_Model extends MY_Model
         return $this->db->get($this->table_name)->row_array();
     }
 
+    //asc desc
     public function first($limit = 1, $status = null)
     {
         if ($status !== null)
@@ -136,6 +155,7 @@ class ELOQUENT_Model extends MY_Model
         return $result;
     }
 
+    //asc desc
     public function last($limit = 1, $status = null)
     {
         if ($status !== null)
@@ -161,7 +181,8 @@ class ELOQUENT_Model extends MY_Model
         return $this->db->update($this->table_name, $data, [$this->primary_key => $id]);
     }
 
-    public function update_where($id, $status){ #update only status
+    public function update_where($id, $status)
+    { #update only status
         $this->db->where('id', $id);
         return $this->db->update('categories', ['status' => $status]);
     }

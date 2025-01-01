@@ -15,9 +15,9 @@ if ($this->session->userdata("admin_credentials")) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/core/core.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/vendors/core@5.3.3/core.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/fonts/feather-font/css/iconfont.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/demo1/style.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/style.css'); ?>">
 </head>
 
 <body>
@@ -105,8 +105,8 @@ if ($this->session->userdata("admin_credentials")) {
         </div>
     </div>
     <script src="<?= base_url('public/admin/assets/js/color-modes.js'); ?>"></script>
-    <script src="<?= base_url('public/admin/assets/vendors/core/core.js'); ?>"></script>
-    <script src="<?= base_url('public/admin/assets/vendors/feather-icons/feather.min.js'); ?>"></script>
+    <script src="<?= base_url('public/admin/assets/vendors/core@5.3.3/core.js'); ?>"></script>
+    <script src="<?= base_url('public/admin/assets/vendors/feathericons@4.29.2/feather.min.js'); ?>"></script>
     <script src="<?= base_url('public/admin/assets/js/app.js'); ?>"></script>
 </body>
 

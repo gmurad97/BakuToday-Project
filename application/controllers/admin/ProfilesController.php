@@ -8,14 +8,14 @@ class ProfilesController extends CRUD_Controller
         parent::__construct();
         $this->load->model("admin/AdminsModel");
 
-        if (!$this->admin_roles->has_access("admin")) {
+/*         if (!$this->admin_roles->has_access("admin")) {
             $this->lang->load("message", $this->current_admin_language);
             $this->alert_flashdata("crud_alert", "danger", [
                 "title" => $this->lang->line("access_denied_alert_title"),
                 "description" => $this->lang->line("access_denied_alert_description")
             ]);
             redirect(base_url("admin/dashboard"));
-        }
+        } */
     }
 
     public function index()

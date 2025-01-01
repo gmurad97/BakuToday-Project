@@ -11,7 +11,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |	https://codeigniter.com/userguide3/general/hooks.html
 |
 */
-
 $hook["post_controller_constructor"][] = [
     "class" => "LanguageLoader",
     "function" => "initialize",
@@ -25,14 +24,7 @@ $hook["post_controller_constructor"][] = [
     "filename" => "SessionGuard.php",
     "filepath" => "hooks",
     "params" => [
-        "check_admin" => true,
-        "check_user" => false
+        "is_admin_guarded" => true,
+        "is_user_guarded" => false
     ]
 ];
-/* 
-$hook["post_controller"][] = [
-    "class" => "DebugPanel",
-    "function" => "initialize",
-    "filename" => "DebugPanel.php",
-    "filepath" => "hooks"
-]; */

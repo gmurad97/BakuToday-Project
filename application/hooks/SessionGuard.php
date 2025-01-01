@@ -19,7 +19,7 @@ class SessionGuard
 
     public function initialize($params)
     {
-        if ($params["check_admin"] && $this->route_type == "admin") {
+        if ($params["is_admin_guarded"] && $this->route_type == "admin") {
             $admin_session = $this->CI->session->userdata("admin_credentials");
 
             if (empty($admin_session) && !isset($admin_session["id"])) {

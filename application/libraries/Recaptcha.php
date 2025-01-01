@@ -19,8 +19,8 @@ class Recaptcha
         $this->CI =& get_instance();
         /* $this->CI->config->item('google_recaptcha_site_key'); */
         //google_recaptcha_secret_key
-            $this->site_key = '6LemsaIqAAAAAAsZWjoDm9t6hrO5u1mLluHF2kI9';
-        $this->secret_key = '6LemsaIqAAAAAADacLjUwmmLLHVLrwS824-7Ygxz';
+            $this->site_key = '6LeL9KoqAAAAAOYj484YU3w_cfRODTVrl9U7XXTy';
+        $this->secret_key = '6LeL9KoqAAAAANJxOJT8hNLK87MKyPsK4eycGOpe';
     }
 
     public function render($theme = 'light', $size = 'normal')
