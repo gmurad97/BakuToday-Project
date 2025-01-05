@@ -3,52 +3,92 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Recaptcha
 {
-    private $site_key;
-    private $secret_key;
+    private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
     /**
      * @var MY_Controller $CI 
      */
     protected $CI;
+    private $site_key;
+    private $secret_key;
 
     public function __construct()
     {
-        /**
-         * @var MY_Controller $CI 
-         */
         $this->CI =& get_instance();
-        /* $this->CI->config->item('google_recaptcha_site_key'); */
-        //google_recaptcha_secret_key
-            $this->site_key = '6LeL9KoqAAAAAOYj484YU3w_cfRODTVrl9U7XXTy';
-        $this->secret_key = '6LeL9KoqAAAAANJxOJT8hNLK87MKyPsK4eycGOpe';
+        $this->site_key = $this->CI->config->item("grecaptcha_site_key");
+        $this->secret_key = $this->CI->config->item("grecaptcha_secret_key");
     }
 
-    public function render($theme = 'light', $size = 'normal')
+    public function render($theme = "light", $size = "normal")
     {
-        return '<div class="g-recaptcha" data-sitekey="' . $this->site_key . '" data-theme="' . $theme . '" data-size="' . $size . '"></div>';
+        return <<<RECAPTCHA
+        <div
+        class="g-recaptcha"
+        data-sitekey="$this->site_key"
+        data-theme="$theme"
+        data-size="$size">
+        </div>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        RECAPTCHA;
     }
-
 
     public function verify($response)
     {
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        if (empty($response)) {
+            return [
+                "success" => false,
+                "error" => "Response cannot be empty"
+            ];
+        }
+
         $data = [
-            'secret' => $this->secret_key,
-            'response' => $response,
-            'remoteip' => $_SERVER['REMOTE_ADDR']
+            "secret" => $this->secret_key,
+            "response" => $response,
+            "remoteip" => $_SERVER["REMOTE_ADDR"]
         ];
 
-        $options = [
-            'http' => [
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query($data)
+        $curl_handle = curl_init(self::API_SITEVERIFY_URL);
+        curl_setopt_array($curl_handle, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query($data),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 60,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/x-www-form-urlencoded"
             ]
-        ];
+        ]);
 
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        $result = curl_exec($curl_handle);
+        $http_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
 
-        return json_decode($result);
+        if ($result === false) {
+            $error = curl_error($curl_handle);
+            curl_close($curl_handle);
+            return [
+                "success" => false,
+                "error" => $error
+            ];
+        }
+
+        if ($http_code !== 200) {
+            curl_close($curl_handle);
+            return [
+                "success" => false,
+                "error" => "Unexpected HTTP response code: $http_code"
+            ];
+        }
+
+        $decoded_result = json_decode($result, true);
+        curl_close($curl_handle);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return [
+                "success" => false,
+                "error" => "Invalid JSON response"
+            ];
+        }
+
+        return $decoded_result;
     }
 }

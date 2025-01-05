@@ -92,7 +92,7 @@
                     </ul>
                 </div>
             </li>
-            <?php if ($has_admin_access): ?>
+            <?php if ($admin_access): ?>
                 <li class="nav-item nav-category text-danger">
                     <?= $this->lang->line("administration"); ?>
                 </li>

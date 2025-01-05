@@ -44,6 +44,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
  * @property Roles_manager $roles_manager
+ * @property File_manager $file_uploader
+ * @property Recaptcha $recaptcha
  * @property ProfilesModel $ProfilesModel
  * @property AdvertisingModel $AdvertisingModel
  * @property CategoriesModel $CategoriesModel

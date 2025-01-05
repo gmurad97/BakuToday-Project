@@ -5,7 +5,6 @@
 - **Template:** Nouble UI
 - **Template Folder Path:** `BASE_DIR.'/public/admin/template'`
 - **Uploads Folder Path:** `BASE_DIR.'/public/uploads'`
-
 ---
 
 ## 🚨 Security Recommendations
@@ -25,3 +24,5 @@ For optimal performance, we recommend using **Open Server 5.4.3** with the follo
 - **HTTP:** `Apache_2.4-PHP_8.0-8.1+Nginx_1.23`
 - **PHP:** `PHP_8.0`
 - **MySQL:** `MySQL-8.0-Win10`
+
+- TEMP: REQUIRED MODULES (VPS) - ffmpeg - compressor & yt-dlp - youtube

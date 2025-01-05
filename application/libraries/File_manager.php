@@ -1,11 +1,67 @@
 <?php
 
-class FileUploader{
+class File_manager
+{
+    public function __construct()
+    {
 
-    public function __construct(){
-        self::__construct();
-
+        /*         try {
+                    $youtube_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                    $downloaded_video = $this->download_video($youtube_url);
+                    echo "Видео успешно скачано по пути: " . $downloaded_video;
+                    
+                    $compressed_video = $this->compress_video($downloaded_video);
+                    echo "Видео успешно сжато по пути: " . $compressed_video;
+                } catch (Exception $e) {
+                    echo "Ошибка: " . $e->getMessage();
+                } */
     }
+
+    public function download_video($youtube_url)
+    {
+        $upload_dir = 'C:\\Downloads\\';
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        $temp_file = $upload_dir . uniqid('video_', true) . '.webm';
+
+        $yt_dlp_path = 'C:\\Modules\\yt-dlp\\yt-dlp.exe';
+
+        $command_download = "\"$yt_dlp_path\" -f best[height<=720] -o \"$temp_file\" \"$youtube_url\"";
+        exec($command_download, $output_download, $return_var_download);
+
+        log_message('debug', "Команда для скачивания: $command_download");
+        log_message('debug', "Результат команды для скачивания: " . implode("\n", $output_download));
+
+        if ($return_var_download !== 0) {
+            log_message('error', "Ошибка при скачивании видео. Код ошибки: $return_var_download. Вывод: " . implode("\n", $output_download));
+            throw new Exception("Ошибка при скачивании видео: " . implode("\n", $output_download));
+        }
+
+        return $temp_file;
+    }
+
+    public function compress_video($video_path)
+    {
+        $output_path = str_replace(".webm", "_compressed.mp4", $video_path);
+
+        $ffmpeg_path = 'C:\\ffmpeg\\bin\\ffmpeg.exe';
+
+        $command_compress = "\"$ffmpeg_path\" -i \"$video_path\" -vcodec libx264 -crf 28 -preset fast -acodec aac -b:a 128k \"$output_path\"";
+        exec($command_compress, $output_compress, $return_var_compress);
+
+        log_message('debug', "Команда для сжатия: $command_compress");
+        log_message('debug', "Результат команды для сжатия: " . implode("\n", $output_compress));
+
+        if ($return_var_compress !== 0) {
+            log_message('error', "Ошибка при сжатии видео. Код ошибки: $return_var_compress. Вывод: " . implode("\n", $output_compress));
+            throw new Exception("Ошибка при сжатии видео: " . implode("\n", $output_compress));
+        }
+
+        return $output_path;
+    }
+
 
     public function alert_flashdata($alert_name, $alert_type, $alert_message)
     {

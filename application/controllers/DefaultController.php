@@ -13,6 +13,6 @@ class DefaultController extends BASE_Controller
     {
         $context["page_title"] = $this->lang->line("home");
         $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
-        $this->load->view("user/home", $context);
+        $this->load->view("user/index", $context);
     }
 }

@@ -6,7 +6,7 @@ class DashboardController extends BASE_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("admin/AdminsModel");
+        $this->load->model("admin/ProfilesModel");
         $this->load->model("admin/AdvertisingModel");
         $this->load->model("admin/CategoriesModel");
         $this->load->model("admin/NewsModel");
@@ -17,7 +17,7 @@ class DashboardController extends BASE_Controller
     {
         $context["page_title"] = $this->lang->line("dashboard");
         $context["statistics"] = [
-            "admins_count" => $this->AdminsModel->count(),
+            "admins_count" => $this->ProfilesModel->count(),
             "advertising_count" => $this->AdvertisingModel->count(),
             "categories_count" => $this->CategoriesModel->count(),
             "news_count" => $this->NewsModel->count()

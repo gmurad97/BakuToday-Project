@@ -33,8 +33,8 @@ class SessionGuard
                 return;
             }
 
-            $this->CI->load->model("admin/AdminsModel");
-            $current_profile = $this->CI->AdminsModel->find($admin_session["id"]);
+            $this->CI->load->model("admin/ProfilesModel");
+            $current_profile = $this->CI->ProfilesModel->find($admin_session["id"]);
 
             if (!$current_profile["status"]) {
                 $this->CI->session->unset_userdata("admin_credentials");
