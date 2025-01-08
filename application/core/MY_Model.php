@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== MY_Model - Controller extending CI_Model for common purposes ==========*/
+/*========== MY_Model - Model extending CI_Model for common purposes ==========*/
 /**
  * @property CI_Benchmark $benchmark
  * @property CI_Cache $cache
@@ -60,30 +60,16 @@ class MY_Model extends CI_Model
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*========== ELOQUENT_Model - Abstract model implementing core database operations in ORM style ==========*/
+/*========== ENTITY_Model - Model extending MY_Model, adding reusable database methods ==========*/
 /**
  * @property string $table_name
  * @property string $primary_key
  */
-class ELOQUENT_Model extends MY_Model
+class ENTITY_Model extends MY_Model
 {
     protected $table_name = "";
     protected $primary_key = "";
+
     private $required_properties = ["table_name", "primary_key"];
 
     public function __construct()
@@ -104,86 +90,80 @@ class ELOQUENT_Model extends MY_Model
         }
     }
 
-
-
-
-
-
-
-
-
-    //asc desc
-    public function all($status = null)
+    public function all($order_by = "DESC", $conditions = [])
     {
-        if ($status !== null)
-            $this->db->where("status", $status);
+        $order_by = strtoupper($order_by) === "ASC" ? "ASC" : "DESC";
+
+        if (!empty($conditions) && is_array($conditions)) {
+            $this->db->where($conditions);
+        }
+
+        $this->db->order_by($this->primary_key, $order_by);
+
         return $this->db
             ->get($this->table_name)
             ->result_array();
     }
 
-    //asc desc
-    public function all_paginated($limit, $offset = 0, $status = null)
+    public function paginate($limit, $offset = 0, $order_by = "DESC", $conditions = [])
     {
-        if ($status !== null) {
-            $this->db->where("status", $status);
+        $order_by = strtoupper($order_by) === "ASC" ? "ASC" : "DESC";
+
+        if (!empty($conditions) && is_array($conditions)) {
+            $this->db->where($conditions);
         }
 
         return $this->db
+            ->order_by($this->primary_key, $order_by)
             ->limit($limit, $offset)
             ->get($this->table_name)
             ->result_array();
     }
 
-    //asc desc
-    public function find($query)
+    public function find($conditions)
     {
-        $query = is_array($query) ? $query : [$this->primary_key => $query];
+        $conditions = is_array($conditions) ? $conditions : [$this->primary_key => $conditions];
 
-        foreach ($query as $field => $value) {
-            if (is_array($value))
+        foreach ($conditions as $field => $value) {
+            if (is_array($value)) {
                 $this->db->where_in($field, $value);
-            else
+            } else {
                 $this->db->where($field, $value);
+            }
         }
 
-        return $this->db->get($this->table_name)->row_array();
+        return $this->db
+            ->get($this->table_name)
+            ->row_array();
     }
 
-    //asc desc
-    public function first($limit = 1, $status = null)
+    public function bounds_range($bound = "start", $limit = 1, $conditions = [])
     {
-        if ($status !== null)
-            $this->db->where("status", $status);
+        $order_by = strtolower($bound) === "start" ? "ASC" : "DESC";
+
+        if (!empty($conditions) && is_array($conditions)) {
+            $this->db->where($conditions);
+        }
+
         $result = $this->db
+            ->order_by($this->primary_key, $order_by)
             ->limit($limit)
             ->get($this->table_name)
             ->result_array();
 
-        if ($limit === 1 && count($result) === 1)
+        if ($limit === 1 && count($result) === 1) {
             return $result[0];
-        return $result;
-    }
+        }
 
-    //asc desc
-    public function last($limit = 1, $status = null)
-    {
-        if ($status !== null)
-            $this->db->where("status", $status);
-        $result = $this->db
-            ->order_by($this->primary_key, "DESC")
-            ->limit($limit)
-            ->get($this->table_name)
-            ->result_array();
-
-        if ($limit === 1 && count($result) === 1)
-            return $result[0];
         return $result;
     }
 
     public function create($data)
     {
-        return $this->db->insert($this->table_name, $data);
+        if ($this->db->insert($this->table_name, $data)) {
+            return $this->db->insert_id();
+        }
+        return false;
     }
 
     public function update($id, $data)
@@ -191,20 +171,28 @@ class ELOQUENT_Model extends MY_Model
         return $this->db->update($this->table_name, $data, [$this->primary_key => $id]);
     }
 
-    public function update_where($id, $status)
-    { #update only status
-        $this->db->where('id', $id);
-        return $this->db->update('categories', ['status' => $status]);
-    }
-
-    public function delete($id)
+    public function delete($ids)
     {
-        return $this->db->delete($this->table_name, [$this->primary_key => $id]);
+        if (is_array($ids)) {
+            return $this->db
+                ->where_in($this->primary_key, $ids)
+                ->delete($this->table_name);
+        } else {
+            return $this->db->delete($this->table_name, [$this->primary_key => $ids]);
+        }
     }
 
     public function count()
     {
-        return $this->db->count_all($this->table_name);
+        $cache_id = "table_{$this->table_name}_count";
+        $count = $this->cache->get($cache_id);
+
+        if (!$count) {
+            $count = $this->db->count_all($this->table_name);
+            $this->cache->save($cache_id, $count, 60);
+        }
+
+        return $count;
     }
 
     public function truncate()

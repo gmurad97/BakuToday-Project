@@ -61,31 +61,6 @@ class File_manager
 
         return $output_path;
     }
-
-
-    public function alert_flashdata($alert_name, $alert_type, $alert_message)
-    {
-        $alert_types = [
-            "info" => ["class" => "alert-info", "icon" => "alert-circle"],
-            "success" => ["class" => "alert-success", "icon" => "check-circle"],
-            "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
-            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"],
-        ];
-
-        $alert_type = strtolower($alert_type) ?? "info";
-        $alert_class = $alert_types[$alert_type]["class"];
-        $alert_icon = $alert_types[$alert_type]["icon"];
-
-        $this->session->set_flashdata($alert_name, [
-            'alert_class' => $alert_class,
-            'alert_icon' => $alert_icon,
-            'alert_message' => [
-                "title" => $alert_message["title"],
-                "description" => $alert_message["description"]
-            ]
-        ]);
-    }
-
     public function upload_image($field_name, $upload_path, $resize_options = [])
     {
         $upload_config = [

@@ -85,36 +85,6 @@ class MY_Controller extends CI_Controller
             $this->load->vars($roles_access);
         }
     }
-
-    public function alert_flashdata($alert_name, $alert_type, $alert_message)
-    {
-        if (empty($alert_name) || empty($alert_type) || !is_array($alert_message)) {
-            throw new InvalidArgumentException("Invalid arguments provided.");
-        }
-
-        $alert_types = [
-            "info" => ["class" => "alert-info", "icon" => "alert-circle"],
-            "success" => ["class" => "alert-success", "icon" => "check-circle"],
-            "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
-            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"]
-        ];
-
-        $alert_type = strtolower($alert_type);
-        if (!array_key_exists($alert_type, $alert_types)) {
-            $alert_type = "info";
-        }
-
-        $alert_message = [
-            "title" => $alert_message["title"] ?? "No title provided.",
-            "description" => $alert_message["description"] ?? "No description provided."
-        ];
-
-        $this->session->set_flashdata($alert_name, [
-            "alert_class" => $alert_types[$alert_type]["class"],
-            "alert_icon" => $alert_types[$alert_type]["icon"],
-            "alert_message" => $alert_message
-        ]);
-    }
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
