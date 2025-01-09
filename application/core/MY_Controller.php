@@ -85,6 +85,29 @@ class MY_Controller extends CI_Controller
             $this->load->vars($roles_access);
         }
     }
+
+    public function notifier($key, $type, $messages)
+    {
+        $types = [
+            "info" => ["class" => "alert-info", "icon" => "alert-circle"],
+            "success" => ["class" => "alert-success", "icon" => "check-circle"],
+            "warning" => ["class" => "alert-warning", "icon" => "alert-octagon"],
+            "danger" => ["class" => "alert-danger", "icon" => "alert-triangle"]
+        ];
+
+        $type = in_array(strtolower($type), array_keys($types)) ? strtolower($type) : "info";
+        $class = $types[$type]["class"];
+        $icon = $types[$type]["icon"];
+
+        $this->session->set_flashdata($key, [
+            "class" => $class,
+            "icon" => $icon,
+            "messages" => [
+                "title" => $messages["title"],
+                "description" => $messages["description"]
+            ]
+        ]);
+    }
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/

@@ -7,6 +7,14 @@ class CategoriesController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/CategoriesModel");
+        $this->load->model("admin/NewsModel");
+
+/*         $xr = $this->NewsModel->with_author_category();
+
+        print_r("<pre>");
+        print_r($xr); */
+        die();
+
     }
 
 
