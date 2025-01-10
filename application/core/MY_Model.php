@@ -46,7 +46,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Roles_manager $roles_manager
  * @property File_manager $file_uploader
  * @property Recaptcha $recaptcha
- * @property ProfilesModel $ProfilesModel
+ * @property AdminsModel $AdminsModel
  * @property AdvertisingModel $AdvertisingModel
  * @property CategoriesModel $CategoriesModel
  * @property NewsModel $NewsModel

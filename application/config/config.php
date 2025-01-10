@@ -4,6 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /*========== Custom Configs ==========*/
 
 /*===== Auth Config =====*/
+$config["login_routes"] = [
+    "admin" => "admin/login",
+    "user" => "login",
+];
 $config["auth_session_key"] = "identity";
 
 /*===== Roles Config =====*/
@@ -38,8 +42,8 @@ $config["languages"] = [
 ];
 
 /*===== Google ReCaptcha V2 Config =====*/
-$config["grecaptcha_site_key"] = "6LeL9KoqAAAAAOYj484YU3w_cfRODTVrl9U7XXTy";
-$config["grecaptcha_secret_key"] = "6LeL9KoqAAAAANJxOJT8hNLK87MKyPsK4eycGOpe";
+$config["grecaptcha_site_key"] = "6LcO0LMqAAAAAIE2lO80V9r1qZToO9kwkwacEbEK";
+$config["grecaptcha_secret_key"] = "6LcO0LMqAAAAAJhUF1wz-pULIBakmuSngeA7vH-h";
 
 /*
 |--------------------------------------------------------------------------

@@ -6,8 +6,14 @@ class AuthController extends BASE_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("admin/ProfilesModel");
+        $this->load->model("admin/AdminsModel");
         $this->load->library('recaptcha');
+
+
+
+/*         print_r("<pre>");
+        print_r($this->session->all_userdata());
+        die(); */
     }
 
     public function index()
@@ -18,6 +24,9 @@ class AuthController extends BASE_Controller
 
     public function verify()
     {
+
+
+        die();
         // check reCAPTCHA
 /*         $recaptcha_response = $this->input->post('g-recaptcha-response');
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
@@ -53,7 +62,7 @@ class AuthController extends BASE_Controller
                 redirect(base_url('admin/login'));
             }
 
-            $this->session->set_userdata("admin_credentials", [
+            $this->session->set_userdata("identity", [
                 "id" => $admin["id"],
                 "first_name" => $admin["first_name"],
                 "last_name" => $admin["last_name"],

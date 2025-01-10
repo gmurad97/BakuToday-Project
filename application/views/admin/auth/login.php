@@ -1,8 +1,3 @@
-<?php
-if ($this->session->userdata("admin_credentials")) {
-    redirect(base_url("admin/dashboard"));
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
