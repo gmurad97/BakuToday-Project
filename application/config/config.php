@@ -4,10 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /*========== Custom Configs ==========*/
 
 /*===== Auth Config =====*/
-$config["login_routes"] = [
-    "admin" => "admin/login",
-    "user" => "login",
-];
 $config["auth_session_key"] = "identity";
 
 /*===== Roles Config =====*/

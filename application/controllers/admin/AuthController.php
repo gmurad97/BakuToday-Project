@@ -8,6 +8,7 @@ class AuthController extends BASE_Controller
         parent::__construct();
         $this->load->model("admin/AdminsModel");
         $this->load->library('recaptcha');
+        // $this->session->sess_destroy();
 
 
 
@@ -26,7 +27,7 @@ class AuthController extends BASE_Controller
     {
 
 
-        die();
+       
         // check reCAPTCHA
 /*         $recaptcha_response = $this->input->post('g-recaptcha-response');
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
@@ -50,8 +51,8 @@ class AuthController extends BASE_Controller
             redirect(base_url("admin/login"));
         }
 
-        $admin = $this->ProfilesModel->find(["username" => $admin_username]) ??
-            $this->ProfilesModel->find(["email" => $admin_username]);
+        $admin = $this->AdminsModel->find(["username" => $admin_username]) ??
+            $this->AdminsModel->find(["email" => $admin_username]);
 
         if ($admin && hash("sha256", $admin_password) === $admin["password"]) {
             if (!$admin["status"]) {

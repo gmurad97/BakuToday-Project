@@ -11,53 +11,62 @@ class SessionGuard
     private $uri_string;
     private $route_type;
     private $auth_session_key = "";
-    private $login_routes = [];
 
     public function __construct()
     {
         $this->CI =& get_instance();
+        $this->CI->load->model("admin/AdminsModel");
         $this->uri_string = $this->CI->uri->uri_string();
         $this->route_type = str_contains($this->uri_string, "admin") ? "admin" : "user";
-
-
-
-
-
-
-
-
-
-        $this->route_type = $this->CI->uri->segment(1);
-        $this->current_route = $this->CI->uri->segment(2);
-        $this->uri_string = $this->CI->uri->uri_string();
         $this->auth_session_key = $this->CI->config->item("auth_session_key");
-        $this->login_routes = $this->CI->config->item("login_routes");
     }
 
     public function initialize($params)
     {
         if ($params["is_admin_guarded"] && $this->route_type === "admin") {
-            $admin_session = $this->CI->session->userdata($this->auth_session_key);
-            if (empty($admin_session) && !isset($admin_session["id"])) {
-                if (!str_contains($this->uri_string, $this->login_routes["admin"])) {
-                    $this->CI->notifier("notifier", "danger", [
-                        "title" => $this->CI->lang->line("access_denied_alert_title"),
-                        "description" => $this->CI->lang->line("access_denied_alert_description")
-                    ]);
-                    redirect(base_url("admin/login"));
-                }
-                return;
-            }
-            $this->CI->load->model("admin/AdminsModel");
-            $current_profile = $this->CI->AdminsModel->find($admin_session["id"]);
-            if (!$current_profile["status"] && isloginize) {
-                $this->CI->session->unset_userdata($this->auth_session_key);
-                $this->CI->notifier("notifier", "info", [
-                    "title" => $this->CI->lang->line("account_disabled_alert_title"),
-                    "description" => $this->CI->lang->line("account_disabled_alert_description")
-                ]);
-                redirect(base_url("admin/login"));
-            }
+            $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
         }
+    }
+
+    private function handle_guard($login_route, $authorized_route, $model_name)
+    {
+        $session_key = $this->auth_session_key;
+        $session_data = $this->CI->session->userdata($session_key);
+
+        if (empty($session_data) || empty($session_data["id"])) {
+            $this->redirect_to_login($login_route);
+            return;
+        }
+
+        if (str_contains($this->uri_string, $login_route)) {
+            redirect(base_url($authorized_route));
+            return;
+        }
+
+        $current_profile = $this->CI->{$model_name}->find($session_data["id"]);
+        if (!$current_profile["status"]) {
+            $this->redirect_disabled_account($login_route);
+        }
+    }
+
+    private function redirect_to_login($login_route)
+    {
+        if (!str_contains($this->uri_string, $login_route)) {
+            $this->CI->notifier("notifier", "danger", [
+                "title" => $this->CI->lang->line("access_denied_alert_title"),
+                "description" => $this->CI->lang->line("access_denied_alert_description")
+            ]);
+            redirect(base_url($login_route));
+        }
+    }
+
+    private function redirect_disabled_account($login_route)
+    {
+        $this->CI->session->unset_userdata($this->auth_session_key);
+        $this->CI->notifier("notifier", "info", [
+            "title" => $this->CI->lang->line("account_disabled_alert_title"),
+            "description" => $this->CI->lang->line("account_disabled_alert_description")
+        ]);
+        redirect(base_url($login_route));
     }
 }

@@ -34,13 +34,13 @@
                                         <h5 class="text-secondary fw-normal mb-4">
                                             <?= $this->lang->line("login_welcome"); ?>
                                         </h5>
-                                        <?php $alert = $this->session->flashdata("crud_alert"); ?>
+                                        <?php $alert = $this->session->flashdata("notifier"); ?>
                                         <?php if ($alert): ?>
-                                            <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show"
+                                            <div class="alert <?= $alert['class']; ?> alert-dismissible fade show"
                                                 role="alert">
-                                                <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                                                <strong><?= $alert['alert_message']['title'] ?></strong>
-                                                <?= $alert['alert_message']['description'] ?>
+                                                <i data-feather="<?= $alert['icon']; ?>"></i>
+                                                <strong><?= $alert['messages']['title'] ?></strong>
+                                                <?= $alert['messages']['description'] ?>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                                     aria-label="btn-close"></button>
                                             </div>
