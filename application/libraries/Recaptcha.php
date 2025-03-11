@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Recaptcha
+class ReCaptcha
 {
     private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
@@ -47,40 +47,18 @@ class Recaptcha
             "remoteip" => $_SERVER["REMOTE_ADDR"]
         ];
 
-        $curl_handle = curl_init(self::API_SITEVERIFY_URL);
-        curl_setopt_array($curl_handle, [
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query($data),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 60,
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_HTTPHEADER => [
-                "Content-Type: application/x-www-form-urlencoded"
-            ]
-        ]);
+        // Используем запрос с помощью класса HttpClient
+        $http_client = new HttpClient();
+        $result = $http_client->post(self::API_SITEVERIFY_URL, $data);
 
-        $result = curl_exec($curl_handle);
-        $http_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
-
-        if ($result === false) {
-            $error = curl_error($curl_handle);
-            curl_close($curl_handle);
+        if (!$result['response']) {
             return [
                 "success" => false,
-                "error" => $error
+                "error" => $result['error'] ?? "Unknown error"
             ];
         }
 
-        if ($http_code !== 200) {
-            curl_close($curl_handle);
-            return [
-                "success" => false,
-                "error" => "Unexpected HTTP response code: $http_code"
-            ];
-        }
-
-        $decoded_result = json_decode($result, true);
-        curl_close($curl_handle);
+        $decoded_result = json_decode($result['response'], true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Roles_manager
+class RolesManager
 {
     /**
      * @var MY_Controller $CI 

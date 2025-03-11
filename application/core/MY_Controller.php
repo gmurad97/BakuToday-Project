@@ -43,9 +43,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Xmlrpc $xmlrpc
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
- * @property Roles_manager $roles_manager
- * @property File_manager $file_uploader
+ * @property RolesManager $rolesmanager
+ * @property FileManager $filemanager
  * @property Recaptcha $recaptcha
+ * @property BinanceApi $binanceapi
+ * @property HttpClient $httpclient
  * @property AdminsModel $AdminsModel
  * @property AdvertisingModel $AdvertisingModel
  * @property CategoriesModel $CategoriesModel
@@ -80,7 +82,7 @@ class MY_Controller extends CI_Controller
             $roles = array_keys($roles_hierarchy);
             $roles_access = [];
             foreach ($roles as $role) {
-                $roles_access["{$role}_access"] = $this->roles_manager->has_access($role);
+                $roles_access["{$role}_access"] = $this->rolesmanager->has_access($role);
             }
             $this->load->vars($roles_access);
         }

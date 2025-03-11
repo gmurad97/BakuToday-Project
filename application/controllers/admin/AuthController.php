@@ -1,20 +1,77 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+/**
+ * @property Binance_api $binance_api
+ * @property HttpClient $httpclient
+ */
 class AuthController extends BASE_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("admin/AdminsModel");
+        
+        /* $client = new HttpClient(); */
+
+
+        /* $args = ["",""];
+
+        $args_1 = ["key"=>"value","key1"=>"value1"];
+
+        print_r(is_array($args_1) ? "True": "False"); */
+        /* print_r($this->httpclient->get("http://google.com")); */
+
+
+/*         $html = file_get_contents("https://www.youtube.com/watch?v=v98xZn3KGQQ");
+        
+        // Поиск всего содержимого JSON
+        preg_match('/ytInitialPlayerResponse\s*=\s*({.+?})\s*;/s', $html, $matches);
+        
+        if (!empty($matches)) {
+            $jsonData = $matches[1];  // Берем весь JSON, а не отдельный кусок
+            $json = json_decode($jsonData, true);  // Декодируем весь JSON сразу
+            
+            if (isset($json['streamingData']['adaptiveFormats'])) {
+                $formats = $json['streamingData']['adaptiveFormats'];
+                
+                foreach ($formats as $format) {
+                    if (isset($format['signatureCipher'])) {
+                        $cipher = $format['signatureCipher'];
+                        
+                        // Разберем структуру сигнатуры
+                        parse_str($cipher, $sigParams);
+        
+                        if (isset($sigParams['url'])) {
+                            $videoUrl = urldecode($sigParams['url']);
+                            echo "Видео ссылка: <a href='{$videoUrl}' target='_blank'>{$videoUrl}</a>\n";
+                        } else {
+                            echo "Не удалось извлечь ссылку из этого формата.\n";
+                        }
+                    }
+                }
+            } else {
+                echo "Не найдено ни одного формата для видео.";
+            }
+        } else {
+            echo "Не удалось найти ytInitialPlayerResponse.";
+        }
+         */
+
+
+
+
+
+
+        /* die();
+        $this->load->model("admin/AdminsModel"); */
         $this->load->library('recaptcha');
         // $this->session->sess_destroy();
 
 
 
-/*         print_r("<pre>");
-        print_r($this->session->all_userdata());
-        die(); */
+        /*         print_r("<pre>");
+                print_r($this->session->all_userdata());
+                die(); */
     }
 
     public function index()
@@ -27,7 +84,7 @@ class AuthController extends BASE_Controller
     {
 
 
-       
+
         // check reCAPTCHA
 /*         $recaptcha_response = $this->input->post('g-recaptcha-response');
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
@@ -36,8 +93,8 @@ class AuthController extends BASE_Controller
         //     redirect('auth/login');
         // }
 
-                /* print_r($this->config->item("grecaptcha"));
-                die(); */
+        /* print_r($this->config->item("grecaptcha"));
+        die(); */
 
 
         $admin_username = trim($this->input->post("admin_username"), true);
