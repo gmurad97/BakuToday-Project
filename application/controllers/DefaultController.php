@@ -11,8 +11,8 @@ class DefaultController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("home");
-        $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
-        $this->load->view("user/index", $context);
+        // $context["page_title"] = $this->lang->line("home");
+        // $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
+        $this->load->view("user/index" /* $context */);
     }
 }

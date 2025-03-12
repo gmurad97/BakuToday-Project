@@ -1,7 +1,7 @@
 # 🚀 Project Information
 
 - **Author:** gmurad97
-- **Release Date:** 04.01.2025
+- **Release Date:** 31.03.2025
 - **Template:** Nouble UI
 - **Template Folder Path:** `BASE_DIR.'/public/admin/template'`
 - **Uploads Folder Path:** `BASE_DIR.'/public/uploads'`
@@ -22,7 +22,7 @@ For optimal performance, we recommend using **Open Server 5.4.3** with the follo
 - **Project DB Name:** `news_local_db`
 - **Full Project Path:** `X:/OSPanel/domains/news.local/application`
 - **HTTP:** `Apache_2.4-PHP_8.0-8.1+Nginx_1.23`
-- **PHP:** `PHP_8.0`
+- **PHP:** `PHP_8.1`
 - **MySQL:** `MySQL-8.0-Win10`
 
 - TEMP: REQUIRED MODULES (VPS) - ffmpeg - compressor & yt-dlp - youtube

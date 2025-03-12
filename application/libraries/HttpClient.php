@@ -8,7 +8,7 @@ class HttpClient
 
     public function __construct()
     {
-
+        $this->headers[""]
     }
 
     public function set_header($key, $value)
@@ -20,6 +20,14 @@ class HttpClient
     {
         $this->headers = [];
     }
+}
+
+
+
+
+class bd
+{
+
 
     private function request($url, $method, $data = [], $content_type = "application/x-www-form-urlencoded")
     {

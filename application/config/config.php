@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== Custom Configs ==========*/
-
 /*===== Auth Config =====*/
 $config["auth_session_key"] = "identity";
 
@@ -38,8 +36,11 @@ $config["languages"] = [
 ];
 
 /*===== Google ReCaptcha V2 Config =====*/
-$config["grecaptcha_site_key"] = "6LcO0LMqAAAAAIE2lO80V9r1qZToO9kwkwacEbEK";
-$config["grecaptcha_secret_key"] = "6LcO0LMqAAAAAJhUF1wz-pULIBakmuSngeA7vH-h";
+$config["grecaptcha_site_key"] = "6LesifIqAAAAAERH0Cuwo0yufDBSdSY2udVThEvd";
+$config["grecaptcha_secret_key"] = "6LesifIqAAAAAA3AmZthFAvCa3qaB0aI_WUyv3LU";
+
+/*===== HttpClient Config =====*/
+$config["http_client_ua"] = "BakuTodayClient/1.0.0";
 
 /*
 |--------------------------------------------------------------------------
