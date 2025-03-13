@@ -76,8 +76,13 @@ class AuthController extends BASE_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("login");
-        $this->load->view("admin/auth/login", $context);
+        $this->load->library("httpclient");
+        $test = new HttpClient();
+        print_r($test->get_headers());
+        // print_r($lol->get("https://jsonplaceholder.typicode.com/posts/1",null,"application/json")["response"]);
+        // print_r("debug");
+        // $context["page_title"] = $this->lang->line("login");
+        // $this->load->view("admin/auth/login", $context);
     }
 
     public function verify()

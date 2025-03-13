@@ -3,12 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ReCaptcha
 {
-    private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
-
     /**
-     * @var MY_Controller $CI 
+     * @var MY_Controller $CI
      */
     protected $CI;
+
+    private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
     private $site_key;
     private $secret_key;
 
@@ -37,7 +37,7 @@ class ReCaptcha
         if (empty($response)) {
             return [
                 "success" => false,
-                "error" => "Response cannot be empty"
+                "error" => "Token cannot be empty."
             ];
         }
 
@@ -46,7 +46,17 @@ class ReCaptcha
             "response" => $response,
             "remoteip" => $_SERVER["REMOTE_ADDR"]
         ];
+        
+    }
 
+}
+
+
+
+class ReCaptcha1
+{
+    public function verify($response)
+    {
         // Используем запрос с помощью класса HttpClient
         $http_client = new HttpClient();
         $result = $http_client->post(self::API_SITEVERIFY_URL, $data);
