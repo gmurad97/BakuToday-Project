@@ -10,7 +10,7 @@ class AuthController extends BASE_Controller
     public function __construct()
     {
         parent::__construct();
-        
+        $this->load->library("httpclient");
         /* $client = new HttpClient(); */
 
 
@@ -22,40 +22,40 @@ class AuthController extends BASE_Controller
         /* print_r($this->httpclient->get("http://google.com")); */
 
 
-/*         $html = file_get_contents("https://www.youtube.com/watch?v=v98xZn3KGQQ");
-        
-        // Поиск всего содержимого JSON
-        preg_match('/ytInitialPlayerResponse\s*=\s*({.+?})\s*;/s', $html, $matches);
-        
-        if (!empty($matches)) {
-            $jsonData = $matches[1];  // Берем весь JSON, а не отдельный кусок
-            $json = json_decode($jsonData, true);  // Декодируем весь JSON сразу
-            
-            if (isset($json['streamingData']['adaptiveFormats'])) {
-                $formats = $json['streamingData']['adaptiveFormats'];
+        /*         $html = file_get_contents("https://www.youtube.com/watch?v=v98xZn3KGQQ");
                 
-                foreach ($formats as $format) {
-                    if (isset($format['signatureCipher'])) {
-                        $cipher = $format['signatureCipher'];
+                // Поиск всего содержимого JSON
+                preg_match('/ytInitialPlayerResponse\s*=\s*({.+?})\s*;/s', $html, $matches);
+                
+                if (!empty($matches)) {
+                    $jsonData = $matches[1];  // Берем весь JSON, а не отдельный кусок
+                    $json = json_decode($jsonData, true);  // Декодируем весь JSON сразу
+                    
+                    if (isset($json['streamingData']['adaptiveFormats'])) {
+                        $formats = $json['streamingData']['adaptiveFormats'];
                         
-                        // Разберем структуру сигнатуры
-                        parse_str($cipher, $sigParams);
-        
-                        if (isset($sigParams['url'])) {
-                            $videoUrl = urldecode($sigParams['url']);
-                            echo "Видео ссылка: <a href='{$videoUrl}' target='_blank'>{$videoUrl}</a>\n";
-                        } else {
-                            echo "Не удалось извлечь ссылку из этого формата.\n";
+                        foreach ($formats as $format) {
+                            if (isset($format['signatureCipher'])) {
+                                $cipher = $format['signatureCipher'];
+                                
+                                // Разберем структуру сигнатуры
+                                parse_str($cipher, $sigParams);
+                
+                                if (isset($sigParams['url'])) {
+                                    $videoUrl = urldecode($sigParams['url']);
+                                    echo "Видео ссылка: <a href='{$videoUrl}' target='_blank'>{$videoUrl}</a>\n";
+                                } else {
+                                    echo "Не удалось извлечь ссылку из этого формата.\n";
+                                }
+                            }
                         }
+                    } else {
+                        echo "Не найдено ни одного формата для видео.";
                     }
+                } else {
+                    echo "Не удалось найти ytInitialPlayerResponse.";
                 }
-            } else {
-                echo "Не найдено ни одного формата для видео.";
-            }
-        } else {
-            echo "Не удалось найти ytInitialPlayerResponse.";
-        }
-         */
+                 */
 
 
 
@@ -76,13 +76,16 @@ class AuthController extends BASE_Controller
 
     public function index()
     {
-        $this->load->library("httpclient");
-        $test = new HttpClient();
-        print_r($test->get_headers());
-        // print_r($lol->get("https://jsonplaceholder.typicode.com/posts/1",null,"application/json")["response"]);
-        // print_r("debug");
-        // $context["page_title"] = $this->lang->line("login");
-        // $this->load->view("admin/auth/login", $context);
+        // $this->load->library("httpclient");
+        // $test = new HttpClient();
+
+        // print_r($test->format_headers($test->get_headers()));
+
+        // // print_r($test->get("https://jsonplaceholder.typicode.com/posts/1"));
+        // // print_r($lol->get("https://jsonplaceholder.typicode.com/posts/1",null,"application/json")["response"]);
+        // // print_r("debug");
+        $context["page_title"] = $this->lang->line("login");
+        $this->load->view("admin/auth/login", $context);
     }
 
     public function verify()
@@ -90,16 +93,17 @@ class AuthController extends BASE_Controller
 
 
 
+        //WORKED !!!
         // check reCAPTCHA
-/*         $recaptcha_response = $this->input->post('g-recaptcha-response');
-        $recaptcha_result = $this->recaptcha->verify($recaptcha_response); */
-        // if (!$recaptcha_result->success) {
-        //     $this->session->set_flashdata('error', 'reCAPTCHA не пройдена. Попробуйте снова.');
-        //     redirect('auth/login');
-        // }
-
-        /* print_r($this->config->item("grecaptcha"));
-        die(); */
+        $recaptcha_response = $this->input->post('g-recaptcha-response');
+        $recaptcha_result = $this->recaptcha->verify($recaptcha_response);
+        if ($recaptcha_result["success"]) {
+            // $this->session->set_flashdata('error', 'reCAPTCHA не пройдена. Попробуйте снова.');
+            // redirect('auth/login');
+            print_r($recaptcha_response);
+            die();
+        }
+        die();
 
 
         $admin_username = trim($this->input->post("admin_username"), true);

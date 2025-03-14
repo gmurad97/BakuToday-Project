@@ -37,7 +37,7 @@ class ReCaptcha
         if (empty($response)) {
             return [
                 "success" => false,
-                "error" => "Token cannot be empty."
+                "error" => "Response cannot be empty."
             ];
         }
 
@@ -46,29 +46,18 @@ class ReCaptcha
             "response" => $response,
             "remoteip" => $_SERVER["REMOTE_ADDR"]
         ];
-        
-    }
 
-}
-
-
-
-class ReCaptcha1
-{
-    public function verify($response)
-    {
-        // Используем запрос с помощью класса HttpClient
         $http_client = new HttpClient();
         $result = $http_client->post(self::API_SITEVERIFY_URL, $data);
 
-        if (!$result['response']) {
+        if (!$result["body"]) {
             return [
                 "success" => false,
-                "error" => $result['error'] ?? "Unknown error"
+                "error" => $result["error"] ?? "Unknown error."
             ];
         }
 
-        $decoded_result = json_decode($result['response'], true);
+        $decoded_result = json_decode($result["body"], true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [
