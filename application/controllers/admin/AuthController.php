@@ -76,6 +76,7 @@ class AuthController extends BASE_Controller
 
     public function index()
     {
+        
         // $this->load->library("httpclient");
         // $test = new HttpClient();
 
@@ -103,6 +104,7 @@ class AuthController extends BASE_Controller
             print_r($recaptcha_response);
             die();
         }
+        print_r($recaptcha_result);
         die();
 
 

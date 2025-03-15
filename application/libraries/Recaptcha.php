@@ -3,12 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ReCaptcha
 {
+    private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+
     /**
-     * @var MY_Controller $CI
+     * @var MY_Controller $CI 
      */
     protected $CI;
 
-    private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
     private $site_key;
     private $secret_key;
 

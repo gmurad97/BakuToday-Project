@@ -4,102 +4,96 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class FileManager
 {
     /**
-     * @var MY_Controller $CI 
+     * @var MY_Controller $CI
      */
     protected $CI;
 
     public function __construct()
     {
-
+        $this->CI =& get_instance();
     }
 
-    public function upload_image($field_name, $upload_path, $allowed_types, $resize_options = [])
-    {
-
-    }
-
-    
-
-    /*public function upload_image($field_name, $upload_path, $resize_options = [])
+    public function upload_media($field_name, $upload_path, $allowed_types)
     {
         $upload_config = [
             "upload_path" => $upload_path,
-            "allowed_types" => "jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF",
-            "file_ext_tolower" => TRUE,
-            "remove_spaces" => TRUE,
-            "encrypt_name" => TRUE
+            "allowed_types" => $allowed_types,
+            "file_ext_tolower" => true,
+            "remove_spaces" => true,
+            "encrypt_name" => true
         ];
 
-        $this->load->library("upload", $upload_config);
+        $this->CI->load->library("upload", $upload_config);
 
-        if (is_array($_FILES[$field_name]['name'])) {
+        if(is_array($_FILES[$field_name]["name"])){
             $files = $_FILES[$field_name];
             $uploaded_files = [];
 
-            for ($idx = 0; $idx < count($files["name"]); $idx++) {
-                $_FILES["userfile"]["name"] = $files["name"][$idx];
-                $_FILES["userfile"]["type"] = $files["type"][$idx];
-                $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
-                $_FILES["userfile"]["error"] = $files["error"][$idx];
-                $_FILES["userfile"]["size"] = $files["size"][$idx];
+        }
+    }
 
-                if ($this->upload->do_upload("userfile")) {
-                    $uploaded_data = $this->upload->data();
+    /*public function upload_image($field_name, $upload_path, $resize_options = [])
+{
 
-                    if (!empty($resize_options)) {
-                        $resize_config = array_merge([
-                            "image_library" => "gd2",
-                            "source_image" => $uploaded_data["full_path"],
-                            "maintain_ratio" => FALSE
-                        ], $resize_options);
+    if (is_array($_FILES[$field_name]['name'])) {
 
-                        $this->load->library("image_lib", $resize_config);
+        for ($idx = 0; $idx < count($files["name"]); $idx++) {
+            $_FILES["userfile"]["name"] = $files["name"][$idx];
+            $_FILES["userfile"]["type"] = $files["type"][$idx];
+            $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
+            $_FILES["userfile"]["error"] = $files["error"][$idx];
+            $_FILES["userfile"]["size"] = $files["size"][$idx];
 
-                        if (!$this->image_lib->resize()) {
-                            return ["success" => false, "error" => $this->image_lib->display_errors()];
-                        }
+            if ($this->upload->do_upload("userfile")) {
+                $uploaded_data = $this->upload->data();
+
+                if (!empty($resize_options)) {
+                    $resize_config = array_merge([
+                        "image_library" => "gd2",
+                        "source_image" => $uploaded_data["full_path"],
+                        "maintain_ratio" => FALSE
+                    ], $resize_options);
+
+                    $this->load->library("image_lib", $resize_config);
+
+                    if (!$this->image_lib->resize()) {
+                        return ["success" => false, "error" => $this->image_lib->display_errors()];
                     }
-
-                    $uploaded_files[] = $uploaded_data;
-                } else {
-                    return ["success" => false, "error" => $this->upload->display_errors()];
                 }
-            }
-            return ["success" => true, "data" => $uploaded_files];
-        } else {
-            if (!$this->upload->do_upload($field_name)) {
+
+                $uploaded_files[] = $uploaded_data;
+            } else {
                 return ["success" => false, "error" => $this->upload->display_errors()];
             }
+        }
+        return ["success" => true, "data" => $uploaded_files];
+    } else {
+        if (!$this->upload->do_upload($field_name)) {
+            return ["success" => false, "error" => $this->upload->display_errors()];
+        }
 
-            $uploaded_data = $this->upload->data();
+        $uploaded_data = $this->upload->data();
 
-            if (!empty($resize_options)) {
-                $resize_config = array_merge([
-                    "image_library" => "gd2",
-                    "source_image" => $uploaded_data["full_path"],
-                    "maintain_ratio" => FALSE
-                ], $resize_options);
+        if (!empty($resize_options)) {
+            $resize_config = array_merge([
+                "image_library" => "gd2",
+                "source_image" => $uploaded_data["full_path"],
+                "maintain_ratio" => FALSE
+            ], $resize_options);
 
-                $this->load->library("image_lib", $resize_config);
+            $this->load->library("image_lib", $resize_config);
 
-                if (!$this->image_lib->resize()) {
-                    return ["success" => false, "error" => $this->image_lib->display_errors()];
-                }
+            if (!$this->image_lib->resize()) {
+                return ["success" => false, "error" => $this->image_lib->display_errors()];
             }
-
-            return ["success" => true, "data" => $uploaded_data];
         }
-    }*/
 
-
-
-    public function create_folder($folder_path)
-    {
-        if (!file_exists($folder_path)) {
-            return mkdir($folder_path, 0777, true);
-        }
-        return true;
+        return ["success" => true, "data" => $uploaded_data];
     }
+}*/
+
+
+
 
     public function delete_file($file_path)
     {
@@ -107,10 +101,5 @@ class FileManager
             return unlink($file_path);
         }
         return false;
-    }
-
-    public function delete_folder($folder_path)
-    {
-
     }
 }
