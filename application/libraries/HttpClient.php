@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class HttpClient
 {
-    private const DEFAULT_USER_AGENT = "User-Agent: BakuTodayClient/1.0.3";
+    private const DEFAULT_USER_AGENT = "User-Agent: BakuTodayClient/1.0.0";
 
     private $headers = [];
 

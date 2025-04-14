@@ -122,3 +122,37 @@ $lang["enter_your_first_name"] = "Enter your first name";
 $lang["enter_your_last_name"] = "Enter your last name";
 $lang["enter_your_username"] = "Enter your username";
 $lang["unchange_current_password"] = "Leave blank to keep current password";
+
+
+
+
+
+
+
+
+
+$lang["recaptcha_verification_failed_title"] = "Error!";
+$lang["recaptcha_verification_failed_description"] = "reCAPTCHA verification failed. Please try again.";
+
+
+
+
+
+
+
+//Updated!!!
+
+
+
+$lang["notifier_error"] = "Error!";
+$lang["notifier_warning"] = "Warning!";
+$lang["notifier_success"] = "Success!";
+$lang["notifier_info"] = "Info!";
+
+
+
+
+
+
+
+

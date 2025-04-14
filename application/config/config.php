@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*===== Auth Config =====*/
+/*========> Auth Config <========*/
 $config["auth_session_key"] = "identity";
 
-/*===== Roles Config =====*/
+/*========> Roles Config <========*/
 $config["roles"] = [
     "root" => ["root"],
     "admin" => ["admin", "root"],
     "moderator" => ["moderator", "admin", "root"]
 ];
 
-/*===== Language Config =====*/
+/*========> Language Config <========*/
 $config["language_session_key"] = [
     "admin" => "admin_lang",
     "user" => "user_lang"
@@ -35,11 +35,11 @@ $config["languages"] = [
     ]
 ];
 
-/*===== Google ReCaptcha V2 Config =====*/
-$config["grecaptcha_site_key"] = "6LesifIqAAAAAERH0Cuwo0yufDBSdSY2udVThEvd";
-$config["grecaptcha_secret_key"] = "6LesifIqAAAAAA3AmZthFAvCa3qaB0aI_WUyv3LU";
+/*========> Google ReCaptcha V2 Config <========*/
+$config["grecaptcha_site_key"] = "6LcnPBcrAAAAAGIoMryZcmfAiAtXdeEHSBMF95pG";
+$config["grecaptcha_secret_key"] = "6LcnPBcrAAAAAJAou3fso0tykHsPXfW3btVQGkuA";
 
-/*===== HttpClient Config =====*/
+/*========> HttpClient Config <========*/
 $config["http_client_ua"] = "BakuTodayClient/1.0.0";
 
 /*

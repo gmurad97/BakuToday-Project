@@ -13,7 +13,7 @@ class FileManager
         $this->CI =& get_instance();
     }
 
-    public function upload_media($field_name, $upload_path, $allowed_types)
+    public function upload_media($field_name, $upload_path, $allowed_types, $resize_options = [])
     {
         $upload_config = [
             "upload_path" => $upload_path,
@@ -25,10 +25,35 @@ class FileManager
 
         $this->CI->load->library("upload", $upload_config);
 
-        if(is_array($_FILES[$field_name]["name"])){
+        if (is_array($_FILES[$field_name]["name"])) {
             $files = $_FILES[$field_name];
             $uploaded_files = [];
 
+            for ($idx = 0; $idx < count($files["name"]); $idx++) {
+                $_FILES["userfile"]["name"] = $files["name"][$idx];
+                $_FILES["userfile"]["type"] = $files["type"][$idx];
+                $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
+                $_FILES["userfile"]["error"] = $files["error"][$idx];
+                $_FILES["userfile"]["size"] = $files["size"][$idx];
+
+                if ($this->CI->upload->do_upload("userfile")) {
+                    $uploaded_data = $this->CI->upload->data();
+
+                    if (!empty($resize_options)) {
+                        $resize_config = array_merge([
+                            "image_library" => "gd2",
+                            "source_image" => $uploaded_data["full_path"]
+                        ], $resize_options);
+
+                        $this->CI->load->library("image_lib", $resize_config);
+
+                        if (!$this->CI->image_lib->resize()) {
+                            return ["success" => false, "error" => $this->CI->image_lib->display_errors()];
+                        }
+                    }
+                    //вот тут чего то не хватает
+                }
+            }
         }
     }
 
@@ -36,26 +61,9 @@ class FileManager
 {
 
     if (is_array($_FILES[$field_name]['name'])) {
-
         for ($idx = 0; $idx < count($files["name"]); $idx++) {
-            $_FILES["userfile"]["name"] = $files["name"][$idx];
-            $_FILES["userfile"]["type"] = $files["type"][$idx];
-            $_FILES["userfile"]["tmp_name"] = $files["tmp_name"][$idx];
-            $_FILES["userfile"]["error"] = $files["error"][$idx];
-            $_FILES["userfile"]["size"] = $files["size"][$idx];
-
             if ($this->upload->do_upload("userfile")) {
-                $uploaded_data = $this->upload->data();
-
                 if (!empty($resize_options)) {
-                    $resize_config = array_merge([
-                        "image_library" => "gd2",
-                        "source_image" => $uploaded_data["full_path"],
-                        "maintain_ratio" => FALSE
-                    ], $resize_options);
-
-                    $this->load->library("image_lib", $resize_config);
-
                     if (!$this->image_lib->resize()) {
                         return ["success" => false, "error" => $this->image_lib->display_errors()];
                     }

@@ -23,9 +23,9 @@ class SessionGuard
 
     public function initialize($params)
     {
-        if ($params["is_admin_guarded"] && $this->route_type === "admin") {
-            $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
-        }
+        // if ($params["is_admin_guarded"] && $this->route_type === "admin") {
+        //     $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
+        // }
     }
 
     private function handle_guard($login_route, $authorized_route, $model_name)

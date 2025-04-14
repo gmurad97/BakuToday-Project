@@ -46,7 +46,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property RolesManager $rolesmanager
  * @property FileManager $filemanager
  * @property Recaptcha $recaptcha
- * @property BinanceApi $binanceapi
  * @property HttpClient $httpclient
  * @property AdminsModel $AdminsModel
  * @property AdvertisingModel $AdvertisingModel
