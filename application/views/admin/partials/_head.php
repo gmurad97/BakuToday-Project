@@ -1,5 +1,5 @@
 <?php
-if (!$this->session->userdata($this->config->item("admin_session_key"))) {
+if (!$this->session->userdata($this->config->item("admin_auth_session_key"))) {
     redirect(base_url("admin/login"));
 }
 ?>

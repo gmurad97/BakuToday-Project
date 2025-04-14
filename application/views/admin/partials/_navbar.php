@@ -57,12 +57,18 @@
             <li class="nav-item dropdown">
                 <?php
                 $admin_credentials = $this->session->userdata("admin_credentials");
-                $admin_id = $admin_credentials["id"];
-                $admin_first_name = $admin_credentials["first_name"];
-                $admin_last_name = $admin_credentials["last_name"];
-                $admin_email = $admin_credentials["email"];
-                $admin_role = $admin_credentials["role"];
-                $admin_img = $admin_credentials["img"];
+                // $admin_id = $admin_credentials["id"];
+                // $admin_first_name = $admin_credentials["first_name"];
+                // $admin_last_name = $admin_credentials["last_name"];
+                // $admin_email = $admin_credentials["email"];
+                // $admin_role = $admin_credentials["role"];
+                // $admin_img = $admin_credentials["img"];
+                $admin_id =  "";
+                $admin_first_name = "";
+                $admin_last_name =  "";
+                $admin_email =  "";
+                $admin_role =  "";
+                $admin_img =  "";
                 ?>
                 <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

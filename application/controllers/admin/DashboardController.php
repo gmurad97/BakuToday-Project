@@ -19,14 +19,13 @@ class DashboardController extends BASE_Controller
     {
         $context["page_title"] = $this->lang->line("dashboard");
         $context["statistics"] = [
-            /* "admins_count" => $this->AdminsModel->count(), */
+            "admins_count" => $this->AdminsModel->count(),
             "advertising_count" => $this->AdvertisingModel->count(),
             "categories_count" => $this->CategoriesModel->count(),
             "news_count" => $this->NewsModel->count()
         ];
-/*         $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
-        $context["news_last_collection"] = $this->NewsModel->last(4, true);
-        $this->load->view("admin/dashboard", $context); */
-        $this->load->view("admin/dashboard", $context);
+        $context["settings"] = [];
+        $context["news_last_collection"] = [];
+        $this->load->view("admin/index", $context);
     }
 }

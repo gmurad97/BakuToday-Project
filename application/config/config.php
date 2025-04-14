@@ -2,7 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /*========> Auth Config <========*/
-$config["auth_session_key"] = "identity";
+$config["admin_auth_session_key"] = "admin_identity";
+$config["user_auth_session_key"] = "user_identity";
 
 /*========> Roles Config <========*/
 $config["roles"] = [

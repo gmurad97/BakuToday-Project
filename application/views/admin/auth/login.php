@@ -36,36 +36,26 @@
                                         </h5>
                                         <?php $alert = $this->session->flashdata("notifier"); ?>
                                         <?php if ($alert): ?>
-                                            <div class="alert <?= $alert['class']; ?> alert-dismissible fade show"
-                                                role="alert">
+                                            <div class="alert <?= $alert['class']; ?> alert-dismissible fade show" role="alert">
                                                 <i data-feather="<?= $alert['icon']; ?>"></i>
                                                 <strong><?= $alert['messages']['title'] ?></strong>
                                                 <?= $alert['messages']['description'] ?>
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="btn-close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                                             </div>
                                         <?php endif; ?>
-                                        <form action="<?= base_url('admin/login/verify'); ?>" method="POST"
-                                            enctype="application/x-www-form-urlencoded" class="forms-sample">
-                                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-                                                value="<?= $this->security->get_csrf_hash(); ?>">
+                                        <form action="<?= base_url('admin/login/verify'); ?>" method="POST" enctype="application/x-www-form-urlencoded" class="forms-sample">
+                                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                                             <div class="mb-3">
                                                 <label for="admin_username" class="form-label">
                                                     <?= $this->lang->line("email_or_username"); ?>
                                                 </label>
-                                                <input name="admin_username" type="text" class="form-control"
-                                                    id="admin_username"
-                                                    placeholder="<?= $this->lang->line("enter_your_email_or_username"); ?>"
-                                                    required>
+                                                <input name="admin_username" type="text" class="form-control" id="admin_username" placeholder="<?= $this->lang->line("enter_your_email_or_username"); ?>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="admin_password" class="form-label">
                                                     <?= $this->lang->line("password"); ?>
                                                 </label>
-                                                <input name="admin_password" type="password" class="form-control"
-                                                    id="admin_password"
-                                                    placeholder="<?= $this->lang->line("enter_your_password"); ?>"
-                                                    required>
+                                                <input name="admin_password" type="password" class="form-control" id="admin_password" placeholder="<?= $this->lang->line("enter_your_password"); ?>" required>
                                             </div>
 
 

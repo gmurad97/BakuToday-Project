@@ -92,10 +92,6 @@ $lang["success_update_alert_title"] = "Success!";
 $lang["success_update_alert_description"] = "The item has been successfully updated.";
 $lang["access_denied_alert_title"] = "Danger!";
 $lang["access_denied_alert_description"] = "You don't have permission to access this page.";
-$lang["empty_fields_alert_title"] = "Warning!";
-$lang["empty_fields_alert_description"] = "Both username and password are required.";
-$lang["account_disabled_alert_title"] = "Info!";
-$lang["account_disabled_alert_description"] = "Your account has been disabled.";
 $lang["login_failed_alert_title"] = "Danger!";
 $lang["login_failed_alert_description"] = "Invalid username or password.";
 $lang["logout_alert_title"] = "Goodbye!";
@@ -127,19 +123,6 @@ $lang["unchange_current_password"] = "Leave blank to keep current password";
 
 
 
-
-
-
-
-$lang["recaptcha_verification_failed_title"] = "Error!";
-$lang["recaptcha_verification_failed_description"] = "reCAPTCHA verification failed. Please try again.";
-
-
-
-
-
-
-
 //Updated!!!
 
 
@@ -150,9 +133,12 @@ $lang["notifier_success"] = "Success!";
 $lang["notifier_info"] = "Info!";
 
 
+$lang["notifier_recaptcha_verification_failed"] = "reCAPTCHA verification failed. Please try again.";
+$lang["notifier_empty_fields"] = "Both username and password are required.";
 
 
+$lang["notifier_logout"] = "You have been successfully logged out.";
 
 
-
+$lang["notifier_account_disabled"] = "Your account has been disabled.";
 

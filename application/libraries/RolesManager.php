@@ -17,7 +17,7 @@ class RolesManager
     public function __construct()
     {
         $this->CI =& get_instance();
-        $this->auth_session_key = $this->CI->config->item("auth_session_key");
+        $this->auth_session_key = $this->CI->config->item("admin_auth_session_key");
         $this->roles_hierarchy = $this->CI->config->item("roles");
     }
 

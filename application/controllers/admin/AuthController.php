@@ -24,8 +24,8 @@ class AuthController extends BASE_Controller
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response);
         if (!$recaptcha_result["success"]) {
             $this->notifier("notifier", "warning", [
-                "title" => $this->lang->line("recaptcha_verification_failed_title"),
-                "description" => $this->lang->line("recaptcha_verification_failed_description")
+                "title" => $this->lang->line("notifier_error"),
+                "description" => $this->lang->line("recaptcha_verification_failed")
             ]);
             redirect(base_url("admin/login"));
         }
@@ -34,26 +34,26 @@ class AuthController extends BASE_Controller
         $admin_password = $this->input->post("admin_password", true);
 
         if (empty($admin_username) || empty($admin_password)) {
-            $this->notifier("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
             redirect(base_url("admin/login"));
         }
 
-        $admin = $this->AdminsModel->find(["username" => $admin_username]) ??
-            $this->AdminsModel->find(["email" => $admin_username]);
+        $admin = $this->AdminsModel->find(["username" => $admin_username]) ?? $this->AdminsModel->find(["email" => $admin_username]);
 
         if ($admin && hash("sha256", $admin_password) === $admin["password"]) {
             if (!$admin["status"]) {
-                $this->notifier("crud_alert", "info", [
-                    "title" => $this->lang->line("account_disabled_alert_title"),
-                    "description" => $this->lang->line("account_disabled_alert_description")
+                $this->notifier("notifier", "info", [
+                    "title" => $this->lang->line("notifier_info"),
+                    "description" => $this->lang->line("notifier_account_disabled")
                 ]);
                 redirect(base_url('admin/login'));
             }
 
-            $this->session->set_userdata("identity", [
+            $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+            $this->session->set_userdata($admin_auth_session_key, [
                 "id" => $admin["id"],
                 "first_name" => $admin["first_name"],
                 "last_name" => $admin["last_name"],
@@ -75,12 +75,12 @@ class AuthController extends BASE_Controller
 
     public function logout()
     {
-        if ($this->session->userdata("admin_credentials")) {
-            $this->session->unset_userdata("admin_credentials");
-
-            $this->notifier("crud_alert", "info", [
-                "title" => $this->lang->line("logout_alert_title"),
-                "description" => $this->lang->line("logout_alert_description")
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        if ($this->session->userdata($admin_auth_session_key)) {
+            $this->session->unset_userdata($admin_auth_session_key);
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_logout")
             ]);
         }
         redirect(base_url("admin/login"));
