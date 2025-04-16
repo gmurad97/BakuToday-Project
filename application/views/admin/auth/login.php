@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>NobleUI - <?= empty($page_title) ? "Undefined" : $page_title; ?></title>
+    <title>NewsCore - <?= $page_title ?? $this->lang->line("undefined"); ?></title>
     <link rel="shortcut icon" href="<?= base_url('public/admin/assets/images/favicon.png'); ?>" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,17 +29,17 @@
                                 <div class="col-md-8 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="<?= base_url('admin/login'); ?>" class="nobleui-logo d-block mb-2">
-                                            Noble<span>UI</span>
+                                            News<span>Core</span>
                                         </a>
                                         <h5 class="text-secondary fw-normal mb-4">
                                             <?= $this->lang->line("login_welcome"); ?>
                                         </h5>
-                                        <?php $alert = $this->session->flashdata("notifier"); ?>
-                                        <?php if ($alert): ?>
-                                            <div class="alert <?= $alert['class']; ?> alert-dismissible fade show" role="alert">
-                                                <i data-feather="<?= $alert['icon']; ?>"></i>
-                                                <strong><?= $alert['messages']['title'] ?></strong>
-                                                <?= $alert['messages']['description'] ?>
+                                        <?php $notifier = $this->session->flashdata("notifier"); ?>
+                                        <?php if ($notifier): ?>
+                                            <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                                                <i data-feather="<?= $notifier['icon']; ?>"></i>
+                                                <strong><?= $notifier['messages']['title'] ?></strong>
+                                                <?= $notifier['messages']['description'] ?>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                                             </div>
                                         <?php endif; ?>
@@ -57,28 +57,15 @@
                                                 </label>
                                                 <input name="admin_password" type="password" class="form-control" id="admin_password" placeholder="<?= $this->lang->line("enter_your_password"); ?>" required>
                                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <!-- render reCAPTCHA beta ver for testing. -->
-                                            <?= $this->recaptcha->render(); ?>
-
+                                            <div class="mb-3">
+                                                <?= $this->recaptcha->render(); ?>
+                                            </div>
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-primary text-white" type="submit">
                                                     <?= $this->lang->line("login"); ?>
                                                 </button>
                                             </div>
                                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
                                         </form>
                                     </div>
                                 </div>

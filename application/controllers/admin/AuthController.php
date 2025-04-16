@@ -24,8 +24,8 @@ class AuthController extends BASE_Controller
         $recaptcha_result = $this->recaptcha->verify($recaptcha_response);
         if (!$recaptcha_result["success"]) {
             $this->notifier("notifier", "warning", [
-                "title" => $this->lang->line("notifier_error"),
-                "description" => $this->lang->line("recaptcha_verification_failed")
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_recaptcha_verification_failed")
             ]);
             redirect(base_url("admin/login"));
         }
@@ -53,6 +53,7 @@ class AuthController extends BASE_Controller
             }
 
             $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+
             $this->session->set_userdata($admin_auth_session_key, [
                 "id" => $admin["id"],
                 "first_name" => $admin["first_name"],
@@ -63,11 +64,12 @@ class AuthController extends BASE_Controller
                 "img" => $admin["img"],
                 "logged_in" => TRUE
             ]);
+
             redirect(base_url('admin/dashboard'));
         } else {
-            $this->notifier("crud_alert", "danger", [
-                "title" => $this->lang->line("login_failed_alert_title"),
-                "description" => $this->lang->line("login_failed_alert_description")
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_error"),
+                "description" => $this->lang->line("notifier_login_failed")
             ]);
             redirect(base_url("admin/login"));
         }

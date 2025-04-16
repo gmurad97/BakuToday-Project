@@ -51,57 +51,36 @@ class FileManager
                             return ["success" => false, "error" => $this->CI->image_lib->display_errors()];
                         }
                     }
-                    //вот тут чего то не хватает
+                    $uploaded_files[] = $uploaded_data;
+                } else {
+                    return ["success" => false, "error" => $this->CI->upload->display_errors()];
                 }
             }
-        }
-    }
+            return ["success" => true, "data" => $uploaded_files];
+        } else {
+            if (!$this->CI->upload->do_upload($field_name)) {
+                return ["success" => false, "error" => $this->CI->upload->display_errors()];
+            }
 
-    /*public function upload_image($field_name, $upload_path, $resize_options = [])
-{
+            $uploaded_data = $this->CI->upload->data();
 
-    if (is_array($_FILES[$field_name]['name'])) {
-        for ($idx = 0; $idx < count($files["name"]); $idx++) {
-            if ($this->upload->do_upload("userfile")) {
-                if (!empty($resize_options)) {
-                    if (!$this->image_lib->resize()) {
-                        return ["success" => false, "error" => $this->image_lib->display_errors()];
-                    }
+            if (!empty($resize_options)) {
+                $resize_config = array_merge([
+                    "image_library" => "gd2",
+                    "source_image" => $uploaded_data["full_path"],
+                    "maintain_ratio" => FALSE
+                ], $resize_options);
+
+                $this->CI->load->library("image_lib", $resize_config);
+
+                if (!$this->CI->image_lib->resize()) {
+                    return ["success" => false, "error" => $this->CI->image_lib->display_errors()];
                 }
-
-                $uploaded_files[] = $uploaded_data;
-            } else {
-                return ["success" => false, "error" => $this->upload->display_errors()];
             }
+
+            return ["success" => true, "data" => $uploaded_data];
         }
-        return ["success" => true, "data" => $uploaded_files];
-    } else {
-        if (!$this->upload->do_upload($field_name)) {
-            return ["success" => false, "error" => $this->upload->display_errors()];
-        }
-
-        $uploaded_data = $this->upload->data();
-
-        if (!empty($resize_options)) {
-            $resize_config = array_merge([
-                "image_library" => "gd2",
-                "source_image" => $uploaded_data["full_path"],
-                "maintain_ratio" => FALSE
-            ], $resize_options);
-
-            $this->load->library("image_lib", $resize_config);
-
-            if (!$this->image_lib->resize()) {
-                return ["success" => false, "error" => $this->image_lib->display_errors()];
-            }
-        }
-
-        return ["success" => true, "data" => $uploaded_data];
     }
-}*/
-
-
-
 
     public function delete_file($file_path)
     {

@@ -10,7 +10,7 @@ class SessionGuard
 
     private $uri_string;
     private $route_type;
-    private $auth_session_key = "";
+    private $admin_auth_session_key = "";
 
     public function __construct()
     {
@@ -18,19 +18,19 @@ class SessionGuard
         $this->CI->load->model("admin/AdminsModel");
         $this->uri_string = $this->CI->uri->uri_string();
         $this->route_type = str_contains($this->uri_string, "admin") ? "admin" : "user";
-        $this->auth_session_key = $this->CI->config->item("auth_session_key");
+        $this->admin_auth_session_key = $this->CI->config->item("admin_auth_session_key");
     }
 
     public function initialize($params)
     {
-        // if ($params["is_admin_guarded"] && $this->route_type === "admin") {
-        //     $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
-        // }
+        if ($params["is_admin_guarded"] && $this->route_type === "admin") {
+            $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
+        }
     }
 
     private function handle_guard($login_route, $authorized_route, $model_name)
     {
-        $session_key = $this->auth_session_key;
+        $session_key = $this->admin_auth_session_key;
         $session_data = $this->CI->session->userdata($session_key);
 
         if (empty($session_data) || empty($session_data["id"])) {
@@ -53,8 +53,8 @@ class SessionGuard
     {
         if (!str_contains($this->uri_string, $login_route)) {
             $this->CI->notifier("notifier", "danger", [
-                "title" => $this->CI->lang->line("access_denied_alert_title"),
-                "description" => $this->CI->lang->line("access_denied_alert_description")
+                "title" => $this->CI->lang->line("notifier_danger"),
+                "description" => $this->CI->lang->line("notifier_access_denied")
             ]);
             redirect(base_url($login_route));
         }
@@ -62,10 +62,10 @@ class SessionGuard
 
     private function redirect_disabled_account($login_route)
     {
-        $this->CI->session->unset_userdata($this->auth_session_key);
+        $this->CI->session->unset_userdata($this->admin_auth_session_key);
         $this->CI->notifier("notifier", "info", [
-            "title" => $this->CI->lang->line("account_disabled_alert_title"),
-            "description" => $this->CI->lang->line("account_disabled_alert_description")
+            "title" => $this->CI->lang->line("notifier_info"),
+            "description" => $this->CI->lang->line("notifier_account_disabled")
         ]);
         redirect(base_url($login_route));
     }

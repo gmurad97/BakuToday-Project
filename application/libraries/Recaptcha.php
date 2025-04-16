@@ -23,6 +23,14 @@ class ReCaptcha
     public function render($theme = "light", $size = "normal")
     {
         return <<<RECAPTCHA
+        <style>
+        iframe[title="reCAPTCHA"] {
+            width: 100% !important;
+            height: 76px !important;
+            border: 1px solid #172340;
+            border-radius: 0.25rem;
+        }
+        </style>
         <div
         class="g-recaptcha"
         data-sitekey="$this->site_key"

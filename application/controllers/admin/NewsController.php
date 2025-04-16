@@ -23,13 +23,13 @@ class NewsController extends CRUD_Controller
         $context["news"] = $this->NewsModel->with_author_category($id);
 
         if (!empty($context["news"])) {
-            $news_title = $context["news"]["title_{$this->current_admin_language}"];
+            $news_title = $context["news"]["title_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("view") . " • $news_title";
             $this->load->view("admin/news/detail", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/news"));
@@ -64,9 +64,9 @@ class NewsController extends CRUD_Controller
         $types_allowed = ["daily_news", "important_news", "general_news"];
 
         if (!in_array($category_id, $categories_ids) || !in_array($type, $types_allowed)) {
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("hacking_data_alert_title"),
-                "description" => $this->lang->line("hacking_data_alert_description")
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_hacking_data")
             ]);
 
             redirect(base_url("admin/news/create"));
@@ -77,18 +77,18 @@ class NewsController extends CRUD_Controller
 
         if (!empty($_FILES["multi_img"]["name"][0])) {
             $multi_images = [];
-            $upload_result = $this->upload_image('multi_img', $upload_path);
+            $upload_result = $this->filemanager->upload_media("multi_img", $upload_path, "jpg|jpeg|png|gif|webp");
 
-            if ($upload_result['success']) {
-                foreach ($upload_result['data'] as $file_data) {
-                    $multi_images[] = $file_data['file_name'];
+            if ($upload_result["success"]) {
+                foreach ($upload_result["data"] as $file_data) {
+                    $multi_images[] = $file_data["file_name"];
                 }
 
-                $data['multi_img'] = json_encode($multi_images);
+                $data["multi_img"] = json_encode($multi_images);
             } else {
-                $this->alert_flashdata("crud_alert", "warning", [
-                    "title" => $this->lang->line("invalid_img_format_alert_title"),
-                    "description" => $this->lang->line("invalid_img_format_alert_description")
+                $this->notifier("notifier", "warning", [
+                    "title" => $this->lang->line("notifier_warning"),
+                    "description" => $this->lang->line("notifier_invalid_img_format")
                 ]);
 
                 redirect(base_url("admin/news/create"));

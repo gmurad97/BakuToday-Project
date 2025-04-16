@@ -1,10 +1,8 @@
 <nav class="navbar">
     <div class="navbar-content">
         <div class="logo-mini-wrapper">
-            <img src="<?= base_url('public/admin/assets/images/logo-mini-light.png'); ?>"
-                class="logo-mini logo-mini-light" alt="Logo Light">
-            <img src="<?= base_url('public/admin/assets/images/logo-mini-dark.png'); ?>"
-                class="logo-mini logo-mini-dark" alt="Logo Dark">
+            <img src="<?= base_url('public/admin/assets/images/logo-mini-light.png'); ?>" class="logo-mini logo-mini-light" alt="Logo Light">
+            <img src="<?= base_url('public/admin/assets/images/logo-mini-dark.png'); ?>" class="logo-mini logo-mini-dark" alt="Logo Dark">
         </div>
         <ul class="navbar-nav">
             <li class="theme-switcher-wrapper nav-item">
@@ -21,57 +19,37 @@
             </li>
             <li class="nav-item dropdown">
                 <?php
-                $current_language = $this->session->userdata("admin_lang");
-                $flags_data = [
-                    "az" => [
-                        "url" => base_url("public/admin/assets/images/flags/az.svg"),
-                        "lang" => "Azərbaycan"
-                    ],
-                    "en" => [
-                        "url" => base_url("public/admin/assets/images/flags/us.svg"),
-                        "lang" => "English"
-                    ],
-                    "ru" => [
-                        "url" => base_url("public/admin/assets/images/flags/ru.svg"),
-                        "lang" => "Русский"
-                    ],
-                ];
+                $available_language = $this->config->item("languages");
+                $language_session_key = $this->config->item("language_session_key");
+                $current_language = $this->session->userdata($language_session_key["admin"]);
                 ?>
-                <a class="nav-link dropdown-toggle d-flex" href="javascript:void(0);" id="languageDropdown"
-                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="<?= $flags_data[$current_language]["url"]; ?>" class="w-20px" alt="Flag">
+                <a class="nav-link dropdown-toggle d-flex" href="javascript:void(0);" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="<?= base_url($available_language[$current_language]["icon"]); ?>" class="w-20px" alt="Flag">
                     <span class="ms-2 d-none d-md-inline-block">
-                        <?= $flags_data[$current_language]["lang"]; ?>
+                        <?= $available_language[$current_language]["lang"]; ?>
                     </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                    <?php foreach ($flags_data as $lang_code => $flag_data): ?>
-                        <a href="<?= base_url('admin/lang/switch/' . $lang_code); ?>"
-                            class="dropdown-item py-2 d-flex <?= $current_language == $lang_code ? 'disabled' : '' ?>">
-                            <img src="<?= $flag_data["url"]; ?>" class="w-20px" alt="<?= strtoupper($lang_code); ?>">
-                            <span class="ms-2"><?= $flag_data["lang"] ?></span>
+                    <?php foreach ($available_language as $lang_code => $lang_data): ?>
+                        <a href="<?= base_url('admin/locale/' . $lang_code); ?>" class="dropdown-item py-2 d-flex <?= $current_language == $lang_code ? 'disabled' : '' ?>">
+                            <img src="<?= base_url($lang_data["icon"]); ?>" class="w-20px" alt="<?= strtoupper($lang_code); ?>">
+                            <span class="ms-2"><?= $lang_data["lang"] ?></span>
                         </a>
                     <?php endforeach; ?>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <?php
-                $admin_credentials = $this->session->userdata("admin_credentials");
-                // $admin_id = $admin_credentials["id"];
-                // $admin_first_name = $admin_credentials["first_name"];
-                // $admin_last_name = $admin_credentials["last_name"];
-                // $admin_email = $admin_credentials["email"];
-                // $admin_role = $admin_credentials["role"];
-                // $admin_img = $admin_credentials["img"];
-                $admin_id =  "";
-                $admin_first_name = "";
-                $admin_last_name =  "";
-                $admin_email =  "";
-                $admin_role =  "";
-                $admin_img =  "";
+                $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+                $admin_credentials = $this->session->userdata($admin_auth_session_key);
+                $admin_id = $admin_credentials["id"];
+                $admin_first_name = $admin_credentials["first_name"];
+                $admin_last_name = $admin_credentials["last_name"];
+                $admin_email = $admin_credentials["email"];
+                $admin_role = $admin_credentials["role"];
+                $admin_img = $admin_credentials["img"];
                 ?>
-                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="w-30px h-30px ms-1 rounded-circle object-fit-cover" src="<?= !empty($admin_img) ?
                         base_url('public/uploads/profiles/' . $admin_img) :
                         base_url('public/admin/assets/images/faces/face0.jpg'); ?>" alt="Profile Image">
@@ -91,8 +69,7 @@
                             <p class="fs-12px text-secondary">
                                 <?= $admin_email; ?>
                             </p>
-                            <p
-                                class="fs-12px <?= ($admin_role === 'root' || $admin_role === 'admin') ? 'text-danger' : 'text-primary'; ?>">
+                            <p class="fs-12px <?= ($admin_role === 'root' || $admin_role === 'admin') ? 'text-danger' : 'text-primary'; ?>">
                                 <?= ucfirst($this->lang->line($admin_role)); ?>
                             </p>
                         </div>

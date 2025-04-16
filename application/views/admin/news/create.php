@@ -1,6 +1,6 @@
-<?php $this->load->view("admin/partials/head"); ?>
-<?php $this->load->view("admin/partials/sidebar"); ?>
-<?php $this->load->view("admin/partials/navbar"); ?>
+<?php $this->load->view("admin/partials/_head"); ?>
+<?php $this->load->view("admin/partials/_sidebar"); ?>
+<?php $this->load->view("admin/partials/_navbar"); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -17,31 +17,26 @@
                         </div>
                     <?php endif; ?>
                     <form action="<?= base_url('admin/news/store'); ?>" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-                            value="<?= $this->security->get_csrf_hash(); ?>">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
-                                    aria-controls="az" aria-selected="true">
+                                <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab" aria-controls="az" aria-selected="true">
                                     AZ
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="en-line-tab" data-bs-toggle="tab" href="#en" role="tab"
-                                    aria-controls="en" aria-selected="true">
+                                <a class="nav-link" id="en-line-tab" data-bs-toggle="tab" href="#en" role="tab" aria-controls="en" aria-selected="true">
                                     EN
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="ru-line-tab" data-bs-toggle="tab" href="#ru" role="tab"
-                                    aria-controls="ru" aria-selected="true">
+                                <a class="nav-link" id="ru-line-tab" data-bs-toggle="tab" href="#ru" role="tab" aria-controls="ru" aria-selected="true">
                                     RU
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="lineTabContent">
-                            <div class="tab-pane fade show active" id="az" role="tabpanel"
-                                aria-labelledby="az-line-tab">
+                            <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-line-tab">
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="title_az" class="form-label">
@@ -55,8 +50,7 @@
                                         <label for="short_description_az" class="form-label">
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_az" id="short_description_az"
-                                            class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_az" id="short_description_az" class="form-control" rows="3" required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -64,8 +58,7 @@
                                         <label for="long_description_az" class="form-label">
                                             <?= $this->lang->line("long_description"); ?>
                                         </label>
-                                        <textarea name="long_description_az" id="long_description_az"
-                                            class="form-control" rows="10" required></textarea>
+                                        <textarea name="long_description_az" id="long_description_az" class="form-control" rows="10" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +76,7 @@
                                         <label for="short_description_en" class="form-label">
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_en" id="short_description_en"
-                                            class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_en" id="short_description_en" class="form-control" rows="3" required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -92,8 +84,7 @@
                                         <label for="long_description_en" class="form-label">
                                             <?= $this->lang->line("long_description"); ?>
                                         </label>
-                                        <textarea name="long_description_en" id="long_description_en"
-                                            class="form-control" rows="10" required></textarea>
+                                        <textarea name="long_description_en" id="long_description_en" class="form-control" rows="10" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +102,7 @@
                                         <label for="short_description_ru" class="form-label">
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_ru" id="short_description_ru"
-                                            class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_ru" id="short_description_ru" class="form-control" rows="3" required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -120,8 +110,7 @@
                                         <label for="long_description_ru" class="form-label">
                                             <?= $this->lang->line("long_description"); ?>
                                         </label>
-                                        <textarea name="long_description_ru" id="long_description_ru"
-                                            class="form-control" rows="10" required></textarea>
+                                        <textarea name="long_description_ru" id="long_description_ru" class="form-control" rows="10" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -132,8 +121,7 @@
                                     <label for="img" class="form-label">
                                         <?= $this->lang->line("image"); ?>
                                     </label>
-                                    <input name="img" id="img" type="file" class="form-control"
-                                        accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon" required>
+                                    <input name="img" id="img" type="file" class="form-control" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -141,8 +129,7 @@
                                     <label for="multi_img" class="form-label">
                                         <?= $this->lang->line("multiple_images"); ?>
                                     </label>
-                                    <input name="multi_img[]" id="multi_img" type="file" class="form-control" multiple
-                                        required>
+                                    <input name="multi_img[]" id="multi_img" type="file" class="form-control" multiple required>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +185,7 @@
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/partials/footer"); ?>
+<?php $this->load->view("admin/partials/_footer"); ?>
 <script src="<?= base_url('public/admin/assets/vendors/ckeditor/ckeditor.js'); ?>"></script>
 <script>
     CKEDITOR.replace("long_description_az", {
@@ -232,4 +219,4 @@
         }
     });
 </script>
-<?php $this->load->view("admin/partials/scripts"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>

@@ -12,18 +12,18 @@ class RolesManager
      * @var array $roles_hierarchy
      */
     private $roles_hierarchy = [];
-    private $auth_session_key = "";
+    private $admin_auth_session_key = "";
 
     public function __construct()
     {
         $this->CI =& get_instance();
-        $this->auth_session_key = $this->CI->config->item("admin_auth_session_key");
+        $this->admin_auth_session_key = $this->CI->config->item("admin_auth_session_key");
         $this->roles_hierarchy = $this->CI->config->item("roles");
     }
 
     public function check_role($role)
     {
-        $credentials = $this->CI->session->userdata($this->auth_session_key);
+        $credentials = $this->CI->session->userdata($this->admin_auth_session_key);
         if (!$credentials || !isset($credentials["role"])) {
             return false;
         }
@@ -35,7 +35,7 @@ class RolesManager
         if (!isset($this->roles_hierarchy[$role]))
             throw new InvalidArgumentException("Role '{$role}' does not exist.");
 
-        $credentials = $this->CI->session->userdata($this->auth_session_key);
+        $credentials = $this->CI->session->userdata($this->admin_auth_session_key);
         $credentials_role = $credentials ? $credentials["role"] : null;
 
         return $credentials_role && in_array($credentials_role, $this->roles_hierarchy[$role]);

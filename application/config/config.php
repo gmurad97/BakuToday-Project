@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /*========> Auth Config <========*/
 $config["admin_auth_session_key"] = "admin_identity";
-$config["user_auth_session_key"] = "user_identity";
 
 /*========> Roles Config <========*/
 $config["roles"] = [
@@ -23,15 +22,15 @@ $config["default_language"] = [
 ];
 $config["languages"] = [
     "az" => [
-        "logo" => "public/shared/flags/az.svg",
+        "icon" => "public/shared/flags/az.svg",
         "lang" => "Azərbaycan"
     ],
     "en" => [
-        "logo" => "public/shared/flags/us.svg",
+        "icon" => "public/shared/flags/us.svg",
         "lang" => "English"
     ],
     "ru" => [
-        "logo" => "public/shared/flags/ru.svg",
+        "icon" => "public/shared/flags/ru.svg",
         "lang" => "Русский"
     ]
 ];
