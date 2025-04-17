@@ -7,12 +7,12 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?= $this->lang->line("all_administrators"); ?></h6>
-                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
-                    <?php if ($alert): ?>
-                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
-                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                            <strong><?= $alert['alert_message']['title'] ?></strong>
-                            <?= $alert['alert_message']['description'] ?>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
@@ -26,92 +26,10 @@
                                     <th><?= $this->lang->line("last_name"); ?></th>
                                     <th><?= $this->lang->line("role"); ?></th>
                                     <th><?= $this->lang->line("status"); ?></th>
-                                    <th><?= $this->lang->line("created_at"); ?></th>
-                                    <th><?= $this->lang->line("updated_at"); ?></th>
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-                                $current_language = $this->session->userdata("admin_lang");
-                                $counter = 0;
-                                ?>
-                                <?php foreach ($profiles_collection as $profile): ?>
-                                    <tr>
-                                        <td><?= ++$counter; ?></td>
-                                        <td>
-                                            <a href="<?= base_url('public/uploads/profiles/') . $profile["img"]; ?>"
-                                                data-lity>
-                                                <img style="object-fit:cover;"
-                                                    src="<?= base_url('public/uploads/profiles/') . $profile["img"]; ?>"
-                                                    alt="Profile Image">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $profile["first_name"]; ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $profile["last_name"]; ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span
-                                                class="badge rounded-pill <?= in_array($profile["role"], ['root', 'admin']) ? 'bg-danger' : 'bg-primary'; ?>">
-                                                <?= $this->lang->line($profile["role"]); ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <?php if ($profile["status"]): ?>
-                                                <span class="badge border border-success text-success">
-                                                    <?= $this->lang->line("enabled"); ?>
-                                                </span>
-                                            <?php else: ?>
-                                                <span class="badge border border-secondary text-secondary">
-                                                    <?= $this->lang->line("disabled"); ?>
-                                                </span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?= $profile["created_at"]; ?></td>
-                                        <td><?= $profile["updated_at"]; ?></td>
-                                        <td>
-                                            <div class="dropdown mb-2">
-                                                <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/profiles/' . $profile['id']); ?>">
-                                                        <i data-feather="eye" class="icon-sm text-info me-2"></i>
-                                                        <span class="text-info">
-                                                            <?= $this->lang->line("view"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/profiles/' . $profile['id']) . '/edit'; ?>">
-                                                        <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
-                                                        <span class="text-warning">
-                                                            <?= $this->lang->line("edit"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="javascript:void(0);" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal"
-                                                        data-url="<?= base_url('admin/profiles/' . $profile['id']) . '/delete'; ?>">
-                                                        <i data-feather="trash" class="icon-sm text-danger me-2"></i>
-                                                        <span class="text-danger">
-                                                            <?= $this->lang->line("delete"); ?>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -143,11 +61,85 @@
     </div>
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>
+<?php
+$language_session_key = $this->config->item("language_session_key");
+$current_language = $this->session->userdata($language_session_key["admin"]);
+$counter = 0;
+?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
         item.addEventListener("click", function () {
             document.getElementById("deleteButton").href = this.getAttribute("data-url");
         });
     });
+
+
+
+    $("#profilesDataTable").DataTable({
+        serverSide: true,
+        processing: true,
+        ajax: {
+            url: "<?= base_url('admin/profiles/json') ?>",
+            type: "POST",
+            data: function (d) {
+                d['<?= $this->security->get_csrf_token_name(); ?>'] = $('meta[name="csrf-token"]').attr('content');
+            },
+            dataSrc: function (json) {
+                // Обновляем мета-тег с новым токеном
+                $('meta[name="csrf-token"]').attr('content', json.csrf_token);
+                return json.data;
+            }
+        },
+        columns: [
+            { data: "id" },
+            { data: "image" },
+            { data: "first_name" },
+            { data: "last_name" },
+            { data: "role" },
+            { data: "status" },
+            { data: "actions" }
+        ],
+        language: {
+            <?php if ($current_language === "ru"): ?>
+                                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+            <?php elseif ($current_language === "az"): ?>
+                                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
+            <?php else: ?>
+                                    url: '',
+            <?php endif; ?>
+        }
+    });
+
+
+
+
+
+
+
+
+
+    // $("#profilesDataTable").DataTable({
+    //     paging: true,
+    //     searching: true,
+    //     ordering: true,
+    //     language: {
+    //         <?php if ($current_language === "ru"): ?>
+        //                             url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+        //         <?php elseif ($current_language === "az"): ?>
+        //                             url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
+        //         <?php else: ?>
+        //                             url: '',
+        //         <?php endif; ?>
+    //     }
+    // });
 </script>
-<?php $this->load->view("admin/partials/_scripts"); ?>
+<script>
+    Fancybox.bind("#profile", {
+        groupAll: false
+    });
+
+
+
+    // document.getElementById("change").addEventListener("")
+</script>

@@ -78,12 +78,13 @@ $route["admin/dashboard"]["GET"] = "admin/DashboardController/index";
 $route["admin/profiles"]["GET"] = "admin/ProfilesController/index";
 $route["admin/profiles/create"]["GET"] = "admin/ProfilesController/create";
 $route["admin/profiles/store"]["POST"] = "admin/ProfilesController/store";
-$route["admin/profiles/tables"]["POST"] = "admin/ProfilesController/tables";
+$route["admin/profiles/json"]["POST"] = "admin/ProfilesController/json";
 $route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
 $route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
 $route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
 $route["admin/profiles/(:any)/status"]["POST"] = "admin/ProfilesController/status/$1";
 $route["admin/profiles/(:any)/delete"]["POST"] = "admin/ProfilesController/destroy/$1";
+$route["admin/profiles/(:any)/status"]["POST"] = "admin/ProfilesController/status/$1";
 
 /*========> Categories Routes <========*/
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";

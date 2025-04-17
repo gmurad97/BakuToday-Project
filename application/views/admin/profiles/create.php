@@ -1,6 +1,6 @@
-<?php $this->load->view("admin/partials/head"); ?>
-<?php $this->load->view("admin/partials/sidebar"); ?>
-<?php $this->load->view("admin/partials/navbar"); ?>
+<?php $this->load->view("admin/partials/_head"); ?>
+<?php $this->load->view("admin/partials/_sidebar"); ?>
+<?php $this->load->view("admin/partials/_navbar"); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -110,5 +110,5 @@
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/partials/footer"); ?>
-<?php $this->load->view("admin/partials/scripts"); ?>
+<?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>

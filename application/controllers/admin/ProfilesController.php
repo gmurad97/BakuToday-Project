@@ -8,21 +8,101 @@ class ProfilesController extends CRUD_Controller
         parent::__construct();
         $this->load->model("admin/AdminsModel");
 
-/*         if (!$this->admin_roles->has_access("admin")) {
-            $this->lang->load("message", $this->current_admin_language);
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("access_denied_alert_title"),
-                "description" => $this->lang->line("access_denied_alert_description")
+        if (!$this->rolesmanager->has_access("admin")) {
+            $this->lang->load("message", $this->get_admin_language());
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_access_denied")
             ]);
             redirect(base_url("admin/dashboard"));
-        } */
+        }
     }
+
+
+
+
+    public function json()
+{
+    $request = $_POST;
+
+    $start = $request['start'] ?? 0;
+    $length = $request['length'] ?? 10;
+    $search = $request['search']['value'] ?? "";
+    $orderColumnIndex = $request['order'][0]['column'] ?? 0;
+    $orderDir = $request['order'][0]['dir'] ?? 'asc';
+    $columns = $request['columns'];
+    $orderColumn = $columns[$orderColumnIndex]['data'] ?? 'id';
+
+    $totalData = $this->AdminsModel->count_all();
+    $filteredData = $this->AdminsModel->count_filtered($search);
+    $data = $this->AdminsModel->get_filtered($search, $start, $length, $orderColumn, $orderDir);
+
+    $result = [];
+
+    foreach ($data as $profile) {
+        $result[] = [
+            "id" => $profile["id"],
+            "image" => '<img src="' . base_url("public/uploads/profiles/" . $profile["img"]) . '" style="height:40px;width:40px;object-fit:cover;">',
+            "first_name" => $profile["first_name"],
+            "last_name" => $profile["last_name"],
+            "role" => $profile["role"],
+            "status" => '<input type="checkbox" ' . ($profile["status"] ? "checked" : "") . '>',
+            "actions" => '... тут dropdown ...'
+        ];
+    }
+
+    echo json_encode([
+        "draw" => intval($request['draw']),
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($filteredData),
+        "data" => $result,
+        "csrf_token" => $this->security->get_csrf_hash()
+    ]);
+}
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("all_administrators");
-        $context["profiles_collection"] = $this->AdminsModel->all();
+        $context = [
+            "page_title" => $this->lang->line("all_administrators"),
+            "profiles_collection" => $this->AdminsModel->all()
+        ];
         $this->load->view("admin/profiles/list", $context);
+    }
+
+    public function status($id){
+        $status = $this->input->post("status");
+        $data = [
+            "status" => $status === "on"
+        ];
+
+        $this->AdminsModel->update($id, $data);
+
+
+        $this->notifier("notifier", "info", [
+            "title" => $this->lang->line("notifier_info"),
+            "description" => $this->lang->line("notifier_invalid_id")
+        ]);
+
+        redirect(base_url("admin/profiles"));
     }
 
     public function show($id)
@@ -37,9 +117,9 @@ class ProfilesController extends CRUD_Controller
 
             $this->load->view("admin/profiles/detail", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/profiles"));

@@ -8,11 +8,11 @@ class SettingsController extends BASE_Controller
         parent::__construct();
         $this->load->model("admin/SettingsModel");
 
-        if (!$this->admin_roles->has_access("admin")) {
-            $this->lang->load("message", $this->current_admin_language);
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("access_denied_alert_title"),
-                "description" => $this->lang->line("access_denied_alert_description")
+        if (!$this->rolesmanager->has_access("admin")) {
+            $this->lang->load("message", $this->get_admin_language());
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_access_denied")
             ]);
             redirect(base_url("admin/dashboard"));
         }
@@ -21,7 +21,7 @@ class SettingsController extends BASE_Controller
     public function index()
     {
         $context["page_title"] = $this->lang->line("settings");
-        $context["settings"] = json_decode($this->SettingsModel->first()["collection"], false);
+        $context["settings"] = json_decode($this->SettingsModel->find([])["collection"], false);
 
         if ($context["settings"]) {
             $this->load->view("admin/settings/edit", $context);
@@ -42,14 +42,14 @@ class SettingsController extends BASE_Controller
             ])
         ];
 
-        $current_db_settings = $this->SettingsModel->first();
+        $current_db_settings = $this->SettingsModel->find([]);
 
         if ($current_db_settings) {
             $this->SettingsModel->update($current_db_settings["uid"], $data);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_update_alert_title"),
-                "description" => $this->lang->line("success_update_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_update")
             ]);
 
             redirect(base_url("admin/settings"));

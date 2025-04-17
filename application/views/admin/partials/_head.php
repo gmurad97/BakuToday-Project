@@ -23,6 +23,9 @@ if (!$this->session->userdata($this->config->item("admin_auth_session_key"))) {
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/style.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('public/admin/assets/css/custom.css'); ?>">
     <script src="<?= base_url('public/admin/assets/vendors/jquery@3.7.1/jquery.min.js'); ?>"></script>
+    
+    <meta name="csrf-token" content="<?= $this->security->get_csrf_hash(); ?>">
+
 </head>
 
 <body>

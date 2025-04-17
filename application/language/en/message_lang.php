@@ -23,39 +23,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-$lang["setting"] = "Setting";
-$lang["status"] = "Status";
-$lang["maintenance_mode"] = "Maintenance mode";
-$lang["snow_mode"] = "Snow mode";
-$lang["update"] = "Update";
+
+
 $lang["view_category"] = "View category";
 $lang["edit_category"] = "Edit category";
 $lang["category_name"] = "Category name";
 $lang["create"] = "Create";
-$lang["view"] = "View";
 $lang["name"] = "Name";
-$lang["enabled"] = "Enabled";
-$lang["disabled"] = "Disabled";
-$lang["delete"] = "Delete";
-$lang["edit"] = "Edit";
 $lang["back"] = "Back";
-$lang["modal_confirm_delete_title"] = "Confirm Deletion";
-$lang["modal_confirm_delete_description"] = "Are you sure you want to permanently delete this item?";
-$lang["close"] = "Close";
-$lang["id"] = "Id";
-$lang["created_at"] = "Created At";
-$lang["updated_at"] = "Updated At";
-$lang["statistics"] = "Statistics";
-$lang["latest_created_news"] = "Latest Created News";
 $lang["read_more"] = "Read more";
 $lang["edit_advertising"] = "Edit Advertising";
 $lang["title"] = "Title";
 $lang["location"] = "Location";
-$lang["image"] = "Image";
+
 $lang["edit_news"] = "Edit News";
 $lang["edit_administrator"] = "Edit Administrator";
-$lang["first_name"] = "First Name";
-$lang["last_name"] = "Last Name";
+
 $lang["email"] = "Email";
 $lang["username"] = "Username";
 $lang["admin_404_error_oopps"] = "Oopps!! The page you were looking for doesn't exist.";
@@ -67,10 +50,6 @@ $lang["type"] = "Type";
 $lang["short_description"] = "Short Description";
 $lang["long_description"] = "Long Description";
 $lang["multiple_images"] = "Multiple Images";
-$lang["success_update_alert_title"] = "Success!";
-$lang["success_update_alert_description"] = "The item has been successfully updated.";
-$lang["logout_alert_title"] = "Goodbye!";
-$lang["logout_alert_description"] = "You have been successfully logged out.";
 
 
 $lang["success_added_alert_title"] = "Success!";
@@ -95,16 +74,36 @@ $lang["unchange_current_password"] = "Leave blank to keep current password";
 
 
 //Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+
+
+$lang["modal_confirm_delete_title"] = "Confirm Deletion";
+$lang["modal_confirm_delete_description"] = "Are you sure you want to permanently delete this item?";
+
+$lang["close"] = "Close";
+
+$lang["id"] = "Id";
+$lang["image"] = "Image";
+$lang["first_name"] = "First Name";
+$lang["last_name"] = "Last Name";
+$lang["created_at"] = "Created At";
+$lang["updated_at"] = "Updated At";
+$lang["enabled"] = "Enabled";
+$lang["disabled"] = "Disabled";
+$lang["view"] = "View";
+$lang["edit"] = "Edit";
+$lang["delete"] = "Delete";
 
 
 
-
-
-
-
-
-
-
+$lang["latest_created_news"] = "Latest Created News";
+$lang["statistics"] = "Statistics";
 $lang["main"] = "Main";
 $lang["dashboard"] = "Dashboard";
 $lang["content_manager"] = "Content Manager";
@@ -122,7 +121,11 @@ $lang["administrators"] = "Administrators";
 $lang["all_administrators"] = "All Administrators";
 $lang["add_administrator"] = "Add Administrator";
 $lang["settings"] = "Settings";
-
+$lang["setting"] = "Setting";
+$lang["status"] = "Status";
+$lang["maintenance_mode"] = "Maintenance mode";
+$lang["snow_mode"] = "Snow mode";
+$lang["update"] = "Update";
 
 
 $lang["copyright"] = "Copyright";
@@ -166,6 +169,14 @@ $lang["notifier_danger"] = "Danger!";
 $lang["notifier_warning"] = "Warning!";
 $lang["notifier_success"] = "Success!";
 $lang["notifier_info"] = "Info!";
+
+
+$lang["notifier_success_update"] = "The item has been successfully updated.";
+
+
+
+
+
 $lang["notifier_recaptcha_verification_failed"] = "reCAPTCHA verification failed. Please try again.";
 $lang["notifier_empty_fields"] = "Both username and password are required.";
 $lang["notifier_logout"] = "You have been successfully logged out.";

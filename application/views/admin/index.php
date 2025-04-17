@@ -4,12 +4,12 @@
 <div class="page-content">
     <div class="row">
         <div class="col-md-12">
-            <?php $alert = $this->session->flashdata("crud_alert"); ?>
-            <?php if ($alert): ?>
-                <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
-                    <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                    <strong><?= $alert['alert_message']['title'] ?></strong>
-                    <?= $alert['alert_message']['description'] ?>
+            <?php $notifier = $this->session->flashdata("notifier"); ?>
+            <?php if ($notifier): ?>
+                <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                    <i data-feather="<?= $notifier['icon']; ?>"></i>
+                    <strong><?= $notifier['messages']['title'] ?></strong>
+                    <?= $notifier['messages']['description'] ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                 </div>
             <?php endif; ?>
@@ -40,32 +40,6 @@
             </div>
         </div>
     </div>
-    <?php if (!empty($news_last_collection)): ?>
-        <h4 class="mb-3"><?= $this->lang->line("latest_created_news"); ?></h4>
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="row flex-grow-1">
-                    <?php $current_language = $this->session->userdata("admin_lang"); ?>
-                    <?php foreach ($news_last_collection as $news): ?>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card">
-                                <img src="<?= base_url('public/uploads/news/') . $news["img"]; ?>" class="card-img-top"
-                                    alt="<?= $news["title_en"] ?>">
-                                <div class="card-body">
-                                    <a class=" fs-16px" href="<?= base_url('admin/news/') . $news['id']; ?>">
-                                        <?= $news["title_$current_language"]; ?>
-                                    </a>
-                                    <p class="card-text text-truncate-multiline">
-                                        <?= $news["short_description_$current_language"]; ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
