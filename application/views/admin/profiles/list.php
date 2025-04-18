@@ -29,7 +29,14 @@
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <?php
+                                $language_session_key = $this->config->item("language_session_key");
+                                $current_language = $this->session->userdata($language_session_key["admin"]);
+                                $counter = 0;
+                                ?>
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -62,77 +69,68 @@
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
-<?php
-$language_session_key = $this->config->item("language_session_key");
-$current_language = $this->session->userdata($language_session_key["admin"]);
-$counter = 0;
-?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
         item.addEventListener("click", function () {
             document.getElementById("deleteButton").href = this.getAttribute("data-url");
         });
     });
-
-
-
-    $("#profilesDataTable").DataTable({
-        serverSide: true,
-        processing: true,
-        ajax: {
-            url: "<?= base_url('admin/profiles/json') ?>",
-            type: "POST",
-            data: function (d) {
-                d['<?= $this->security->get_csrf_token_name(); ?>'] = $('meta[name="csrf-token"]').attr('content');
-            },
-            dataSrc: function (json) {
-                // Обновляем мета-тег с новым токеном
-                $('meta[name="csrf-token"]').attr('content', json.csrf_token);
-                return json.data;
-            }
+    $('#profilesDataTable').DataTable({
+    pageLength: 1,
+    serverSide: true,
+    processing: true,
+    ajax: {
+        url: "<?= base_url('admin/profiles/datatable_json'); ?>", // Используем метод контроллера
+        type: "POST",
+        data: function (d) {
+            d['<?= $this->security->get_csrf_token_name(); ?>'] = $('meta[name="csrf-token"]').attr('content');
         },
-        columns: [
-            { data: "id" },
-            { data: "image" },
-            { data: "first_name" },
-            { data: "last_name" },
-            { data: "role" },
-            { data: "status" },
-            { data: "actions" }
-        ],
-        language: {
-            <?php if ($current_language === "ru"): ?>
-                                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-            <?php elseif ($current_language === "az"): ?>
-                                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
-            <?php else: ?>
-                                    url: '',
-            <?php endif; ?>
+        dataSrc: function (json) {
+            // Обновляем CSRF токен
+            $('meta[name="csrf-token"]').attr('content', json.csrf_token);
+
+            // Обрабатываем данные перед выводом
+            json.data.forEach(function(row) {
+                // Формируем изображение на клиенте
+                if (row.img) {
+                    row.img = '<img src="' + row.img + '" width="40">';
+                }
+
+                // Статус
+                if (row.status === 1) {
+                    row.status = '✅';
+                } else {
+                    row.status = '❌';
+                }
+
+                // Создание ссылок на действия
+                row.actions = '<a href="#">Edit</a>';
+            });
+
+            return json.data;
         }
-    });
+    },
+    columns: [
+        { data: 'id' },
+        { data: 'img' },
+        { data: 'first_name' },
+        { data: 'last_name' },
+        { data: 'role' },
+        { data: 'status' },
+        { data: 'actions', orderable: false, searchable: false }
+    ],
+    language: {
+        <?php if ($current_language === "ru"): ?>
+        url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+        <?php elseif ($current_language === "az"): ?>
+        url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
+        <?php else: ?>
+        url: '',
+        <?php endif; ?>
+    }
+});
 
 
-
-
-
-
-
-
-
-    // $("#profilesDataTable").DataTable({
-    //     paging: true,
-    //     searching: true,
-    //     ordering: true,
-    //     language: {
-    //         <?php if ($current_language === "ru"): ?>
-        //                             url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-        //         <?php elseif ($current_language === "az"): ?>
-        //                             url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
-        //         <?php else: ?>
-        //                             url: '',
-        //         <?php endif; ?>
-    //     }
-    // });
 </script>
 <script>
     Fancybox.bind("#profile", {

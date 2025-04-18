@@ -18,59 +18,21 @@ class ProfilesController extends CRUD_Controller
         }
     }
 
+    public function datatable_json()
+    {
 
-
-
-    public function json()
-{
-    $request = $_POST;
-
-    $start = $request['start'] ?? 0;
-    $length = $request['length'] ?? 10;
-    $search = $request['search']['value'] ?? "";
-    $orderColumnIndex = $request['order'][0]['column'] ?? 0;
-    $orderDir = $request['order'][0]['dir'] ?? 'asc';
-    $columns = $request['columns'];
-    $orderColumn = $columns[$orderColumnIndex]['data'] ?? 'id';
-
-    $totalData = $this->AdminsModel->count_all();
-    $filteredData = $this->AdminsModel->count_filtered($search);
-    $data = $this->AdminsModel->get_filtered($search, $start, $length, $orderColumn, $orderDir);
-
-    $result = [];
-
-    foreach ($data as $profile) {
-        $result[] = [
-            "id" => $profile["id"],
-            "image" => '<img src="' . base_url("public/uploads/profiles/" . $profile["img"]) . '" style="height:40px;width:40px;object-fit:cover;">',
-            "first_name" => $profile["first_name"],
-            "last_name" => $profile["last_name"],
-            "role" => $profile["role"],
-            "status" => '<input type="checkbox" ' . ($profile["status"] ? "checked" : "") . '>',
-            "actions" => '... тут dropdown ...'
+        // Параметры для универсального метода
+        $table = 'admins';
+        $columns = ['id', 'img', 'first_name', 'last_name', 'role', 'status'];
+        $searchable_columns = ['first_name', 'last_name', 'role'];
+        $custom_order = [
+            'first_name' => 'custom_first_name_column', // Пример настраиваемого порядка сортировки
+            'status' => 'custom_status_column' // Другой пример
         ];
+
+        // Вызов универсального метода с параметрами
+        $this->sdatatable_json($table, $columns, $searchable_columns, $custom_order);
     }
-
-    echo json_encode([
-        "draw" => intval($request['draw']),
-        "recordsTotal" => intval($totalData),
-        "recordsFiltered" => intval($filteredData),
-        "data" => $result,
-        "csrf_token" => $this->security->get_csrf_hash()
-    ]);
-}
-
-    
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -81,6 +43,7 @@ class ProfilesController extends CRUD_Controller
 
     public function index()
     {
+
         $context = [
             "page_title" => $this->lang->line("all_administrators"),
             "profiles_collection" => $this->AdminsModel->all()
@@ -88,7 +51,8 @@ class ProfilesController extends CRUD_Controller
         $this->load->view("admin/profiles/list", $context);
     }
 
-    public function status($id){
+    public function status($id)
+    {
         $status = $this->input->post("status");
         $data = [
             "status" => $status === "on"
