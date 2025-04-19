@@ -110,38 +110,22 @@ class MY_Controller extends CI_Controller
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function sdatatable_json($table, $columns, $searchable_columns = [], $custom_order = null) {
+    public function datatable_json($table, $columns, $searchable_columns = [], $custom_order = null)
+    {
         $post = $this->input->post();
         $start = $post["start"] ?? 0;
         $length = $post["length"] ?? 10;
         $search = $post["search"]["value"] ?? "";
         $order_col = $post["order"][0]["column"] ?? 0;
         $order_dir = $post["order"][0]["dir"] ?? "desc";
-        
-        // Выбираем колонку для сортировки с учетом custom_order
+
         $order_by = $columns[$order_col] ?? $columns[0];
         if ($custom_order && isset($custom_order[$order_by])) {
-            // Если для этой колонки есть пользовательский порядок сортировки
             $order_by = $custom_order[$order_by];
         }
-    
-        // Строим запрос к базе
+
         $this->db->from($table);
-    
-        // Если есть поисковое значение, добавляем фильтрацию
+
         if (!empty($search) && !empty($searchable_columns)) {
             $this->db->group_start();
             foreach ($searchable_columns as $column) {
@@ -149,63 +133,33 @@ class MY_Controller extends CI_Controller
             }
             $this->db->group_end();
         }
-    
-        // Считаем общее количество отфильтрованных записей
-        $totalFiltered = $this->db->count_all_results('', false);
-    
-        // Применяем сортировку и лимит
+
+        $totalFiltered = $this->db->count_all_results("", false);
+
         $this->db->order_by($order_by, $order_dir);
         $this->db->limit($length, $start);
         $query = $this->db->get();
         $data = $query->result();
-    
-        // Формируем результат
+
         $result = [];
         foreach ($data as $item) {
             $row = [];
             foreach ($columns as $column) {
-                $row[$column] = isset($item->$column) ? $item->$column : ''; // Обрабатываем данные
+                $row[$column] = isset($item->$column) ? $item->$column : "";
             }
             $result[] = $row;
         }
-    
-        // Получаем общее количество записей без учета фильтрации
+
         $total = $this->db->count_all($table);
-    
-        // Возвращаем данные в формате JSON
+
         echo json_encode([
-            'draw' => intval($this->input->post('draw')),
-            'recordsTotal' => $total,
-            'recordsFiltered' => $totalFiltered,
-            'data' => $result,
+            "draw" => intval($this->input->post("draw")),
+            "recordsTotal" => $total,
+            "recordsFiltered" => $totalFiltered,
+            "data" => $result,
             "csrf_token" => $this->security->get_csrf_hash()
         ]);
     }
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 /*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/

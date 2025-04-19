@@ -21,13 +21,13 @@ class AdvertisingController extends CRUD_Controller
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
         if (!empty($context["advertising"])) {
-            $advertising_title = $context["advertising"]["title_{$this->current_admin_language}"];
+            $advertising_title = $context["advertising"]["title_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("view") . " • $advertising_title";
             $this->load->view("admin/advertising/detail", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/advertising"));
@@ -51,9 +51,9 @@ class AdvertisingController extends CRUD_Controller
         $location_allowed = [1, 2, 3];
 
         if (!in_array($location, $location_allowed)) {
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("hacking_data_alert_title"),
-                "description" => $this->lang->line("hacking_data_alert_description")
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_hacking_data")
             ]);
 
             redirect(base_url("admin/news/create"));
@@ -61,7 +61,7 @@ class AdvertisingController extends CRUD_Controller
 
         if (!empty($title_az) && !empty($title_en) && !empty($title_ru)) {
             $upload_path = "./public/uploads/advertising/";
-            $upload_result = $this->upload_image("img", $upload_path);
+            $upload_result = $this->filemanager->upload_media("img", $upload_path, "jpg|png|jpeg|webp");
 
             if ($upload_result["success"]) {
                 $uploaded_img_data = $upload_result["data"];
@@ -78,25 +78,25 @@ class AdvertisingController extends CRUD_Controller
 
                 $this->AdvertisingModel->create($data);
 
-                $this->alert_flashdata("crud_alert", "success", [
-                    "title" => $this->lang->line("success_added_alert_title"),
-                    "description" => $this->lang->line("success_added_alert_description")
+                $this->notifier("notifier", "success", [
+                    "title" => $this->lang->line("notifier_success"),
+                    "description" => $this->lang->line("notifier_success_added")
                 ]);
 
                 redirect(base_url("admin/advertising"));
 
             } else {
-                $this->alert_flashdata("crud_alert", "warning", [
-                    "title" => $this->lang->line("invalid_img_format_alert_title"),
-                    "description" => $this->lang->line("invalid_img_format_alert_description")
+                $this->notifier("notifier", "warning", [
+                    "title" => $this->lang->line("notifier_warning"),
+                    "description" => $this->lang->line("notifier_invalid_img_format")
                 ]);
 
                 redirect(base_url("admin/advertising/create"));
             }
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
 
             redirect(base_url("admin/advertising/create"));
@@ -107,13 +107,13 @@ class AdvertisingController extends CRUD_Controller
     {
         $context["advertising"] = $this->AdvertisingModel->find($id);
         if (!empty($context["advertising"])) {
-            $advertising_title = $context["advertising"]["title_{$this->current_admin_language}"];
+            $advertising_title = $context["advertising"]["title_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("edit_advertising") . " • $advertising_title";
             $this->load->view("admin/advertising/edit", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
             redirect(base_url("admin/advertising"));
         }
@@ -124,9 +124,9 @@ class AdvertisingController extends CRUD_Controller
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
         if (empty($context["advertising"])) {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/advertising"));
@@ -141,9 +141,9 @@ class AdvertisingController extends CRUD_Controller
         $location_allowed = [1, 2, 3];
 
         if (!in_array($location, $location_allowed)) {
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("hacking_data_alert_title"),
-                "description" => $this->lang->line("hacking_data_alert_description")
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_hacking_data")
             ]);
 
             redirect(base_url("admin/news/create"));
@@ -154,17 +154,17 @@ class AdvertisingController extends CRUD_Controller
             $current_img_name = $context["advertising"]["img"];
 
             if (!empty($_FILES["img"]["name"])) {
-                $upload_result = $this->upload_image("img", $upload_path);
+                $upload_result = $this->filemanager->upload_media("img", $upload_path, "jpg|png|jpeg|webp");
 
                 if ($upload_result["success"]) {
                     $uploaded_img_data = $upload_result["data"];
                     $current_img_name = $uploaded_img_data["file_name"];
                     $old_image_path = $upload_path . $context["advertising"]["img"];
-                    $this->delete_file($old_image_path);
+                    $this->filemanager->delete_file($old_image_path);
                 } else {
-                    $this->alert_flashdata("crud_alert", "warning", [
-                        "title" => $this->lang->line("invalid_img_format_alert_title"),
-                        "description" => $this->lang->line("invalid_img_format_alert_description")
+                    $this->notifier("notifier", "warning", [
+                        "title" => $this->lang->line("notifier_warning"),
+                        "description" => $this->lang->line("notifier_invalid_img_format")
                     ]);
 
                     redirect(base_url("admin/advertising/$id/edit"));
@@ -182,16 +182,16 @@ class AdvertisingController extends CRUD_Controller
 
             $this->AdvertisingModel->update($id, $data);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_update_alert_title"),
-                "description" => $this->lang->line("success_update_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_update")
             ]);
 
             redirect(base_url("admin/advertising/$id/edit"));
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
 
             redirect(base_url("admin/advertising/$id/edit"));
@@ -203,9 +203,9 @@ class AdvertisingController extends CRUD_Controller
         $context["advertising"] = $this->AdvertisingModel->find($id);
 
         if (empty($context["advertising"])) {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/advertising"));
@@ -213,15 +213,37 @@ class AdvertisingController extends CRUD_Controller
 
         $upload_path = "./public/uploads/advertising/";
         $current_image_path = $upload_path . $context["advertising"]["img"];
-        $this->delete_file($current_image_path);
+        $this->filemanager->delete_file($current_image_path);
 
         $this->AdvertisingModel->delete($id);
 
-        $this->alert_flashdata("crud_alert", "success", [
-            "title" => $this->lang->line("success_delete_alert_title"),
-            "description" => $this->lang->line("success_delete_alert_description")
+        $this->notifier("notifier", "success", [
+            "title" => $this->lang->line("notifier_success"),
+            "description" => $this->lang->line("notifier_success_delete")
         ]);
 
         redirect(base_url("admin/advertising"));
+    }
+
+    public function status($id)
+    {
+        $status = $this->input->post("status");
+        $data = [
+            "status" => $status === "on"
+        ];
+        $this->AdminsModel->update($id, $data);
+        $this->notifier("notifier", "success", [
+            "title" => $this->lang->line("notifier_success"),
+            "description" => $this->lang->line("notifier_success_update")
+        ]);
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/profiles"));
+    }
+
+    public function json()
+    {
+        $table = $this->AdminsModel->get_table_name();
+        $columns = ["id", "title_az", "title_en", "title_ru", "location", "img", "status"];
+        $searchable_columns = ["title_az", "title_en", "title_ru", "location", "status"];
+        $this->datatable_json($table, $columns, $searchable_columns);
     }
 }

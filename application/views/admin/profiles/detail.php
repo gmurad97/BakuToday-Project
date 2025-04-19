@@ -10,26 +10,19 @@
                         <?= $this->lang->line("view"); ?> •
                         <?= $profile["first_name"] . ' ' . $profile["last_name"]; ?>
                     </h6>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                        </div>
+                    <?php endif; ?>
                     <div class="d-flex flex-row justify-content-center align-items-center mb-3">
-
-                        <form id="myForm" action="" class="was-validated">
-                            <input type="text" REQUIRED class="form-control" minlength="10">
-                        </form>
-
-
-
-
-                        <!-- <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-fancybox
-                            data-caption="Single image">
-                            <img src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" />
-                        </a> -->
-
-
-                        <!-- <a href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>" data-lity>
-                            <img style="object-fit:cover;width:128px;height:128px;border-radius:50%;"
-                                src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>"
-                                alt="Profile Image">
-                        </a> -->
+                        <a id="profile" href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
+                            <img style="object-fit:cover;width:150px;height:150px;border-radius:50%;" src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
+                        </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -90,8 +83,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span
-                                        class="badge rounded-pill <?= in_array($profile["role"], ['root', 'admin']) ? 'bg-danger' : 'bg-primary'; ?>">
+                                    <span class="badge rounded-pill <?= in_array($profile["role"], ['root', 'admin']) ? 'bg-danger' : 'bg-primary'; ?>">
                                         <?= $this->lang->line($profile["role"]); ?>
                                     </span>
                                 </td>
@@ -103,15 +95,12 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <?php if ($profile["status"]): ?>
-                                        <span class="badge border border-success text-success">
-                                            <?= $this->lang->line("enabled"); ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span class="badge border border-secondary text-secondary">
-                                            <?= $this->lang->line("disabled"); ?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <form action="<?= base_url('admin/profiles/' . $profile['id'] . '/status'); ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                                        <div class="form-check form-switch">
+                                            <input name="status" type="checkbox" class="form-check-input" onclick="this.form.submit();" <?= $profile["status"] ? "checked" : ""; ?>>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             <tr>
@@ -142,12 +131,10 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        class="btn btn-outline-danger">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">
                         <?= $this->lang->line("delete"); ?>
                     </a>
-                    <a href="<?= base_url('admin/profiles/' . $profile['id'] . '/edit'); ?>"
-                        class="btn btn-outline-warning">
+                    <a href="<?= base_url('admin/profiles/' . $profile['id'] . '/edit'); ?>" class="btn btn-outline-warning">
                         <?= $this->lang->line("edit"); ?>
                     </a>
                     <a href="<?= base_url('admin/profiles'); ?>" class="btn btn-primary">
@@ -174,8 +161,7 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="<?= base_url('admin/profiles/' . $profile['id'] . '/delete'); ?>" id="deleteButton"
-                    class="btn btn-outline-danger">
+                <a href="<?= base_url('admin/profiles/' . $profile['id'] . '/delete'); ?>" id="deleteButton" class="btn btn-outline-danger">
                     <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
@@ -183,24 +169,9 @@
     </div>
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
-
 <?php $this->load->view("admin/partials/_scripts"); ?>
 <script>
-    Fancybox.bind("[data-fancybox]", {
-        // Your custom options
+    Fancybox.bind("#profile", {
+        groupAll: false
     });
-
-
-</script>
-
-<script>
-/*     $(document).ready(function () {
-        $("#myForm").validate({
-            errorClass: "is-invalid", // Класс для ошибочных полей
-            validClass: "is-valid",   // Класс для валидных полей
-            errorPlacement: function (error, element) {
-                error.insertAfter(element); // Размещение ошибки после поля
-            }
-        });
-    }); */
 </script>

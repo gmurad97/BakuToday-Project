@@ -91,6 +91,10 @@ class ENTITY_Model extends MY_Model
         }
     }
 
+    public function get_table_name(){
+        return $this->table_name;
+    }
+
     public function all($order_by = "DESC", $conditions = [])
     {
         $order_by = strtoupper($order_by) === "ASC" ? "ASC" : "DESC";
