@@ -25,8 +25,6 @@
                                     <th><?= $this->lang->line("title"); ?></th>
                                     <th><?= $this->lang->line("location"); ?></th>
                                     <th><?= $this->lang->line("status"); ?></th>
-                                    <th><?= $this->lang->line("created_at"); ?></th>
-                                    <th><?= $this->lang->line("updated_at"); ?></th>
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
@@ -74,21 +72,16 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             document.getElementById("deleteButton").href = this.getAttribute("data-url");
         });
     });
-    const ROLES_LANG = {
-        "root": "<?= $this->lang->line("root") ?>",
-        "admin": "<?= $this->lang->line("admin") ?>",
-        "moderator": "<?= $this->lang->line("moderator") ?>",
-    };
     const ACTIONS_LANG = {
         "view": "<?= $this->lang->line("view") ?>",
         "edit": "<?= $this->lang->line("edit") ?>",
         "delete": "<?= $this->lang->line("delete") ?>"
     };
-    $("#profilesDataTable").DataTable({
+    $("#advertisingDataTable").DataTable({
         serverSide: true,
         processing: true,
         ajax: {
-            url: "<?= base_url('admin/profiles/json'); ?>",
+            url: "<?= base_url('admin/advertising/json'); ?>",
             type: "POST",
             data: function (d) {
                 d["<?= $this->security->get_csrf_token_name(); ?>"] = $("meta[name='csrf-token']").attr("content");
@@ -97,15 +90,14 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
                 $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 json.data.forEach(function (row, idx) {
                     row.counter = idx + 1;
-                    row.img = `<a id="profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}"></a>`;
-                    row.first_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.first_name}</span>`;
-                    row.last_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.last_name}</span>`;
-                    row.role = `<span class="badge rounded-pill ${['root', 'admin'].includes(row.role) ? 'bg-danger' : 'bg-primary'}">${ROLES_LANG[row.role] || row.role}</span>`;
+                    row.img = `<a id="advertising" href="<?= base_url('public/uploads/advertising/') ?>${row.img}"><img src="<?= base_url('public/uploads/advertising/') ?>${row.img}"></a>`;
+                    row.title = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row['title_' + '<?= $current_language; ?>'] ?? ''}</span>`;
+                    row.location = row.location;
                     row.status = `
-                        <form method="post" action="<?= base_url('admin/profiles/') ?>${row.id}/status">
+                        <form method="post" action="<?= base_url('admin/advertising/') ?>${row.id}/status">
                             <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="${$('meta[name=csrf-token]').attr('content')}">
                             <div class="form-check form-switch mb-0">
-                                <input type="checkbox" class="form-check-input" id="switch-${row.id}" name="status" onchange="this.form.submit()" ${row.status === '1' ? 'checked' : ''}>
+                                <input type="checkbox" class="form-check-input" id="switch-${row.id}" name="status" onchange="this.form.submit();" ${row.status === '1' ? 'checked' : ''}>
                                 <label class="form-check-label" for="switch-${row.id}"></label>
                             </div>
                         </form>`;
@@ -141,32 +133,31 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
         columns: [
             { data: "counter" },
             { data: "img", orderable: false, searchable: false },
-            { data: "first_name" },
-            { data: "last_name" },
-            { data: "role" },
+            { data: "title" },
+            { data: "location" },
             { data: "status" },
             { data: "actions", orderable: false, searchable: false }
         ],
         language: {
             <?php if ($current_language === "ru"): ?>
-                        url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+                            url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
             <?php elseif ($current_language === "az"): ?>
-                        url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
+                            url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
             <?php else: ?>
-                        url: '',
+                            url: '',
             <?php endif; ?>
         }
     });
-    $("#profilesDataTable").on("draw.dt", function () {
+    $("#advertisingDataTable").on("draw.dt", function () {
         feather.replace();
     });
-    document.querySelector("#profilesDataTable").addEventListener("click", function (event) {
+    document.querySelector("#advertisingDataTable").addEventListener("click", function (event) {
         if (event.target.closest("[data-bs-toggle='modal']")) {
             const deleteUrl = event.target.closest("[data-bs-toggle='modal']").getAttribute("data-url");
             document.getElementById("deleteButton").href = deleteUrl;
         }
     });
-    Fancybox.bind("#profile", {
+    Fancybox.bind("#advertising", {
         groupAll: false
     });
 </script>

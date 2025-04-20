@@ -50,31 +50,54 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-/*================> System Routes <================*/
+/*<================> System Routes <================>*/
 $route["default_controller"] = "DefaultController";
 $route["404_override"] = "ErrorController";
 $route["translate_uri_dashes"] = FALSE;
 
-/*================> Language Routes <================*/
+/*<================> Language Routes <================>*/
 $route["locale/(:any)"]["GET"] = "user/LanguageController/index/$1";
 $route["admin/locale/(:any)"]["GET"] = "admin/LanguageController/index/$1";
 
-/*================> User Routes <================*/
+/*<================> User Routes <================>*/
+/*<========> Home Routes <========>*/
+$route[""]["GET"] = "user/HomeController/index";
+$route["home"]["GET"] = "user/HomeController/home";
 
-// $route[""]["GET"] = "sss";
-// $route["home"]["GET"] = "user/HomeController/home";
+/*<========> Blog Routes <========>*/
+$route["blog"]["GET"] = "user/CategoriesController/index";
+$route["blog/(:any)"]["GET"] = "user/HomeController/home";
 
-/*================> Admin Routes <================*/
+/*<========> Categories Routes <========>*/
+$route["categories"]["GET"] = "user/CategoriesController/index";
+$route["categories/(:any)"]["GET"] = "user/HomeController/home";
 
-/*========> Auth Routes <========*/
+/*<========> Author Routes <========>*/
+$route["author"]["GET"] = "user/HomeController/home";
+
+/*<========> About Routes <========>*/
+$route["about"]["GET"] = "sss";
+
+/*<========> Contacts Routes <========>*/
+$route["contacts"]["GET"] = "user/HomeController/home";
+
+/*<========> Team Routes <========>*/
+$route["team"]["GET"] = "user/HomeController/home";
+
+/*<========> Auth Routes <========>*/
+$route["signin"]["GET"] = "user/HomeController/home";
+$route["signup"]["GET"] = "user/HomeController/home";
+
+/*<================> Admin Routes <================>*/
+/*<========> Auth Routes <========>*/
 $route["admin/login"]["GET"] = "admin/AuthController/index";
 $route["admin/login/verify"]["POST"] = "admin/AuthController/verify";
 $route["admin/logout"]["GET"] = "admin/AuthController/logout";
 
-/*========> Dashboard Routes <========*/
+/*<========> Dashboard Routes <========>*/
 $route["admin/dashboard"]["GET"] = "admin/DashboardController/index";
 
-/*========> Profiles Routes <========*/
+/*<========> Profiles Routes <========>*/
 $route["admin/profiles"]["GET"] = "admin/ProfilesController/index";
 $route["admin/profiles/create"]["GET"] = "admin/ProfilesController/create";
 $route["admin/profiles/store"]["POST"] = "admin/ProfilesController/store";
@@ -82,43 +105,45 @@ $route["admin/profiles/json"]["POST"] = "admin/ProfilesController/json";
 $route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
 $route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
 $route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
-$route["admin/profiles/(:any)/status"]["POST"] = "admin/ProfilesController/status/$1";
 $route["admin/profiles/(:any)/delete"]["POST"] = "admin/ProfilesController/destroy/$1";
 $route["admin/profiles/(:any)/status"]["POST"] = "admin/ProfilesController/status/$1";
 
-/*========> Categories Routes <========*/
+/*<========> Categories Routes <========>*/
 $route["admin/categories"]["GET"] = "admin/CategoriesController/index";
 $route["admin/categories/create"]["GET"] = "admin/CategoriesController/create";
 $route["admin/categories/store"]["POST"] = "admin/CategoriesController/store";
-$route["admin/categories/tables"]["POST"] = "admin/CategoriesController/tables";
+$route["admin/categories/json"]["POST"] = "admin/CategoriesController/json";
 $route["admin/categories/(:any)"]["GET"] = "admin/CategoriesController/show/$1";
 $route["admin/categories/(:any)/edit"]["GET"] = "admin/CategoriesController/edit/$1";
 $route["admin/categories/(:any)/update"]["POST"] = "admin/CategoriesController/update/$1";
 $route["admin/categories/(:any)/status"]["POST"] = "admin/CategoriesController/status/$1";
 $route["admin/categories/(:any)/delete"]["POST"] = "admin/CategoriesController/destroy/$1";
+$route["admin/categories/(:any)/status"]["POST"] = "admin/CategoriesController/status/$1";
 
-/*========> News Routes <========*/
+/*<========> News Routes <========>*/
 $route["admin/news"]["GET"] = "admin/NewsController/index";
 $route["admin/news/create"]["GET"] = "admin/NewsController/create";
 $route["admin/news/store"]["POST"] = "admin/NewsController/store";
-$route["admin/news/tables"]["POST"] = "admin/NewsController/tables";
+$route["admin/news/json"]["POST"] = "admin/NewsController/json";
 $route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
 $route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
 $route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
 $route["admin/news/(:any)/status"]["POST"] = "admin/NewsController/status/$1";
 $route["admin/news/(:any)/delete"]["POST"] = "admin/NewsController/destroy/$1";
+$route["admin/news/(:any)/status"]["POST"] = "admin/NewsController/status/$1";
 
-/*========> Advertising Routes <========*/
+/*<========> Advertising Routes <========>*/
 $route["admin/advertising"]["GET"] = "admin/AdvertisingController/index";
 $route["admin/advertising/create"]["GET"] = "admin/AdvertisingController/create";
 $route["admin/advertising/store"]["POST"] = "admin/AdvertisingController/store";
-$route["admin/advertising/tables"]["POST"] = "admin/AdvertisingController/tables";
+$route["admin/advertising/json"]["POST"] = "admin/AdvertisingController/json";
 $route["admin/advertising/(:any)"]["GET"] = "admin/AdvertisingController/show/$1";
 $route["admin/advertising/(:any)/edit"]["GET"] = "admin/AdvertisingController/edit/$1";
 $route["admin/advertising/(:any)/update"]["POST"] = "admin/AdvertisingController/update/$1";
 $route["admin/advertising/(:any)/status"]["POST"] = "admin/AdvertisingController/status/$1";
 $route["admin/advertising/(:any)/delete"]["POST"] = "admin/AdvertisingController/destroy/$1";
+$route["admin/advertising/(:any)/status"]["POST"] = "admin/AdvertisingController/status/$1";
 
-/*========> Settings Routes <========*/
+/*<========> Settings Routes <========>*/
 $route["admin/settings"]["GET"] = "admin/SettingsController/index";
 $route["admin/settings/update"]["POST"] = "admin/SettingsController/update";

@@ -231,17 +231,17 @@ class AdvertisingController extends CRUD_Controller
         $data = [
             "status" => $status === "on"
         ];
-        $this->AdminsModel->update($id, $data);
+        $this->AdvertisingModel->update($id, $data);
         $this->notifier("notifier", "success", [
             "title" => $this->lang->line("notifier_success"),
             "description" => $this->lang->line("notifier_success_update")
         ]);
-        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/profiles"));
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/advertising"));
     }
 
     public function json()
     {
-        $table = $this->AdminsModel->get_table_name();
+        $table = $this->AdvertisingModel->get_table_name();
         $columns = ["id", "title_az", "title_en", "title_ru", "location", "img", "status"];
         $searchable_columns = ["title_az", "title_en", "title_ru", "location", "status"];
         $this->datatable_json($table, $columns, $searchable_columns);

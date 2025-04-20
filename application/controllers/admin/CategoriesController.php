@@ -9,60 +9,60 @@ class CategoriesController extends CRUD_Controller
         $this->load->model("admin/CategoriesModel");
         $this->load->model("admin/NewsModel");
 
-/*         $xr = $this->NewsModel->with_author_category();
+// /*         $xr = $this->NewsModel->with_author_category();
 
-        print_r("<pre>");
-        print_r($xr); */
-        die();
-
-    }
-
-
-    public function zn(){
-// Получение параметров запроса
-$limit = $this->input->post('length');
-$start = $this->input->post('start');
-$order = $this->input->post('order')[0]['column'];
-$dir = $this->input->post('order')[0]['dir'];
-$search = $this->input->post('search')['value'];
-
-// Названия колонок для сортировки
-$columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
-$order = $columns[$order] ?? 'id';
-
-// Получение данных
-$data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
-$total = $this->CategoriesModel->get_total_count();
-$filtered = $this->CategoriesModel->get_filtered_count($search);
-
-// Формируем ответ для DataTables
-$response = [
-    "draw" => intval($this->input->post('draw')),
-    "recordsTotal" => $total,
-    "recordsFiltered" => $filtered,
-    "data" => array_map(function ($row) {
-        return [
-            $row['id'],
-            $row['name_en'],
-            '<form action="' . base_url('admin/categories/' . $row['id'] . '/status') . '" method="post">
-                <input type="hidden" name="' . $this->security->get_csrf_token_name() . '" value="' . $this->security->get_csrf_hash() . '">
-                <div class="form-check form-switch">
-                    <input 
-                        type="checkbox" 
-                        class="form-check-input" 
-                        onchange="this.form.submit()" 
-                        ' . ($row['status'] ? 'checked' : '') . '>
-                </div>
-            </form>',
-            $row['created_at'],
-            $row['updated_at'],
-        ];
-    }, $data)
-];
-
-echo json_encode($response);
+//         print_r("<pre>");
+//         print_r($xr); */
+//         die();
 
     }
+
+
+//     public function zn(){
+// // Получение параметров запроса
+// $limit = $this->input->post('length');
+// $start = $this->input->post('start');
+// $order = $this->input->post('order')[0]['column'];
+// $dir = $this->input->post('order')[0]['dir'];
+// $search = $this->input->post('search')['value'];
+
+// // Названия колонок для сортировки
+// $columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
+// $order = $columns[$order] ?? 'id';
+
+// // Получение данных
+// $data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
+// $total = $this->CategoriesModel->get_total_count();
+// $filtered = $this->CategoriesModel->get_filtered_count($search);
+
+// // Формируем ответ для DataTables
+// $response = [
+//     "draw" => intval($this->input->post('draw')),
+//     "recordsTotal" => $total,
+//     "recordsFiltered" => $filtered,
+//     "data" => array_map(function ($row) {
+//         return [
+//             $row['id'],
+//             $row['name_en'],
+//             '<form action="' . base_url('admin/categories/' . $row['id'] . '/status') . '" method="post">
+//                 <input type="hidden" name="' . $this->security->get_csrf_token_name() . '" value="' . $this->security->get_csrf_hash() . '">
+//                 <div class="form-check form-switch">
+//                     <input 
+//                         type="checkbox" 
+//                         class="form-check-input" 
+//                         onchange="this.form.submit()" 
+//                         ' . ($row['status'] ? 'checked' : '') . '>
+//                 </div>
+//             </form>',
+//             $row['created_at'],
+//             $row['updated_at'],
+//         ];
+//     }, $data)
+// ];
+
+// echo json_encode($response);
+
+//     }
 
     public function index()
     {
@@ -212,24 +212,25 @@ echo json_encode($response);
     }
 
 
-    public function upd($id)
+    public function status($id)
     {
-        
-        $status = $this->input->post('status') === 'on' ? 1 : 0; // Чекбокс передаёт "on" при включении
+        $status = $this->input->post("status");
+        $data = [
+            "status" => $status === "on"
+        ];
+        $this->CategoriesModel->update($id, $data);
+        $this->notifier("notifier", "success", [
+            "title" => $this->lang->line("notifier_success"),
+            "description" => $this->lang->line("notifier_success_update")
+        ]);
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/advertising"));
+    }
 
-        if (!isset($id)) {
-            show_error('Некорректный запрос', 400);
-        }
-
-        $update = $this->CategoriesModel->update_status($id, $status);
-
-        if ($update) {
-            // Опционально: добавь флеш-сообщение
-            $this->session->set_flashdata('success', 'Статус успешно обновлён.');
-        } else {
-            $this->session->set_flashdata('error', 'Ошибка при обновлении статуса.');
-        }
-
-        redirect($_SERVER['HTTP_REFERER']); // Вернёмся обратно на список
+    public function json()
+    {
+        $table = $this->CategoriesModel->get_table_name();
+        $columns = ["id", "name_az", "name_en", "name_ru", "img", "status"];
+        $searchable_columns = ["name_az", "name_en", "name_ru", "status"];
+        $this->datatable_json($table, $columns, $searchable_columns);
     }
 }

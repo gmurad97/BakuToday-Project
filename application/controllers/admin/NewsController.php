@@ -332,4 +332,32 @@ class NewsController extends CRUD_Controller
 
         redirect(base_url("admin/news"));
     }
+
+
+
+    public function status($id)
+    {
+        $status = $this->input->post("status");
+        $data = [
+            "status" => $status === "on"
+        ];
+        $this->AdvertisingModel->update($id, $data);
+        $this->notifier("notifier", "success", [
+            "title" => $this->lang->line("notifier_success"),
+            "description" => $this->lang->line("notifier_success_update")
+        ]);
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/advertising"));
+    }
+
+    public function json()
+    {
+        $table = $this->AdvertisingModel->get_table_name();
+        $columns = ["id", "title_az", "title_en", "title_ru", "location", "img","type", "status"];
+        $searchable_columns = ["title_az", "title_en", "title_ru", "location", "status"];
+        $this->datatable_json($table, $columns, $searchable_columns);
+
+
+
+        // id	title_az	title_en	title_ru	short_description_az	short_description_en	short_description_ru	long_description_az	long_description_en	long_description_ru	img	multi_img	category_id	author_id	type	status
+    }
 }
