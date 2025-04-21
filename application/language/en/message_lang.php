@@ -198,6 +198,7 @@ $lang["notifier_account_disabled"] = "Your account has been disabled.";
 $lang["notifier_access_denied"] = "You don't have permission to access this page.";
 $lang["notifier_login_failed"] = "Invalid username or password.";
 $lang["notifier_invalid_id"] = "The provided ID is invalid or does not exist.";
+$lang["notifier_settings_not_configured"] = "Settings have not been configured yet.";
 
 $lang["notifier_success_added"] = "The item has been successfully added.";
 $lang["notifier_success_delete"] = "The item has been successfully deleted.";

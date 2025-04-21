@@ -24,12 +24,14 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("first_name"); ?>
                                 </label>
                                 <input name="first_name" type="text" class="form-control" placeholder="<?= $this->lang->line("enter_your_first_name"); ?>" id="first_name" value="<?= $profile['first_name']; ?>" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="last_name" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("last_name"); ?>
                                 </label>
                                 <input name="last_name" type="text" class="form-control" placeholder="<?= $this->lang->line("enter_your_last_name"); ?>" id="last_name" value="<?= $profile['last_name']; ?>" required>
@@ -38,12 +40,14 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="email" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("email"); ?>
                                 </label>
                                 <input name="email" type="email" class="form-control" placeholder="example@example.com" id="email" value="<?= $profile['email']; ?>" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="username" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("username"); ?>
                                 </label>
                                 <input name="username" type="text" class="form-control" placeholder="<?= $this->lang->line("enter_your_username"); ?>" id="username" value="<?= $profile['username']; ?>" required>
@@ -78,7 +82,7 @@
                                 <label for="img" class="form-label">
                                     <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon" type="file" class="form-control" id="img">
+                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/webp" type="file" class="form-control" id="img">
                             </div>
                         </div>
                         <div class="row mb-3">

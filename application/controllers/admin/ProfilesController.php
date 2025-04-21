@@ -113,12 +113,24 @@ class ProfilesController extends CRUD_Controller
                 redirect(base_url("admin/profiles"));
 
             } else {
-                $this->notifier("notifier", "warning", [
-                    "title" => $this->lang->line("notifier_warning"),
-                    "description" => $this->lang->line("notifier_invalid_img_format")
+                $data = [
+                    "first_name" => $first_name,
+                    "last_name" => $last_name,
+                    "email" => $email,
+                    "username" => $username,
+                    "password" => hash("sha256", $password),
+                    "role" => $role,
+                    "status" => $status === "on"
+                ];
+
+                $this->AdminsModel->create($data);
+
+                $this->notifier("notifier", "success", [
+                    "title" => $this->lang->line("notifier_success"),
+                    "description" => $this->lang->line("notifier_success_added")
                 ]);
 
-                redirect(base_url("admin/profiles/create"));
+                redirect(base_url("admin/profiles"));
             }
         } else {
             $this->notifier("notifier", "warning", [
@@ -171,20 +183,20 @@ class ProfilesController extends CRUD_Controller
         $existing_email = $this->AdminsModel->find(["email" => $email]);
         $existing_user = $this->AdminsModel->find(["username" => $username]);
 
-        if ($existing_email) {
+        if ($existing_email && $existing_email["email"] != $context["profile"]["email"]) {
             $this->notifier("notifier", "warning", [
                 "title" => $this->lang->line("notifier_warning"),
                 "description" => $this->lang->line("notifier_email_existing")
             ]);
-            redirect(base_url("admin/profiles/create"));
+            redirect(base_url("admin/profiles/{$id}/edit"));
         }
 
-        if ($existing_user) {
+        if ($existing_user && $existing_user["username"] != $context["profile"]["username"]) {
             $this->notifier("notifier", "warning", [
                 "title" => $this->lang->line("notifier_warning"),
                 "description" => $this->lang->line("notifier_username_existing")
             ]);
-            redirect(base_url("admin/profiles/create"));
+            redirect(base_url("admin/profiles/{$id}/edit"));
         }
 
         if (

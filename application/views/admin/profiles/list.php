@@ -63,8 +63,10 @@
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
 <?php
+$languages = $this->config->item("languages");
 $language_session_key = $this->config->item("language_session_key");
 $current_language = $this->session->userdata($language_session_key["admin"]);
+$current_language_translate = base_url($languages[$current_language]["json"]);
 ?>
 <script>
     const ROLES_LANG = {
@@ -90,7 +92,9 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
                 $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 json.data.forEach(function (row, idx) {
                     row.counter = idx + 1;
-                    row.img = `<a id="profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}"></a>`;
+                    row.img = row.img
+                        ? `<a id="profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}" alt="Profile" height="40"></a>`
+                        : `<a id="profile" href="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>"><img src="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>" alt="Profile" height="40"></a>`;
                     row.first_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.first_name}</span>`;
                     row.last_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.last_name}</span>`;
                     row.role = `<span class="badge rounded-pill ${['root', 'admin'].includes(row.role) ? 'bg-danger' : 'bg-primary'}">${ROLES_LANG[row.role] || row.role}</span>`;
@@ -141,13 +145,7 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             { data: "actions", orderable: false, searchable: false }
         ],
         language: {
-            <?php if ($current_language === "ru"): ?>
-                url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-            <?php elseif ($current_language === "az"): ?>
-                url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
-            <?php else: ?>
-                url: '',
-            <?php endif; ?>
+            url: '<?= $current_language_translate; ?>',
         }
     });
     $("#profilesDataTable").on("draw.dt", function () {

@@ -5,10 +5,13 @@ class NewsController extends CRUD_Controller
 {
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model("admin/NewsModel");
-        $this->load->model("admin/CategoriesModel");
-        $this->load->model("admin/AdminsModel");
+        // parent::__construct();
+        // $this->load->model("admin/NewsModel");
+        // $this->load->model("admin/CategoriesModel");
+        // $this->load->model("admin/AdminsModel");
+
+
+        // $this->db->delete("news","id=1")
     }
 
     public function index()

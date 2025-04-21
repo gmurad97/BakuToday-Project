@@ -7,7 +7,6 @@ class SettingsController extends BASE_Controller
     {
         parent::__construct();
         $this->load->model("admin/SettingsModel");
-
         if (!$this->rolesmanager->has_access("admin")) {
             $this->lang->load("message", $this->get_admin_language());
             $this->notifier("notifier", "danger", [
@@ -21,11 +20,16 @@ class SettingsController extends BASE_Controller
     public function index()
     {
         $context["page_title"] = $this->lang->line("settings");
-        $context["settings"] = json_decode($this->SettingsModel->find([])["collection"], false);
-
-        if ($context["settings"]) {
+        $settings = $this->SettingsModel->find([]);
+        if ($settings) {
+            $context["settings"] = json_decode($settings["collection"], false);
             $this->load->view("admin/settings/edit", $context);
         } else {
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_settings_not_configured")
+            ]);
+
             redirect(base_url("admin/dashboard"));
         }
     }

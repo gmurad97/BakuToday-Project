@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== MY_Model - Model extending CI_Model for common purposes ==========*/
+/*<================> MY_Model - Model extending CI_Model for common purposes <================>*/
 /**
  * @property CI_Benchmark $benchmark
  * @property CI_Cache $cache
@@ -61,7 +61,7 @@ class MY_Model extends CI_Model
     }
 }
 
-/*========== ENTITY_Model - Model extending MY_Model, adding reusable database methods ==========*/
+/*<================> ENTITY_Model - Model extending MY_Model, adding reusable database methods <================>*/
 /**
  * @property string $table_name
  * @property string $primary_key
@@ -91,8 +91,14 @@ class ENTITY_Model extends MY_Model
         }
     }
 
-    public function get_table_name(){
+    public function get_table_name()
+    {
         return $this->table_name;
+    }
+
+    public function get_primary_key()
+    {
+        return $this->primary_key;
     }
 
     public function all($order_by = "DESC", $conditions = [])

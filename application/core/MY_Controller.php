@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========== MY_Controller - Controller extending CI_Controller for common purposes ==========*/
+/*<================> MY_Controller - Controller extending CI_Controller for common purposes <================>*/
 /**
  * @property CI_Benchmark $benchmark
  * @property CI_Cache $cache
@@ -162,7 +162,7 @@ class MY_Controller extends CI_Controller
     }
 }
 
-/*========== BASE_Controller - Abstract template for creating controllers based on MY_Controller ==========*/
+/*<================> BASE_Controller - Abstract template for creating controllers based on MY_Controller <================>*/
 abstract class BASE_Controller extends MY_Controller
 {
     public function __construct()
@@ -173,7 +173,7 @@ abstract class BASE_Controller extends MY_Controller
     abstract public function index();
 }
 
-/*========== ERROR_Controller - Abstract base controller for handling error-specific functionality ==========*/
+/*<================> ERROR_Controller - Abstract base controller for handling error-specific functionality <================>*/
 abstract class ERROR_Controller extends MY_Controller
 {
     public function __construct()
@@ -184,7 +184,7 @@ abstract class ERROR_Controller extends MY_Controller
     abstract public function index();
 }
 
-/*========== CRUD_Controller - Abstract controller for implementing CRUD operations ==========*/
+/*<================> CRUD_Controller - Abstract controller for implementing CRUD operations <================>*/
 abstract class CRUD_Controller extends MY_Controller
 {
     public function __construct()

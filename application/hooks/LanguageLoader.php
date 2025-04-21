@@ -12,17 +12,13 @@ class LanguageLoader
     private $default_language = [];
     private $route_type = "";
 
-    public function __construct()
+    public function initialize()
     {
         $this->CI =& get_instance();
         $this->CI->load->helper("language");
         $this->language_session_key = $this->CI->config->item("language_session_key");
         $this->default_language = $this->CI->config->item("default_language");
         $this->route_type = $this->CI->uri->segment(1);
-    }
-
-    public function initialize()
-    {
         $type = $this->route_type === "admin" ? "admin" : "user";
         $session_key = $this->language_session_key[$type];
         $this->set_language($session_key, $type);

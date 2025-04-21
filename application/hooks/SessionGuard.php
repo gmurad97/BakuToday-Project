@@ -12,17 +12,13 @@ class SessionGuard
     private $route_type;
     private $admin_auth_session_key = "";
 
-    public function __construct()
+    public function initialize($params)
     {
         $this->CI =& get_instance();
         $this->CI->load->model("admin/AdminsModel");
         $this->uri_string = $this->CI->uri->uri_string();
         $this->route_type = str_contains($this->uri_string, "admin") ? "admin" : "user";
         $this->admin_auth_session_key = $this->CI->config->item("admin_auth_session_key");
-    }
-
-    public function initialize($params)
-    {
         if ($params["is_admin_guarded"] && $this->route_type === "admin") {
             $this->handle_guard("admin/login", "admin/dashboard", "AdminsModel");
         }

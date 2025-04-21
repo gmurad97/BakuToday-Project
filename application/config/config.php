@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/*========> Auth Config <========*/
+/*<================> Auth Config <================>*/
 $config["admin_auth_session_key"] = "admin_identity";
 
-/*========> Roles Config <========*/
+/*<================> Roles Config <================>*/
 $config["roles"] = [
     "root" => ["root"],
     "admin" => ["admin", "root"],
     "moderator" => ["moderator", "admin", "root"]
 ];
 
-/*========> Language Config <========*/
+/*<================> Language Config <================>*/
 $config["language_session_key"] = [
     "admin" => "admin_lang",
     "user" => "user_lang"
@@ -23,24 +23,24 @@ $config["default_language"] = [
 $config["languages"] = [
     "az" => [
         "icon" => "public/shared/flags/az.svg",
-        "lang" => "Azərbaycan"
+        "lang" => "Azərbaycan",
+        "json" => "public/admin/assets/vendors/datatables@2.1.8/translate/az.json",
     ],
     "en" => [
         "icon" => "public/shared/flags/us.svg",
-        "lang" => "English"
+        "lang" => "English",
+        "json" => "public/admin/assets/vendors/datatables@2.1.8/translate/en.json",
     ],
     "ru" => [
         "icon" => "public/shared/flags/ru.svg",
-        "lang" => "Русский"
+        "lang" => "Русский",
+        "json" => "public/admin/assets/vendors/datatables@2.1.8/translate/ru.json",
     ]
 ];
 
-/*========> Google ReCaptcha V2 Config <========*/
+/*<================> Google ReCaptcha V2 Config <================>*/
 $config["grecaptcha_site_key"] = "6LcnPBcrAAAAAGIoMryZcmfAiAtXdeEHSBMF95pG";
 $config["grecaptcha_secret_key"] = "6LcnPBcrAAAAAJAou3fso0tykHsPXfW3btVQGkuA";
-
-/*========> HttpClient Config <========*/
-$config["http_client_ua"] = "BakuTodayClient/1.0.0";
 
 /*
 |--------------------------------------------------------------------------
