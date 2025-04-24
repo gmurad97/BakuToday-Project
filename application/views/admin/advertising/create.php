@@ -1,6 +1,6 @@
-<?php $this->load->view("admin/partials/head"); ?>
-<?php $this->load->view("admin/partials/sidebar"); ?>
-<?php $this->load->view("admin/partials/navbar"); ?>
+<?php $this->load->view("admin/partials/_head"); ?>
+<?php $this->load->view("admin/partials/_sidebar"); ?>
+<?php $this->load->view("admin/partials/_navbar"); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -9,51 +9,44 @@
                     <h6 class="card-title">
                         <?= $this->lang->line("create_advertising"); ?>
                     </h6>
-                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
-                    <?php if ($alert): ?>
-                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
-                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                            <strong><?= $alert['alert_message']['title'] ?></strong>
-                            <?= $alert['alert_message']['description'] ?>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
-                    <form action="<?= base_url('admin/advertising/store'); ?>" method="POST"
-                        enctype="multipart/form-data">
-                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-                            value="<?= $this->security->get_csrf_hash(); ?>">
+                    <form action="<?= base_url('admin/advertising/store'); ?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab"
-                                    aria-controls="az" aria-selected="true">
+                                <a class="nav-link active" id="az-line-tab" data-bs-toggle="tab" href="#az" role="tab" aria-controls="az" aria-selected="true">
                                     AZ
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="en-line-tab" data-bs-toggle="tab" href="#en" role="tab"
-                                    aria-controls="en" aria-selected="true">
+                                <a class="nav-link" id="en-line-tab" data-bs-toggle="tab" href="#en" role="tab" aria-controls="en" aria-selected="true">
                                     EN
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="ru-line-tab" data-bs-toggle="tab" href="#ru" role="tab"
-                                    aria-controls="ru" aria-selected="true">
+                                <a class="nav-link" id="ru-line-tab" data-bs-toggle="tab" href="#ru" role="tab" aria-controls="ru" aria-selected="true">
                                     RU
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="lineTabContent">
-                            <div class="tab-pane fade show active" id="az" role="tabpanel"
-                                aria-labelledby="az-line-tab">
+                            <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-line-tab">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="title_az" class="form-label">
+                                                <span class="text-danger">*</span>
                                                 <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="title_az" maxlength="255" type="text" class="form-control"
-                                                placeholder="Ən yaxşı seçiminiz üçün reklam edin!" id="title_az"
-                                                required>
+                                            <input name="title_az" maxlength="255" type="text" class="form-control" placeholder="Ən yaxşı seçiminiz üçün reklam edin!" id="title_az" required>
                                         </div>
                                     </div>
                                 </div>
@@ -63,10 +56,10 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="title_en" class="form-label">
+                                                <span class="text-danger">*</span>
                                                 <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="title_en" maxlength="255" type="text" class="form-control"
-                                                placeholder="Advertise for the best results!" id="title_en" required>
+                                            <input name="title_en" maxlength="255" type="text" class="form-control" placeholder="Advertise for the best results!" id="title_en" required>
                                         </div>
                                     </div>
                                 </div>
@@ -76,11 +69,10 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="title_ru" class="form-label">
+                                                <span class="text-danger">*</span>
                                                 <?= $this->lang->line("title"); ?>
                                             </label>
-                                            <input name="title_ru" maxlength="255" type="text" class="form-control"
-                                                placeholder="Рекламируйтесь для лучших результатов!" id="title_ru"
-                                                required>
+                                            <input name="title_ru" maxlength="255" type="text" class="form-control" placeholder="Рекламируйтесь для лучших результатов!" id="title_ru" required>
                                         </div>
                                     </div>
                                 </div>
@@ -89,6 +81,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="location" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("location"); ?>
                                 </label>
                                 <select name="location" id="location" class="form-select">
@@ -99,10 +92,10 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="img" class="form-label">
+                                    <span class="text-danger">*</span>
                                     <?= $this->lang->line("image"); ?>
                                 </label>
-                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/gif, image/x-icon"
-                                    type="file" class="form-control" id="img" required>
+                                <input name="img" accept="image/jpeg, image/jpg, image/png, image/webp" type="file" class="form-control" id="img" required>
                             </div>
                         </div>
                         <div class="row">
@@ -124,5 +117,5 @@
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/partials/footer"); ?>
-<?php $this->load->view("admin/partials/scripts"); ?>
+<?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>

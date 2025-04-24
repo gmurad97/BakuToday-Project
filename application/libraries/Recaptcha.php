@@ -22,6 +22,7 @@ class ReCaptcha
 
     public function render($theme = "light", $size = "normal")
     {
+        $current_admin_language = $this->CI->get_admin_language();
         return <<<RECAPTCHA
         <style>
         iframe[title="reCAPTCHA"] {
@@ -37,7 +38,7 @@ class ReCaptcha
         data-theme="$theme"
         data-size="$size">
         </div>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://www.google.com/recaptcha/api.js?hl=$current_admin_language" async defer></script>
         RECAPTCHA;
     }
 

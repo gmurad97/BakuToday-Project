@@ -93,9 +93,9 @@ $current_language_translate = base_url($languages[$current_language]["json"]);
                 json.data.forEach(function (row, idx) {
                     row.counter = idx + 1;
                     row.img = row.img
-                        ? `<a id="profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}" alt="Profile" height="40"></a>`
-                        : `<a id="profile" href="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>"><img src="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>" alt="Profile" height="40"></a>`;
-                    row.first_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.first_name}</span>`;
+                        ? `<a class="fancybox_profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}" alt="Profile" height="40"></a>`
+                        : `<a class="fancybox_profile" href="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>"><img src="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>" alt="Profile" height="40"></a>`;
+                    row.first_name = `<a href="<?= base_url('admin/profiles/') ?>${row.id}/edit"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row.first_name}</span></a>`;
                     row.last_name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row.last_name}</span>`;
                     row.role = `<span class="badge rounded-pill ${['root', 'admin'].includes(row.role) ? 'bg-danger' : 'bg-primary'}">${ROLES_LANG[row.role] || row.role}</span>`;
                     row.status = `
@@ -157,7 +157,7 @@ $current_language_translate = base_url($languages[$current_language]["json"]);
             document.getElementById("deleteButton").href = deleteUrl;
         }
     });
-    Fancybox.bind("#profile", {
+    Fancybox.bind(".fancybox_profile", {
         groupAll: false
     });
 </script>

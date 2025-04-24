@@ -65,28 +65,28 @@ $route[""]["GET"] = "user/HomeController/index";
 $route["home"]["GET"] = "user/HomeController/home";
 
 /*<========> Blog Routes <========>*/
-$route["blog"]["GET"] = "user/CategoriesController/index";
-$route["blog/(:any)"]["GET"] = "user/HomeController/home";
+$route["blog"]["GET"] = "user/BlogController/index";
+$route["blog/(:any)"]["GET"] = "user/BlogController/show/$1";
 
 /*<========> Categories Routes <========>*/
 $route["categories"]["GET"] = "user/CategoriesController/index";
-$route["categories/(:any)"]["GET"] = "user/HomeController/home";
+$route["categories/(:any)"]["GET"] = "user/CategoriesController/show/$1";
 
 /*<========> Author Routes <========>*/
-$route["author"]["GET"] = "user/HomeController/home";
+$route["author"]["GET"] = "user/AuthorController/index";
 
 /*<========> About Routes <========>*/
-$route["about"]["GET"] = "sss";
+$route["about"]["GET"] = "user/AboutController/index";
 
 /*<========> Contacts Routes <========>*/
-$route["contacts"]["GET"] = "user/HomeController/home";
+$route["contacts"]["GET"] = "user/ContactsController/index";
 
 /*<========> Team Routes <========>*/
-$route["team"]["GET"] = "user/HomeController/home";
+$route["team"]["GET"] = "user/TeamController/index";
 
 /*<========> Auth Routes <========>*/
-$route["signin"]["GET"] = "user/HomeController/home";
-$route["signup"]["GET"] = "user/HomeController/home";
+$route["signin"]["GET"] = "user/AuthController/index";
+$route["signup"]["GET"] = "user/AuthController/register";
 
 /*<================> Admin Routes <================>*/
 /*<========> Auth Routes <========>*/
