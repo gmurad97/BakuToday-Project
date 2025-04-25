@@ -5,13 +5,9 @@ class NewsController extends CRUD_Controller
 {
     public function __construct()
     {
-        // parent::__construct();
-        // $this->load->model("admin/NewsModel");
-        // $this->load->model("admin/CategoriesModel");
-        // $this->load->model("admin/AdminsModel");
-
-
-        // $this->db->delete("news","id=1")
+        parent::__construct();
+        $this->load->model("admin/NewsModel");
+        $this->load->model("admin/CategoriesModel");
     }
 
     public function index()
@@ -57,11 +53,11 @@ class NewsController extends CRUD_Controller
         $long_description_az = $this->input->post("long_description_az", false);
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
+        $video_link = $this->input->post("video_link", true);
         $category_id = $this->input->post("category_id", true);
         $author_id = $this->session->userdata("admin_credentials")["id"];
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
-
         $categories_collection = $this->CategoriesModel->all();
         $categories_ids = array_column($categories_collection, "id");
         $types_allowed = ["daily_news", "important_news", "general_news"];
@@ -355,7 +351,7 @@ class NewsController extends CRUD_Controller
     public function json()
     {
         $table = $this->AdvertisingModel->get_table_name();
-        $columns = ["id", "title_az", "title_en", "title_ru", "location", "img","type", "status"];
+        $columns = ["id", "title_az", "title_en", "title_ru", "location", "img", "type", "status"];
         $searchable_columns = ["title_az", "title_en", "title_ru", "location", "status"];
         $this->datatable_json($table, $columns, $searchable_columns);
 

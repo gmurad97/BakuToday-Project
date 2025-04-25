@@ -7,12 +7,12 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?= $this->lang->line("all_categories"); ?></h6>
-                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
-                    <?php if ($alert): ?>
-                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
-                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                            <strong><?= $alert['alert_message']['title'] ?></strong>
-                            <?= $alert['alert_message']['description'] ?>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
@@ -21,7 +21,6 @@
                             <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th><?= $this->lang->line("image"); ?></th>
                                     <th><?= $this->lang->line("name"); ?></th>
                                     <th><?= $this->lang->line("status"); ?></th>
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
@@ -60,17 +59,13 @@
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
-
 <?php
+$languages = $this->config->item("languages");
 $language_session_key = $this->config->item("language_session_key");
 $current_language = $this->session->userdata($language_session_key["admin"]);
+$current_language_translate = base_url($languages[$current_language]["json"]);
 ?>
 <script>
-    const ROLES_LANG = {
-        "root": "<?= $this->lang->line("root") ?>",
-        "admin": "<?= $this->lang->line("admin") ?>",
-        "moderator": "<?= $this->lang->line("moderator") ?>",
-    };
     const ACTIONS_LANG = {
         "view": "<?= $this->lang->line("view") ?>",
         "edit": "<?= $this->lang->line("edit") ?>",
@@ -79,6 +74,13 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
     $("#categoriesDataTable").DataTable({
         serverSide: true,
         processing: true,
+        autoWidth: false,
+        columnDefs: [
+            {
+                targets: 0,
+                width: "1%",
+            }
+        ],
         ajax: {
             url: "<?= base_url('admin/categories/json'); ?>",
             type: "POST",
@@ -88,9 +90,9 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             dataSrc: function (json) {
                 $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 json.data.forEach(function (row, idx) {
-                    row.counter = idx + 1;
-                    row.img = `<a id="profile" href="<?= base_url('public/uploads/categories/') ?>${row.img}"><img src="<?= base_url('public/uploads/categories/') ?>${row.img}"></a>`;
-                    row.name = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row['name_' + '<?= $current_language; ?>'] ?? ''}</span>`;
+                    const start = $("#categoriesDataTable").DataTable().page.info().start;
+                    row.counter = start + idx + 1;
+                    row.name = `<a href="<?= base_url('admin/categories/') ?>${row.id}/edit"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row['name_' + '<?= $current_language; ?>'] ?? ''}</span></a>`;
                     row.status = `
                         <form method="post" action="<?= base_url('admin/categories/') ?>${row.id}/status">
                             <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="${$('meta[name=csrf-token]').attr('content')}">
@@ -106,19 +108,19 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_${row.id}">
                                 <a class="dropdown-item d-flex align-items-center"
-                                    href="<?= base_url('admin/profiles/') ?>${row.id}">
+                                    href="<?= base_url('admin/categories/') ?>${row.id}">
                                     <i data-feather="eye" class="icon-sm text-info me-2"></i>
                                     <span class="text-info">${ACTIONS_LANG.view}</span>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center"
-                                    href="<?= base_url('admin/profiles/') ?>${row.id}/edit">
+                                    href="<?= base_url('admin/categories/') ?>${row.id}/edit">
                                     <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
                                     <span class="text-warning">${ACTIONS_LANG.edit}</span>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center"
                                     href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal"
-                                    data-url="<?= base_url('admin/profiles/') ?>${row.id}/delete">
+                                    data-url="<?= base_url('admin/categories/') ?>${row.id}/delete">
                                     <i data-feather="trash" class="icon-sm text-danger me-2"></i>
                                     <span class="text-danger">${ACTIONS_LANG.delete}</span>
                                 </a>
@@ -130,19 +132,12 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
         },
         columns: [
             { data: "counter" },
-            { data: "img", orderable: false, searchable: false },
             { data: "name" },
             { data: "status" },
             { data: "actions", orderable: false, searchable: false }
         ],
         language: {
-            <?php if ($current_language === "ru"): ?>
-                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-            <?php elseif ($current_language === "az"): ?>
-                    url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
-            <?php else: ?>
-                    url: '',
-            <?php endif; ?>
+            url: '<?= $current_language_translate; ?>',
         }
     });
     $("#categoriesDataTable").on("draw.dt", function () {
@@ -153,8 +148,5 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             const deleteUrl = event.target.closest("[data-bs-toggle='modal']").getAttribute("data-url");
             document.getElementById("deleteButton").href = deleteUrl;
         }
-    });
-    Fancybox.bind("#categories", {
-        groupAll: false
     });
 </script>

@@ -1,6 +1,6 @@
-<?php $this->load->view("admin/partials/head"); ?>
-<?php $this->load->view("admin/partials/sidebar"); ?>
-<?php $this->load->view("admin/partials/navbar"); ?>
+<?php $this->load->view("admin/partials/_head"); ?>
+<?php $this->load->view("admin/partials/_sidebar"); ?>
+<?php $this->load->view("admin/partials/_navbar"); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -11,6 +11,15 @@
                         <?= $this->lang->line("view"); ?> •
                         <?= $category["name_$current_language"]; ?>
                     </h6>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                        </div>
+                    <?php endif; ?>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
@@ -32,15 +41,12 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <?php if ($category["status"]): ?>
-                                        <span class="badge border border-success text-success">
-                                            <?= $this->lang->line("enabled"); ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span class="badge border border-secondary text-secondary">
-                                            <?= $this->lang->line("disabled"); ?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <form action="<?= base_url('admin/categories/' . $category['id'] . '/status'); ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                                        <div class="form-check form-switch">
+                                            <input name="status" type="checkbox" class="form-check-input" onclick="this.form.submit();" <?= $category["status"] ? "checked" : ""; ?>>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             <tr>
@@ -71,12 +77,10 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        class="btn btn-outline-danger">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">
                         <?= $this->lang->line("delete"); ?>
                     </a>
-                    <a href="<?= base_url('admin/categories/' . $category['id'] . '/edit'); ?>"
-                        class="btn btn-outline-warning">
+                    <a href="<?= base_url('admin/categories/' . $category['id'] . '/edit'); ?>" class="btn btn-outline-warning">
                         <?= $this->lang->line("edit"); ?>
                     </a>
                     <a href="<?= base_url('admin/categories'); ?>" class="btn btn-primary">
@@ -103,13 +107,12 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="<?= base_url('admin/categories/' . $category['id'] . '/delete'); ?>" id="deleteButton"
-                    class="btn btn-outline-danger">
+                <a href="<?= base_url('admin/categories/' . $category['id'] . '/delete'); ?>" id="deleteButton" class="btn btn-outline-danger">
                     <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/partials/footer"); ?>
-<?php $this->load->view("admin/partials/scripts"); ?>
+<?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>

@@ -82,6 +82,13 @@ $current_language_translate = base_url($languages[$current_language]["json"]);
     $("#profilesDataTable").DataTable({
         serverSide: true,
         processing: true,
+        autoWidth: false,
+        columnDefs: [
+            {
+                targets: 0,
+                width: "1%",
+            }
+        ],
         ajax: {
             url: "<?= base_url('admin/profiles/json'); ?>",
             type: "POST",
@@ -91,7 +98,8 @@ $current_language_translate = base_url($languages[$current_language]["json"]);
             dataSrc: function (json) {
                 $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 json.data.forEach(function (row, idx) {
-                    row.counter = idx + 1;
+                    const start = $("#profilesDataTable").DataTable().page.info().start;
+                    row.counter = start + idx + 1;
                     row.img = row.img
                         ? `<a class="fancybox_profile" href="<?= base_url('public/uploads/profiles/') ?>${row.img}"><img src="<?= base_url('public/uploads/profiles/') ?>${row.img}" alt="Profile" height="40"></a>`
                         : `<a class="fancybox_profile" href="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>"><img src="<?= base_url('public/admin/assets/images/others/profile-placeholder.png') ?>" alt="Profile" height="40"></a>`;

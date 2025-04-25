@@ -22,67 +22,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-
-
-
-$lang["view_category"] = "View category";
-$lang["edit_category"] = "Edit category";
-$lang["category_name"] = "Category name";
 $lang["name"] = "Name";
 $lang["read_more"] = "Read more";
-$lang["edit_advertising"] = "Edit Advertising";
-$lang["title"] = "Title";
-$lang["location"] = "Location";
+
+
 $lang["edit_news"] = "Edit News";
 $lang["edit_administrator"] = "Edit Administrator";
 $lang["admin_404_error_oopps"] = "Oopps!! The page you were looking for doesn't exist.";
 $lang["back_to_home"] = "Back to home";
 $lang["view_news"] = "View News";
 $lang["author"] = "Author";
-$lang["category"] = "Category";
 $lang["type"] = "Type";
 $lang["short_description"] = "Short Description";
 $lang["long_description"] = "Long Description";
 $lang["multiple_images"] = "Multiple Images";
-$lang["success_delete_alert_title"] = "Success!";
+// $lang["success_delete_alert_title"] = "Success!";
+// $lang["maintenance"] = "Maintenance";
+// $lang["maintenance_title"] = "Maintenance Mode";
+// $lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
+
+
+
+
+
+
+
+
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+//Updated!!!
+$lang["video_link"] = "Video Link";
 $lang["daily_news"] = "Daily";
 $lang["general_news"] = "General";
 $lang["important_news"] = "Important";
-$lang["maintenance"] = "Maintenance";
-// $lang["maintenance_title"] = "Maintenance Mode";
-// $lang["maintenance_description"] = "We're currently performing maintenance. Please try again later.";
-$lang["unchange_current_password"] = "Leave blank to keep current password";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Updated!!!
-//Updated!!!
-//Updated!!!
-//Updated!!!
-//Updated!!!
-//Updated!!!
-//Updated!!!
-//Updated!!!
+$lang["view_category"] = "View category";
+$lang["edit_category"] = "Edit category";
+$lang["category_name"] = "Category name";
+$lang["category"] = "Category";
+$lang["edit_advertising"] = "Edit Advertising";
+$lang["title"] = "Title";
+$lang["location"] = "Location";
 $lang["enter_your_email_or_username"] = "Enter your email or username";
 $lang["enter_your_first_name"] = "Enter your first name";
 $lang["enter_your_last_name"] = "Enter your last name";
@@ -213,3 +197,4 @@ $lang["notifier_invalid_img_format"] = "The image format is not supported.";
 
 
 $lang["page_not_found"] = "Page Not Found";
+$lang["unchange_current_password"] = "Leave blank to keep current password";

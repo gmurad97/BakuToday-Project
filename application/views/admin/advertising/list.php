@@ -61,10 +61,11 @@
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
-
 <?php
+$languages = $this->config->item("languages");
 $language_session_key = $this->config->item("language_session_key");
 $current_language = $this->session->userdata($language_session_key["admin"]);
+$current_language_translate = base_url($languages[$current_language]["json"]);
 ?>
 <script>
     document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
@@ -80,6 +81,13 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
     $("#advertisingDataTable").DataTable({
         serverSide: true,
         processing: true,
+        autoWidth: false,
+        columnDefs: [
+            {
+                targets: [0, 1, 2],
+                width: "1%",
+            }
+        ],
         ajax: {
             url: "<?= base_url('admin/advertising/json'); ?>",
             type: "POST",
@@ -89,10 +97,13 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             dataSrc: function (json) {
                 $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 json.data.forEach(function (row, idx) {
-                    row.counter = idx + 1;
-                    row.img = `<a id="advertising" href="<?= base_url('public/uploads/advertising/') ?>${row.img}"><img src="<?= base_url('public/uploads/advertising/') ?>${row.img}"></a>`;
-                    row.title = `<span class="d-inline-block text-truncate" style="max-width: 150px;">${row['title_' + '<?= $current_language; ?>'] ?? ''}</span>`;
-                    row.location = row.location;
+                    const start = $("#advertisingDataTable").DataTable().page.info().start;
+                    row.counter = start + idx + 1;
+                    row.img = row.img
+                        ? `<a class="fancybox_advertising" href="<?= base_url('public/uploads/advertising/') ?>${row.img}"><img src="<?= base_url('public/uploads/advertising/') ?>${row.img}" alt="Advertising" height="40"></a>`
+                        : `<a class="fancybox_advertising" href="<?= base_url('public/admin/assets/images/others/placeholder.jpg') ?>"><img src="<?= base_url('public/admin/assets/images/others/placeholder.jpg') ?>" alt="Advertising" height="40"></a>`;
+                    row.title = `<a href="<?= base_url('admin/advertising/') ?>${row.id}/edit"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row['title_' + '<?= $current_language; ?>'] ?? ''}</span></a>`;
+                    row.location = `<span class="badge rounded-pill bg-primary px-3 fw-bold">${row.location}</span>`;
                     row.status = `
                         <form method="post" action="<?= base_url('admin/advertising/') ?>${row.id}/status">
                             <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="${$('meta[name=csrf-token]').attr('content')}">
@@ -108,19 +119,19 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_${row.id}">
                                 <a class="dropdown-item d-flex align-items-center"
-                                    href="<?= base_url('admin/profiles/') ?>${row.id}">
+                                    href="<?= base_url('admin/advertising/') ?>${row.id}">
                                     <i data-feather="eye" class="icon-sm text-info me-2"></i>
                                     <span class="text-info">${ACTIONS_LANG.view}</span>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center"
-                                    href="<?= base_url('admin/profiles/') ?>${row.id}/edit">
+                                    href="<?= base_url('admin/advertising/') ?>${row.id}/edit">
                                     <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
                                     <span class="text-warning">${ACTIONS_LANG.edit}</span>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center"
                                     href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal"
-                                    data-url="<?= base_url('admin/profiles/') ?>${row.id}/delete">
+                                    data-url="<?= base_url('admin/advertising/') ?>${row.id}/delete">
                                     <i data-feather="trash" class="icon-sm text-danger me-2"></i>
                                     <span class="text-danger">${ACTIONS_LANG.delete}</span>
                                 </a>
@@ -139,13 +150,7 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             { data: "actions", orderable: false, searchable: false }
         ],
         language: {
-            <?php if ($current_language === "ru"): ?>
-                            url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-            <?php elseif ($current_language === "az"): ?>
-                            url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/az-AZ.json',
-            <?php else: ?>
-                            url: '',
-            <?php endif; ?>
+            url: '<?= $current_language_translate; ?>',
         }
     });
     $("#advertisingDataTable").on("draw.dt", function () {
@@ -157,7 +162,7 @@ $current_language = $this->session->userdata($language_session_key["admin"]);
             document.getElementById("deleteButton").href = deleteUrl;
         }
     });
-    Fancybox.bind("#advertising", {
+    Fancybox.bind(".fancybox_advertising", {
         groupAll: false
     });
 </script>

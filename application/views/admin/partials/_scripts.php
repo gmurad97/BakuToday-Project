@@ -1,5 +1,4 @@
 <script src="<?= base_url('public/admin/assets/vendors/jquery.validation@1.19.5/jquery.validate.min.js'); ?>"></script>
-<script src="<?= base_url('public/admin/assets/vendors/ckeditor@4.25.0/ckeditor.js'); ?>"></script>
 <script src="<?= base_url('public/admin/assets/vendors/datatables@2.1.8/datatables.min.js'); ?>"></script>
 <script src="<?= base_url('public/admin/assets/vendors/fancybox@5.0.36/fancybox.umd.js'); ?>"></script>
 <script src="<?= base_url('public/admin/assets/vendors/feathericons@4.29.2/feather.min.js'); ?>"></script>

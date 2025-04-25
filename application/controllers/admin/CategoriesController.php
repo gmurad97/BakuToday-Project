@@ -7,62 +7,7 @@ class CategoriesController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/CategoriesModel");
-        $this->load->model("admin/NewsModel");
-
-// /*         $xr = $this->NewsModel->with_author_category();
-
-//         print_r("<pre>");
-//         print_r($xr); */
-//         die();
-
     }
-
-
-//     public function zn(){
-// // Получение параметров запроса
-// $limit = $this->input->post('length');
-// $start = $this->input->post('start');
-// $order = $this->input->post('order')[0]['column'];
-// $dir = $this->input->post('order')[0]['dir'];
-// $search = $this->input->post('search')['value'];
-
-// // Названия колонок для сортировки
-// $columns = ['id', 'name', 'status', 'created_at', 'updated_at'];
-// $order = $columns[$order] ?? 'id';
-
-// // Получение данных
-// $data = $this->CategoriesModel->get_filtered_data($limit, $start, $order, $dir, $search);
-// $total = $this->CategoriesModel->get_total_count();
-// $filtered = $this->CategoriesModel->get_filtered_count($search);
-
-// // Формируем ответ для DataTables
-// $response = [
-//     "draw" => intval($this->input->post('draw')),
-//     "recordsTotal" => $total,
-//     "recordsFiltered" => $filtered,
-//     "data" => array_map(function ($row) {
-//         return [
-//             $row['id'],
-//             $row['name_en'],
-//             '<form action="' . base_url('admin/categories/' . $row['id'] . '/status') . '" method="post">
-//                 <input type="hidden" name="' . $this->security->get_csrf_token_name() . '" value="' . $this->security->get_csrf_hash() . '">
-//                 <div class="form-check form-switch">
-//                     <input 
-//                         type="checkbox" 
-//                         class="form-check-input" 
-//                         onchange="this.form.submit()" 
-//                         ' . ($row['status'] ? 'checked' : '') . '>
-//                 </div>
-//             </form>',
-//             $row['created_at'],
-//             $row['updated_at'],
-//         ];
-//     }, $data)
-// ];
-
-// echo json_encode($response);
-
-//     }
 
     public function index()
     {
@@ -75,13 +20,13 @@ class CategoriesController extends CRUD_Controller
     {
         $context["category"] = $this->CategoriesModel->find($id);
         if (!empty($context["category"])) {
-            $category_name = $context["category"]["name_{$this->current_admin_language}"];
+            $category_name = $context["category"]["name_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("view_category") . " • $category_name";
             $this->load->view("admin/categories/detail", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/categories"));
@@ -111,16 +56,16 @@ class CategoriesController extends CRUD_Controller
 
             $this->CategoriesModel->create($data);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_added_alert_title"),
-                "description" => $this->lang->line("success_added_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_added")
             ]);
 
             redirect(base_url("admin/categories"));
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
 
             redirect(base_url("admin/categories/create"));
@@ -132,13 +77,13 @@ class CategoriesController extends CRUD_Controller
         $context["category"] = $this->CategoriesModel->find($id);
 
         if (!empty($context["category"])) {
-            $category_name = $context["category"]["name_{$this->current_admin_language}"];
+            $category_name = $context["category"]["name_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("edit_category") . " • $category_name";
             $this->load->view("admin/categories/edit", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/categories"));
@@ -165,24 +110,24 @@ class CategoriesController extends CRUD_Controller
 
                 $this->CategoriesModel->update($id, $data);
 
-                $this->alert_flashdata("crud_alert", "success", [
-                    "title" => $this->lang->line("success_update_alert_title"),
-                    "description" => $this->lang->line("success_update_alert_description")
+                $this->notifier("notifier", "success", [
+                    "title" => $this->lang->line("notifier_success"),
+                    "description" => $this->lang->line("notifier_success_update")
                 ]);
 
                 redirect(base_url("admin/categories/$id/edit"));
             } else {
-                $this->alert_flashdata("crud_alert", "warning", [
-                    "title" => $this->lang->line("empty_fields_alert_title"),
-                    "description" => $this->lang->line("empty_fields_alert_description")
+                $this->notifier("notifier", "warning", [
+                    "title" => $this->lang->line("notifier_warning"),
+                    "description" => $this->lang->line("notifier_empty_fields")
                 ]);
 
                 redirect(base_url("admin/categories/$id/edit"));
             }
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/categories"));
@@ -195,22 +140,21 @@ class CategoriesController extends CRUD_Controller
         if (!empty($context["category"])) {
             $this->CategoriesModel->delete($id);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_delete_alert_title"),
-                "description" => $this->lang->line("success_delete_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_delete")
             ]);
 
             redirect(base_url("admin/categories"));
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/categories"));
         }
     }
-
 
     public function status($id)
     {
@@ -223,13 +167,13 @@ class CategoriesController extends CRUD_Controller
             "title" => $this->lang->line("notifier_success"),
             "description" => $this->lang->line("notifier_success_update")
         ]);
-        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/advertising"));
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/categories"));
     }
 
     public function json()
     {
         $table = $this->CategoriesModel->get_table_name();
-        $columns = ["id", "name_az", "name_en", "name_ru", "img", "status"];
+        $columns = ["id", "name_az", "name_en", "name_ru", "status"];
         $searchable_columns = ["name_az", "name_en", "name_ru", "status"];
         $this->datatable_json($table, $columns, $searchable_columns);
     }
