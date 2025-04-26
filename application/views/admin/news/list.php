@@ -7,12 +7,12 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?= $this->lang->line("all_news"); ?></h6>
-                    <?php $alert = $this->session->flashdata("crud_alert"); ?>
-                    <?php if ($alert): ?>
-                        <div class="alert <?= $alert['alert_class']; ?> alert-dismissible fade show" role="alert">
-                            <i data-feather="<?= $alert['alert_icon']; ?>"></i>
-                            <strong><?= $alert['alert_message']['title'] ?></strong>
-                            <?= $alert['alert_message']['description'] ?>
+                    <?php $notifier = $this->session->flashdata("notifier"); ?>
+                    <?php if ($notifier): ?>
+                        <div class="alert <?= $notifier['class']; ?> alert-dismissible fade show" role="alert">
+                            <i data-feather="<?= $notifier['icon']; ?>"></i>
+                            <strong><?= $notifier['messages']['title'] ?></strong>
+                            <?= $notifier['messages']['description'] ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
                         </div>
                     <?php endif; ?>
@@ -27,110 +27,10 @@
                                     <th><?= $this->lang->line("author"); ?></th>
                                     <th><?= $this->lang->line("type"); ?></th>
                                     <th><?= $this->lang->line("status"); ?></th>
-                                    <th><?= $this->lang->line("created_at"); ?></th>
-                                    <th><?= $this->lang->line("updated_at"); ?></th>
                                     <th><i class="icon-lg text-secondary pb-3px" data-feather="menu"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-                                $current_language = $this->session->userdata("admin_lang");
-                                $counter = 0;
-                                ?>
-                                <?php foreach ($news_collection as $news): ?>
-                                    <tr>
-                                        <td><?= ++$counter; ?></td>
-                                        <td>
-                                            <a href="<?= base_url('public/uploads/news/') . $news["img"]; ?>" data-lity>
-                                                <img style="object-fit:cover;"
-                                                    src="<?= base_url('public/uploads/news/') . $news["img"]; ?>"
-                                                    alt="Item Image">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <?= $news["title_$current_language"]; ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <a href="<?= base_url('admin/categories/') . $news['category_id']; ?>">
-                                                    <?= $news["category_name_$current_language"]; ?>
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                <a href="<?= base_url('admin/profiles/') . $news['author_id']; ?>">
-                                                    <?= $news["author_first_name"]; ?>
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <?php if ($news["type"] === "daily_news"): ?>
-                                                <span class="badge border border-info text-info">
-                                                    <?= $this->lang->line($news["type"]); ?>
-                                                </span>
-                                            <?php elseif ($news["type"] === "general_news"): ?>
-                                                <span class="badge border border-primary text-primary">
-                                                    <?= $this->lang->line($news["type"]); ?>
-                                                </span>
-                                            <?php elseif ($news["type"] === "important_news"): ?>
-                                                <span class="badge border border-danger text-danger">
-                                                    <?= $this->lang->line($news["type"]); ?>
-                                                </span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($news["status"]): ?>
-                                                <span class="badge border border-success text-success">
-                                                    <?= $this->lang->line("enabled"); ?>
-                                                </span>
-                                            <?php else: ?>
-                                                <span class="badge border border-secondary text-secondary">
-                                                    <?= $this->lang->line("disabled"); ?>
-                                                </span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td><?= $news["created_at"]; ?></td>
-                                        <td><?= $news["updated_at"]; ?></td>
-
-                                        <td>
-                                            <div class="dropdown mb-2">
-                                                <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/news/' . $news['id']); ?>">
-                                                        <i data-feather="eye" class="icon-sm text-info me-2"></i>
-                                                        <span class="text-info">
-                                                            <?= $this->lang->line("view"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="<?= base_url('admin/news/' . $news['id']) . '/edit'; ?>">
-                                                        <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
-                                                        <span class="text-warning">
-                                                            <?= $this->lang->line("edit"); ?>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex align-items-center"
-                                                        href="javascript:void(0);" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal"
-                                                        data-url="<?= base_url('admin/news/' . $news['id']) . '/delete'; ?>">
-                                                        <i data-feather="trash" class="icon-sm text-danger me-2"></i>
-                                                        <span class="text-danger">
-                                                            <?= $this->lang->line("delete"); ?>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -138,7 +38,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -163,11 +62,116 @@
     </div>
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>
+<?php
+$languages = $this->config->item("languages");
+$language_session_key = $this->config->item("language_session_key");
+$current_language = $this->session->userdata($language_session_key["admin"]);
+$current_language_translate = base_url($languages[$current_language]["json"]);
+?>
 <script>
-    document.querySelectorAll("[data-bs-toggle='modal']").forEach(item => {
-        item.addEventListener("click", function () {
-            document.getElementById("deleteButton").href = this.getAttribute("data-url");
-        });
+    const ACTIONS_LANG = {
+        "view": "<?= $this->lang->line("view") ?>",
+        "edit": "<?= $this->lang->line("edit") ?>",
+        "delete": "<?= $this->lang->line("delete") ?>",
+        "daily_news": "<?= $this->lang->line("daily_news") ?>",
+        "general_news": "<?= $this->lang->line("general_news") ?>",
+        "important_news": "<?= $this->lang->line("important_news") ?>"
+    };
+    $("#newsDataTable").DataTable({
+        serverSide: true,
+        processing: true,
+        autoWidth: false,
+        columnDefs: [
+            {
+                targets: 0,
+                width: "1%",
+            }
+        ],
+        ajax: {
+            url: "<?= base_url('admin/news/json'); ?>",
+            type: "POST",
+            data: function (d) {
+                d["<?= $this->security->get_csrf_token_name(); ?>"] = $("meta[name='csrf-token']").attr("content");
+            },
+            dataSrc: function (json) {
+                $('meta[name="csrf-token"]').attr('content', json.csrf_token);
+                json.data.forEach(function (row, idx) {
+                    const start = $("#newsDataTable").DataTable().page.info().start;
+                    const category_id = row.category_id;
+                    const author_id = row.author_id;
+                    row.counter = start + idx + 1;
+                    row.img = row.img
+                        ? `<a class="fancybox_news" href="<?= base_url('public/uploads/news/') ?>${row.img}"><img src="<?= base_url('public/uploads/news/') ?>${row.img}" alt="News" height="40"></a>`
+                        : `<a class="fancybox_news" href="<?= base_url('public/admin/assets/images/others/placeholder.jpg') ?>"><img src="<?= base_url('public/admin/assets/images/others/placeholder.jpg') ?>" alt="News" height="40"></a>`;
+                    row.title = `<a href="<?= base_url('admin/news/') ?>${row.id}/edit"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row['title_<?= $current_language ?>'] ?? ''}</span></a>`;
+                    row.category_id = `<a href="<?= base_url('admin/categories/') ?>${category_id}"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row['category_name_<?= $current_language ?>']}</span></a>`;
+                    row.author_id = `<a href="<?= base_url('admin/profiles/') ?>${author_id}"><span class="d-inline-block text-truncate" style="max-width: 150px;">${row['author_first_name'] + " " + row['author_last_name']}</span></a>`;
+                    row.type = `<span class="badge border ${row.type === 'daily_news' ? 'border-info text-info' :
+                        row.type === 'general_news' ? 'border-primary text-primary' :
+                            'border-danger text-danger'
+                        }">${ACTIONS_LANG[row.type]}</span>`;
+                    row.status = `
+                        <form method="post" action="<?= base_url('admin/news/') ?>${row.id}/status">
+                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="${$('meta[name=csrf-token]').attr('content')}">
+                            <div class="form-check form-switch mb-0">
+                                <input type="checkbox" class="form-check-input" id="switch-${row.id}" name="status" onchange="this.form.submit();" ${row.status === '1' ? 'checked' : ''}>
+                                <label class="form-check-label" for="switch-${row.id}"></label>
+                            </div>
+                        </form>`;
+                    row.actions = `
+                        <div class="dropdown mb-2">
+                            <a type="button" id="dropdownMenuButton_${row.id}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_${row.id}">
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="<?= base_url('admin/news/') ?>${row.id}">
+                                    <i data-feather="eye" class="icon-sm text-info me-2"></i>
+                                    <span class="text-info">${ACTIONS_LANG.view}</span>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="<?= base_url('admin/news/') ?>${row.id}/edit">
+                                    <i data-feather="edit-2" class="icon-sm text-warning me-2"></i>
+                                    <span class="text-warning">${ACTIONS_LANG.edit}</span>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-url="<?= base_url('admin/news/') ?>${row.id}/delete">
+                                    <i data-feather="trash" class="icon-sm text-danger me-2"></i>
+                                    <span class="text-danger">${ACTIONS_LANG.delete}</span>
+                                </a>
+                            </div>
+                        </div>`;
+                });
+                return json.data;
+            }
+        },
+        columns: [
+            { data: "counter" },
+            { data: "img", orderable: false, searchable: false },
+            { data: "title" },
+            { data: "category_id" },
+            { data: "author_id" },
+            { data: "type" },
+            { data: "status" },
+            { data: "actions", orderable: false, searchable: false }
+        ],
+        language: {
+            url: '<?= $current_language_translate; ?>',
+        }
+    });
+    $("#newsDataTable").on("draw.dt", function () {
+        feather.replace();
+    });
+    document.querySelector("#newsDataTable").addEventListener("click", function (event) {
+        if (event.target.closest("[data-bs-toggle='modal']")) {
+            const deleteUrl = event.target.closest("[data-bs-toggle='modal']").getAttribute("data-url");
+            document.getElementById("deleteButton").href = deleteUrl;
+        }
+    });
+    Fancybox.bind(".fancybox_news", {
+        groupAll: false
     });
 </script>
-<?php $this->load->view("admin/partials/_scripts"); ?>

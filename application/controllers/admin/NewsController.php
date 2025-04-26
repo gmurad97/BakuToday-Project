@@ -12,8 +12,9 @@ class NewsController extends CRUD_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("all_news");
-        $context["news_collection"] = $this->NewsModel->with_author_category();
+        $context = [
+            "page_title" => $this->lang->line("all_news"),
+        ];
         $this->load->view("admin/news/list", $context);
     }
 
@@ -55,7 +56,10 @@ class NewsController extends CRUD_Controller
         $long_description_ru = $this->input->post("long_description_ru", false);
         $video_link = $this->input->post("video_link", true);
         $category_id = $this->input->post("category_id", true);
-        $author_id = $this->session->userdata("admin_credentials")["id"];
+
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        $author_id = $this->session->userdata($admin_auth_session_key)["id"];
+
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
         $categories_collection = $this->CategoriesModel->all();
@@ -94,14 +98,14 @@ class NewsController extends CRUD_Controller
             }
         }
 
-        $upload_result = $this->upload_image("img", $upload_path);
+        $upload_result = $this->filemanager->upload_media("img", $upload_path, "jpg|jpeg|png|gif|webp");
         if ($upload_result["success"]) {
             $uploaded_img_data = $upload_result["data"];
             $data['img'] = $uploaded_img_data["file_name"];
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("invalid_img_format_alert_title"),
-                "description" => $this->lang->line("invalid_img_format_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_invalid_img_format")
             ]);
 
             redirect(base_url("admin/news/create"));
@@ -118,6 +122,7 @@ class NewsController extends CRUD_Controller
             && !empty($long_description_az)
             && !empty($long_description_en)
             && !empty($long_description_ru)
+            && !empty($video_link)
         ) {
             $data = array_merge($data, [
                 "title_az" => $title_az,
@@ -129,6 +134,7 @@ class NewsController extends CRUD_Controller
                 "long_description_az" => $long_description_az,
                 "long_description_en" => $long_description_en,
                 "long_description_ru" => $long_description_ru,
+                "video" => $video_link,
                 "category_id" => $category_id,
                 "author_id" => $author_id,
                 "type" => $type,
@@ -137,16 +143,16 @@ class NewsController extends CRUD_Controller
 
             $this->NewsModel->create($data);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_added_alert_title"),
-                "description" => $this->lang->line("success_added_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_added")
             ]);
 
             redirect(base_url("admin/news"));
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
 
             redirect(base_url("admin/news/create"));
@@ -158,13 +164,13 @@ class NewsController extends CRUD_Controller
         $context["news"] = $this->NewsModel->find($id);
         $context["categories_collection"] = $this->CategoriesModel->all();
         if (!empty($context["news"])) {
-            $news_title = $context["news"]["title_{$this->current_admin_language}"];
+            $news_title = $context["news"]["title_{$this->get_admin_language()}"];
             $context["page_title"] = $this->lang->line("edit_news") . " • $news_title";
             $this->load->view("admin/news/edit", $context);
         } else {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
             redirect(base_url("admin/news"));
         }
@@ -175,9 +181,9 @@ class NewsController extends CRUD_Controller
         $context["news"] = $this->NewsModel->find($id);
 
         if (empty($context["news"])) {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/news"));
@@ -192,8 +198,12 @@ class NewsController extends CRUD_Controller
         $long_description_az = $this->input->post("long_description_az", false);
         $long_description_en = $this->input->post("long_description_en", false);
         $long_description_ru = $this->input->post("long_description_ru", false);
+        $video_link = $this->input->post("video_link", true);
         $category_id = $this->input->post("category_id", true);
-        $author_id = $this->session->userdata("admin_credentials")["id"];
+
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        $author_id = $this->session->userdata($admin_auth_session_key)["id"];
+
         $type = $this->input->post("type", true);
         $status = $this->input->post("status", true);
 
@@ -202,9 +212,9 @@ class NewsController extends CRUD_Controller
         $types_allowed = ["daily_news", "important_news", "general_news"];
 
         if (!in_array($category_id, $categories_ids) || !in_array($type, $types_allowed)) {
-            $this->alert_flashdata("crud_alert", "danger", [
-                "title" => $this->lang->line("hacking_data_alert_title"),
-                "description" => $this->lang->line("hacking_data_alert_description")
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_hacking_data")
             ]);
 
             redirect(base_url("admin/news/$id/edit"));
@@ -220,12 +230,13 @@ class NewsController extends CRUD_Controller
             && !empty($long_description_az)
             && !empty($long_description_en)
             && !empty($long_description_ru)
+            && !empty($video_link)
         ) {
             $upload_path = "./public/uploads/news/";
 
             if (!empty($_FILES["multi_img"]["name"][0])) {
                 $multi_images = [];
-                $upload_result = $this->upload_image("multi_img", $upload_path);
+                $upload_result = $this->filemanager->upload_media("multi_img", $upload_path, "jpg|png|jpeg|webp");
 
                 if ($upload_result["success"]) {
                     foreach ($upload_result["data"] as $file_data) {
@@ -234,9 +245,9 @@ class NewsController extends CRUD_Controller
 
                     $data["multi_img"] = json_encode($multi_images);
                 } else {
-                    $this->alert_flashdata("crud_alert", "warning", [
-                        "title" => $this->lang->line("invalid_img_format_alert_title"),
-                        "description" => $this->lang->line("invalid_img_format_alert_description")
+                    $this->notifier("notifier", "warning", [
+                        "title" => $this->lang->line("notifier_warning"),
+                        "description" => $this->lang->line("notifier_invalid_img_format")
                     ]);
 
                     redirect(base_url("admin/news/$id/edit"));
@@ -245,17 +256,17 @@ class NewsController extends CRUD_Controller
 
             $current_img_name = $context["news"]["img"];
             if (!empty($_FILES["img"]["name"])) {
-                $upload_result = $this->upload_image("img", $upload_path);
+                $upload_result = $this->filemanager->upload_media("img", $upload_path, "jpg|png|jpeg|webp");
 
                 if ($upload_result["success"]) {
                     $uploaded_img_data = $upload_result["data"];
                     $current_img_name = $uploaded_img_data["file_name"];
                     $old_image_path = $upload_path . $context["news"]["img"];
-                    $this->delete_file($old_image_path);
+                    $this->filemanager->delete_file($old_image_path);
                 } else {
-                    $this->alert_flashdata("crud_alert", "warning", [
-                        "title" => $this->lang->line("invalid_img_format_alert_title"),
-                        "description" => $this->lang->line("invalid_img_format_alert_description")
+                    $this->notifier("notifier", "warning", [
+                        "title" => $this->lang->line("notifier_warning"),
+                        "description" => $this->lang->line("notifier_invalid_img_format")
                     ]);
 
                     redirect(base_url("admin/news/$id/edit"));
@@ -273,6 +284,7 @@ class NewsController extends CRUD_Controller
                 "long_description_az" => $long_description_az,
                 "long_description_en" => $long_description_en,
                 "long_description_ru" => $long_description_ru,
+                "video" => $video_link,
                 "category_id" => $category_id,
                 "author_id" => $author_id,
                 "type" => $type,
@@ -282,16 +294,16 @@ class NewsController extends CRUD_Controller
 
             $this->NewsModel->update($id, $data);
 
-            $this->alert_flashdata("crud_alert", "success", [
-                "title" => $this->lang->line("success_update_alert_title"),
-                "description" => $this->lang->line("success_update_alert_description")
+            $this->notifier("notifier", "success", [
+                "title" => $this->lang->line("notifier_success"),
+                "description" => $this->lang->line("notifier_success_update")
             ]);
 
             redirect(base_url("admin/news/$id/edit"));
         } else {
-            $this->alert_flashdata("crud_alert", "warning", [
-                "title" => $this->lang->line("empty_fields_alert_title"),
-                "description" => $this->lang->line("empty_fields_alert_description")
+            $this->notifier("notifier", "warning", [
+                "title" => $this->lang->line("notifier_warning"),
+                "description" => $this->lang->line("notifier_empty_fields")
             ]);
 
             redirect(base_url("admin/news/$id/edit"));
@@ -303,9 +315,9 @@ class NewsController extends CRUD_Controller
         $context["news"] = $this->NewsModel->find($id);
 
         if (empty($context["news"])) {
-            $this->alert_flashdata("crud_alert", "info", [
-                "title" => $this->lang->line("invalid_id_alert_title"),
-                "description" => $this->lang->line("invalid_id_alert_description")
+            $this->notifier("notifier", "info", [
+                "title" => $this->lang->line("notifier_info"),
+                "description" => $this->lang->line("notifier_invalid_id")
             ]);
 
             redirect(base_url("admin/news"));
@@ -313,26 +325,24 @@ class NewsController extends CRUD_Controller
 
         $upload_path = "./public/uploads/news/";
         $current_img_path = $upload_path . $context["news"]["img"];
-        $this->delete_file($current_img_path);
+        $this->filemanager->delete_file($current_img_path);
 
         $multi_images = json_decode($context["news"]["multi_img"], true);
         if (!empty($multi_images)) {
             foreach ($multi_images as $image) {
-                $this->delete_file($upload_path . $image);
+                $this->filemanager->delete_file($upload_path . $image);
             }
         }
 
         $this->NewsModel->delete($id);
 
-        $this->alert_flashdata("crud_alert", "success", [
-            "title" => $this->lang->line("success_delete_alert_title"),
-            "description" => $this->lang->line("success_delete_alert_description")
+        $this->notifier("notifier", "success", [
+            "title" => $this->lang->line("notifier_sucess"),
+            "description" => $this->lang->line("notifier_success_delete")
         ]);
 
         redirect(base_url("admin/news"));
     }
-
-
 
     public function status($id)
     {
@@ -340,23 +350,63 @@ class NewsController extends CRUD_Controller
         $data = [
             "status" => $status === "on"
         ];
-        $this->AdvertisingModel->update($id, $data);
+        $this->NewsModel->update($id, $data);
         $this->notifier("notifier", "success", [
             "title" => $this->lang->line("notifier_success"),
             "description" => $this->lang->line("notifier_success_update")
         ]);
-        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/advertising"));
+        redirect($_SERVER["HTTP_REFERER"] ?? base_url("admin/news"));
     }
 
     public function json()
     {
-        $table = $this->AdvertisingModel->get_table_name();
-        $columns = ["id", "title_az", "title_en", "title_ru", "location", "img", "type", "status"];
-        $searchable_columns = ["title_az", "title_en", "title_ru", "location", "status"];
-        $this->datatable_json($table, $columns, $searchable_columns);
+        $this->db
+            ->select("news.*,
+            admins.first_name as author_first_name,
+            admins.last_name as author_last_name,
+            admins.img as author_img,
+            admins.role as author_role,
+            categories.name_az as category_name_az,
+            categories.name_en as category_name_en,
+            categories.name_ru as category_name_ru")
+            ->join("admins", "news.author_id = admins.id", "left")
+            ->join("categories", "news.category_id = categories.id", "left");
 
+        $columns = [
+            "id",
+            "title_az",
+            "title_en",
+            "title_ru",
+            "img",
+            "category_id",
+            "author_id",
+            "type",
+            "status",
+            "author_first_name",
+            "author_last_name",
+            "author_img",
+            "author_role",
+            "category_name_az",
+            "category_name_en",
+            "category_name_ru"
+        ];
 
+        $searchable_columns = [
+            "title_az",
+            "title_en",
+            "title_ru",
+            "category_id",
+            "author_id",
+            "type",
+            "status",
+            "author_first_name",
+            "author_last_name",
+            "author_role",
+            "category_name_az",
+            "category_name_en",
+            "category_name_ru"
+        ];
 
-        // id	title_az	title_en	title_ru	short_description_az	short_description_en	short_description_ru	long_description_az	long_description_en	long_description_ru	img	multi_img	category_id	author_id	type	status
+        $this->datatable_json("news", $columns, $searchable_columns);
     }
 }

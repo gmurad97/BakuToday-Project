@@ -16,8 +16,7 @@ class NewsModel extends ENTITY_Model
                     admins.role as author_role,
                     categories.name_az as category_name_az,
                     categories.name_en as category_name_en,
-                    categories.name_ru as category_name_ru,
-                    categories.img as category_img")
+                    categories.name_ru as category_name_ru")
             ->from($this->table_name)
             ->join("admins", "news.author_id = admins.id", "left")
             ->join("categories", "news.category_id = categories.id", "left");

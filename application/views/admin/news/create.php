@@ -43,7 +43,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("title"); ?>
                                         </label>
-                                        <input type="text" name="title_az" id="title_az" class="form-control" required>
+                                        <input type="text" name="title_az" id="title_az" class="form-control" placeholder="Azərbaycanın yeni texnoloji nailiyyəti" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -52,7 +52,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_az" id="short_description_az" class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_az" id="short_description_az" class="form-control" rows="3" placeholder="Bu yenilik ölkənin innovasiya potensialını artıracaq." required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -72,7 +72,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("title"); ?>
                                         </label>
-                                        <input type="text" name="title_en" id="title_en" class="form-control" required>
+                                        <input type="text" name="title_en" id="title_en" class="form-control" placeholder="Azerbaijan's new technological achievement" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -81,7 +81,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_en" id="short_description_en" class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_en" id="short_description_en" class="form-control" rows="3" placeholder="This innovation will boost the country's innovation potential." required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,7 +101,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("title"); ?>
                                         </label>
-                                        <input type="text" name="title_ru" id="title_ru" class="form-control" required>
+                                        <input type="text" name="title_ru" id="title_ru" class="form-control" placeholder="Новая технологическая победа Азербайджана" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -110,7 +110,7 @@
                                             <span class="text-danger">*</span>
                                             <?= $this->lang->line("short_description"); ?>
                                         </label>
-                                        <textarea name="short_description_ru" id="short_description_ru" class="form-control" rows="3" required></textarea>
+                                        <textarea name="short_description_ru" id="short_description_ru" class="form-control" rows="3" placeholder="Эта новинка усилит инновационный потенциал страны." required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">

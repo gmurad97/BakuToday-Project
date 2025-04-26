@@ -11,8 +11,9 @@ class CategoriesController extends CRUD_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("all_categories");
-        $context["categories_collection"] = $this->CategoriesModel->all();
+        $context = [
+            "page_title" => $this->lang->line("all_categories"),
+        ];
         $this->load->view("admin/categories/list", $context);
     }
 

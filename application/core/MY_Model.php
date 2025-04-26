@@ -8,7 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Calendar $calendar
  * @property CI_Config $config
  * @property CI_Controller $controller
- * @property CI_DB $db
+ * @property CI_DB_mysqli_driver $db
  * @property CI_Driver $driver
  * @property CI_Email $email
  * @property CI_Encrypt $encrypt
@@ -210,94 +210,4 @@ class ENTITY_Model extends MY_Model
     {
         return $this->db->truncate($this->table_name);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // /*DATATABLES WARNING DONT TOUCH!!! */
-    // public function get_paginated($limit, $offset, $order_by, $order_dir, $search = '')
-    // {
-    //     if (!empty($search)) {
-    //         $this->db->group_start()
-    //             ->like('first_name', $search)
-    //             ->or_like('last_name', $search)
-    //             ->or_like('role', $search)
-    //             ->group_end();
-    //     }
-
-    //     $data = $this->db
-    //         ->order_by($order_by, $order_dir)
-    //         ->limit($limit, $offset)
-    //         ->get($this->table_name)
-    //         ->result_array();
-
-    //     foreach ($data as &$item) {
-    //         $id = $item['id'];
-    //         $item['actions'] = '
-    //         <div class="dropdown">
-    //             <a type="button" data-bs-toggle="dropdown">
-    //                 <i class="icon-lg text-primary pb-3px" data-feather="command"></i>
-    //             </a>
-    //             <div class="dropdown-menu">
-    //                 <a class="dropdown-item" href="' . base_url("admin/profiles/$id") . '">Просмотр</a>
-    //                 <a class="dropdown-item" href="' . base_url("admin/profiles/$id/edit") . '">Редактировать</a>
-    //                 <a class="dropdown-item text-danger" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="' . base_url("admin/profiles/$id/delete") . '">Удалить</a>
-    //             </div>
-    //         </div>
-    //     ';
-    //     }
-    //     unset($item);
-    //     return $data;
-    // }
-
-    // public function count_all()
-    // {
-    //     return $this->db->count_all($this->table_name);
-    // }
-
-    // public function count_filtered($search = '')
-    // {
-    //     if (!empty($search)) {
-    //         $this->db->group_start()
-    //             ->like('first_name', $search)
-    //             ->or_like('last_name', $search)
-    //             ->or_like('role', $search)
-    //             ->group_end();
-    //     }
-
-    //     return $this->db->count_all_results($this->table_name);
-    // }
 }

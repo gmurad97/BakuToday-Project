@@ -11,8 +11,9 @@ class AdvertisingController extends CRUD_Controller
 
     public function index()
     {
-        $context["page_title"] = $this->lang->line("all_advertising");
-        $context["advertising_collection"] = $this->AdvertisingModel->all();
+        $context = [
+            "page_title" => $this->lang->line("all_advertising"),
+        ];
         $this->load->view("admin/advertising/list", $context);
     }
 
