@@ -10,11 +10,17 @@ class AuthController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("login")
+		];
+		$this->load->view("user/login", $context);
 	}
 
 	public function register()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("register")
+		];
+		$this->load->view("user/register", $context);
 	}
 }

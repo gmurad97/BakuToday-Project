@@ -10,6 +10,9 @@ class AuthorController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("author")
+		];
+		$this->load->view("user/author", $context);
 	}
 }

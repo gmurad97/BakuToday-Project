@@ -6,7 +6,10 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <?php $current_language = $this->session->userdata("admin_lang"); ?>
+                    <?php
+                    $language_session_key = $this->config->item("language_session_key");
+                    $current_language = $this->session->userdata($language_session_key["admin"]);
+                    ?>
                     <h6 class="card-title">
                         <?= $this->lang->line("view"); ?> •
                         <?= $advertising["title_$current_language"]; ?>

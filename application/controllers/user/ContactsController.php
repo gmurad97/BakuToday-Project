@@ -10,6 +10,9 @@ class ContactsController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("contacts")
+		];
+		$this->load->view("user/contacts", $context);
 	}
 }

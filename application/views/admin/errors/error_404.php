@@ -32,7 +32,7 @@
                         </h6>
                         <?php
                         $admin_auth_session_key = $this->config->item("admin_auth_session_key");
-                        if ($this->session->userdata("admin_auth_session_key")): ?>
+                        if ($this->session->userdata($admin_auth_session_key)): ?>
                             <a href="<?= base_url('admin/dashboard'); ?>">
                                 <?= $this->lang->line("back_to_home"); ?>
                             </a>

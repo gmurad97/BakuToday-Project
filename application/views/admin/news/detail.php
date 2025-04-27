@@ -1,16 +1,34 @@
-<?php $this->load->view("admin/partials/head"); ?>
-<?php $this->load->view("admin/partials/sidebar"); ?>
-<?php $this->load->view("admin/partials/navbar"); ?>
+<?php $this->load->view("admin/partials/_head"); ?>
+<?php $this->load->view("admin/partials/_sidebar"); ?>
+<?php $this->load->view("admin/partials/_navbar"); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <?php $current_language = $this->session->userdata("admin_lang"); ?>
+                    <?php
+                    $language_session_key = $this->config->item("language_session_key");
+                    $current_language = $this->session->userdata($language_session_key["admin"]);
+                    ?>
                     <h6 class="card-title">
                         <?= $this->lang->line("view"); ?> •
                         <?= $news["title_$current_language"]; ?>
                     </h6>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-5">
+                        <a class="fancybox_news" href="<?= base_url('public/uploads/news/' . $news["img"]); ?>">
+                            <img style="object-fit:cover;width:150px;height:150px;border-radius:50%;" src="<?= base_url('public/uploads/news/' . $news["img"]); ?>">
+                        </a>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-3 gap-2">
+                        <?php foreach (json_decode($news["multi_img"]) as $news_img): ?>
+                            <a class="fancybox_news" href="<?= base_url('public/uploads/news/' . $news_img); ?>">
+                                <img style="object-fit:cover;width:50px;height:50px;border-radius:12px;" src="<?= base_url('public/uploads/news/' . $news_img); ?>">
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-3 gap-2">
+                        <iframe width="100%" height="333px" src="<?= $news['video'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
@@ -114,15 +132,12 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <?php if ($news["status"]): ?>
-                                        <span class="badge border border-success text-success">
-                                            <?= $this->lang->line("enabled"); ?>
-                                        </span>
-                                    <?php else: ?>
-                                        <span class="badge border border-secondary text-secondary">
-                                            <?= $this->lang->line("disabled"); ?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <form action="<?= base_url('admin/news/' . $news['id'] . '/status'); ?>" method="POST" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                                        <div class="form-check form-switch">
+                                            <input name="status" type="checkbox" class="form-check-input" onclick="this.form.submit();" <?= $news["status"] ? "checked" : ""; ?>>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             <tr>
@@ -153,8 +168,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        class="btn btn-outline-danger">
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">
                         <?= $this->lang->line("delete"); ?>
                     </a>
                     <a href="<?= base_url('admin/news/' . $news['id'] . '/edit'); ?>" class="btn btn-outline-warning">
@@ -184,13 +198,17 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     <?= $this->lang->line("close"); ?>
                 </button>
-                <a href="<?= base_url('admin/news/' . $news['id'] . '/delete'); ?>" id="deleteButton"
-                    class="btn btn-outline-danger">
+                <a href="<?= base_url('admin/news/' . $news['id'] . '/delete'); ?>" id="deleteButton" class="btn btn-outline-danger">
                     <?= $this->lang->line("delete"); ?>
                 </a>
             </div>
         </div>
     </div>
 </div>
-<?php $this->load->view("admin/partials/footer"); ?>
-<?php $this->load->view("admin/partials/scripts"); ?>
+<?php $this->load->view("admin/partials/_footer"); ?>
+<?php $this->load->view("admin/partials/_scripts"); ?>
+<script>
+    Fancybox.bind(".fancybox_news", {
+        groupAll: false
+    });
+</script>

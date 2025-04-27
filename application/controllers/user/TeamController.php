@@ -10,6 +10,9 @@ class TeamController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("team")
+		];
+		$this->load->view("user/team", $context);
 	}
 }

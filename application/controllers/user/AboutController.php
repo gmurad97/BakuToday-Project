@@ -10,6 +10,9 @@ class AboutController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("about")
+		];
+		$this->load->view("user/about", $context);
 	}
 }

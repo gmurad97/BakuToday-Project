@@ -25,7 +25,7 @@ class NewsModel extends ENTITY_Model
             $this->db->where("$this->table_name.$this->primary_key", $id);
             return $this->db
                 ->get()
-                ->result_array();
+                ->row_array();
         }
 
         return $this->db

@@ -10,11 +10,9 @@ class CategoriesController extends BASE_Controller
 
 	public function index()
 	{
-		redirect(base_url(), "location", 301);
-	}
-
-	public function show($id)
-	{
-		redirect(base_url(), "location", 301);
+		$context = [
+			"page_title" => $this->lang->line("categories")
+		];
+		$this->load->view("user/categories", $context);
 	}
 }

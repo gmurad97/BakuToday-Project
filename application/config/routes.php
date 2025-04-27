@@ -66,11 +66,9 @@ $route["home"]["GET"] = "user/HomeController/home";
 
 /*<========> Blog Routes <========>*/
 $route["blog"]["GET"] = "user/BlogController/index";
-$route["blog/(:any)"]["GET"] = "user/BlogController/show/$1";
 
 /*<========> Categories Routes <========>*/
 $route["categories"]["GET"] = "user/CategoriesController/index";
-$route["categories/(:any)"]["GET"] = "user/CategoriesController/show/$1";
 
 /*<========> Author Routes <========>*/
 $route["author"]["GET"] = "user/AuthorController/index";
