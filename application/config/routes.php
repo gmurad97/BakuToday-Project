@@ -83,8 +83,8 @@ $route["contacts"]["GET"] = "user/ContactsController/index";
 $route["team"]["GET"] = "user/TeamController/index";
 
 /*<========> Auth Routes <========>*/
-$route["signin"]["GET"] = "user/AuthController/index";
-$route["signup"]["GET"] = "user/AuthController/register";
+$route["login"]["GET"] = "user/AuthController/index";
+$route["register"]["GET"] = "user/AuthController/register";
 
 /*<================> Admin Routes <================>*/
 /*<========> Auth Routes <========>*/
@@ -103,7 +103,7 @@ $route["admin/profiles/json"]["POST"] = "admin/ProfilesController/json";
 $route["admin/profiles/(:any)"]["GET"] = "admin/ProfilesController/show/$1";
 $route["admin/profiles/(:any)/edit"]["GET"] = "admin/ProfilesController/edit/$1";
 $route["admin/profiles/(:any)/update"]["POST"] = "admin/ProfilesController/update/$1";
-$route["admin/profiles/(:any)/delete"]["POST"] = "admin/ProfilesController/destroy/$1";
+$route["admin/profiles/(:any)/delete"]["GET"] = "admin/ProfilesController/destroy/$1";
 $route["admin/profiles/(:any)/status"]["POST"] = "admin/ProfilesController/status/$1";
 
 /*<========> Categories Routes <========>*/
@@ -115,7 +115,7 @@ $route["admin/categories/(:any)"]["GET"] = "admin/CategoriesController/show/$1";
 $route["admin/categories/(:any)/edit"]["GET"] = "admin/CategoriesController/edit/$1";
 $route["admin/categories/(:any)/update"]["POST"] = "admin/CategoriesController/update/$1";
 $route["admin/categories/(:any)/status"]["POST"] = "admin/CategoriesController/status/$1";
-$route["admin/categories/(:any)/delete"]["POST"] = "admin/CategoriesController/destroy/$1";
+$route["admin/categories/(:any)/delete"]["GET"] = "admin/CategoriesController/destroy/$1";
 $route["admin/categories/(:any)/status"]["POST"] = "admin/CategoriesController/status/$1";
 
 /*<========> News Routes <========>*/
@@ -127,7 +127,7 @@ $route["admin/news/(:any)"]["GET"] = "admin/NewsController/show/$1";
 $route["admin/news/(:any)/edit"]["GET"] = "admin/NewsController/edit/$1";
 $route["admin/news/(:any)/update"]["POST"] = "admin/NewsController/update/$1";
 $route["admin/news/(:any)/status"]["POST"] = "admin/NewsController/status/$1";
-$route["admin/news/(:any)/delete"]["POST"] = "admin/NewsController/destroy/$1";
+$route["admin/news/(:any)/delete"]["GET"] = "admin/NewsController/destroy/$1";
 $route["admin/news/(:any)/status"]["POST"] = "admin/NewsController/status/$1";
 
 /*<========> Advertising Routes <========>*/
@@ -139,7 +139,7 @@ $route["admin/advertising/(:any)"]["GET"] = "admin/AdvertisingController/show/$1
 $route["admin/advertising/(:any)/edit"]["GET"] = "admin/AdvertisingController/edit/$1";
 $route["admin/advertising/(:any)/update"]["POST"] = "admin/AdvertisingController/update/$1";
 $route["admin/advertising/(:any)/status"]["POST"] = "admin/AdvertisingController/status/$1";
-$route["admin/advertising/(:any)/delete"]["POST"] = "admin/AdvertisingController/destroy/$1";
+$route["admin/advertising/(:any)/delete"]["GET"] = "admin/AdvertisingController/destroy/$1";
 $route["admin/advertising/(:any)/status"]["POST"] = "admin/AdvertisingController/status/$1";
 
 /*<========> Settings Routes <========>*/

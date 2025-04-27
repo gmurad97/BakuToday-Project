@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+$lang["administrators_count"] = "Administrators Count";
+$lang["categories_count"] = "Categories Count";
+$lang["advertising_count"] = "Advertising Count";
+$lang["news_count"] = "News Count";
 $lang["team"] = "Team";
 $lang["contacts"] = "Contacts";
 $lang["categories"] = "Categories";

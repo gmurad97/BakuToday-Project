@@ -64,7 +64,7 @@
                                 <label for="role" class="form-label">
                                     <?= $this->lang->line("role"); ?>
                                 </label>
-                                <select name="role" class="form-select" id="role" required>
+                                <select name="role" class="form-select" id="role" <?= $current_admin_session["role"] === "moderator" ? "disabled" : ""; ?> required>
                                     <option value="root" <?= $profile['role'] === 'root' ? 'selected' : ''; ?>>
                                         <?= $this->lang->line("root"); ?>
                                     </option>

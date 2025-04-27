@@ -7,7 +7,12 @@ class ProfilesController extends CRUD_Controller
     {
         parent::__construct();
         $this->load->model("admin/AdminsModel");
-        if (!$this->rolesmanager->has_access("admin")) {
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        $admin_id = $this->session->userdata($admin_auth_session_key)["id"];
+        $profile_id = $this->uri->segment(3);
+        $profile_event = $this->uri->segment(4);
+
+        if (!$this->rolesmanager->has_access("admin") && ($profile_event === "delete" || $admin_id !== $profile_id)) {
             $this->lang->load("message", $this->get_admin_language());
             $this->notifier("notifier", "danger", [
                 "title" => $this->lang->line("notifier_danger"),
@@ -145,6 +150,9 @@ class ProfilesController extends CRUD_Controller
     public function edit($id)
     {
         $context["profile"] = $this->AdminsModel->find($id);
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        $context["current_admin_session"] = $this->session->userdata($admin_auth_session_key);
+
         if (!empty($context["profile"])) {
             $profile_first_name = $context["profile"]["first_name"];
             $profile_last_name = $context["profile"]["last_name"];
@@ -162,6 +170,8 @@ class ProfilesController extends CRUD_Controller
     public function update($id)
     {
         $context["profile"] = $this->AdminsModel->find($id);
+        $admin_auth_session_key = $this->config->item("admin_auth_session_key");
+        $current_admin_session = $this->session->userdata($admin_auth_session_key);
 
         if (empty($context["profile"])) {
             $this->notifier("notifier", "info", [
@@ -197,6 +207,10 @@ class ProfilesController extends CRUD_Controller
                 "description" => $this->lang->line("notifier_username_existing")
             ]);
             redirect(base_url("admin/profiles/{$id}/edit"));
+        }
+
+        if ($current_admin_session["role"] === "moderator") {
+            $role = $role !== "moderator" ? "moderator" : $role;
         }
 
         if (

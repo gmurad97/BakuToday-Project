@@ -20,9 +20,15 @@
                         </div>
                     <?php endif; ?>
                     <div class="d-flex flex-row justify-content-center align-items-center mb-3">
-                        <a id="profile" href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
-                            <img style="object-fit:cover;width:150px;height:150px;border-radius:50%;" src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
-                        </a>
+                        <?php if ($profile["img"]): ?>
+                            <a id="profile" href="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
+                                <img style="object-fit:cover;width:150px;height:150px;border-radius:50%;" src="<?= base_url('public/uploads/profiles/' . $profile["img"]); ?>">
+                            </a>
+                        <?php else: ?>
+                            <a id="profile" href="<?= base_url('public/admin/assets/images/others/profile-placeholder.png'); ?>">
+                                <img style="object-fit:cover;width:150px;height:150px;border-radius:50%;" src="<?= base_url('public/admin/assets/images/others/profile-placeholder.png'); ?>">
+                            </a>
+                        <?php endif; ?>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -131,15 +137,23 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">
-                        <?= $this->lang->line("delete"); ?>
-                    </a>
+                    <?php if ($this->rolesmanager->has_access("admin")): ?>
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">
+                            <?= $this->lang->line("delete"); ?>
+                        </a>
+                    <?php endif; ?>
                     <a href="<?= base_url('admin/profiles/' . $profile['id'] . '/edit'); ?>" class="btn btn-outline-warning">
                         <?= $this->lang->line("edit"); ?>
                     </a>
-                    <a href="<?= base_url('admin/profiles'); ?>" class="btn btn-primary">
-                        <?= $this->lang->line("back"); ?>
-                    </a>
+                    <?php if ($this->rolesmanager->has_access("admin")): ?>
+                        <a href="<?= base_url('admin/profiles'); ?>" class="btn btn-primary">
+                            <?= $this->lang->line("back"); ?>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= base_url('admin/dashboard'); ?>" class="btn btn-primary">
+                            <?= $this->lang->line("back"); ?>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

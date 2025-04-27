@@ -21,10 +21,10 @@
             <div class="row flex-grow-1">
                 <?php
                 $statistics_cards = [
-                    ["title" => "Administrators Count", "count" => $statistics["admins_count"]],
-                    ["title" => "Categories Count", "count" => $statistics["categories_count"]],
-                    ["title" => "Advertising Count", "count" => $statistics["advertising_count"]],
-                    ["title" => "News Count", "count" => $statistics["news_count"]],
+                    ["title" => "{$this->lang->line('administrators_count')}", "count" => $statistics["admins_count"]],
+                    ["title" => "{$this->lang->line('categories_count')}", "count" => $statistics["categories_count"]],
+                    ["title" => "{$this->lang->line('advertising_count')}", "count" => $statistics["advertising_count"]],
+                    ["title" => "{$this->lang->line('news_count')}", "count" => $statistics["news_count"]],
                 ];
                 ?>
                 <?php foreach ($statistics_cards as $statistics_card): ?>
