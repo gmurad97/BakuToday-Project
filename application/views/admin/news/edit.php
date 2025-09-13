@@ -146,10 +146,10 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="video_link" class="form-label">
-                                        <span class="text-danger">*</span>
+                                        <span class="text-danger"></span>
                                         <?= $this->lang->line("video_link"); ?>
                                     </label>
-                                    <input type="text" name="video_link" id="video_link" class="form-control" value="<?= $news["video"] ?>" required>
+                                    <input type="text" name="video_link" id="video_link" class="form-control" value="<?= $news["video"] ?>">
                                 </div>
                             </div>
                         </div>
@@ -184,6 +184,12 @@
                                         </option>
                                         <option value="general_news" <?= $news['type'] == 'general_news' ? 'selected' : ''; ?>>
                                             <?= $this->lang->line("general_news"); ?>
+                                        </option>
+                                        <option value="naxcivan" <?= $news['type'] == 'naxcivan' ? 'selected' : ''; ?>>
+                                            <?= $this->lang->line("naxcivan"); ?>
+                                        </option>
+                                        <option value="zengezur_corridor" <?= $news['type'] == 'zengezur_corridor' ? 'selected' : ''; ?>>
+                                            <?= $this->lang->line("zengezur_corridor"); ?>
                                         </option>
                                     </select>
                                 </div>

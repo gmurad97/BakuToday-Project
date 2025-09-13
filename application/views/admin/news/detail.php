@@ -122,6 +122,14 @@
                                         <span class="badge border border-danger text-danger">
                                             <?= $this->lang->line($news["type"]); ?>
                                         </span>
+                                    <?php elseif ($news["type"] === "naxcivan"): ?>
+                                        <span class="badge border border-success text-success">
+                                            <?= $this->lang->line("naxcivan"); ?>
+                                        </span>
+                                    <?php elseif ($news["type"] === "zengezur_corridor"): ?>
+                                        <span class="badge border border-warning text-warning">
+                                            <?= $this->lang->line("zengezur_corridor"); ?>
+                                        </span>
                                     <?php endif; ?>
                                 </td>
                             </tr>

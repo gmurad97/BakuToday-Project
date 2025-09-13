@@ -65,15 +65,9 @@
                                     <?= $this->lang->line("role"); ?>
                                 </label>
                                 <select name="role" class="form-select" id="role" required>
-                                    <option value="root">
-                                        <?= $this->lang->line("root"); ?>
-                                    </option>
-                                    <option value="admin" selected>
-                                        <?= $this->lang->line("admin"); ?>
-                                    </option>
-                                    <option value="moderator">
-                                        <?= $this->lang->line("moderator"); ?>
-                                    </option>
+                                    <option value="root" <?= $this->rolesmanager->has_access('root') ? '' : 'disabled' ?>>Root</option>
+                                    <option value="admin" <?= $this->rolesmanager->has_access('admin') ? '' : 'disabled' ?> selected>Admin</option>
+                                    <option value="moderator" <?= $this->rolesmanager->has_access('moderator') ? '' : 'disabled' ?>>Moderator</option>
                                 </select>
                             </div>
                         </div>
@@ -106,3 +100,4 @@
 </div>
 <?php $this->load->view("admin/partials/_footer"); ?>
 <?php $this->load->view("admin/partials/_scripts"); ?>
+

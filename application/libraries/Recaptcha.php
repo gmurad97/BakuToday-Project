@@ -6,7 +6,7 @@ class ReCaptcha
     private const API_SITEVERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
     /**
-     * @var MY_Controller $CI 
+     * @var MY_Controller $CI
      */
     protected $CI;
 

@@ -122,7 +122,6 @@ class NewsController extends CRUD_Controller
             && !empty($long_description_az)
             && !empty($long_description_en)
             && !empty($long_description_ru)
-            && !empty($video_link)
         ) {
             $data = array_merge($data, [
                 "title_az" => $title_az,
@@ -230,7 +229,6 @@ class NewsController extends CRUD_Controller
             && !empty($long_description_az)
             && !empty($long_description_en)
             && !empty($long_description_ru)
-            && !empty($video_link)
         ) {
             $upload_path = "./public/uploads/news/";
 

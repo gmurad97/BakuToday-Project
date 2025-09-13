@@ -30,7 +30,7 @@ class AuthController extends BASE_Controller
             redirect(base_url("admin/login"));
         }
 
-        $admin_username = trim($this->input->post("admin_username"), true);
+        $admin_username = trim($this->input->post("admin_username", true));
         $admin_password = $this->input->post("admin_password", true);
 
         if (empty($admin_username) || empty($admin_password)) {

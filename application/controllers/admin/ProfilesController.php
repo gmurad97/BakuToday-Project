@@ -63,6 +63,15 @@ class ProfilesController extends CRUD_Controller
         $role = $this->input->post("role", true);
         $status = $this->input->post("status", true);
 
+        if (!$this->rolesmanager->has_access($role)) {
+            $this->lang->load("message", $this->get_admin_language());
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_access_denied")
+            ]);
+            redirect(base_url("admin/dashboard"));
+        }
+
         $existing_email = $this->AdminsModel->find(["email" => $email]);
         $existing_user = $this->AdminsModel->find(["username" => $username]);
 
@@ -153,6 +162,15 @@ class ProfilesController extends CRUD_Controller
         $admin_auth_session_key = $this->config->item("admin_auth_session_key");
         $context["current_admin_session"] = $this->session->userdata($admin_auth_session_key);
 
+        if (!$this->rolesmanager->has_access($context["profile"]["role"])) {
+            $this->lang->load("message", $this->get_admin_language());
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_access_denied")
+            ]);
+            redirect(base_url("admin/profiles"));
+        }
+
         if (!empty($context["profile"])) {
             $profile_first_name = $context["profile"]["first_name"];
             $profile_last_name = $context["profile"]["last_name"];
@@ -189,6 +207,15 @@ class ProfilesController extends CRUD_Controller
         $password = $this->input->post("password", true);
         $role = $this->input->post("role", true);
         $status = $this->input->post("status", true);
+
+        if (!$this->rolesmanager->has_access($role)) {
+            $this->lang->load("message", $this->get_admin_language());
+            $this->notifier("notifier", "danger", [
+                "title" => $this->lang->line("notifier_danger"),
+                "description" => $this->lang->line("notifier_access_denied")
+            ]);
+            redirect(base_url("admin/dashboard"));
+        }
 
         $existing_email = $this->AdminsModel->find(["email" => $email]);
         $existing_user = $this->AdminsModel->find(["username" => $username]);
