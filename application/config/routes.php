@@ -65,7 +65,8 @@ $route[""]["GET"] = "user/HomeController/index";
 $route["home"]["GET"] = "user/HomeController/home";
 
 /*<========> Blog Routes <========>*/
-$route["blog"]["GET"] = "user/BlogController/index";
+// $route["blog"]["GET"] = "user/BlogController/index";
+$route["news/(:any)"]["GET"] = "user/BlogController/show/$1";
 
 /*<========> Categories Routes <========>*/
 $route["categories"]["GET"] = "user/CategoriesController/index";

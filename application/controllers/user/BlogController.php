@@ -115,4 +115,100 @@ class BlogController extends BASE_Controller
 
         $this->load->view("user/blog", $context);
     }
+    public function show($id)
+    {
+        // Получаем пост по ID
+        $post = $this->NewsModel->find($id);
+
+        if (!$post) {
+            show_404();
+        }
+
+        // Получаем категорию поста
+        $category = $this->CategoriesModel->find($post['category_id']);
+
+        // Получаем данные для хлебных крошек
+        $breadcrumbs = [
+            [
+                'text' => $this->lang->line("home"),
+                'url' => base_url(),
+                'active' => false
+            ],
+            [
+                'text' => $category ? ($category['name_' . $this->get_user_language()] ?? $category['name_az']) : 'Blog',
+                'url' => $category ? base_url('category/' . $category['id']) : base_url('blog'),
+                'active' => false
+            ],
+            [
+                'text' => $post['title_' . $this->get_user_language()] ?? $post['title_az'],
+                'url' => base_url('blog/' . $id),
+                'active' => true
+            ]
+        ];
+
+        // Получаем связанные посты (той же категории)
+        $related_posts = $this->NewsModel->paginate(6, 0, 'DESC', [
+            'category_id' => $post['category_id'],
+            'status' => true
+        ]);
+
+        // Получаем предыдущий и следующий пост
+        $prev_post = $this->NewsModel->bounds_range('prev', 1, [
+            'id <' => $id,
+            'status' => true
+        ]);
+
+        $next_post = $this->NewsModel->bounds_range('next', 1, [
+            'id >' => $id,
+            'status' => true
+        ]);
+
+        // Получаем данные для сайдбара
+        $sidebar_categories = $this->CategoriesModel->paginate(5, 0, 'ASC', ['status' => true]);
+
+        // Подсчитываем количество постов для каждой категории
+        $categories_with_count = [];
+        foreach ($sidebar_categories as $cat) {
+            $cat_posts_count = $this->NewsModel->paginate(1000, 0, 'DESC', [
+                'category_id' => $cat['id'],
+                'status' => true
+            ]);
+            $count = count($cat_posts_count);
+
+            $categories_with_count[] = [
+                'category' => $cat,
+                'count' => $count
+            ];
+        }
+
+        // Текущая дата для хедера
+        $current_date = date('l, F, Y');
+
+        // Получаем посты для табов Related Post
+        $latest_related = $this->NewsModel->paginate(3, 0, 'DESC', ['status' => true]);
+        $trending_related = $this->NewsModel->paginate(3, 3, 'DESC', ['status' => true]);
+        $popular_related = $this->NewsModel->paginate(3, 6, 'DESC', ['status' => true]);
+
+        // Получаем посты для карусели Most Views News
+        $most_views_news = $this->NewsModel->paginate(4, 9, 'DESC', ['status' => true]);
+
+        $context = [
+            "page_title" => $post['title_' . $this->get_user_language()] ?? $post['title_az'],
+            "breadcrumbs" => $breadcrumbs,
+            "post" => $post,
+            "category" => $category,
+            "related_posts" => $related_posts,
+            "prev_post" => $prev_post,
+            "next_post" => $next_post,
+            "categories_with_count" => $categories_with_count,
+            "latest_related" => $latest_related,
+            "trending_related" => $trending_related,
+            "popular_related" => $popular_related,
+            "most_views_news" => $most_views_news,
+            "current_date" => $current_date,
+            "lang" => $this->get_user_language(),
+        ];
+
+        $this->load->view("user/blog", $context);
+    }
 }
