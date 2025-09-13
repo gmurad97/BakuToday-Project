@@ -193,13 +193,21 @@ class ENTITY_Model extends MY_Model
         }
     }
 
-    public function count()
+    public function count($conditions = [])
     {
         $cache_id = "table_{$this->table_name}_count";
+
+        if (!empty($conditions)) {
+            $cache_id .= '_' . md5(json_encode($conditions));
+        }
+
         $count = $this->cache->get($cache_id);
 
-        if (!$count) {
-            $count = $this->db->count_all($this->table_name);
+        if ($count === false) {
+            if (!empty($conditions) && is_array($conditions)) {
+                $this->db->where($conditions);
+            }
+            $count = $this->db->count_all_results($this->table_name);
             $this->cache->save($cache_id, $count, 60);
         }
 

@@ -64,13 +64,13 @@ $route["admin/locale/(:any)"]["GET"] = "admin/LanguageController/index/$1";
 $route[""]["GET"] = "user/HomeController/index";
 $route["home"]["GET"] = "user/HomeController/home";
 
-/*<========> Blog Routes <========>*/
+/*<========> News Routes <========>*/
 $route["news"]["GET"] = "user/NewsController/index";
 $route["news/(:any)"]["GET"] = "user/NewsController/show/$1";
 
 /*<========> Categories Routes <========>*/
 $route["categories"]["GET"] = "user/CategoriesController/index";
-$route["categories/(:any)"]["GET"] = "user/CategoriesController/index";
+$route["categories/(:any)"]["GET"] = "user/CategoriesController/show/$1";
 
 /*<========> About Routes <========>*/
 $route["about"]["GET"] = "user/AboutController/index";
@@ -80,6 +80,9 @@ $route["contacts"]["GET"] = "user/ContactsController/index";
 
 /*<========> Team Routes <========>*/
 $route["team"]["GET"] = "user/TeamController/index";
+
+/*<========> Team Routes <========>*/
+$route["author/(:any)"]["GET"] = "user/AuthorController/show/$1";
 
 /*<========> Auth Routes <========>*/
 $route["login"]["GET"] = "user/AuthController/index";

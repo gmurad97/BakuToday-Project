@@ -1,12 +1,19 @@
 <section class="inner-header">
-	<div class="container">
-		<div class="row ">
-			<div class="col-md-12">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home me-1"></i>Home</a></li>
-					<li class="breadcrumb-item active"><i class="fa-solid fa-chevron-right me-2"></i><span>About Us</span></li>
-				</ol>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <?php foreach ($breadcrumbs as $crumb): ?>
+                        <li class="breadcrumb-item <?= $crumb['active'] ? 'active' : '' ?>">
+                            <?php if (!$crumb["active"]): ?>
+                                <a href="<?= $crumb['url'] ?>"><i class="fas fa-home me-1"></i><?= $crumb["title"] ?></a>
+                            <?php else: ?>
+                                <i class="fa-solid fa-chevron-right me-2"></i><span><?= $crumb["title"] ?></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+    </div>
 </section>
