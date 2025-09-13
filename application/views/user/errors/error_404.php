@@ -10,7 +10,7 @@
     <?php $this->load->view("user/partials/_header"); ?>
     <?php $this->load->view("user/partials/_sidebar"); ?>
     <?php $this->load->view("user/partials/_searchbar"); ?>
-    <?php $this->load->view("user/partials/_breadcrumb"); ?>
+    <?php $this->load->view("user/partials/_breadcrumbs"); ?>
     <section class="space-ptb">
         <div class="container">
             <div class="row">

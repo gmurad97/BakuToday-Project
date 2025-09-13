@@ -65,11 +65,12 @@ $route[""]["GET"] = "user/HomeController/index";
 $route["home"]["GET"] = "user/HomeController/home";
 
 /*<========> Blog Routes <========>*/
-// $route["blog"]["GET"] = "user/BlogController/index";
-$route["news/(:any)"]["GET"] = "user/BlogController/show/$1";
+$route["news"]["GET"] = "user/NewsController/index";
+$route["news/(:any)"]["GET"] = "user/NewsController/show/$1";
 
 /*<========> Categories Routes <========>*/
 $route["categories"]["GET"] = "user/CategoriesController/index";
+$route["categories/(:any)"]["GET"] = "user/CategoriesController/index";
 
 /*<========> About Routes <========>*/
 $route["about"]["GET"] = "user/AboutController/index";
@@ -81,8 +82,8 @@ $route["contacts"]["GET"] = "user/ContactsController/index";
 $route["team"]["GET"] = "user/TeamController/index";
 
 /*<========> Auth Routes <========>*/
-// $route["login"]["GET"] = "user/AuthController/index";
-// $route["register"]["GET"] = "user/AuthController/register";
+$route["login"]["GET"] = "user/AuthController/index";
+$route["register"]["GET"] = "user/AuthController/register";
 
 /*<================> Admin Routes <================>*/
 /*<========> Auth Routes <========>*/

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class DefaultController extends BASE_Controller
+class BlogController extends BASE_Controller
 {
     public function __construct()
     {
@@ -11,8 +11,8 @@ class DefaultController extends BASE_Controller
     public function index()
     {
         $context = [
-            "page_title" => $this->lang->line("home"),
+            "page_title" => $this->lang->line("news")
         ];
-        $this->load->view("user/index", $context);
+        $this->load->view("user/news", $context);
     }
 }
