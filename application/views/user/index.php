@@ -7,6 +7,7 @@
 
 <body>
     <?php $this->load->view("user/partials/_preloader"); ?>
+
     <?php $this->load->view("user/partials/_header"); ?>
     <?php $this->load->view("user/partials/_sidebar"); ?>
     <?php $this->load->view("user/partials/_searchbar"); ?>

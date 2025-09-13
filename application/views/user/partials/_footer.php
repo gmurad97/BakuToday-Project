@@ -69,6 +69,7 @@
                         <?php endif; ?>
                     </div>
                 </div>
+
                 <!-- Instagram -->
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                     <h4 class="footer-title">Instagram</h4>
@@ -84,6 +85,7 @@
             </div>
         </div>
     </div>
+
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <div class="container">
