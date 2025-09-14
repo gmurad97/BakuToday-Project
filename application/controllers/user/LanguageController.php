@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class LanguageController extends BASE_Controller
 {
     /**
-     * @var MY_Controller $CI 
+     * @var MY_Controller $CI
      */
     protected $CI;
 
