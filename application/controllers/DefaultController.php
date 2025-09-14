@@ -70,6 +70,9 @@ class DefaultController extends BASE_Controller
             "admins_count" => $this->AdminsModel->count(),
             "lang" => $this->get_user_language()
         ];
+
+        // print_r($context["latest_news_with_author_category"]);
+        // die();
         $this->load->view("user/index", $context);
     }
 }

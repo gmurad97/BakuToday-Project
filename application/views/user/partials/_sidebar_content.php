@@ -1,6 +1,7 @@
 <div class="sidebar">
+    <!-- Виджет социальных сетей (оставляем статичным) -->
     <div class="widget sidebar-category">
-        <h6 class="widget-title">Categories</h6>
+        <h6 class="widget-title">Social Media</h6>
         <div class="row">
             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                 <div class="follow-style-01">
@@ -56,6 +57,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Виджет связанных постов с динамическими данными -->
     <div class="widget post-widget">
         <h6 class="widget-title">Related Post</h6>
         <div class="news-tab">
@@ -71,137 +74,134 @@
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent03">
+                <!-- Latest News Tab -->
                 <div class="tab-pane fade show active" id="pills-latest" role="tabpanel" aria-labelledby="pills-latest-tab" tabindex="0">
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/01.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">Show</span>
-                            <h6 class="blog-title"><a href="#">Reach out to the show</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Jan 12 2022</a> </div>
+                    <?php
+                    $latest_news = array_slice($latest_news_with_author_category, 0, 3);
+                    foreach ($latest_news as $news):
+                        ?>
+                        <div class="blog-post post-style-04">
+                            <div class="blog-image">
+                                <img class="img-fluid" src="<?= base_url('public/uploads/news/' . $news['img']); ?>" alt="<?= $news['title_' . $lang]; ?>">
+                            </div>
+                            <div class="blog-post-details">
+                                <span class="badge text-primary"><?= $news['category_name_' . $lang]; ?></span>
+                                <h6 class="blog-title">
+                                    <a href="<?= base_url('news/' . $news['id']); ?>">
+                                        <?= $news['title_' . $lang]; ?>
+                                    </a>
+                                </h6>
+                                <div class="blog-post-meta">
+                                    <div class="blog-post-time">
+                                        <a href="#">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <?= date("M j Y", strtotime($news['created_at'])); ?>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/02.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">Photography</span>
-                            <h6 class="blog-title"><a href="#">Photography is the art of moments frozen in time</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Feb 17 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/03.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">Food</span>
-                            <h6 class="blog-title"><a href="#">Don’t be rude, donate some food</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Mar 15 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+
+                <!-- Trending News Tab -->
                 <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab" tabindex="0">
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/04.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">series</span>
-                            <h6 class="blog-title"><a href="#">Time Is Greater Than Money</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Feb 2 2022</a> </div>
+                    <?php
+                    $trending_news = array_slice($latest_news_with_author_category, 3, 3);
+                    foreach ($trending_news as $news):
+                        ?>
+                        <div class="blog-post post-style-04">
+                            <div class="blog-image">
+                                <img class="img-fluid" src="<?= base_url('public/uploads/news/' . $news['img']); ?>" alt="<?= $news['title_' . $lang]; ?>">
+                            </div>
+                            <div class="blog-post-details">
+                                <span class="badge text-primary"><?= $news['category_name_' . $lang]; ?></span>
+                                <h6 class="blog-title">
+                                    <a href="<?= base_url('news/' . $news['id']); ?>">
+                                        <?= character_limiter($news['title_' . $lang], 60); ?>
+                                    </a>
+                                </h6>
+                                <div class="blog-post-meta">
+                                    <div class="blog-post-time">
+                                        <a href="#">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <?= date("M j Y", strtotime($news['created_at'])); ?>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/05.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">crypto</span>
-                            <h6 class="blog-title"><a href="#">I Do Think Bitcoin Is The First That Has The Potential To Do Something Like Changing The World</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Mar 4 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/06.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">politician</span>
-                            <h6 class="blog-title"><a href="#">Leadership, Experience, Values Means Something</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>May 6 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+
+                <!-- Popular News Tab -->
                 <div class="tab-pane fade" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab" tabindex="0">
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/07.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">electric</span>
-                            <h6 class="blog-title"><a href="#">Everyday Vehicles That Aren’t</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Apr 11 2022</a> </div>
+                    <?php
+                    $popular_news = array_slice($latest_news_with_author_category, 6, 3);
+                    foreach ($popular_news as $news):
+                        ?>
+                        <div class="blog-post post-style-04">
+                            <div class="blog-image">
+                                <img class="img-fluid" src="<?= base_url('public/uploads/news/' . $news['img']); ?>" alt="<?= $news['title_' . $lang]; ?>">
+                            </div>
+                            <div class="blog-post-details">
+                                <span class="badge text-primary"><?= $news['category_name_' . $lang]; ?></span>
+                                <h6 class="blog-title">
+                                    <a href="<?= base_url('news/' . $news['id']); ?>">
+                                        <?= character_limiter($news['title_' . $lang], 60); ?>
+                                    </a>
+                                </h6>
+                                <div class="blog-post-meta">
+                                    <div class="blog-post-time">
+                                        <a href="#">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <?= date("M j Y", strtotime($news['created_at'])); ?>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/08.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">crypto</span>
-                            <h6 class="blog-title"><a href="#">Blockchain is the most promising technology since the internet</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>May 8 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-post post-style-04">
-                        <div class="blog-image"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/blog/latest/09.jpg'); ?>" alt=""> </div>
-                        <div class="blog-post-details"> <span class="badge text-primary">security</span>
-                            <h6 class="blog-title"><a href="#">Professional Security wasn’t Available… So we fixed it</a></h6>
-                            <div class="blog-post-meta">
-                                <div class="blog-post-time"> <a href="#"><i class="fa-solid fa-calendar-days"></i>Jun 6 2022</a> </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Виджет категорий с динамическими данными -->
     <div class="widget sidebar-category">
         <h6 class="widget-title">Categories</h6>
         <ul>
-            <li>
-                <a href="#">
-                    <div class="category-02">
-                        <div class="category-image bg-overlay-black-40"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/category/06.jpg'); ?>" alt=""> </div>
-                        <div class="category-name d-flex justify-content-between"> <span class="category-count">(3)</span> <span class="category-content">sport</span> <span class="category-icon"><i class="fa-solid fa-basketball"></i></span> </div>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="category-02">
-                        <div class="category-image bg-overlay-black-40"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/category/07.jpg'); ?>" alt=""> </div>
-                        <div class="category-name d-flex justify-content-between"> <span class="category-count">(5)</span> <span class="category-content">Travel</span> <span class="category-icon"><i class="fa-solid fa-cart-flatbed-suitcase"></i></span> </div>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="category-02">
-                        <div class="category-image bg-overlay-black-40"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/category/08.jpg'); ?>" alt=""> </div>
-                        <div class="category-name d-flex justify-content-between"> <span class="category-count">(8)</span> <span class="category-content">Lifestyle</span> <span class="category-icon"><i class="fa-solid fa-vest-patches"></i></span> </div>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="category-02">
-                        <div class="category-image bg-overlay-black-40"> <img class="img-fluid" src="<?= base_url('public/user/assets/images/category/17.jpg'); ?>" alt=""> </div>
-                        <div class="category-name d-flex justify-content-between">
-                            <span class="category-count">(9)</span>
-                            <span class="category-content">Politician</span>
-                            <span class="category-icon"><i class="fa-solid fa-bullhorn"></i></span>
+            <?php
+            $categories_to_show = array_slice($categories_all, 0, 4);
+            $category_icons = ['fa-basketball', 'fa-cart-flatbed-suitcase', 'fa-vest-patches', 'fa-bullhorn'];
+            $i = 0;
+
+            foreach ($categories_to_show as $category):
+                $news_count = $this->NewsModel->count(['category_id' => $category['id']]);
+                ?>
+                <li>
+                    <a href="<?= base_url('categories/' . $category['id']); ?>">
+                        <div class="category-02">
+
+                            <div class="category-image bg-overlay-black-40">
+                                <img class="img-fluid" src="<?= base_url('public/user/assets/images/category/17.jpg'); ?>" alt="">
+                            </div>
+                            <div class="category-name d-flex justify-content-between">
+                                <span class="category-count">(<?= $news_count; ?>)</span>
+                                <span class="category-content"><?= $category['name_' . $lang]; ?></span>
+                                <span class="category-icon"><i class="fa-solid <?= $category_icons[$i]; ?>"></i></span>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+                <?php
+                $i++;
+            endforeach;
+            ?>
         </ul>
     </div>
+
+    <!-- Виджет подписки на рассылку (оставляем статичным) -->
     <div class="widget">
         <h6 class="widget-title">Newsletter</h6>
         <div class="newsletter">
@@ -213,9 +213,12 @@
             </div>
         </div>
     </div>
+
+    <!-- Виджет тегов (можно сделать динамическим, если у вас есть теги в системе) -->
     <div class="widget widget-tag mb-0">
         <h6 class="widget-title">Tags</h6>
         <ul class="list-unstyled">
+            <!-- Статические теги (можно заменить на динамические, если есть в системе) -->
             <li><a href="#"> Games</a></li>
             <li><a href="#"> Lifestyle</a></li>
             <li><a href="#"> Technology</a></li>
