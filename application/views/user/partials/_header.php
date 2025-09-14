@@ -85,7 +85,6 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown02">
                             <li><a class="dropdown-item" href="<?= base_url('about') ?>">About Us</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('team') ?>">Team</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('team') ?>">A</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('contacts') ?>">Contact Us</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('404') ?>">404</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('login') ?>">Sign in</a></li>
